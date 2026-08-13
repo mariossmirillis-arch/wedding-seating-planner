@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Seatly V4.1</title>
+<title>Seatly V4.2</title>
 
 <style>
 *{box-sizing:border-box}
@@ -105,16 +105,11 @@ align-items:center;
 flex-wrap:wrap
 }
 
-input,select,textarea{
+input{
 border:1px solid #ccc;
 border-radius:9px;
 padding:10px;
 font:inherit
-}
-
-textarea{
-width:100%;
-min-height:110px
 }
 
 .upload{
@@ -131,7 +126,7 @@ cursor:pointer
 display:none
 }
 
-/* WHITE WORK AREA */
+/* WORK AREA */
 
 .shell{
 height:calc(100vh - 135px);
@@ -144,7 +139,7 @@ overflow:hidden;
 touch-action:none
 }
 
-/* FIXED VENUE IMAGE */
+/* BACKGROUND NEVER ZOOMS */
 
 .fixedBackground{
 position:absolute;
@@ -154,14 +149,10 @@ z-index:0;
 pointer-events:none
 }
 
-/* ONLY TABLES + OBJECTS ZOOM */
-
-.overlayLayer{
+.overlay{
 position:absolute;
 inset:0;
-z-index:2;
-transform-origin:0 0;
-touch-action:none
+z-index:2
 }
 
 .empty{
@@ -171,15 +162,29 @@ display:grid;
 place-items:center;
 color:#999;
 text-align:center;
-z-index:1;
 pointer-events:none
 }
 
+/* OBJECTS */
+
 .obj{
 position:absolute;
-touch-action:none;
 user-select:none;
-cursor:grab
+touch-action:none;
+cursor:pointer
+}
+
+/* default = locked */
+
+.obj:not(.selected){
+cursor:pointer
+}
+
+/* selected object */
+
+.obj.selected{
+outline:3px solid rgba(40,40,40,.35);
+outline-offset:5px
 }
 
 /* TABLE */
@@ -216,14 +221,10 @@ font-size:10px;
 color:#666
 }
 
-/* FULL TABLE */
-
 .tableWrap.complete .tableCore{
 background:#dff3e4;
 border-color:#2f7d47
 }
-
-/* OVER CAPACITY */
 
 .tableWrap.over .tableCore{
 background:#ffe6e3;
@@ -249,7 +250,7 @@ border-color:#2f7d47
 border-color:#b53a2d
 }
 
-/* VENUE OBJECTS */
+/* VENUE ITEMS */
 
 .vobj{
 border:2px dashed #555;
@@ -262,25 +263,22 @@ font-weight:800;
 font-size:12px
 }
 
-.vobj.round{
-border-radius:50%
-}
+/* SELECTED TOOLBAR */
 
-.tools{
+.selectionTools{
 position:absolute;
-right:10px;
-top:10px;
-z-index:10;
+display:none;
+z-index:20;
 background:#fff;
 border:1px solid #ddd;
-border-radius:11px;
-padding:6px;
-display:flex;
-gap:5px
+border-radius:10px;
+padding:5px;
+gap:5px;
+box-shadow:0 5px 16px #0002
 }
 
-.tools button{
-padding:7px 9px
+.selectionTools button{
+padding:6px 9px
 }
 
 .guest{
@@ -318,9 +316,7 @@ padding:15px
 background:#fff;
 border-radius:15px;
 padding:20px;
-width:min(470px,100%);
-max-height:90vh;
-overflow:auto
+width:min(430px,100%)
 }
 
 .card label{
@@ -330,8 +326,7 @@ color:#666;
 margin-top:8px
 }
 
-.card input,
-.card select{
+.card input{
 width:100%;
 margin-top:5px
 }
@@ -372,12 +367,9 @@ height:65vh;
 min-height:470px
 }
 
-.tools{
-display:none
-}
-
 }
 </style>
+
 </head>
 
 <body>
@@ -422,12 +414,8 @@ Remove image
 
 </button>
 
-<div
-class="small"
-style="margin-top:6px">
-
-Χωρίς εικόνα το φόντο παραμένει λευκό.
-
+<div class="small" style="margin-top:6px">
+Το background μένει πάντα κλειδωμένο.
 </div>
 
 </div>
@@ -441,33 +429,25 @@ style="margin-top:6px">
 <button
 class="soft"
 onclick="addTable(8)">
-
 + 8 seats
-
 </button>
 
 <button
 class="soft"
 onclick="addTable(10)">
-
 + 10 seats
-
 </button>
 
 <button
 class="soft"
 onclick="addTable(12)">
-
 + 12 seats
-
 </button>
 
 <button
 class="soft"
 onclick="addTable(16)">
-
 + 16 seats
-
 </button>
 
 </div>
@@ -483,33 +463,25 @@ onclick="addTable(16)">
 <button
 class="soft"
 onclick="addObj('Dance Floor')">
-
 Dance Floor
-
 </button>
 
 <button
 class="soft"
 onclick="addObj('DJ')">
-
 DJ
-
 </button>
 
 <button
 class="soft"
 onclick="addObj('Bar')">
-
 Bar
-
 </button>
 
 <button
 class="soft"
 onclick="addObj('Stage')">
-
 Stage
-
 </button>
 
 </div>
@@ -556,25 +528,13 @@ id="status">
 
 </div>
 
-<div class="row">
-
 <button
 class="sec"
-onclick="fit()">
+onclick="deselectAll()">
 
-Fit
-
-</button>
-
-<button
-class="sec"
-onclick="resetItems()">
-
-Reset items
+Lock all
 
 </button>
-
-</div>
 
 </div>
 
@@ -584,38 +544,45 @@ id="shell">
 
 <div
 class="fixedBackground"
-id="fixedBackground">
+id="background">
 </div>
 
 <div
 class="empty"
 id="empty">
 
-White canvas — upload venue or start placing tables.
+White canvas — upload venue or add tables.
 
 </div>
 
 <div
-class="overlayLayer"
-id="overlayLayer">
+class="overlay"
+id="overlay">
 </div>
 
-<div class="tools">
+<div
+class="selectionTools"
+id="selectionTools">
 
 <button
-class="sec"
-onclick="zoomCenter(.1)">
-
+onclick="resizeSelected(1.1)">
 ＋
+</button>
 
+<button
+onclick="resizeSelected(.9)">
+−
+</button>
+
+<button
+onclick="rotateSelected(15)">
+↻
 </button>
 
 <button
 class="sec"
-onclick="zoomCenter(-.1)">
-
-−
-
+onclick="deselectAll()">
+Lock
 </button>
 
 </div>
@@ -649,14 +616,6 @@ id="tSeats"
 type="number"
 min="1">
 
-<label>Size</label>
-
-<input
-id="tScale"
-type="range"
-min="50"
-max="180">
-
 <div class="actions">
 
 <button onclick="saveTable()">
@@ -666,7 +625,6 @@ Save
 <button
 class="sec"
 onclick="hide('tableModal')">
-
 Cancel
 </button>
 
@@ -695,15 +653,11 @@ guests:[],
 
 counter:0,
 
-zoom:1,
-
-panX:0,
-
-panY:0,
-
 venue:null
 
 };
+
+let selected=null;
 
 let selectedGuest=null;
 
@@ -717,12 +671,17 @@ document.getElementById(
 
 const overlay=
 document.getElementById(
-'overlayLayer'
+'overlay'
 );
 
-const fixedBackground=
+const bg=
 document.getElementById(
-'fixedBackground'
+'background'
+);
+
+const tools=
+document.getElementById(
+'selectionTools'
 );
 
 
@@ -750,7 +709,7 @@ function save(){
 try{
 
 localStorage.setItem(
-'seatly_v41',
+'seatly_v42',
 JSON.stringify(S)
 );
 
@@ -767,7 +726,7 @@ try{
 
 let x=
 localStorage.getItem(
-'seatly_v41'
+'seatly_v42'
 );
 
 if(x){
@@ -786,14 +745,12 @@ applyVenue();
 
 render();
 
-applyOverlayTransform();
-
 }
 
 
 function applyVenue(){
 
-fixedBackground.style.backgroundImage=
+bg.style.backgroundImage=
 
 S.venue
 
@@ -825,8 +782,7 @@ x.target.result;
 
 applyVenue();
 
-empty.style.display=
-'none';
+render();
 
 save();
 
@@ -844,22 +800,6 @@ function removeVenue(){
 S.venue=null;
 
 applyVenue();
-
-empty.style.display=
-
-(
-S.tables.length
-||
-S.objects.length
-)
-
-?
-
-'none'
-
-:
-
-'grid';
 
 save();
 
@@ -879,11 +819,15 @@ S.tables.push({
 
 id:uid(),
 
+type:'table',
+
 number:S.counter,
 
 seats:seats,
 
 scale:1,
+
+rotation:0,
 
 x:
 60+
@@ -917,11 +861,6 @@ table.number;
 tSeats.value=
 table.seats;
 
-tScale.value=
-Math.round(
-(table.scale||1)*100
-);
-
 show(
 'tableModal'
 );
@@ -948,10 +887,6 @@ Math.max(
 +tSeats.value||1
 );
 
-table.scale=
-(+tScale.value||100)
-/100;
-
 hide(
 'tableModal'
 );
@@ -963,7 +898,7 @@ save();
 }
 
 
-/* VENUE OBJECTS */
+/* VENUE ITEMS */
 
 function addObj(type){
 
@@ -985,11 +920,17 @@ S.objects.push({
 
 id:uid(),
 
-type:type,
+type:'object',
+
+label:type,
 
 w:width,
 
 h:height,
+
+scale:1,
+
+rotation:0,
 
 x:
 220+
@@ -1062,10 +1003,12 @@ selectedGuest===guest.id
 ''
 );
 
+
 let table=
 S.tables.find(
 x=>x.id===guest.tableId
 );
+
 
 row.innerHTML=
 
@@ -1076,6 +1019,7 @@ ${safe(guest.name)}
 <span class="badge">
 ${table?'T'+table.number:'Unassigned'}
 </span>`;
+
 
 row.onclick=()=>{
 
@@ -1091,9 +1035,11 @@ null
 
 guest.id;
 
+
 renderGuests();
 
 };
+
 
 guestList.appendChild(
 row
@@ -1122,10 +1068,12 @@ if(
 !table
 )return;
 
+
 let count=
 S.guests.filter(
 x=>x.tableId===tableId
 ).length;
+
 
 if(
 count>=table.seats
@@ -1135,11 +1083,14 @@ count>=table.seats
 guest.tableId!==tableId
 ){
 
-return toast(
+toast(
 'Table is full'
 );
 
+return;
+
 }
+
 
 guest.tableId=
 tableId;
@@ -1168,6 +1119,7 @@ seats,
 
 let radius=47;
 
+
 for(
 let i=0;
 i<n;
@@ -1184,13 +1136,16 @@ i/n
 
 Math.PI/2;
 
+
 let chair=
 document.createElement(
 'div'
 );
 
+
 chair.className=
 'chair';
+
 
 chair.style.left=
 
@@ -1202,6 +1157,7 @@ Math.cos(angle)*radius
 )
 +'px';
 
+
 chair.style.top=
 
 (
@@ -1212,11 +1168,13 @@ Math.sin(angle)*radius
 )
 +'px';
 
+
 chair.style.transform=
 
 `rotate(${
 angle*180/Math.PI+90
 }deg)`;
+
 
 wrap.appendChild(
 chair
@@ -1227,967 +1185,71 @@ chair
 }
 
 
-/* DRAG OBJECTS */
+/* SELECTION */
 
-function makeDraggable(
-element,
-item,
-type
+function selectItem(
+type,
+id,
+element
 ){
 
-let startX;
-
-let startY;
-
-let originalX;
-
-let originalY;
-
-let active=false;
-
-let moved=false;
-
-
-element.onpointerdown=e=>{
-
-active=true;
-
-moved=false;
-
-element.setPointerCapture(
-e.pointerId
-);
-
-startX=
-e.clientX;
-
-startY=
-e.clientY;
-
-originalX=
-item.x;
-
-originalY=
-item.y;
-
+selected={
+type:type,
+id:id
 };
 
 
-element.onpointermove=e=>{
+document
 
-if(!active)return;
+.querySelectorAll(
+'.obj'
+)
 
-let dx=
-(e.clientX-startX)
-/S.zoom;
-
-let dy=
-(e.clientY-startY)
-/S.zoom;
-
-if(
-Math.abs(dx)+
-Math.abs(dy)>4
-){
-
-moved=true;
-
-}
-
-item.x=
-originalX+dx;
-
-item.y=
-originalY+dy;
-
-element.style.left=
-item.x+'px';
-
-element.style.top=
-item.y+'px';
-
-};
-
-
-element.onpointerup=()=>{
-
-active=false;
-
-if(moved){
-
-save();
-
-}
-
-element.dataset.moved=
-
-moved
-
-?
-
-'1'
-
-:
-
-'';
-
-setTimeout(
-()=>element.dataset.moved='',
-70
-);
-
-};
-
-
-element.onclick=()=>{
-
-if(
-element.dataset.moved==='1'
-)return;
-
-if(
-type==='table'
-){
-
-if(selectedGuest){
-
-assignGuest(
-item.id
-);
-
-}else{
-
-openTable(
-item.id
-);
-
-}
-
-}
-
-};
-
-}
-
-
-/* RENDER */
-
-function render(){
-
-overlay.innerHTML='';
-
-
-S.tables.forEach(
-table=>{
-
-let wrap=
-document.createElement(
-'div'
-);
-
-wrap.className=
-'obj tableWrap';
-
-
-let count=
-S.guests.filter(
-g=>g.tableId===table.id
-).length;
-
-
-if(
-count===table.seats
-){
-
-wrap.classList.add(
-'complete'
-);
-
-}
-
-
-if(
-count>table.seats
-){
-
-wrap.classList.add(
-'over'
-);
-
-}
-
-
-wrap.style.left=
-table.x+'px';
-
-wrap.style.top=
-table.y+'px';
-
-wrap.style.transform=
-
-`scale(${table.scale||1})`;
-
-
-chairs(
-wrap,
-table.seats
+.forEach(
+x=>
+x.classList.remove(
+'selected'
+)
 );
 
 
-let core=
-document.createElement(
-'div'
-);
-
-core.className=
-'tableCore';
-
-core.innerHTML=
-
-`<strong>
-TABLE ${table.number}
-</strong>
-
-<span>
-${count}/${table.seats}
-</span>`;
-
-
-wrap.appendChild(
-core
+element.classList.add(
+'selected'
 );
 
 
-makeDraggable(
-wrap,
-table,
-'table'
-);
-
-
-overlay.appendChild(
-wrap
-);
-
-}
-);
-
-
-S.objects.forEach(
-obj=>{
-
-let element=
-document.createElement(
-'div'
-);
-
-element.className=
-'obj vobj';
-
-element.style.left=
-obj.x+'px';
-
-element.style.top=
-obj.y+'px';
-
-element.style.width=
-obj.w+'px';
-
-element.style.height=
-obj.h+'px';
-
-element.textContent=
-obj.type;
-
-
-makeDraggable(
-element,
-obj,
-'object'
-);
-
-
-overlay.appendChild(
+positionTools(
 element
 );
 
 }
-);
 
 
-empty.style.display=
+function deselectAll(){
 
-(
-S.venue
-||
-S.tables.length
-||
-S.objects.length
-)
+selected=null;
 
-?
+document
 
-'none'
-
-:
-
-'grid';
-
-
-renderGuests();
-
-updateStatus();
-
-applyOverlayTransform();
-
-}
-
-
-/* STATUS */
-
-function updateStatus(){
-
-let assigned=
-S.guests.filter(
-g=>g.tableId
-).length;
-
-status.textContent=
-
-`${S.tables.length} tables · ${assigned}/${S.guests.length} guests assigned`;
-
-}
-
-
-/* ZOOM ONLY TABLES + OBJECTS */
-
-function applyOverlayTransform(){
-
-overlay.style.transform=
-
-`translate(
-${S.panX}px,
-${S.panY}px
-)
-scale(${S.zoom})`;
-
-}
-
-
-function zoomAround(
-clientX,
-clientY,
-newZoom
-){
-
-let rect=
-shell.getBoundingClientRect();
-
-let x=
-clientX-
-rect.left;
-
-let y=
-clientY-
-rect.top;
-
-
-let worldX=
-(x-S.panX)
-/S.zoom;
-
-let worldY=
-(y-S.panY)
-/S.zoom;
-
-
-S.zoom=
-Math.max(
-.4,
-Math.min(
-3,
-newZoom
-)
-);
-
-
-S.panX=
-x-
-worldX*
-S.zoom;
-
-S.panY=
-y-
-worldY*
-S.zoom;
-
-
-applyOverlayTransform();
-
-}
-
-
-function zoomCenter(delta){
-
-let rect=
-shell.getBoundingClientRect();
-
-zoomAround(
-
-rect.left+
-rect.width/2,
-
-rect.top+
-rect.height/2,
-
-S.zoom+
-delta
-
-);
-
-save();
-
-}
-
-
-function fit(){
-
-S.zoom=1;
-
-S.panX=0;
-
-S.panY=0;
-
-applyOverlayTransform();
-
-save();
-
-}
-
-
-function resetItems(){
-
-S.zoom=1;
-
-S.panX=0;
-
-S.panY=0;
-
-render();
-
-save();
-
-}
-
-
-/* DESKTOP WHEEL */
-
-shell.addEventListener(
-
-'wheel',
-
-e=>{
-
-e.preventDefault();
-
-
-let factor=
-
-Math.exp(
--e.deltaY*
-.0015
-);
-
-
-zoomAround(
-
-e.clientX,
-
-e.clientY,
-
-S.zoom*
-factor
-
-);
-
-
-clearTimeout(
-window.zoomSave
-);
-
-
-window.zoomSave=
-setTimeout(
-save,
-120
-);
-
-},
-
-{
-passive:false
-}
-
-);
-
-
-/* MOBILE PINCH */
-
-const pointers=
-new Map();
-
-let gesture=null;
-
-
-shell.addEventListener(
-
-'pointerdown',
-
-e=>{
-
-if(
-e.target.closest(
+.querySelectorAll(
 '.obj'
 )
-)return;
 
-
-pointers.set(
-
-e.pointerId,
-
-{
-x:e.clientX,
-y:e.clientY
-}
-
-);
-
-
-if(
-pointers.size===1
-){
-
-gesture={
-
-type:'pan',
-
-x:e.clientX,
-
-y:e.clientY,
-
-px:S.panX,
-
-py:S.panY
-
-};
-
-}
-
-
-if(
-pointers.size===2
-){
-
-let points=
-[
-...pointers.values()
-];
-
-
-let distance=
-Math.hypot(
-
-points[0].x-points[1].x,
-
-points[0].y-points[1].y
-
-);
-
-
-let centerX=
-(
-points[0].x+
-points[1].x
+.forEach(
+x=>
+x.classList.remove(
+'selected'
 )
-/2;
-
-
-let centerY=
-(
-points[0].y+
-points[1].y
-)
-/2;
-
-
-let rect=
-shell.getBoundingClientRect();
-
-
-let localX=
-centerX-
-rect.left;
-
-
-let localY=
-centerY-
-rect.top;
-
-
-gesture={
-
-type:'pinch',
-
-distance:distance,
-
-zoom:S.zoom,
-
-worldX:
-(localX-S.panX)
-/S.zoom,
-
-worldY:
-(localY-S.panY)
-/S.zoom
-
-};
-
-}
-
-
-try{
-
-shell.setPointerCapture(
-e.pointerId
-);
-
-}catch(_){}
-
-}
 );
 
 
-shell.addEventListener(
-
-'pointermove',
-
-e=>{
-
-if(
-!pointers.has(
-e.pointerId
-)
-)return;
-
-
-pointers.set(
-
-e.pointerId,
-
-{
-x:e.clientX,
-y:e.clientY
-}
-
-);
-
-
-if(
-pointers.size===1
-
-&&
-
-gesture?.type==='pan'
-){
-
-S.panX=
-
-gesture.px
-
-+
-
-e.clientX
-
--
-
-gesture.x;
-
-
-S.panY=
-
-gesture.py
-
-+
-
-e.clientY
-
--
-
-gesture.y;
-
-
-applyOverlayTransform();
-
-}
-
-
-if(
-pointers.size===2
-){
-
-let points=
-[
-...pointers.values()
-];
-
-
-let distance=
-Math.hypot(
-
-points[0].x-points[1].x,
-
-points[0].y-points[1].y
-
-);
-
-
-let centerX=
-(
-points[0].x+
-points[1].x
-)
-/2;
-
-
-let centerY=
-(
-points[0].y+
-points[1].y
-)
-/2;
-
-
-let rect=
-shell.getBoundingClientRect();
-
-
-let localX=
-centerX-
-rect.left;
-
-
-let localY=
-centerY-
-rect.top;
-
-
-if(
-gesture?.type!=='pinch'
-){
-
-gesture={
-
-type:'pinch',
-
-distance:distance,
-
-zoom:S.zoom,
-
-worldX:
-(localX-S.panX)
-/S.zoom,
-
-worldY:
-(localY-S.panY)
-/S.zoom
-
-};
-
-}
-
-
-S.zoom=
-
-Math.max(
-
-.4,
-
-Math.min(
-
-3,
-
-gesture.zoom
-
-*
-
-(
-distance/
-gesture.distance
-)
-
-)
-
-);
-
-
-S.panX=
-
-localX
-
--
-
-gesture.worldX*
-S.zoom;
-
-
-S.panY=
-
-localY
-
--
-
-gesture.worldY*
-S.zoom;
-
-
-applyOverlayTransform();
-
-}
-
-}
-);
-
-
-function endPointer(e){
-
-pointers.delete(
-e.pointerId
-);
-
-
-if(
-pointers.size===1
-){
-
-let point=
-[
-...pointers.values()
-][0];
-
-
-gesture={
-
-type:'pan',
-
-x:point.x,
-
-y:point.y,
-
-px:S.panX,
-
-py:S.panY
-
-};
-
-}
-
-
-else if(
-pointers.size===0
-){
-
-gesture=null;
-
-save();
-
-}
-
-}
-
-
-shell.addEventListener(
-'pointerup',
-endPointer
-);
-
-shell.addEventListener(
-'pointercancel',
-endPointer
-);
-
-
-/* HELPERS */
-
-function show(id){
-
-document
-.getElementById(id)
-.style.display=
-'flex';
-
-}
-
-
-function hide(id){
-
-document
-.getElementById(id)
-.style.display=
+tools.style.display=
 'none';
 
 }
 
 
-function toast(message){
+function positionTools(element){
 
-let t=
-document.getElementById(
-'toast'
-);
-
-t.textContent=
-message;
-
-t.style.display=
-'block';
-
-
-clearTimeout(
-window.toastTimer
-);
-
-
-window.toastTimer=
-setTimeout(
-
-()=>t.style.display='none',
-
-1600
-
-);
-
-}
-
-
-function safe(text){
-
-let div=
-document.createElement(
-'div'
-);
-
-div.textContent=
-text||'';
-
-return div.innerHTML;
-
-}
-
-
-load();
-
-</script>
-
-</body>
-</html>
+let shellRect=
+shell.getBoundingClientRect();
