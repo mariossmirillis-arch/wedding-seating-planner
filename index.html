@@ -3,13 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Seatly V4</title>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<title>Seatly V4.1</title>
 
 <style>
 *{box-sizing:border-box}
+
 body{
 margin:0;
 font-family:system-ui,-apple-system,sans-serif;
@@ -30,8 +28,14 @@ top:0;
 z-index:30
 }
 
-.logo{font-size:24px;font-weight:800}
-.logo span{font-weight:400}
+.logo{
+font-size:24px;
+font-weight:800
+}
+
+.logo span{
+font-weight:400
+}
 
 button{
 border:0;
@@ -54,8 +58,6 @@ background:#eee;
 color:#222
 }
 
-.danger{background:#8c2e26}
-
 .app{
 display:grid;
 grid-template-columns:340px 1fr;
@@ -69,7 +71,10 @@ padding:16px;
 overflow:auto
 }
 
-main{padding:12px}
+main{
+padding:12px;
+min-width:0
+}
 
 .section{
 padding-bottom:15px;
@@ -122,12 +127,16 @@ background:#faf9f7;
 cursor:pointer
 }
 
-.upload input{display:none}
+.upload input{
+display:none
+}
+
+/* WHITE WORK AREA */
 
 .shell{
 height:calc(100vh - 135px);
 min-height:520px;
-background:#ddd6ce;
+background:#fff;
 border:1px solid #ccc;
 border-radius:15px;
 position:relative;
@@ -135,17 +144,24 @@ overflow:hidden;
 touch-action:none
 }
 
-.stage{
+/* FIXED VENUE IMAGE */
+
+.fixedBackground{
 position:absolute;
 inset:0;
-transform-origin:0 0;
-touch-action:none
+background:#fff center/contain no-repeat;
+z-index:0;
+pointer-events:none
 }
 
-.bg{
+/* ONLY TABLES + OBJECTS ZOOM */
+
+.overlayLayer{
 position:absolute;
 inset:0;
-background:#eee center/contain no-repeat
+z-index:2;
+transform-origin:0 0;
+touch-action:none
 }
 
 .empty{
@@ -153,8 +169,9 @@ position:absolute;
 inset:0;
 display:grid;
 place-items:center;
-color:#777;
+color:#999;
 text-align:center;
+z-index:1;
 pointer-events:none
 }
 
@@ -165,7 +182,7 @@ user-select:none;
 cursor:grab
 }
 
-/* TABLES */
+/* TABLE */
 
 .tableWrap{
 width:110px;
@@ -190,12 +207,6 @@ box-shadow:0 4px 12px #0002;
 z-index:2
 }
 
-.tableWrap.rect .tableCore{
-width:90px;
-height:58px;
-border-radius:11px
-}
-
 .tableCore strong{
 font-size:11px
 }
@@ -205,14 +216,14 @@ font-size:10px;
 color:#666
 }
 
-/* FULL TABLE = GREEN */
+/* FULL TABLE */
 
 .tableWrap.complete .tableCore{
 background:#dff3e4;
 border-color:#2f7d47
 }
 
-/* OVER CAPACITY = RED */
+/* OVER CAPACITY */
 
 .tableWrap.over .tableCore{
 background:#ffe6e3;
@@ -253,11 +264,6 @@ font-size:12px
 
 .vobj.round{
 border-radius:50%
-}
-
-.locked{
-opacity:.75;
-cursor:not-allowed
 }
 
 .tools{
@@ -337,51 +343,6 @@ gap:7px;
 margin-top:12px
 }
 
-.checkList{
-max-height:260px;
-overflow:auto;
-border:1px solid #ddd;
-border-radius:10px;
-padding:6px;
-margin-top:8px
-}
-
-.checkRow{
-display:flex;
-align-items:center;
-gap:8px;
-padding:8px;
-border-bottom:1px solid #eee;
-font-size:13px
-}
-
-.checkRow input{
-width:auto
-}
-
-.finder{
-width:900px;
-background:#fff;
-padding:24px;
-position:fixed;
-left:-99999px;
-top:0
-}
-
-.alpha{
-font-size:26px;
-font-weight:900;
-border-bottom:2px solid #222;
-margin-top:16px
-}
-
-.frow{
-display:grid;
-grid-template-columns:1fr 120px;
-padding:6px 0;
-border-bottom:1px solid #eee
-}
-
 .toast{
 position:fixed;
 bottom:20px;
@@ -411,7 +372,6 @@ height:65vh;
 min-height:470px
 }
 
-/* no +/- buttons on mobile */
 .tools{
 display:none
 }
@@ -428,7 +388,7 @@ display:none
 seat<span>ly</span>
 </div>
 
-<button onclick="openExport()">
+<button>
 Finish / Export
 </button>
 
@@ -466,7 +426,7 @@ Remove image
 class="small"
 style="margin-top:6px">
 
-Autosave on.
+Χωρίς εικόνα το φόντο παραμένει λευκό.
 
 </div>
 
@@ -512,24 +472,6 @@ onclick="addTable(16)">
 
 </div>
 
-<button
-class="sec"
-style="width:100%;margin-top:7px"
-onclick="show('multiModal')">
-
-+ Add multiple tables
-
-</button>
-
-<button
-class="sec"
-style="width:100%;margin-top:7px"
-onclick="renumber()">
-
-Renumber 1,2,3...
-
-</button>
-
 </div>
 
 <div class="section">
@@ -570,22 +512,6 @@ Stage
 
 </button>
 
-<button
-class="soft"
-onclick="addObj('Entrance')">
-
-Entrance
-
-</button>
-
-<button
-class="soft"
-onclick="addObj('Buffet')">
-
-Buffet
-
-</button>
-
 </div>
 
 </div>
@@ -597,44 +523,17 @@ Buffet
 <div class="row">
 
 <input
-id="firstName"
+id="guestName"
 style="flex:1;min-width:0"
-placeholder="Όνομα / First name">
+placeholder="Guest name">
 
-<input
-id="lastName"
-style="flex:1;min-width:0"
-placeholder="Επίθετο / Surname">
+<button onclick="addGuest()">
+Add
+</button>
 
 </div>
 
-<button
-style="width:100%;margin-top:7px"
-onclick="addGuest()">
-
-Add guest
-
-</button>
-
-<button
-class="sec"
-style="width:100%;margin-top:7px"
-onclick="show('bulkModal')">
-
-Paste many guests
-
-</button>
-
-<input
-id="search"
-style="width:100%;margin-top:7px"
-placeholder="Search guest..."
-oninput="renderGuests()">
-
-<div
-id="guestList"
-style="max-height:230px;overflow:auto">
-</div>
+<div id="guestList"></div>
 
 </div>
 
@@ -661,14 +560,6 @@ id="status">
 
 <button
 class="sec"
-onclick="undo()">
-
-Undo
-
-</button>
-
-<button
-class="sec"
 onclick="fit()">
 
 Fit
@@ -677,9 +568,9 @@ Fit
 
 <button
 class="sec"
-onclick="clearPlan()">
+onclick="resetItems()">
 
-Clear
+Reset items
 
 </button>
 
@@ -692,22 +583,21 @@ class="shell"
 id="shell">
 
 <div
-class="stage"
-id="stage">
-
-<div
-class="bg"
-id="bg">
+class="fixedBackground"
+id="fixedBackground">
 </div>
 
 <div
 class="empty"
 id="empty">
 
-Upload your venue plan, then add tables.
+White canvas — upload venue or start placing tables.
 
 </div>
 
+<div
+class="overlayLayer"
+id="overlayLayer">
 </div>
 
 <div class="tools">
@@ -737,8 +627,6 @@ onclick="zoomCenter(-.1)">
 </div>
 
 
-<!-- TABLE MODAL -->
-
 <div
 class="modal"
 id="tableModal">
@@ -761,20 +649,6 @@ id="tSeats"
 type="number"
 min="1">
 
-<label>Shape</label>
-
-<select id="tShape">
-
-<option value="round">
-Round
-</option>
-
-<option value="rect">
-Rectangle
-</option>
-
-</select>
-
 <label>Size</label>
 
 <input
@@ -782,48 +656,6 @@ id="tScale"
 type="range"
 min="50"
 max="180">
-
-<label>Rotation</label>
-
-<input
-id="tRot"
-type="range"
-min="0"
-max="359">
-
-<label>
-
-<input
-id="tLock"
-type="checkbox"
-style="width:auto">
-
-Lock position
-
-</label>
-
-<div
-id="capBox"
-class="small"
-style="margin-top:8px">
-</div>
-
-<button
-style="width:100%;margin-top:10px"
-onclick="openAssign()">
-
-Assign many guests
-
-</button>
-
-<button
-class="sec"
-style="width:100%;margin-top:7px"
-onclick="openPasteTable()">
-
-Paste guests directly
-
-</button>
 
 <div class="actions">
 
@@ -833,26 +665,9 @@ Save
 
 <button
 class="sec"
-onclick="dupTable()">
-
-Duplicate
-
-</button>
-
-<button
-class="danger"
-onclick="delTable()">
-
-Delete
-
-</button>
-
-<button
-class="sec"
 onclick="hide('tableModal')">
 
 Cancel
-
 </button>
 
 </div>
@@ -861,372 +676,6 @@ Cancel
 
 </div>
 
-
-<!-- ASSIGN MANY -->
-
-<div
-class="modal"
-id="assignModal">
-
-<div class="card">
-
-<h2 id="assignTitle">
-Assign guests
-</h2>
-
-<div
-id="assignCap"
-class="small">
-</div>
-
-<input
-id="assignSearch"
-placeholder="Search guest..."
-oninput="renderAssign()">
-
-<div
-class="checkList"
-id="assignList">
-</div>
-
-<div class="actions">
-
-<button onclick="assignMany()">
-Assign selected
-</button>
-
-<button
-class="sec"
-onclick="hide('assignModal')">
-
-Cancel
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- PASTE DIRECTLY -->
-
-<div
-class="modal"
-id="pasteModal">
-
-<div class="card">
-
-<h2 id="pasteTitle">
-Paste guests
-</h2>
-
-<div class="small">
-
-One guest per line.<br>
-Recommended:
-First name, Surname
-
-</div>
-
-<textarea
-id="pasteNames"
-placeholder="Μαρία, Γεωργίου
-Andreas, Nicolaou">
-</textarea>
-
-<div class="actions">
-
-<button onclick="pasteToTable()">
-Add to table
-</button>
-
-<button
-class="sec"
-onclick="hide('pasteModal')">
-
-Cancel
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- VENUE OBJECT -->
-
-<div
-class="modal"
-id="objModal">
-
-<div class="card">
-
-<h2 id="objTitle">
-Venue item
-</h2>
-
-<label>Shape</label>
-
-<select id="oShape">
-
-<option value="round">
-Round
-</option>
-
-<option value="square">
-Square
-</option>
-
-<option value="rect">
-Rectangle
-</option>
-
-</select>
-
-<label>Width</label>
-
-<input
-id="oW"
-type="range"
-min="50"
-max="360">
-
-<label>Height</label>
-
-<input
-id="oH"
-type="range"
-min="40"
-max="300">
-
-<label>Rotation</label>
-
-<input
-id="oRot"
-type="range"
-min="0"
-max="359">
-
-<label>
-
-<input
-id="oLock"
-type="checkbox"
-style="width:auto">
-
-Lock item
-
-</label>
-
-<div class="actions">
-
-<button onclick="saveObj()">
-Save
-</button>
-
-<button
-class="sec"
-onclick="dupObj()">
-
-Duplicate
-
-</button>
-
-<button
-class="danger"
-onclick="delObj()">
-
-Delete
-
-</button>
-
-<button
-class="sec"
-onclick="hide('objModal')">
-
-Cancel
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- MULTIPLE TABLES -->
-
-<div
-class="modal"
-id="multiModal">
-
-<div class="card">
-
-<h2>Add multiple tables</h2>
-
-<label>Quantity</label>
-
-<input
-id="mQty"
-type="number"
-min="1"
-max="100"
-value="10">
-
-<label>Seats per table</label>
-
-<input
-id="mSeats"
-type="number"
-min="1"
-value="10">
-
-<label>Shape</label>
-
-<select id="mShape">
-
-<option value="round">
-Round
-</option>
-
-<option value="rect">
-Rectangle
-</option>
-
-</select>
-
-<div class="actions">
-
-<button onclick="createMulti()">
-Create
-</button>
-
-<button
-class="sec"
-onclick="hide('multiModal')">
-
-Cancel
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- BULK GUESTS -->
-
-<div
-class="modal"
-id="bulkModal">
-
-<div class="card">
-
-<h2>Add many guests</h2>
-
-<div class="small">
-
-Supports Greek & English names.
-
-</div>
-
-<textarea
-id="bulkNames"
-placeholder="Μαρία, Γεωργίου
-Andreas, Nicolaou">
-</textarea>
-
-<div class="actions">
-
-<button onclick="addBulk()">
-Add guests
-</button>
-
-<button
-class="sec"
-onclick="hide('bulkModal')">
-
-Cancel
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- EXPORT -->
-
-<div
-class="modal"
-id="exportModal">
-
-<div class="card">
-
-<h2>Finish & Export</h2>
-
-<div class="actions">
-
-<button onclick="exportPlanPNG()">
-Venue PNG
-</button>
-
-<button onclick="exportFinderPNG()">
-Guest Finder PNG
-</button>
-
-<button onclick="exportPDF()">
-Complete PDF
-</button>
-
-<button
-class="sec"
-onclick="hide('exportModal')">
-
-Close
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- HIDDEN GUEST FINDER -->
-
-<div
-class="finder"
-id="finder">
-
-<div
-style="font-size:30px;font-weight:900">
-
-Guest Finder
-
-</div>
-
-<div
-style="color:#666;margin-bottom:16px">
-
-Find your surname → find your table
-
-</div>
-
-<div id="alphaList">
-</div>
-
-</div>
 
 <div
 class="toast"
@@ -1239,34 +688,42 @@ id="toast">
 let S={
 
 tables:[],
+
 objects:[],
+
 guests:[],
+
 counter:0,
 
 zoom:1,
+
 panX:0,
+
 panY:0,
 
 venue:null
 
 };
 
-let H=[];
+let selectedGuest=null;
 
-let selGuest=null;
+let editingTable=null;
 
-let editT=null;
-
-let editO=null;
-
-const stage=
-document.getElementById('stage');
 
 const shell=
-document.getElementById('shell');
+document.getElementById(
+'shell'
+);
 
-const bg=
-document.getElementById('bg');
+const overlay=
+document.getElementById(
+'overlayLayer'
+);
+
+const fixedBackground=
+document.getElementById(
+'fixedBackground'
+);
 
 
 const uid=()=>{
@@ -1293,56 +750,13 @@ function save(){
 try{
 
 localStorage.setItem(
-'seatly_v4',
+'seatly_v41',
 JSON.stringify(S)
 );
 
 }catch(e){}
 
-update();
-
-}
-
-
-function hist(){
-
-H.push(
-JSON.stringify(S)
-);
-
-if(
-H.length>30
-){
-
-H.shift();
-
-}
-
-}
-
-
-function undo(){
-
-if(!H.length){
-
-return toast(
-'Nothing to undo'
-);
-
-}
-
-S=
-JSON.parse(
-H.pop()
-);
-
-selGuest=null;
-
-applyVenue();
-
-render();
-
-save();
+updateStatus();
 
 }
 
@@ -1352,21 +766,8 @@ function load(){
 try{
 
 let x=
-
 localStorage.getItem(
-'seatly_v4'
-)
-
-||
-
-localStorage.getItem(
-'seatly_v3'
-)
-
-||
-
-localStorage.getItem(
-'seatly_v2'
+'seatly_v41'
 );
 
 if(x){
@@ -1385,12 +786,14 @@ applyVenue();
 
 render();
 
+applyOverlayTransform();
+
 }
 
 
 function applyVenue(){
 
-bg.style.backgroundImage=
+fixedBackground.style.backgroundImage=
 
 S.venue
 
@@ -1407,43 +810,56 @@ S.venue
 
 venueFile.onchange=e=>{
 
-let f=
+let file=
 e.target.files[0];
 
-if(!f)return;
+if(!file)return;
 
-let r=
+let reader=
 new FileReader();
 
-r.onload=x=>{
-
-hist();
+reader.onload=x=>{
 
 S.venue=
 x.target.result;
 
 applyVenue();
 
-render();
+empty.style.display=
+'none';
 
 save();
 
 };
 
-r.readAsDataURL(f);
+reader.readAsDataURL(
+file
+);
 
 };
 
 
 function removeVenue(){
 
-hist();
-
 S.venue=null;
 
 applyVenue();
 
-render();
+empty.style.display=
+
+(
+S.tables.length
+||
+S.objects.length
+)
+
+?
+
+'none'
+
+:
+
+'grid';
 
 save();
 
@@ -1452,17 +868,14 @@ save();
 
 /* TABLES */
 
-function makeTable(
-seats,
-shape='round'
-){
+function addTable(seats){
 
 S.counter++;
 
 let i=
 S.tables.length;
 
-return{
+S.tables.push({
 
 id:uid(),
 
@@ -1470,114 +883,17 @@ number:S.counter,
 
 seats:seats,
 
-shape:shape,
-
 scale:1,
 
-rot:0,
-
-lock:false,
-
 x:
-40+
+60+
 (i%5)*125,
 
 y:
-45+
+70+
 Math.floor(i/5)*120
 
-};
-
-}
-
-
-function addTable(
-seats,
-shape='round'
-){
-
-hist();
-
-S.tables.push(
-makeTable(
-seats,
-shape
-)
-);
-
-render();
-
-save();
-
-}
-
-
-function createMulti(){
-
-let q=
-Math.max(
-1,
-Math.min(
-100,
-+mQty.value||1
-)
-);
-
-let se=
-Math.max(
-1,
-+mSeats.value||1
-);
-
-let sh=
-mShape.value;
-
-hist();
-
-for(
-let i=0;
-i<q;
-i++
-){
-
-S.tables.push(
-makeTable(
-se,
-sh
-)
-);
-
-}
-
-hide(
-'multiModal'
-);
-
-render();
-
-save();
-
-}
-
-
-function renumber(){
-
-hist();
-
-S.tables
-
-.sort(
-(a,b)=>
-a.number-b.number
-)
-
-.forEach(
-(t,i)=>
-t.number=i+1
-);
-
-S.counter=
-S.tables.length;
+});
 
 render();
 
@@ -1588,40 +904,23 @@ save();
 
 function openTable(id){
 
-editT=id;
+editingTable=id;
 
-let t=
+let table=
 S.tables.find(
 x=>x.id===id
 );
 
 tNum.value=
-t.number;
+table.number;
 
 tSeats.value=
-t.seats;
-
-tShape.value=
-t.shape;
+table.seats;
 
 tScale.value=
 Math.round(
-(t.scale||1)*100
+(table.scale||1)*100
 );
-
-tRot.value=
-t.rot||0;
-
-tLock.checked=
-!!t.lock;
-
-let c=
-S.guests.filter(
-g=>g.tableId===t.id
-).length;
-
-capBox.textContent=
-`Table ${t.number}: ${c}/${t.seats} seats`;
 
 show(
 'tableModal'
@@ -1632,38 +931,27 @@ show(
 
 function saveTable(){
 
-let t=
+let table=
 S.tables.find(
-x=>x.id===editT
+x=>x.id===editingTable
 );
 
-hist();
-
-t.number=
+table.number=
 Math.max(
 1,
 +tNum.value||1
 );
 
-t.seats=
+table.seats=
 Math.max(
 1,
 +tSeats.value||1
 );
 
-t.shape=
-tShape.value;
-
-t.scale=
+table.scale=
 (+tScale.value||100)
 /100;
 
-t.rot=
-+tRot.value||0;
-
-t.lock=
-tLock.checked;
-
 hide(
 'tableModal'
 );
@@ -1675,410 +963,21 @@ save();
 }
 
 
-function dupTable(){
-
-let t=
-S.tables.find(
-x=>x.id===editT
-);
-
-hist();
-
-S.counter++;
-
-S.tables.push({
-
-...t,
-
-id:uid(),
-
-number:S.counter,
-
-x:t.x+30,
-
-y:t.y+30,
-
-lock:false
-
-});
-
-hide(
-'tableModal'
-);
-
-render();
-
-save();
-
-}
-
-
-function delTable(){
-
-hist();
-
-S.guests.forEach(
-g=>{
-
-if(
-g.tableId===editT
-){
-
-g.tableId=null;
-
-}
-
-}
-);
-
-S.tables=
-S.tables.filter(
-x=>x.id!==editT
-);
-
-hide(
-'tableModal'
-);
-
-render();
-
-save();
-
-}
-
-
-/* ASSIGN MANY GUESTS */
-
-function openAssign(){
-
-let t=
-S.tables.find(
-x=>x.id===editT
-);
-
-assignTitle.textContent=
-`Assign guests to Table ${t.number}`;
-
-renderAssign();
-
-hide(
-'tableModal'
-);
-
-show(
-'assignModal'
-);
-
-}
-
-
-function renderAssign(){
-
-let t=
-S.tables.find(
-x=>x.id===editT
-);
-
-let c=
-S.guests.filter(
-g=>g.tableId===t.id
-).length;
-
-assignCap.textContent=
-`${c}/${t.seats} seats filled · ${Math.max(0,t.seats-c)} available`;
-
-let q=
-(assignSearch.value||'')
-.toLowerCase();
-
-assignList.innerHTML='';
-
-S.guests
-
-.filter(
-g=>
-
-g.tableId!==t.id
-
-&&
-
-(
-!q
-
-||
-
-(
-gFirst(g)+' '+gLast(g)
-)
-.toLowerCase()
-.includes(q)
-
-)
-)
-
-.forEach(
-g=>{
-
-let row=
-document.createElement(
-'label'
-);
-
-row.className=
-'checkRow';
-
-let ct=
-S.tables.find(
-x=>x.id===g.tableId
-);
-
-row.innerHTML=
-
-`<input
-type="checkbox"
-value="${g.id}">
-
-<span style="flex:1">
-${safe(
-(gFirst(g)+' '+gLast(g)).trim()
-)}
-</span>
-
-<span class="badge">
-${ct?'T'+ct.number:'Unassigned'}
-</span>`;
-
-assignList
-.appendChild(row);
-
-}
-);
-
-}
-
-
-function assignMany(){
-
-let t=
-S.tables.find(
-x=>x.id===editT
-);
-
-let checked=
-[
-...assignList.querySelectorAll(
-'input:checked'
-)
-];
-
-let c=
-S.guests.filter(
-g=>g.tableId===t.id
-).length;
-
-let available=
-t.seats-c;
-
-if(
-checked.length>
-available
-){
-
-return toast(
-`Only ${available} seats available`
-);
-
-}
-
-hist();
-
-checked.forEach(
-ch=>{
-
-let g=
-S.guests.find(
-x=>x.id===ch.value
-);
-
-if(g){
-
-g.tableId=
-t.id;
-
-}
-
-}
-);
-
-hide(
-'assignModal'
-);
-
-render();
-
-save();
-
-}
-
-
-/* PASTE GUESTS DIRECTLY */
-
-function openPasteTable(){
-
-let t=
-S.tables.find(
-x=>x.id===editT
-);
-
-pasteTitle.textContent=
-`Paste guests into Table ${t.number}`;
-
-pasteNames.value='';
-
-hide(
-'tableModal'
-);
-
-show(
-'pasteModal'
-);
-
-}
-
-
-function parseLine(line){
-
-let p=
-line.split(',');
-
-let fn=
-(p[0]||'')
-.trim();
-
-let ln=
-(p.slice(1).join(',')||'')
-.trim();
-
-if(!ln){
-
-let w=
-line.split(/\s+/);
-
-ln=
-w.length>1
-?
-w.pop()
-:
-'';
-
-fn=
-w.join(' ');
-
-}
-
-return{
-fn:fn,
-ln:ln
-};
-
-}
-
-
-function pasteToTable(){
-
-let t=
-S.tables.find(
-x=>x.id===editT
-);
-
-let lines=
-pasteNames.value
-
-.split(/\n+/)
-
-.map(
-x=>x.trim()
-)
-
-.filter(Boolean);
-
-let c=
-S.guests.filter(
-g=>g.tableId===t.id
-).length;
-
-let available=
-t.seats-c;
-
-if(
-lines.length>
-available
-){
-
-return toast(
-`Only ${available} seats available`
-);
-
-}
-
-hist();
-
-lines.forEach(
-line=>{
-
-let p=
-parseLine(line);
-
-S.guests.push({
-
-id:uid(),
-
-firstName:p.fn,
-
-lastName:p.ln,
-
-name:
-(p.fn+' '+p.ln).trim(),
-
-tableId:t.id
-
-});
-
-}
-);
-
-hide(
-'pasteModal'
-);
-
-render();
-
-save();
-
-}
-
-
-/* VENUE ITEMS */
+/* VENUE OBJECTS */
 
 function addObj(type){
 
-hist();
+let width=130;
 
-let shape='rect';
-
-let w=130;
-
-let h=70;
+let height=70;
 
 if(
 type==='Dance Floor'
 ){
 
-shape='square';
+width=170;
 
-w=170;
-
-h=170;
+height=170;
 
 }
 
@@ -2088,160 +987,19 @@ id:uid(),
 
 type:type,
 
-shape:shape,
+w:width,
 
-w:w,
-
-h:h,
-
-rot:0,
-
-lock:false,
+h:height,
 
 x:
-190+
-S.objects.length*28,
+220+
+S.objects.length*30,
 
 y:
 180+
-S.objects.length*22
+S.objects.length*25
 
 });
-
-render();
-
-save();
-
-}
-
-
-function openObj(id){
-
-editO=id;
-
-let o=
-S.objects.find(
-x=>x.id===id
-);
-
-objTitle.textContent=
-o.type;
-
-oShape.value=
-o.shape;
-
-oW.value=
-o.w;
-
-oH.value=
-o.h;
-
-oRot.value=
-o.rot||0;
-
-oLock.checked=
-!!o.lock;
-
-show(
-'objModal'
-);
-
-}
-
-
-function saveObj(){
-
-let o=
-S.objects.find(
-x=>x.id===editO
-);
-
-hist();
-
-o.shape=
-oShape.value;
-
-o.w=
-+oW.value||130;
-
-o.h=
-+oH.value||80;
-
-if(
-o.shape==='round'
-
-||
-
-o.shape==='square'
-){
-
-o.h=o.w;
-
-}
-
-o.rot=
-+oRot.value||0;
-
-o.lock=
-oLock.checked;
-
-hide(
-'objModal'
-);
-
-render();
-
-save();
-
-}
-
-
-function dupObj(){
-
-let o=
-S.objects.find(
-x=>x.id===editO
-);
-
-hist();
-
-S.objects.push({
-
-...o,
-
-id:uid(),
-
-x:o.x+25,
-
-y:o.y+25,
-
-lock:false
-
-});
-
-hide(
-'objModal'
-);
-
-render();
-
-save();
-
-}
-
-
-function delObj(){
-
-hist();
-
-S.objects=
-S.objects.filter(
-x=>x.id!==editO
-);
-
-hide(
-'objModal'
-);
 
 render();
 
@@ -2254,139 +1012,26 @@ save();
 
 function addGuest(){
 
-let fn=
-firstName.value.trim();
+let name=
+guestName.value.trim();
 
-let ln=
-lastName.value.trim();
-
-if(
-!fn &&
-!ln
-)return;
-
-hist();
+if(!name)return;
 
 S.guests.push({
 
 id:uid(),
 
-firstName:fn,
-
-lastName:ln,
-
-name:
-(fn+' '+ln).trim(),
+name:name,
 
 tableId:null
 
 });
 
-firstName.value='';
-
-lastName.value='';
+guestName.value='';
 
 renderGuests();
 
 save();
-
-}
-
-
-function addBulk(){
-
-let lines=
-bulkNames.value
-
-.split(/\n+/)
-
-.map(
-x=>x.trim()
-)
-
-.filter(Boolean);
-
-if(!lines.length)return;
-
-hist();
-
-lines.forEach(
-line=>{
-
-let p=
-parseLine(line);
-
-S.guests.push({
-
-id:uid(),
-
-firstName:p.fn,
-
-lastName:p.ln,
-
-name:
-(p.fn+' '+p.ln).trim(),
-
-tableId:null
-
-});
-
-}
-);
-
-bulkNames.value='';
-
-hide(
-'bulkModal'
-);
-
-renderGuests();
-
-save();
-
-}
-
-
-function gFirst(g){
-
-return
-
-g.firstName!==undefined
-
-?
-
-g.firstName
-
-:
-
-(g.name||'')
-
-.split(/\s+/)
-
-.slice(0,-1)
-
-.join(' ');
-
-}
-
-
-function gLast(g){
-
-return
-
-g.lastName!==undefined
-
-?
-
-g.lastName
-
-:
-
-(g.name||'')
-
-.split(/\s+/)
-
-.slice(-1)[0];
 
 }
 
@@ -2395,72 +1040,48 @@ function renderGuests(){
 
 guestList.innerHTML='';
 
-let q=
-(search.value||'')
-.toLowerCase();
+S.guests.forEach(
+guest=>{
 
-S.guests
-
-.filter(
-g=>
-
-!q
-
-||
-
-(
-gFirst(g)+' '+gLast(g)
-)
-
-.toLowerCase()
-
-.includes(q)
-)
-
-.forEach(
-g=>{
-
-let r=
+let row=
 document.createElement(
 'div'
 );
 
-r.className=
+row.className=
 
 'guest'
 
 +
 
 (
-selGuest===g.id
+selectedGuest===guest.id
 ?
 ' sel'
 :
 ''
 );
 
-let t=
+let table=
 S.tables.find(
-x=>x.id===g.tableId
+x=>x.id===guest.tableId
 );
 
-r.innerHTML=
+row.innerHTML=
 
 `<span>
-${safe(
-(gFirst(g)+' '+gLast(g)).trim()
-)}
+${safe(guest.name)}
 </span>
 
 <span class="badge">
-${t?'T'+t.number:'Unassigned'}
+${table?'T'+table.number:'Unassigned'}
 </span>`;
 
-r.onclick=()=>{
+row.onclick=()=>{
 
-selGuest=
+selectedGuest=
 
-selGuest===g.id
+selectedGuest===guest.id
 
 ?
 
@@ -2468,14 +1089,15 @@ null
 
 :
 
-g.id;
+guest.id;
 
 renderGuests();
 
 };
 
-guestList
-.appendChild(r);
+guestList.appendChild(
+row
+);
 
 }
 );
@@ -2483,34 +1105,34 @@ guestList
 }
 
 
-function assignOne(tid){
+function assignGuest(tableId){
 
-let g=
+let guest=
 S.guests.find(
-x=>x.id===selGuest
+x=>x.id===selectedGuest
 );
 
-let t=
+let table=
 S.tables.find(
-x=>x.id===tid
+x=>x.id===tableId
 );
 
 if(
-!g ||
-!t
+!guest ||
+!table
 )return;
 
-let c=
+let count=
 S.guests.filter(
-x=>x.tableId===tid
+x=>x.tableId===tableId
 ).length;
 
 if(
-c>=t.seats
+count>=table.seats
 
 &&
 
-g.tableId!==tid
+guest.tableId!==tableId
 ){
 
 return toast(
@@ -2519,12 +1141,10 @@ return toast(
 
 }
 
-hist();
+guest.tableId=
+tableId;
 
-g.tableId=
-tid;
-
-selGuest=null;
+selectedGuest=null;
 
 render();
 
@@ -2537,8 +1157,7 @@ save();
 
 function chairs(
 wrap,
-seats,
-shape
+seats
 ){
 
 let n=
@@ -2548,10 +1167,6 @@ seats,
 );
 
 let radius=47;
-
-if(
-shape==='round'
-){
 
 for(
 let i=0;
@@ -2609,151 +1224,65 @@ chair
 
 }
 
-}else{
-
-let top=
-Math.ceil(n/2);
-
-let bottom=
-n-top;
-
-for(
-let i=0;
-i<top;
-i++
-){
-
-let chair=
-document.createElement(
-'div'
-);
-
-chair.className=
-'chair';
-
-chair.style.left=
-
-(
-10+
-i*
-(
-90/
-Math.max(
-1,
-top-1
-)
-)
-)
-+'px';
-
-chair.style.top=
-'4px';
-
-wrap.appendChild(
-chair
-);
-
-}
-
-for(
-let i=0;
-i<bottom;
-i++
-){
-
-let chair=
-document.createElement(
-'div'
-);
-
-chair.className=
-'chair';
-
-chair.style.left=
-
-(
-10+
-i*
-(
-90/
-Math.max(
-1,
-bottom-1
-)
-)
-)
-+'px';
-
-chair.style.top=
-'92px';
-
-wrap.appendChild(
-chair
-);
-
-}
-
-}
-
 }
 
 
-/* DRAG */
+/* DRAG OBJECTS */
 
-function drag(
-el,
+function makeDraggable(
+element,
 item,
 type
 ){
 
-let sx;
-let sy;
-let ox;
-let oy;
+let startX;
 
-let on=false;
+let startY;
+
+let originalX;
+
+let originalY;
+
+let active=false;
 
 let moved=false;
 
-el.onpointerdown=e=>{
 
-if(
-item.lock
-)return;
+element.onpointerdown=e=>{
 
-on=true;
+active=true;
 
 moved=false;
 
-el.setPointerCapture(
+element.setPointerCapture(
 e.pointerId
 );
 
-sx=
+startX=
 e.clientX;
 
-sy=
+startY=
 e.clientY;
 
-ox=
+originalX=
 item.x;
 
-oy=
+originalY=
 item.y;
 
 };
 
 
-el.onpointermove=e=>{
+element.onpointermove=e=>{
 
-if(!on)return;
+if(!active)return;
 
 let dx=
-(e.clientX-sx)
+(e.clientX-startX)
 /S.zoom;
 
 let dy=
-(e.clientY-sy)
+(e.clientY-startY)
 /S.zoom;
 
 if(
@@ -2766,23 +1295,23 @@ moved=true;
 }
 
 item.x=
-ox+dx;
+originalX+dx;
 
 item.y=
-oy+dy;
+originalY+dy;
 
-el.style.left=
+element.style.left=
 item.x+'px';
 
-el.style.top=
+element.style.top=
 item.y+'px';
 
 };
 
 
-el.onpointerup=()=>{
+element.onpointerup=()=>{
 
-on=false;
+active=false;
 
 if(moved){
 
@@ -2790,34 +1319,39 @@ save();
 
 }
 
-el.dataset.m=
+element.dataset.moved=
+
 moved
+
 ?
+
 '1'
+
 :
+
 '';
 
 setTimeout(
-()=>el.dataset.m='',
+()=>element.dataset.moved='',
 70
 );
 
 };
 
 
-el.onclick=()=>{
+element.onclick=()=>{
 
 if(
-el.dataset.m==='1'
+element.dataset.moved==='1'
 )return;
 
 if(
-type==='t'
+type==='table'
 ){
 
-if(selGuest){
+if(selectedGuest){
 
-assignOne(
+assignGuest(
 item.id
 );
 
@@ -2828,12 +1362,6 @@ item.id
 );
 
 }
-
-}else{
-
-openObj(
-item.id
-);
 
 }
 
@@ -2846,19 +1374,11 @@ item.id
 
 function render(){
 
-stage
-
-.querySelectorAll(
-'.obj'
-)
-
-.forEach(
-x=>x.remove()
-);
+overlay.innerHTML='';
 
 
 S.tables.forEach(
-t=>{
+table=>{
 
 let wrap=
 document.createElement(
@@ -2866,38 +1386,17 @@ document.createElement(
 );
 
 wrap.className=
-
-'obj tableWrap '
-
-+
-
-(
-t.shape==='rect'
-?
-'rect '
-:
-''
-)
-
-+
-
-(
-t.lock
-?
-'locked '
-:
-''
-);
+'obj tableWrap';
 
 
 let count=
 S.guests.filter(
-g=>g.tableId===t.id
+g=>g.tableId===table.id
 ).length;
 
 
 if(
-count===t.seats
+count===table.seats
 ){
 
 wrap.classList.add(
@@ -2908,7 +1407,7 @@ wrap.classList.add(
 
 
 if(
-count>t.seats
+count>table.seats
 ){
 
 wrap.classList.add(
@@ -2919,21 +1418,19 @@ wrap.classList.add(
 
 
 wrap.style.left=
-t.x+'px';
+table.x+'px';
 
 wrap.style.top=
-t.y+'px';
+table.y+'px';
 
 wrap.style.transform=
 
-`scale(${t.scale||1})
-rotate(${t.rot||0}deg)`;
+`scale(${table.scale||1})`;
 
 
 chairs(
 wrap,
-t.seats,
-t.shape
+table.seats
 );
 
 
@@ -2948,11 +1445,11 @@ core.className=
 core.innerHTML=
 
 `<strong>
-TABLE ${t.number}
+TABLE ${table.number}
 </strong>
 
 <span>
-${count}/${t.seats} seats
+${count}/${table.seats}
 </span>`;
 
 
@@ -2960,13 +1457,15 @@ wrap.appendChild(
 core
 );
 
-drag(
+
+makeDraggable(
 wrap,
-t,
-'t'
+table,
+'table'
 );
 
-stage.appendChild(
+
+overlay.appendChild(
 wrap
 );
 
@@ -2975,64 +1474,41 @@ wrap
 
 
 S.objects.forEach(
-o=>{
+obj=>{
 
-let e=
+let element=
 document.createElement(
 'div'
 );
 
-e.className=
+element.className=
+'obj vobj';
 
-'obj vobj '
+element.style.left=
+obj.x+'px';
 
-+
-o.shape
+element.style.top=
+obj.y+'px';
 
-+
-' '
+element.style.width=
+obj.w+'px';
 
-+
+element.style.height=
+obj.h+'px';
 
-(
-o.lock
-?
-'locked'
-:
-''
+element.textContent=
+obj.type;
+
+
+makeDraggable(
+element,
+obj,
+'object'
 );
 
 
-e.style.left=
-o.x+'px';
-
-e.style.top=
-o.y+'px';
-
-e.style.width=
-o.w+'px';
-
-e.style.height=
-o.h+'px';
-
-e.style.transform=
-
-`rotate(${o.rot||0}deg)`;
-
-
-e.textContent=
-o.type;
-
-
-drag(
-e,
-o,
-'o'
-);
-
-
-stage.appendChild(
-e
+overlay.appendChild(
+element
 );
 
 }
@@ -3043,13 +1519,9 @@ empty.style.display=
 
 (
 S.venue
-
 ||
-
 S.tables.length
-
 ||
-
 S.objects.length
 )
 
@@ -3064,50 +1536,34 @@ S.objects.length
 
 renderGuests();
 
-update();
+updateStatus();
 
-applyTransform();
+applyOverlayTransform();
 
 }
 
 
 /* STATUS */
 
-function update(){
+function updateStatus(){
 
 let assigned=
 S.guests.filter(
 g=>g.tableId
 ).length;
 
-
-let complete=
-S.tables.filter(
-t=>
-
-S.guests.filter(
-g=>g.tableId===t.id
-).length
-
-===
-
-t.seats
-
-).length;
-
-
 status.textContent=
 
-`${S.tables.length} tables · ${complete} complete · ${assigned}/${S.guests.length} guests assigned`;
+`${S.tables.length} tables · ${assigned}/${S.guests.length} guests assigned`;
 
 }
 
 
-/* ZOOM */
+/* ZOOM ONLY TABLES + OBJECTS */
 
-function applyTransform(){
+function applyOverlayTransform(){
 
-stage.style.transform=
+overlay.style.transform=
 
 `translate(
 ${S.panX}px,
@@ -3147,9 +1603,9 @@ let worldY=
 
 S.zoom=
 Math.max(
-.35,
+.4,
 Math.min(
-3.5,
+3,
 newZoom
 )
 );
@@ -3166,25 +1622,26 @@ worldY*
 S.zoom;
 
 
-applyTransform();
+applyOverlayTransform();
 
 }
 
 
-function zoomCenter(d){
+function zoomCenter(delta){
 
-let r=
+let rect=
 shell.getBoundingClientRect();
 
 zoomAround(
 
-r.left+
-r.width/2,
+rect.left+
+rect.width/2,
 
-r.top+
-r.height/2,
+rect.top+
+rect.height/2,
 
-S.zoom+d
+S.zoom+
+delta
 
 );
 
@@ -3201,14 +1658,29 @@ S.panX=0;
 
 S.panY=0;
 
-applyTransform();
+applyOverlayTransform();
 
 save();
 
 }
 
 
-/* COMPUTER MOUSE / TRACKPAD ZOOM */
+function resetItems(){
+
+S.zoom=1;
+
+S.panX=0;
+
+S.panY=0;
+
+render();
+
+save();
+
+}
+
+
+/* DESKTOP WHEEL */
 
 shell.addEventListener(
 
@@ -3218,12 +1690,14 @@ e=>{
 
 e.preventDefault();
 
+
 let factor=
 
 Math.exp(
 -e.deltaY*
 .0015
 );
+
 
 zoomAround(
 
@@ -3236,14 +1710,16 @@ factor
 
 );
 
+
 clearTimeout(
-window.ws
+window.zoomSave
 );
 
-window.ws=
+
+window.zoomSave=
 setTimeout(
 save,
-100
+120
 );
 
 },
@@ -3255,7 +1731,7 @@ passive:false
 );
 
 
-/* MOBILE PINCH ZOOM */
+/* MOBILE PINCH */
 
 const pointers=
 new Map();
@@ -3313,62 +1789,66 @@ if(
 pointers.size===2
 ){
 
-let p=
+let points=
 [
 ...pointers.values()
 ];
 
-let dist=
+
+let distance=
 Math.hypot(
 
-p[0].x-p[1].x,
+points[0].x-points[1].x,
 
-p[0].y-p[1].y
+points[0].y-points[1].y
 
 );
 
 
-let cx=
+let centerX=
 (
-p[0].x+
-p[1].x
+points[0].x+
+points[1].x
 )
 /2;
 
 
-let cy=
+let centerY=
 (
-p[0].y+
-p[1].y
+points[0].y+
+points[1].y
 )
 /2;
 
 
-let r=
+let rect=
 shell.getBoundingClientRect();
 
 
-let sx=
-cx-r.left;
+let localX=
+centerX-
+rect.left;
 
-let sy=
-cy-r.top;
+
+let localY=
+centerY-
+rect.top;
 
 
 gesture={
 
 type:'pinch',
 
-dist:dist,
+distance:distance,
 
 zoom:S.zoom,
 
-wx:
-(sx-S.panX)
+worldX:
+(localX-S.panX)
 /S.zoom,
 
-wy:
-(sy-S.panY)
+worldY:
+(localY-S.panY)
 /S.zoom
 
 };
@@ -3447,7 +1927,7 @@ e.clientY
 gesture.y;
 
 
-applyTransform();
+applyOverlayTransform();
 
 }
 
@@ -3456,47 +1936,50 @@ if(
 pointers.size===2
 ){
 
-let p=
+let points=
 [
 ...pointers.values()
 ];
 
 
-let dist=
+let distance=
 Math.hypot(
 
-p[0].x-p[1].x,
+points[0].x-points[1].x,
 
-p[0].y-p[1].y
+points[0].y-points[1].y
 
 );
 
 
-let cx=
+let centerX=
 (
-p[0].x+
-p[1].x
+points[0].x+
+points[1].x
 )
 /2;
 
 
-let cy=
+let centerY=
 (
-p[0].y+
-p[1].y
+points[0].y+
+points[1].y
 )
 /2;
 
 
-let r=
+let rect=
 shell.getBoundingClientRect();
 
 
-let sx=
-cx-r.left;
+let localX=
+centerX-
+rect.left;
 
-let sy=
-cy-r.top;
+
+let localY=
+centerY-
+rect.top;
 
 
 if(
@@ -3507,16 +1990,16 @@ gesture={
 
 type:'pinch',
 
-dist:dist,
+distance:distance,
 
 zoom:S.zoom,
 
-wx:
-(sx-S.panX)
+worldX:
+(localX-S.panX)
 /S.zoom,
 
-wy:
-(sy-S.panY)
+worldY:
+(localY-S.panY)
 /S.zoom
 
 };
@@ -3528,19 +2011,19 @@ S.zoom=
 
 Math.max(
 
-.35,
+.4,
 
 Math.min(
 
-3.5,
+3,
 
 gesture.zoom
 
 *
 
 (
-dist/
-gesture.dist
+distance/
+gesture.distance
 )
 
 )
@@ -3550,25 +2033,25 @@ gesture.dist
 
 S.panX=
 
-sx
+localX
 
 -
 
-gesture.wx*
+gesture.worldX*
 S.zoom;
 
 
 S.panY=
 
-sy
+localY
 
 -
 
-gesture.wy*
+gesture.worldY*
 S.zoom;
 
 
-applyTransform();
+applyOverlayTransform();
 
 }
 
@@ -3587,7 +2070,7 @@ if(
 pointers.size===1
 ){
 
-let p=
+let point=
 [
 ...pointers.values()
 ][0];
@@ -3597,9 +2080,9 @@ gesture={
 
 type:'pan',
 
-x:p.x,
+x:point.x,
 
-y:p.y,
+y:point.y,
 
 px:S.panX,
 
@@ -3634,472 +2117,7 @@ endPointer
 );
 
 
-/* GUEST FINDER */
-
-function normalizeLetter(s){
-
-let v=
-
-(s||'')
-
-.trim()
-
-.toUpperCase()
-
-.normalize(
-'NFD'
-)
-
-.replace(
-/[\u0300-\u036f]/g,
-''
-);
-
-
-return
-
-v.charAt(0)
-
-||
-
-'#';
-
-}
-
-
-function buildFinder(){
-
-let groups={};
-
-
-S.guests.forEach(
-g=>{
-
-let letter=
-normalizeLetter(
-gLast(g)
-);
-
-
-if(
-!groups[letter]
-){
-
-groups[letter]=[];
-
-}
-
-
-groups[letter]
-.push(g);
-
-}
-);
-
-
-let order=[
-
-...'ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ',
-
-...'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-
-'#'
-
-];
-
-
-alphaList.innerHTML='';
-
-
-order
-
-.filter(
-letter=>
-groups[letter]?.length
-)
-
-.forEach(
-letter=>{
-
-
-let title=
-document.createElement(
-'div'
-);
-
-title.className=
-'alpha';
-
-title.textContent=
-letter;
-
-alphaList.appendChild(
-title
-);
-
-
-groups[letter]
-
-.sort(
-(a,b)=>
-
-gLast(a)
-.localeCompare(
-gLast(b),
-'el'
-)
-)
-
-.forEach(
-g=>{
-
-let t=
-S.tables.find(
-x=>x.id===g.tableId
-);
-
-
-let row=
-document.createElement(
-'div'
-);
-
-row.className=
-'frow';
-
-
-row.innerHTML=
-
-`<div>
-
-<b>
-${safe(
-gLast(g)
-)}
-</b>
-
-${safe(
-gFirst(g)
-)}
-
-</div>
-
-<div>
-
-${t?'TABLE '+t.number:'UNASSIGNED'}
-
-</div>`;
-
-
-alphaList.appendChild(
-row
-);
-
-}
-);
-
-}
-);
-
-}
-
-
-function openExport(){
-
-buildFinder();
-
-show(
-'exportModal'
-);
-
-}
-
-
-/* EXPORT PNG */
-
-async function exportPlanPNG(){
-
-hide(
-'exportModal'
-);
-
-
-let old=
-stage.style.transform;
-
-
-stage.style.transform=
-'none';
-
-
-let canvas=
-
-await html2canvas(
-
-shell,
-
-{
-
-scale:3,
-
-useCORS:true,
-
-backgroundColor:'#fff'
-
-}
-
-);
-
-
-stage.style.transform=
-old;
-
-
-downloadCanvas(
-
-canvas,
-
-'seatly-venue-plan.png'
-
-);
-
-}
-
-
-async function exportFinderPNG(){
-
-buildFinder();
-
-hide(
-'exportModal'
-);
-
-
-let canvas=
-
-await html2canvas(
-
-finder,
-
-{
-
-scale:3,
-
-backgroundColor:'#fff'
-
-}
-
-);
-
-
-downloadCanvas(
-
-canvas,
-
-'seatly-guest-finder.png'
-
-);
-
-}
-
-
-/* PDF */
-
-async function exportPDF(){
-
-buildFinder();
-
-hide(
-'exportModal'
-);
-
-
-let {
-jsPDF
-}=
-window.jspdf;
-
-
-let pdf=
-new jsPDF({
-
-orientation:
-'landscape',
-
-unit:
-'mm',
-
-format:
-'a4'
-
-});
-
-
-let old=
-stage.style.transform;
-
-
-stage.style.transform=
-'none';
-
-
-let planCanvas=
-
-await html2canvas(
-
-shell,
-
-{
-
-scale:2.4,
-
-useCORS:true,
-
-backgroundColor:'#fff'
-
-}
-
-);
-
-
-stage.style.transform=
-old;
-
-
-pdf.addImage(
-
-planCanvas.toDataURL(
-'image/png'
-),
-
-'PNG',
-
-5,
-
-5,
-
-287,
-
-200,
-
-'FAST'
-
-);
-
-
-let finderCanvas=
-
-await html2canvas(
-
-finder,
-
-{
-
-scale:2,
-
-backgroundColor:'#fff'
-
-}
-
-);
-
-
-pdf.addPage(
-'a4',
-'portrait'
-);
-
-
-pdf.addImage(
-
-finderCanvas.toDataURL(
-'image/png'
-),
-
-'PNG',
-
-8,
-
-8,
-
-194,
-
-finderCanvas.height*
-(
-194/
-finderCanvas.width
-),
-
-'FAST'
-
-);
-
-
-pdf.save(
-'seatly-complete-wedding-plan.pdf'
-);
-
-}
-
-
-function downloadCanvas(
-canvas,
-name
-){
-
-let a=
-document.createElement(
-'a'
-);
-
-a.download=
-name;
-
-a.href=
-canvas.toDataURL(
-'image/png'
-);
-
-a.click();
-
-}
-
-
-/* CLEAR */
-
-function clearPlan(){
-
-if(
-!confirm(
-'Clear tables, venue items and assignments?'
-)
-)return;
-
-
-hist();
-
-
-S.tables=[];
-
-S.objects=[];
-
-S.counter=0;
-
-
-S.guests.forEach(
-g=>
-g.tableId=null
-);
-
-
-render();
-
-save();
-
-}
-
-
-/* UI HELPERS */
+/* HELPERS */
 
 function show(id){
 
@@ -4121,25 +2139,26 @@ document
 }
 
 
-function toast(x){
+function toast(message){
 
 let t=
 document.getElementById(
 'toast'
 );
 
-t.textContent=x;
+t.textContent=
+message;
 
 t.style.display=
 'block';
 
 
 clearTimeout(
-window.tt
+window.toastTimer
 );
 
 
-window.tt=
+window.toastTimer=
 setTimeout(
 
 ()=>t.style.display='none',
@@ -4151,17 +2170,17 @@ setTimeout(
 }
 
 
-function safe(s){
+function safe(text){
 
-let d=
+let div=
 document.createElement(
 'div'
 );
 
-d.textContent=
-s||'';
+div.textContent=
+text||'';
 
-return d.innerHTML;
+return div.innerHTML;
 
 }
 
