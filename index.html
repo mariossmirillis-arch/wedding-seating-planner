@@ -3,1253 +3,443 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Seatly V4.2</title>
-
+<title>Seatly V4.3</title>
 <style>
 *{box-sizing:border-box}
-
-body{
-margin:0;
-font-family:system-ui,-apple-system,sans-serif;
-background:#f6f3ef;
-color:#222
-}
-
-header{
-height:64px;
-background:#fff;
-border-bottom:1px solid #ddd;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 16px;
-position:sticky;
-top:0;
-z-index:30
-}
-
-.logo{
-font-size:24px;
-font-weight:800
-}
-
-.logo span{
-font-weight:400
-}
-
-button{
-border:0;
-border-radius:10px;
-padding:10px 12px;
-background:#222;
-color:#fff;
-font-weight:700;
-cursor:pointer
-}
-
-.sec{
-background:#fff;
-color:#222;
-border:1px solid #ddd
-}
-
-.soft{
-background:#eee;
-color:#222
-}
-
-.app{
-display:grid;
-grid-template-columns:340px 1fr;
-min-height:calc(100vh - 64px)
-}
-
-aside{
-background:#fff;
-border-right:1px solid #ddd;
-padding:16px;
-overflow:auto
-}
-
-main{
-padding:12px;
-min-width:0
-}
-
-.section{
-padding-bottom:15px;
-margin-bottom:15px;
-border-bottom:1px solid #eee
-}
-
-h2{
-font-size:16px;
-margin:0 0 9px
-}
-
-.small{
-font-size:12px;
-color:#777
-}
-
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:7px
-}
-
-.row{
-display:flex;
-gap:7px;
-align-items:center;
-flex-wrap:wrap
-}
-
-input{
-border:1px solid #ccc;
-border-radius:9px;
-padding:10px;
-font:inherit
-}
-
-.upload{
-display:block;
-border:1.5px dashed #bbb;
-border-radius:12px;
-padding:16px;
-text-align:center;
-background:#faf9f7;
-cursor:pointer
-}
-
-.upload input{
-display:none
-}
-
-/* WORK AREA */
-
-.shell{
-height:calc(100vh - 135px);
-min-height:520px;
-background:#fff;
-border:1px solid #ccc;
-border-radius:15px;
-position:relative;
-overflow:hidden;
-touch-action:none
-}
-
-/* BACKGROUND NEVER ZOOMS */
-
-.fixedBackground{
-position:absolute;
-inset:0;
-background:#fff center/contain no-repeat;
-z-index:0;
-pointer-events:none
-}
-
-.overlay{
-position:absolute;
-inset:0;
-z-index:2
-}
-
-.empty{
-position:absolute;
-inset:0;
-display:grid;
-place-items:center;
-color:#999;
-text-align:center;
-pointer-events:none
-}
-
-/* OBJECTS */
-
-.obj{
-position:absolute;
-user-select:none;
-touch-action:none;
-cursor:pointer
-}
-
-/* default = locked */
-
-.obj:not(.selected){
-cursor:pointer
-}
-
-/* selected object */
-
-.obj.selected{
-outline:3px solid rgba(40,40,40,.35);
-outline-offset:5px
-}
-
-/* TABLE */
-
-.tableWrap{
-width:110px;
-height:110px;
-display:flex;
-align-items:center;
-justify-content:center
-}
-
-.tableCore{
-width:70px;
-height:70px;
-border:2px solid #222;
-border-radius:50%;
-background:#fff;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-align:center;
-box-shadow:0 4px 12px #0002;
-z-index:2
-}
-
-.tableCore strong{
-font-size:11px
-}
-
-.tableCore span{
-font-size:10px;
-color:#666
-}
-
-.tableWrap.complete .tableCore{
-background:#dff3e4;
-border-color:#2f7d47
-}
-
-.tableWrap.over .tableCore{
-background:#ffe6e3;
-border-color:#b53a2d
-}
-
-/* CHAIRS */
-
-.chair{
-position:absolute;
-width:14px;
-height:14px;
-border:1.5px solid #555;
-background:#fff;
-border-radius:3px
-}
-
-.tableWrap.complete .chair{
-border-color:#2f7d47
-}
-
-.tableWrap.over .chair{
-border-color:#b53a2d
-}
-
-/* VENUE ITEMS */
-
-.vobj{
-border:2px dashed #555;
-background:#fff9;
-border-radius:12px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:800;
-font-size:12px
-}
-
-/* SELECTED TOOLBAR */
-
-.selectionTools{
-position:absolute;
-display:none;
-z-index:20;
-background:#fff;
-border:1px solid #ddd;
-border-radius:10px;
-padding:5px;
-gap:5px;
-box-shadow:0 5px 16px #0002
-}
-
-.selectionTools button{
-padding:6px 9px
-}
-
-.guest{
-display:flex;
-justify-content:space-between;
-padding:8px 0;
-border-bottom:1px solid #eee;
-font-size:13px;
-cursor:pointer
-}
-
-.guest.sel{
-font-weight:800
-}
-
-.badge{
-font-size:11px;
-background:#eee;
-border-radius:999px;
-padding:3px 7px
-}
-
-.modal{
-position:fixed;
-inset:0;
-background:#0005;
-display:none;
-align-items:center;
-justify-content:center;
-z-index:100;
-padding:15px
-}
-
-.card{
-background:#fff;
-border-radius:15px;
-padding:20px;
-width:min(430px,100%)
-}
-
-.card label{
-display:block;
-font-size:12px;
-color:#666;
-margin-top:8px
-}
-
-.card input{
-width:100%;
-margin-top:5px
-}
-
-.actions{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:7px;
-margin-top:12px
-}
-
-.toast{
-position:fixed;
-bottom:20px;
-left:50%;
-transform:translateX(-50%);
-background:#222;
-color:#fff;
-padding:10px 14px;
-border-radius:10px;
-display:none;
-z-index:150
-}
-
-@media(max-width:860px){
-
-.app{
-grid-template-columns:1fr
-}
-
-aside{
-border-right:0;
-border-bottom:1px solid #ddd
-}
-
-.shell{
-height:65vh;
-min-height:470px
-}
-
-}
+body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f6f3ef;color:#222}
+header{height:64px;background:#fff;border-bottom:1px solid #ddd;display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:sticky;top:0;z-index:30}
+.logo{font-size:24px;font-weight:800}.logo span{font-weight:400}
+button{border:0;border-radius:10px;padding:10px 12px;background:#222;color:#fff;font-weight:700;cursor:pointer}
+.sec{background:#fff;color:#222;border:1px solid #ddd}.soft{background:#eee;color:#222}.danger{background:#8d3028}
+.app{display:grid;grid-template-columns:340px 1fr;min-height:calc(100vh - 64px)}
+aside{background:#fff;border-right:1px solid #ddd;padding:16px;overflow:auto}
+main{padding:12px;min-width:0}
+.section{padding-bottom:15px;margin-bottom:15px;border-bottom:1px solid #eee}
+h2{font-size:16px;margin:0 0 9px}.small{font-size:12px;color:#777;line-height:1.4}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.row{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+input,select{border:1px solid #ccc;border-radius:9px;padding:10px;font:inherit}
+.upload{display:block;border:1.5px dashed #bbb;border-radius:12px;padding:16px;text-align:center;background:#faf9f7;cursor:pointer}.upload input{display:none}
+.shell{height:calc(100vh - 135px);min-height:520px;background:#fff;border:1px solid #ccc;border-radius:15px;position:relative;overflow:hidden;touch-action:none}
+.fixedBg{position:absolute;inset:0;background:#fff center/contain no-repeat;pointer-events:none;z-index:0}
+.empty{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#999;pointer-events:none;z-index:1}
+.overlay{position:absolute;inset:0;z-index:2}
+.obj{position:absolute;touch-action:none;user-select:none;cursor:pointer}
+.obj.selected{outline:3px solid rgba(34,34,34,.35);outline-offset:4px}
+.table{width:110px;height:110px;display:flex;align-items:center;justify-content:center}
+.core{width:70px;height:70px;border:2px solid #222;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 4px 12px #0002;z-index:2}
+.core strong{font-size:11px}.core span{font-size:10px;color:#666}
+.table.complete .core{background:#dff3e4;border-color:#2f7d47}
+.table.over .core{background:#ffe6e3;border-color:#b53a2d}
+.chair{position:absolute;width:14px;height:14px;border:1.5px solid #555;background:#fff;border-radius:3px}
+.table.complete .chair{border-color:#2f7d47}.table.over .chair{border-color:#b53a2d}
+.vobj{border:2px dashed #555;background:#fff9;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px}
+.vobj.round{border-radius:50%}
+.selTools{position:absolute;display:none;z-index:20;background:#fff;border:1px solid #ddd;border-radius:10px;padding:5px;gap:5px;box-shadow:0 5px 16px #0002}
+.selTools button{padding:6px 9px}
+.guest{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee;font-size:13px;cursor:pointer}
+.guest.sel{font-weight:800}.badge{font-size:11px;background:#eee;border-radius:999px;padding:3px 7px}
+.modal{position:fixed;inset:0;background:#0005;display:none;align-items:center;justify-content:center;z-index:100;padding:15px}
+.card{background:#fff;border-radius:15px;padding:20px;width:min(430px,100%);max-height:90vh;overflow:auto}
+.card label{display:block;font-size:12px;color:#666;margin-top:8px}.card input,.card select{width:100%;margin-top:5px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#222;color:#fff;padding:10px 14px;border-radius:10px;display:none;z-index:150}
+@media(max-width:860px){.app{grid-template-columns:1fr}aside{border-right:0;border-bottom:1px solid #ddd}.shell{height:65vh;min-height:470px}}
 </style>
-
 </head>
-
 <body>
-
 <header>
-
-<div class="logo">
-seat<span>ly</span>
-</div>
-
-<button>
-Finish / Export
-</button>
-
+  <div class="logo">seat<span>ly</span></div>
+  <button onclick="toast('Export θα προστεθεί στο επόμενο βήμα')">Finish / Export</button>
 </header>
 
 <div class="app">
-
 <aside>
+  <div class="section">
+    <h2>1. Venue</h2>
+    <label class="upload">📷 Upload screenshot / photo
+      <input id="venueFile" type="file" accept="image/*">
+    </label>
+    <button class="sec" style="margin-top:7px" onclick="removeVenue()">Remove image</button>
+    <div class="small" style="margin-top:6px">Το background μένει πάντα σταθερό και κλειδωμένο.</div>
+  </div>
 
-<div class="section">
+  <div class="section">
+    <h2>2. Tables</h2>
+    <div class="grid">
+      <button class="soft" onclick="addTable(8)">+ 8 seats</button>
+      <button class="soft" onclick="addTable(10)">+ 10 seats</button>
+      <button class="soft" onclick="addTable(12)">+ 12 seats</button>
+      <button class="soft" onclick="addTable(16)">+ 16 seats</button>
+    </div>
+  </div>
 
-<h2>1. Venue</h2>
+  <div class="section">
+    <h2>3. Venue items</h2>
+    <div class="grid">
+      <button class="soft" onclick="addObj('Dance Floor')">Dance Floor</button>
+      <button class="soft" onclick="addObj('DJ')">DJ</button>
+      <button class="soft" onclick="addObj('Bar')">Bar</button>
+      <button class="soft" onclick="addObj('Stage')">Stage</button>
+    </div>
+  </div>
 
-<label class="upload">
-
-📷 Upload screenshot / photo
-
-<input
-id="venueFile"
-type="file"
-accept="image/*">
-
-</label>
-
-<button
-class="sec"
-style="margin-top:7px"
-onclick="removeVenue()">
-
-Remove image
-
-</button>
-
-<div class="small" style="margin-top:6px">
-Το background μένει πάντα κλειδωμένο.
-</div>
-
-</div>
-
-<div class="section">
-
-<h2>2. Tables</h2>
-
-<div class="grid">
-
-<button
-class="soft"
-onclick="addTable(8)">
-+ 8 seats
-</button>
-
-<button
-class="soft"
-onclick="addTable(10)">
-+ 10 seats
-</button>
-
-<button
-class="soft"
-onclick="addTable(12)">
-+ 12 seats
-</button>
-
-<button
-class="soft"
-onclick="addTable(16)">
-+ 16 seats
-</button>
-
-</div>
-
-</div>
-
-<div class="section">
-
-<h2>3. Venue items</h2>
-
-<div class="grid">
-
-<button
-class="soft"
-onclick="addObj('Dance Floor')">
-Dance Floor
-</button>
-
-<button
-class="soft"
-onclick="addObj('DJ')">
-DJ
-</button>
-
-<button
-class="soft"
-onclick="addObj('Bar')">
-Bar
-</button>
-
-<button
-class="soft"
-onclick="addObj('Stage')">
-Stage
-</button>
-
-</div>
-
-</div>
-
-<div class="section">
-
-<h2>4. Guests</h2>
-
-<div class="row">
-
-<input
-id="guestName"
-style="flex:1;min-width:0"
-placeholder="Guest name">
-
-<button onclick="addGuest()">
-Add
-</button>
-
-</div>
-
-<div id="guestList"></div>
-
-</div>
-
+  <div class="section">
+    <h2>4. Guests</h2>
+    <div class="row">
+      <input id="guestName" style="flex:1;min-width:0" placeholder="Guest name">
+      <button onclick="addGuest()">Add</button>
+    </div>
+    <div id="guestList"></div>
+  </div>
 </aside>
 
 <main>
+  <div class="row" style="justify-content:space-between;margin-bottom:10px">
+    <div><b>Your venue</b><div class="small" id="status"></div></div>
+    <button class="sec" onclick="deselect()">Lock all</button>
+  </div>
 
-<div
-class="row"
-style="justify-content:space-between;margin-bottom:10px">
+  <div class="shell" id="shell">
+    <div class="fixedBg" id="bg"></div>
+    <div class="empty" id="empty">White canvas — upload venue or add tables.</div>
+    <div class="overlay" id="overlay"></div>
 
-<div>
-
-<b>Your venue</b>
-
-<div
-class="small"
-id="status">
-</div>
-
-</div>
-
-<button
-class="sec"
-onclick="deselectAll()">
-
-Lock all
-
-</button>
-
-</div>
-
-<div
-class="shell"
-id="shell">
-
-<div
-class="fixedBackground"
-id="background">
-</div>
-
-<div
-class="empty"
-id="empty">
-
-White canvas — upload venue or add tables.
-
-</div>
-
-<div
-class="overlay"
-id="overlay">
-</div>
-
-<div
-class="selectionTools"
-id="selectionTools">
-
-<button
-onclick="resizeSelected(1.1)">
-＋
-</button>
-
-<button
-onclick="resizeSelected(.9)">
-−
-</button>
-
-<button
-onclick="rotateSelected(15)">
-↻
-</button>
-
-<button
-class="sec"
-onclick="deselectAll()">
-Lock
-</button>
-
-</div>
-
-</div>
-
+    <div class="selTools" id="selTools">
+      <button onclick="resizeSelected(1.1)">＋</button>
+      <button onclick="resizeSelected(0.9)">−</button>
+      <button onclick="rotateSelected(15)">↻</button>
+      <button class="sec" onclick="openSelectedSettings()">Edit</button>
+      <button class="sec" onclick="deselect()">Lock</button>
+    </div>
+  </div>
 </main>
-
 </div>
 
-
-<div
-class="modal"
-id="tableModal">
-
-<div class="card">
-
-<h2>Table settings</h2>
-
-<label>Table number</label>
-
-<input
-id="tNum"
-type="number"
-min="1">
-
-<label>Seats</label>
-
-<input
-id="tSeats"
-type="number"
-min="1">
-
-<div class="actions">
-
-<button onclick="saveTable()">
-Save
-</button>
-
-<button
-class="sec"
-onclick="hide('tableModal')">
-Cancel
-</button>
-
+<div class="modal" id="tableModal">
+  <div class="card">
+    <h2>Table settings</h2>
+    <label>Table number</label><input id="tNum" type="number" min="1">
+    <label>Seats</label><input id="tSeats" type="number" min="1">
+    <div class="actions">
+      <button onclick="saveTableSettings()">Save</button>
+      <button class="danger" onclick="deleteSelected()">Delete</button>
+      <button class="sec" onclick="hide('tableModal')">Cancel</button>
+    </div>
+  </div>
 </div>
 
+<div class="modal" id="objModal">
+  <div class="card">
+    <h2 id="objTitle">Object settings</h2>
+    <label>Width</label><input id="oW" type="range" min="60" max="360">
+    <label>Height</label><input id="oH" type="range" min="40" max="300">
+    <div class="actions">
+      <button onclick="saveObjSettings()">Save</button>
+      <button class="danger" onclick="deleteSelected()">Delete</button>
+      <button class="sec" onclick="hide('objModal')">Cancel</button>
+    </div>
+  </div>
 </div>
 
-</div>
-
-
-<div
-class="toast"
-id="toast">
-</div>
-
+<div class="toast" id="toast"></div>
 
 <script>
-
-let S={
-
-tables:[],
-
-objects:[],
-
-guests:[],
-
-counter:0,
-
-venue:null
-
-};
-
+let S={tables:[],objects:[],guests:[],counter:0,venue:null};
 let selected=null;
-
 let selectedGuest=null;
+const shell=document.getElementById('shell');
+const overlay=document.getElementById('overlay');
+const bg=document.getElementById('bg');
+const tools=document.getElementById('selTools');
+const uid=()=>window.crypto&&crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random());
 
-let editingTable=null;
-
-
-const shell=
-document.getElementById(
-'shell'
-);
-
-const overlay=
-document.getElementById(
-'overlay'
-);
-
-const bg=
-document.getElementById(
-'background'
-);
-
-const tools=
-document.getElementById(
-'selectionTools'
-);
-
-
-const uid=()=>{
-
-if(
-window.crypto &&
-crypto.randomUUID
-){
-
-return crypto.randomUUID();
-
-}
-
-return String(
-Date.now()+
-Math.random()
-);
-
-};
-
-
-function save(){
-
-try{
-
-localStorage.setItem(
-'seatly_v42',
-JSON.stringify(S)
-);
-
-}catch(e){}
-
-updateStatus();
-
-}
-
-
-function load(){
-
-try{
-
-let x=
-localStorage.getItem(
-'seatly_v42'
-);
-
-if(x){
-
-S=
-Object.assign(
-S,
-JSON.parse(x)
-);
-
-}
-
-}catch(e){}
-
-applyVenue();
-
-render();
-
-}
-
-
-function applyVenue(){
-
-bg.style.backgroundImage=
-
-S.venue
-
-?
-
-`url("${S.venue}")`
-
-:
-
-'none';
-
-}
-
+function save(){try{localStorage.setItem('seatly_v43',JSON.stringify(S))}catch(e){} updateStatus()}
+function load(){try{let x=localStorage.getItem('seatly_v43');if(x)S=Object.assign(S,JSON.parse(x))}catch(e){}applyVenue();render()}
+function applyVenue(){bg.style.backgroundImage=S.venue?`url("${S.venue}")`:'none'}
 
 venueFile.onchange=e=>{
-
-let file=
-e.target.files[0];
-
-if(!file)return;
-
-let reader=
-new FileReader();
-
-reader.onload=x=>{
-
-S.venue=
-x.target.result;
-
-applyVenue();
-
-render();
-
-save();
-
+  const file=e.target.files[0]; if(!file)return;
+  const r=new FileReader();
+  r.onload=x=>{S.venue=x.target.result;applyVenue();render();save()};
+  r.readAsDataURL(file);
 };
-
-reader.readAsDataURL(
-file
-);
-
-};
-
-
-function removeVenue(){
-
-S.venue=null;
-
-applyVenue();
-
-save();
-
-}
-
-
-/* TABLES */
+function removeVenue(){S.venue=null;applyVenue();render();save()}
 
 function addTable(seats){
-
-S.counter++;
-
-let i=
-S.tables.length;
-
-S.tables.push({
-
-id:uid(),
-
-type:'table',
-
-number:S.counter,
-
-seats:seats,
-
-scale:1,
-
-rotation:0,
-
-x:
-60+
-(i%5)*125,
-
-y:
-70+
-Math.floor(i/5)*120
-
-});
-
-render();
-
-save();
-
+  S.counter++;
+  const i=S.tables.length;
+  S.tables.push({
+    id:uid(),kind:'table',number:S.counter,seats,scale:1,rotation:0,
+    x:60+(i%5)*125,y:70+Math.floor(i/5)*120
+  });
+  render();save();
 }
-
-
-function openTable(id){
-
-editingTable=id;
-
-let table=
-S.tables.find(
-x=>x.id===id
-);
-
-tNum.value=
-table.number;
-
-tSeats.value=
-table.seats;
-
-show(
-'tableModal'
-);
-
+function addObj(label){
+  const i=S.objects.length;
+  let w=140,h=70;
+  if(label==='Dance Floor'){w=170;h=170}
+  S.objects.push({
+    id:uid(),kind:'object',label,w,h,scale:1,rotation:0,
+    x:220+i*30,y:180+i*25
+  });
+  render();save();
 }
-
-
-function saveTable(){
-
-let table=
-S.tables.find(
-x=>x.id===editingTable
-);
-
-table.number=
-Math.max(
-1,
-+tNum.value||1
-);
-
-table.seats=
-Math.max(
-1,
-+tSeats.value||1
-);
-
-hide(
-'tableModal'
-);
-
-render();
-
-save();
-
-}
-
-
-/* VENUE ITEMS */
-
-function addObj(type){
-
-let width=130;
-
-let height=70;
-
-if(
-type==='Dance Floor'
-){
-
-width=170;
-
-height=170;
-
-}
-
-S.objects.push({
-
-id:uid(),
-
-type:'object',
-
-label:type,
-
-w:width,
-
-h:height,
-
-scale:1,
-
-rotation:0,
-
-x:
-220+
-S.objects.length*30,
-
-y:
-180+
-S.objects.length*25
-
-});
-
-render();
-
-save();
-
-}
-
-
-/* GUESTS */
 
 function addGuest(){
+  const n=guestName.value.trim(); if(!n)return;
+  S.guests.push({id:uid(),name:n,tableId:null});
+  guestName.value='';renderGuests();save();
+}
+function renderGuests(){
+  guestList.innerHTML='';
+  S.guests.forEach(g=>{
+    const r=document.createElement('div');
+    r.className='guest'+(selectedGuest===g.id?' sel':'');
+    const t=S.tables.find(x=>x.id===g.tableId);
+    r.innerHTML=`<span>${safe(g.name)}</span><span class="badge">${t?'T'+t.number:'Unassigned'}</span>`;
+    r.onclick=()=>{selectedGuest=selectedGuest===g.id?null:g.id;renderGuests()};
+    guestList.appendChild(r);
+  });
+}
+function assignGuest(tableId){
+  const g=S.guests.find(x=>x.id===selectedGuest);
+  const t=S.tables.find(x=>x.id===tableId);
+  if(!g||!t)return;
+  const count=S.guests.filter(x=>x.tableId===tableId).length;
+  if(count>=t.seats&&g.tableId!==tableId)return toast('Table is full');
+  g.tableId=tableId;selectedGuest=null;render();save();
+}
 
-let name=
-guestName.value.trim();
+function chairs(wrap,seats){
+  const n=Math.min(seats,16),radius=47;
+  for(let i=0;i<n;i++){
+    const a=2*Math.PI*i/n-Math.PI/2;
+    const c=document.createElement('div');
+    c.className='chair';
+    c.style.left=(55+Math.cos(a)*radius-7)+'px';
+    c.style.top=(55+Math.sin(a)*radius-7)+'px';
+    c.style.transform=`rotate(${a*180/Math.PI+90}deg)`;
+    wrap.appendChild(c);
+  }
+}
 
-if(!name)return;
+function getSelected(){
+  if(!selected)return null;
+  return selected.kind==='table'
+    ? S.tables.find(x=>x.id===selected.id)
+    : S.objects.find(x=>x.id===selected.id);
+}
+function deselect(){
+  selected=null;
+  tools.style.display='none';
+  render();
+}
+function selectItem(kind,id){
+  selected={kind,id};
+  render();
+}
+function positionTools(el){
+  const sr=shell.getBoundingClientRect(),er=el.getBoundingClientRect();
+  tools.style.left=Math.max(5,er.left-sr.left)+'px';
+  tools.style.top=Math.max(5,Math.min(sr.height-45,er.bottom-sr.top+6))+'px';
+  tools.style.display='flex';
+}
 
-S.guests.push({
+function resizeSelected(mult){
+  const item=getSelected(); if(!item)return;
+  item.scale=Math.max(.5,Math.min(2.2,(item.scale||1)*mult));
+  render();save();
+}
+function rotateSelected(deg){
+  const item=getSelected(); if(!item)return;
+  item.rotation=((item.rotation||0)+deg)%360;
+  render();save();
+}
+function openSelectedSettings(){
+  const item=getSelected(); if(!item)return;
+  if(selected.kind==='table'){
+    tNum.value=item.number;tSeats.value=item.seats;show('tableModal');
+  }else{
+    objTitle.textContent=item.label+' settings';
+    oW.value=item.w;oH.value=item.h;show('objModal');
+  }
+}
+function saveTableSettings(){
+  const t=getSelected(); if(!t)return;
+  t.number=Math.max(1,+tNum.value||1);
+  t.seats=Math.max(1,+tSeats.value||1);
+  hide('tableModal');render();save();
+}
+function saveObjSettings(){
+  const o=getSelected(); if(!o)return;
+  o.w=+oW.value||o.w;o.h=+oH.value||o.h;
+  hide('objModal');render();save();
+}
+function deleteSelected(){
+  if(!selected)return;
+  if(selected.kind==='table'){
+    S.guests.forEach(g=>{if(g.tableId===selected.id)g.tableId=null});
+    S.tables=S.tables.filter(x=>x.id!==selected.id);
+    hide('tableModal');
+  }else{
+    S.objects=S.objects.filter(x=>x.id!==selected.id);
+    hide('objModal');
+  }
+  selected=null;tools.style.display='none';render();save();
+}
 
-id:uid(),
+/* interaction: first tap selects; only selected item can drag/pinch */
+function attachInteraction(el,item,kind){
+  const pointers=new Map();
+  let dragStart=null;
+  let pinchStart=null;
+  let moved=false;
 
-name:name,
+  el.addEventListener('pointerdown',e=>{
+    e.stopPropagation();
 
-tableId:null
+    if(selectedGuest&&kind==='table'){
+      assignGuest(item.id);
+      return;
+    }
 
+    if(!selected||selected.id!==item.id){
+      selectItem(kind,item.id);
+      return;
+    }
+
+    pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    try{el.setPointerCapture(e.pointerId)}catch(_){}
+
+    if(pointers.size===1){
+      dragStart={x:e.clientX,y:e.clientY,ox:item.x,oy:item.y};
+      moved=false;
+    }else if(pointers.size===2){
+      const p=[...pointers.values()];
+      pinchStart={
+        dist:Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y),
+        scale:item.scale||1
+      };
+    }
+  });
+
+  el.addEventListener('pointermove',e=>{
+    if(!pointers.has(e.pointerId))return;
+    pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+
+    if(pointers.size===1&&dragStart){
+      const dx=e.clientX-dragStart.x,dy=e.clientY-dragStart.y;
+      if(Math.abs(dx)+Math.abs(dy)>3)moved=true;
+      item.x=dragStart.ox+dx;
+      item.y=dragStart.oy+dy;
+      el.style.left=item.x+'px';
+      el.style.top=item.y+'px';
+      positionTools(el);
+    }
+
+    if(pointers.size===2){
+      const p=[...pointers.values()];
+      if(!pinchStart){
+        pinchStart={
+          dist:Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y),
+          scale:item.scale||1
+        };
+      }
+      const dist=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);
+      item.scale=Math.max(.5,Math.min(2.2,pinchStart.scale*(dist/pinchStart.dist)));
+      el.style.transform=`scale(${item.scale}) rotate(${item.rotation||0}deg)`;
+      positionTools(el);
+    }
+  });
+
+  const end=e=>{
+    pointers.delete(e.pointerId);
+    if(pointers.size===0){
+      dragStart=null;pinchStart=null;
+      save();
+    }else if(pointers.size===1){
+      const p=[...pointers.values()][0];
+      dragStart={x:p.x,y:p.y,ox:item.x,oy:item.y};
+      pinchStart=null;
+    }
+  };
+  el.addEventListener('pointerup',end);
+  el.addEventListener('pointercancel',end);
+
+  el.addEventListener('wheel',e=>{
+    if(!selected||selected.id!==item.id)return;
+    e.preventDefault();
+    const factor=e.deltaY<0?1.08:.92;
+    item.scale=Math.max(.5,Math.min(2.2,(item.scale||1)*factor));
+    el.style.transform=`scale(${item.scale}) rotate(${item.rotation||0}deg)`;
+    positionTools(el);
+    save();
+  },{passive:false});
+}
+
+function render(){
+  overlay.innerHTML='';
+
+  S.tables.forEach(t=>{
+    const el=document.createElement('div');
+    el.className='obj table'+(selected&&selected.id===t.id?' selected':'');
+    const count=S.guests.filter(g=>g.tableId===t.id).length;
+    if(count===t.seats)el.classList.add('complete');
+    if(count>t.seats)el.classList.add('over');
+    el.style.left=t.x+'px';el.style.top=t.y+'px';
+    el.style.transform=`scale(${t.scale||1}) rotate(${t.rotation||0}deg)`;
+
+    chairs(el,t.seats);
+
+    const core=document.createElement('div');
+    core.className='core';
+    core.innerHTML=`<strong>TABLE ${t.number}</strong><span>${count}/${t.seats}</span>`;
+    el.appendChild(core);
+
+    attachInteraction(el,t,'table');
+    overlay.appendChild(el);
+
+    if(selected&&selected.id===t.id)setTimeout(()=>positionTools(el),0);
+  });
+
+  S.objects.forEach(o=>{
+    const el=document.createElement('div');
+    el.className='obj vobj'+(selected&&selected.id===o.id?' selected':'');
+    el.style.left=o.x+'px';el.style.top=o.y+'px';
+    el.style.width=o.w+'px';el.style.height=o.h+'px';
+    el.style.transform=`scale(${o.scale||1}) rotate(${o.rotation||0}deg)`;
+    el.textContent=o.label;
+
+    attachInteraction(el,o,'object');
+    overlay.appendChild(el);
+
+    if(selected&&selected.id===o.id)setTimeout(()=>positionTools(el),0);
+  });
+
+  empty.style.display=(S.venue||S.tables.length||S.objects.length)?'none':'grid';
+  renderGuests();updateStatus();
+}
+
+shell.addEventListener('pointerdown',e=>{
+  if(e.target===shell||e.target===overlay)deselect();
 });
 
-guestName.value='';
-
-renderGuests();
-
-save();
-
+function updateStatus(){
+  const assigned=S.guests.filter(g=>g.tableId).length;
+  const complete=S.tables.filter(t=>S.guests.filter(g=>g.tableId===t.id).length===t.seats).length;
+  status.textContent=`${S.tables.length} tables · ${complete} complete · ${assigned}/${S.guests.length} guests assigned`;
 }
-
-
-function renderGuests(){
-
-guestList.innerHTML='';
-
-S.guests.forEach(
-guest=>{
-
-let row=
-document.createElement(
-'div'
-);
-
-row.className=
-
-'guest'
-
-+
-
-(
-selectedGuest===guest.id
-?
-' sel'
-:
-''
-);
-
-
-let table=
-S.tables.find(
-x=>x.id===guest.tableId
-);
-
-
-row.innerHTML=
-
-`<span>
-${safe(guest.name)}
-</span>
-
-<span class="badge">
-${table?'T'+table.number:'Unassigned'}
-</span>`;
-
-
-row.onclick=()=>{
-
-selectedGuest=
-
-selectedGuest===guest.id
-
-?
-
-null
-
-:
-
-guest.id;
-
-
-renderGuests();
-
-};
-
-
-guestList.appendChild(
-row
-);
-
+function show(id){document.getElementById(id).style.display='flex'}
+function hide(id){document.getElementById(id).style.display='none'}
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.style.display='block';
+  clearTimeout(window.tt);
+  window.tt=setTimeout(()=>t.style.display='none',1600);
 }
-);
-
-}
-
-
-function assignGuest(tableId){
-
-let guest=
-S.guests.find(
-x=>x.id===selectedGuest
-);
-
-let table=
-S.tables.find(
-x=>x.id===tableId
-);
-
-if(
-!guest ||
-!table
-)return;
-
-
-let count=
-S.guests.filter(
-x=>x.tableId===tableId
-).length;
-
-
-if(
-count>=table.seats
-
-&&
-
-guest.tableId!==tableId
-){
-
-toast(
-'Table is full'
-);
-
-return;
-
-}
-
-
-guest.tableId=
-tableId;
-
-selectedGuest=null;
-
-render();
-
-save();
-
-}
-
-
-/* CHAIRS */
-
-function chairs(
-wrap,
-seats
-){
-
-let n=
-Math.min(
-seats,
-16
-);
-
-let radius=47;
-
-
-for(
-let i=0;
-i<n;
-i++
-){
-
-let angle=
-
-2*
-Math.PI*
-i/n
-
--
-
-Math.PI/2;
-
-
-let chair=
-document.createElement(
-'div'
-);
-
-
-chair.className=
-'chair';
-
-
-chair.style.left=
-
-(
-55+
-Math.cos(angle)*radius
--
-7
-)
-+'px';
-
-
-chair.style.top=
-
-(
-55+
-Math.sin(angle)*radius
--
-7
-)
-+'px';
-
-
-chair.style.transform=
-
-`rotate(${
-angle*180/Math.PI+90
-}deg)`;
-
-
-wrap.appendChild(
-chair
-);
-
-}
-
-}
-
-
-/* SELECTION */
-
-function selectItem(
-type,
-id,
-element
-){
-
-selected={
-type:type,
-id:id
-};
-
-
-document
-
-.querySelectorAll(
-'.obj'
-)
-
-.forEach(
-x=>
-x.classList.remove(
-'selected'
-)
-);
-
-
-element.classList.add(
-'selected'
-);
-
-
-positionTools(
-element
-);
-
-}
-
-
-function deselectAll(){
-
-selected=null;
-
-document
-
-.querySelectorAll(
-'.obj'
-)
-
-.forEach(
-x=>
-x.classList.remove(
-'selected'
-)
-);
-
-
-tools.style.display=
-'none';
-
-}
-
-
-function positionTools(element){
-
-let shellRect=
-shell.getBoundingClientRect();
+function safe(s){const d=document.createElement('div');d.textContent=s||'';return d.innerHTML}
+
+load();
+</script>
+</body>
+</html>
