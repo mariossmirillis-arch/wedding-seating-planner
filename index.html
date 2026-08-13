@@ -2,36 +2,63 @@
 <html lang="el">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Seatly V3 — Wedding Venue & Seating Planner</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Seatly V4</title>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:#f6f3ef;color:#222}
-header{height:64px;background:#fff;border-bottom:1px solid #ddd;display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:sticky;top:0;z-index:20}
+body{
+margin:0;
+font-family:system-ui,-apple-system,sans-serif;
+background:#f6f3ef;
+color:#222
+}
+
+header{
+height:64px;
+background:#fff;
+border-bottom:1px solid #ddd;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 16px;
+position:sticky;
+top:0;
+z-index:30
+}
+
 .logo{font-size:24px;font-weight:800}
 .logo span{font-weight:400}
 
-button,.btn{
+button{
 border:0;
 border-radius:10px;
 padding:10px 12px;
 background:#222;
 color:#fff;
 font-weight:700;
-cursor:pointer;
-font:inherit
+cursor:pointer
 }
 
-.sec{background:#fff;color:#222;border:1px solid #ddd}
-.soft{background:#eee;color:#222}
-.danger{background:#8d3028}
+.sec{
+background:#fff;
+color:#222;
+border:1px solid #ddd
+}
+
+.soft{
+background:#eee;
+color:#222
+}
+
+.danger{background:#8c2e26}
 
 .app{
 display:grid;
-grid-template-columns:330px 1fr;
+grid-template-columns:340px 1fr;
 min-height:calc(100vh - 64px)
 }
 
@@ -50,12 +77,14 @@ margin-bottom:15px;
 border-bottom:1px solid #eee
 }
 
-h2{font-size:16px;margin:0 0 9px}
+h2{
+font-size:16px;
+margin:0 0 9px
+}
 
 .small{
 font-size:12px;
-color:#777;
-line-height:1.45
+color:#777
 }
 
 .grid{
@@ -102,7 +131,8 @@ background:#ddd6ce;
 border:1px solid #ccc;
 border-radius:15px;
 position:relative;
-overflow:hidden
+overflow:hidden;
+touch-action:none
 }
 
 .stage{
@@ -123,63 +153,118 @@ position:absolute;
 inset:0;
 display:grid;
 place-items:center;
+color:#777;
 text-align:center;
-color:#777
+pointer-events:none
 }
 
 .obj{
 position:absolute;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
 touch-action:none;
 user-select:none;
-cursor:grab;
-box-shadow:0 4px 12px #0002
+cursor:grab
 }
 
-.table{
-width:88px;
-height:88px;
+/* TABLES */
+
+.tableWrap{
+width:110px;
+height:110px;
+display:flex;
+align-items:center;
+justify-content:center
+}
+
+.tableCore{
+width:70px;
+height:70px;
 border:2px solid #222;
 border-radius:50%;
 background:#fff;
-flex-direction:column
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+box-shadow:0 4px 12px #0002;
+z-index:2
 }
 
-.table.rect{
-width:124px;
-height:72px;
-border-radius:12px
+.tableWrap.rect .tableCore{
+width:90px;
+height:58px;
+border-radius:11px
 }
 
-.table strong{font-size:12px}
-.table span{font-size:11px;color:#777}
-.table.full{border-color:#a1372b}
-
-.locked{
-opacity:.7;
-cursor:not-allowed
+.tableCore strong{
+font-size:11px
 }
+
+.tableCore span{
+font-size:10px;
+color:#666
+}
+
+/* FULL TABLE = GREEN */
+
+.tableWrap.complete .tableCore{
+background:#dff3e4;
+border-color:#2f7d47
+}
+
+/* OVER CAPACITY = RED */
+
+.tableWrap.over .tableCore{
+background:#ffe6e3;
+border-color:#b53a2d
+}
+
+/* CHAIRS */
+
+.chair{
+position:absolute;
+width:14px;
+height:14px;
+border:1.5px solid #555;
+background:#fff;
+border-radius:3px
+}
+
+.tableWrap.complete .chair{
+border-color:#2f7d47
+}
+
+.tableWrap.over .chair{
+border-color:#b53a2d
+}
+
+/* VENUE OBJECTS */
 
 .vobj{
 border:2px dashed #555;
 background:#fff9;
 border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
 font-weight:800;
-font-size:12px;
-min-width:90px;
-min-height:55px
+font-size:12px
 }
 
-.vobj.round{border-radius:50%}
+.vobj.round{
+border-radius:50%
+}
+
+.locked{
+opacity:.75;
+cursor:not-allowed
+}
 
 .tools{
 position:absolute;
 right:10px;
 top:10px;
-z-index:5;
+z-index:10;
 background:#fff;
 border:1px solid #ddd;
 border-radius:11px;
@@ -188,7 +273,9 @@ display:flex;
 gap:5px
 }
 
-.tools button{padding:7px 9px}
+.tools button{
+padding:7px 9px
+}
 
 .guest{
 display:flex;
@@ -199,12 +286,14 @@ font-size:13px;
 cursor:pointer
 }
 
-.guest.sel{font-weight:800}
+.guest.sel{
+font-weight:800
+}
 
 .badge{
 font-size:11px;
 background:#eee;
-border-radius:99px;
+border-radius:999px;
 padding:3px 7px
 }
 
@@ -223,7 +312,7 @@ padding:15px
 background:#fff;
 border-radius:15px;
 padding:20px;
-width:min(460px,100%);
+width:min(470px,100%);
 max-height:90vh;
 overflow:auto
 }
@@ -235,7 +324,8 @@ color:#666;
 margin-top:8px
 }
 
-.card input,.card select{
+.card input,
+.card select{
 width:100%;
 margin-top:5px
 }
@@ -247,46 +337,49 @@ gap:7px;
 margin-top:12px
 }
 
-.alphaPreview{
+.checkList{
+max-height:260px;
+overflow:auto;
+border:1px solid #ddd;
+border-radius:10px;
+padding:6px;
+margin-top:8px
+}
+
+.checkRow{
+display:flex;
+align-items:center;
+gap:8px;
+padding:8px;
+border-bottom:1px solid #eee;
+font-size:13px
+}
+
+.checkRow input{
+width:auto
+}
+
+.finder{
+width:900px;
 background:#fff;
 padding:24px;
-width:900px;
 position:fixed;
 left:-99999px;
 top:0
 }
 
-.alphaGroup{
-break-inside:avoid;
-margin-bottom:20px
-}
-
-.alphaLetter{
+.alpha{
 font-size:26px;
 font-weight:900;
 border-bottom:2px solid #222;
-padding-bottom:4px;
-margin-bottom:8px
+margin-top:16px
 }
 
-.alphaRow{
+.frow{
 display:grid;
 grid-template-columns:1fr 120px;
-gap:10px;
 padding:6px 0;
-border-bottom:1px solid #eee;
-font-size:14px
-}
-
-.alphaRow b{text-transform:uppercase}
-
-.exportNote{
-background:#f2eee8;
-border-radius:10px;
-padding:10px;
-font-size:12px;
-color:#666;
-margin-top:10px
+border-bottom:1px solid #eee
 }
 
 .toast{
@@ -299,20 +392,30 @@ color:#fff;
 padding:10px 14px;
 border-radius:10px;
 display:none;
-z-index:120
+z-index:150
 }
 
-@media(max-width:850px){
-.app{grid-template-columns:1fr}
-aside{border-right:0;border-bottom:1px solid #ddd}
-.shell{height:65vh;min-height:470px}
+@media(max-width:860px){
+
+.app{
+grid-template-columns:1fr
 }
 
-@media print{
-header,aside,.topbar,.tools{display:none!important}
-.app{display:block}
-main{padding:0}
-.shell{border:0;border-radius:0;height:100vh}
+aside{
+border-right:0;
+border-bottom:1px solid #ddd
+}
+
+.shell{
+height:65vh;
+min-height:470px
+}
+
+/* no +/- buttons on mobile */
+.tools{
+display:none
+}
+
 }
 </style>
 </head>
@@ -320,8 +423,15 @@ main{padding:0}
 <body>
 
 <header>
-<div class="logo">seat<span>ly</span></div>
-<button onclick="openExport()">Finish / Export</button>
+
+<div class="logo">
+seat<span>ly</span>
+</div>
+
+<button onclick="openExport()">
+Finish / Export
+</button>
+
 </header>
 
 <div class="app">
@@ -329,20 +439,37 @@ main{padding:0}
 <aside>
 
 <div class="section">
+
 <h2>1. Venue</h2>
 
 <label class="upload">
+
 📷 Upload screenshot / photo
-<input id="venueFile" type="file" accept="image/*">
+
+<input
+id="venueFile"
+type="file"
+accept="image/*">
+
 </label>
 
-<button class="sec" style="margin-top:7px" onclick="removeVenue()">
+<button
+class="sec"
+style="margin-top:7px"
+onclick="removeVenue()">
+
 Remove image
+
 </button>
 
-<div class="small" style="margin-top:6px">
-Autosave is always on.
+<div
+class="small"
+style="margin-top:6px">
+
+Autosave on.
+
 </div>
+
 </div>
 
 <div class="section">
@@ -351,30 +478,56 @@ Autosave is always on.
 
 <div class="grid">
 
-<button class="soft" onclick="addTable(8)">
+<button
+class="soft"
+onclick="addTable(8)">
+
 + 8 seats
+
 </button>
 
-<button class="soft" onclick="addTable(10)">
+<button
+class="soft"
+onclick="addTable(10)">
+
 + 10 seats
+
 </button>
 
-<button class="soft" onclick="addTable(12)">
+<button
+class="soft"
+onclick="addTable(12)">
+
 + 12 seats
+
 </button>
 
-<button class="soft" onclick="addTable(16)">
+<button
+class="soft"
+onclick="addTable(16)">
+
 + 16 seats
+
 </button>
 
 </div>
 
-<button class="sec" style="width:100%;margin-top:7px" onclick="show('multiModal')">
+<button
+class="sec"
+style="width:100%;margin-top:7px"
+onclick="show('multiModal')">
+
 + Add multiple tables
+
 </button>
 
-<button class="sec" style="width:100%;margin-top:7px" onclick="renumber()">
+<button
+class="sec"
+style="width:100%;margin-top:7px"
+onclick="renumber()">
+
 Renumber 1,2,3...
+
 </button>
 
 </div>
@@ -385,34 +538,54 @@ Renumber 1,2,3...
 
 <div class="grid">
 
-<button class="soft" onclick="addObj('Dance Floor')">
+<button
+class="soft"
+onclick="addObj('Dance Floor')">
+
 Dance Floor
+
 </button>
 
-<button class="soft" onclick="addObj('DJ')">
+<button
+class="soft"
+onclick="addObj('DJ')">
+
 DJ
+
 </button>
 
-<button class="soft" onclick="addObj('Bar')">
+<button
+class="soft"
+onclick="addObj('Bar')">
+
 Bar
+
 </button>
 
-<button class="soft" onclick="addObj('Stage')">
+<button
+class="soft"
+onclick="addObj('Stage')">
+
 Stage
+
 </button>
 
-<button class="soft" onclick="addObj('Entrance')">
+<button
+class="soft"
+onclick="addObj('Entrance')">
+
 Entrance
+
 </button>
 
-<button class="soft" onclick="addObj('Buffet')">
+<button
+class="soft"
+onclick="addObj('Buffet')">
+
 Buffet
+
 </button>
 
-</div>
-
-<div class="small" style="margin-top:7px">
-Dance Floor: round / square / rectangle + custom size.
 </div>
 
 </div>
@@ -426,47 +599,41 @@ Dance Floor: round / square / rectangle + custom size.
 <input
 id="firstName"
 style="flex:1;min-width:0"
-placeholder="First name"
->
+placeholder="Όνομα / First name">
 
 <input
 id="lastName"
 style="flex:1;min-width:0"
-placeholder="Surname"
->
+placeholder="Επίθετο / Surname">
 
 </div>
 
 <button
 style="width:100%;margin-top:7px"
-onclick="addGuest()"
->
+onclick="addGuest()">
+
 Add guest
+
 </button>
 
 <button
 class="sec"
 style="width:100%;margin-top:7px"
-onclick="show('bulkModal')"
->
+onclick="show('bulkModal')">
+
 Paste many guests
+
 </button>
 
 <input
 id="search"
 style="width:100%;margin-top:7px"
 placeholder="Search guest..."
-oninput="renderGuests()"
->
+oninput="renderGuests()">
 
 <div
 id="guestList"
-style="max-height:230px;overflow:auto"
-></div>
-
-<div class="small" style="margin-top:6px">
-Select guest → tap table.
-Surname is used for the Α–Ω / A–Z finder.
+style="max-height:230px;overflow:auto">
 </div>
 
 </div>
@@ -476,61 +643,89 @@ Surname is used for the Α–Ω / A–Z finder.
 <main>
 
 <div
-class="topbar row"
-style="justify-content:space-between;margin-bottom:10px"
->
+class="row"
+style="justify-content:space-between;margin-bottom:10px">
 
 <div>
+
 <b>Your venue</b>
-<div class="small" id="status"></div>
+
+<div
+class="small"
+id="status">
+</div>
+
 </div>
 
 <div class="row">
 
-<button class="sec" onclick="undo()">
+<button
+class="sec"
+onclick="undo()">
+
 Undo
+
 </button>
 
-<button class="sec" onclick="fit()">
+<button
+class="sec"
+onclick="fit()">
+
 Fit
+
 </button>
 
-<button class="sec" onclick="clearPlan()">
+<button
+class="sec"
+onclick="clearPlan()">
+
 Clear
+
 </button>
 
 </div>
 
 </div>
 
-<div class="shell" id="shell">
+<div
+class="shell"
+id="shell">
 
-<div class="stage" id="stage">
+<div
+class="stage"
+id="stage">
 
-<div class="bg" id="bg"></div>
+<div
+class="bg"
+id="bg">
+</div>
 
-<div class="empty" id="empty">
+<div
+class="empty"
+id="empty">
+
 Upload your venue plan, then add tables.
+
 </div>
 
 </div>
 
 <div class="tools">
 
-<button class="sec" onclick="zoom(.1)">
-＋
-</button>
+<button
+class="sec"
+onclick="zoomCenter(.1)">
 
-<button class="sec" onclick="zoom(-.1)">
-−
+＋
+
 </button>
 
 <button
 class="sec"
-id="panBtn"
-onclick="togglePan()"
->
-Pan
+onclick="zoomCenter(-.1)">
+
+−
+
 </button>
 
 </div>
@@ -541,17 +736,30 @@ Pan
 
 </div>
 
-<div class="modal" id="tableModal">
+
+<!-- TABLE MODAL -->
+
+<div
+class="modal"
+id="tableModal">
 
 <div class="card">
 
 <h2>Table settings</h2>
 
 <label>Table number</label>
-<input id="tNum" type="number" min="1">
+
+<input
+id="tNum"
+type="number"
+min="1">
 
 <label>Seats</label>
-<input id="tSeats" type="number" min="1">
+
+<input
+id="tSeats"
+type="number"
+min="1">
 
 <label>Shape</label>
 
@@ -567,14 +775,13 @@ Rectangle
 
 </select>
 
-<label>Size (%)</label>
+<label>Size</label>
 
 <input
 id="tScale"
 type="range"
 min="50"
-max="180"
->
+max="180">
 
 <label>Rotation</label>
 
@@ -582,17 +789,41 @@ max="180"
 id="tRot"
 type="range"
 min="0"
-max="359"
->
+max="359">
 
 <label>
+
 <input
 id="tLock"
 type="checkbox"
-style="width:auto"
->
+style="width:auto">
+
 Lock position
+
 </label>
+
+<div
+id="capBox"
+class="small"
+style="margin-top:8px">
+</div>
+
+<button
+style="width:100%;margin-top:10px"
+onclick="openAssign()">
+
+Assign many guests
+
+</button>
+
+<button
+class="sec"
+style="width:100%;margin-top:7px"
+onclick="openPasteTable()">
+
+Paste guests directly
+
+</button>
 
 <div class="actions">
 
@@ -600,16 +831,28 @@ Lock position
 Save
 </button>
 
-<button class="sec" onclick="dupTable()">
+<button
+class="sec"
+onclick="dupTable()">
+
 Duplicate
+
 </button>
 
-<button class="danger" onclick="delTable()">
+<button
+class="danger"
+onclick="delTable()">
+
 Delete
+
 </button>
 
-<button class="sec" onclick="hide('tableModal')">
+<button
+class="sec"
+onclick="hide('tableModal')">
+
 Cancel
+
 </button>
 
 </div>
@@ -618,7 +861,107 @@ Cancel
 
 </div>
 
-<div class="modal" id="objModal">
+
+<!-- ASSIGN MANY -->
+
+<div
+class="modal"
+id="assignModal">
+
+<div class="card">
+
+<h2 id="assignTitle">
+Assign guests
+</h2>
+
+<div
+id="assignCap"
+class="small">
+</div>
+
+<input
+id="assignSearch"
+placeholder="Search guest..."
+oninput="renderAssign()">
+
+<div
+class="checkList"
+id="assignList">
+</div>
+
+<div class="actions">
+
+<button onclick="assignMany()">
+Assign selected
+</button>
+
+<button
+class="sec"
+onclick="hide('assignModal')">
+
+Cancel
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PASTE DIRECTLY -->
+
+<div
+class="modal"
+id="pasteModal">
+
+<div class="card">
+
+<h2 id="pasteTitle">
+Paste guests
+</h2>
+
+<div class="small">
+
+One guest per line.<br>
+Recommended:
+First name, Surname
+
+</div>
+
+<textarea
+id="pasteNames"
+placeholder="Μαρία, Γεωργίου
+Andreas, Nicolaou">
+</textarea>
+
+<div class="actions">
+
+<button onclick="pasteToTable()">
+Add to table
+</button>
+
+<button
+class="sec"
+onclick="hide('pasteModal')">
+
+Cancel
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- VENUE OBJECT -->
+
+<div
+class="modal"
+id="objModal">
 
 <div class="card">
 
@@ -650,8 +993,7 @@ Rectangle
 id="oW"
 type="range"
 min="50"
-max="360"
->
+max="360">
 
 <label>Height</label>
 
@@ -659,8 +1001,7 @@ max="360"
 id="oH"
 type="range"
 min="40"
-max="300"
->
+max="300">
 
 <label>Rotation</label>
 
@@ -668,16 +1009,14 @@ max="300"
 id="oRot"
 type="range"
 min="0"
-max="359"
->
+max="359">
 
 <label>
 
 <input
 id="oLock"
 type="checkbox"
-style="width:auto"
->
+style="width:auto">
 
 Lock item
 
@@ -689,16 +1028,28 @@ Lock item
 Save
 </button>
 
-<button class="sec" onclick="dupObj()">
+<button
+class="sec"
+onclick="dupObj()">
+
 Duplicate
+
 </button>
 
-<button class="danger" onclick="delObj()">
+<button
+class="danger"
+onclick="delObj()">
+
 Delete
+
 </button>
 
-<button class="sec" onclick="hide('objModal')">
+<button
+class="sec"
+onclick="hide('objModal')">
+
 Cancel
+
 </button>
 
 </div>
@@ -707,7 +1058,12 @@ Cancel
 
 </div>
 
-<div class="modal" id="multiModal">
+
+<!-- MULTIPLE TABLES -->
+
+<div
+class="modal"
+id="multiModal">
 
 <div class="card">
 
@@ -720,8 +1076,7 @@ id="mQty"
 type="number"
 min="1"
 max="100"
-value="10"
->
+value="10">
 
 <label>Seats per table</label>
 
@@ -729,8 +1084,7 @@ value="10"
 id="mSeats"
 type="number"
 min="1"
-value="10"
->
+value="10">
 
 <label>Shape</label>
 
@@ -752,8 +1106,12 @@ Rectangle
 Create
 </button>
 
-<button class="sec" onclick="hide('multiModal')">
+<button
+class="sec"
+onclick="hide('multiModal')">
+
 Cancel
+
 </button>
 
 </div>
@@ -762,26 +1120,28 @@ Cancel
 
 </div>
 
-<div class="modal" id="bulkModal">
+
+<!-- BULK GUESTS -->
+
+<div
+class="modal"
+id="bulkModal">
 
 <div class="card">
 
 <h2>Add many guests</h2>
 
 <div class="small">
-One guest per line.<br>
-Recommended format:
-<b>First name, Surname</b>
-<br><br>
-Example:
-Maria, Georgiou
+
+Supports Greek & English names.
+
 </div>
 
 <textarea
 id="bulkNames"
-placeholder="Maria, Georgiou
-Andreas, Nicolaou"
-></textarea>
+placeholder="Μαρία, Γεωργίου
+Andreas, Nicolaou">
+</textarea>
 
 <div class="actions">
 
@@ -789,8 +1149,12 @@ Andreas, Nicolaou"
 Add guests
 </button>
 
-<button class="sec" onclick="hide('bulkModal')">
+<button
+class="sec"
+onclick="hide('bulkModal')">
+
 Cancel
+
 </button>
 
 </div>
@@ -799,21 +1163,16 @@ Cancel
 
 </div>
 
-<div class="modal" id="exportModal">
+
+<!-- EXPORT -->
+
+<div
+class="modal"
+id="exportModal">
 
 <div class="card">
 
 <h2>Finish & Export</h2>
-
-<div class="exportNote">
-
-Exports are generated from your current plan.
-
-For printing, PNG is rendered at high resolution.
-
-PDF contains the venue plan plus the alphabetical guest finder.
-
-</div>
 
 <div class="actions">
 
@@ -829,8 +1188,12 @@ Guest Finder PNG
 Complete PDF
 </button>
 
-<button class="sec" onclick="hide('exportModal')">
+<button
+class="sec"
+onclick="hide('exportModal')">
+
 Close
+
 </button>
 
 </div>
@@ -839,68 +1202,62 @@ Close
 
 </div>
 
-<div
-class="alphaPreview"
-id="finderExport"
->
+
+<!-- HIDDEN GUEST FINDER -->
 
 <div
-style="
-display:flex;
-justify-content:space-between;
-align-items:end;
-margin-bottom:18px
-"
->
-
-<div>
+class="finder"
+id="finder">
 
 <div
-style="
-font-size:30px;
-font-weight:900
-"
->
+style="font-size:30px;font-weight:900">
+
 Guest Finder
+
 </div>
 
-<div style="color:#666">
+<div
+style="color:#666;margin-bottom:16px">
+
 Find your surname → find your table
+
+</div>
+
+<div id="alphaList">
 </div>
 
 </div>
 
-<div style="font-weight:800">
-Seatly
+<div
+class="toast"
+id="toast">
 </div>
 
-</div>
-
-<div id="alphaList"></div>
-
-</div>
-
-<div class="toast" id="toast"></div>
 
 <script>
 
 let S={
+
 tables:[],
 objects:[],
 guests:[],
 counter:0,
+
 zoom:1,
 panX:0,
 panY:0,
+
 venue:null
+
 };
 
 let H=[];
+
 let selGuest=null;
+
 let editT=null;
+
 let editO=null;
-let pan=false;
-let panStart=null;
 
 const stage=
 document.getElementById('stage');
@@ -910,6 +1267,7 @@ document.getElementById('shell');
 
 const bg=
 document.getElementById('bg');
+
 
 const uid=()=>{
 
@@ -929,12 +1287,13 @@ Math.random()
 
 };
 
-function persist(){
+
+function save(){
 
 try{
 
 localStorage.setItem(
-'seatly_v3',
+'seatly_v4',
 JSON.stringify(S)
 );
 
@@ -944,27 +1303,31 @@ update();
 
 }
 
+
 function hist(){
 
 H.push(
 JSON.stringify(S)
 );
 
-if(H.length>30){
+if(
+H.length>30
+){
+
 H.shift();
+
 }
 
 }
+
 
 function undo(){
 
 if(!H.length){
 
-toast(
+return toast(
 'Nothing to undo'
 );
-
-return;
 
 }
 
@@ -976,19 +1339,32 @@ H.pop()
 selGuest=null;
 
 applyVenue();
+
 render();
-persist();
+
+save();
 
 }
+
 
 function load(){
 
 try{
 
 let x=
+
+localStorage.getItem(
+'seatly_v4'
+)
+
+||
+
 localStorage.getItem(
 'seatly_v3'
-) ||
+)
+
+||
+
 localStorage.getItem(
 'seatly_v2'
 );
@@ -1006,24 +1382,30 @@ JSON.parse(x)
 }catch(e){}
 
 applyVenue();
+
 render();
 
 }
 
+
 function applyVenue(){
 
 bg.style.backgroundImage=
+
 S.venue
+
 ?
+
 `url("${S.venue}")`
+
 :
+
 'none';
 
 }
 
-document
-.getElementById('venueFile')
-.onchange=e=>{
+
+venueFile.onchange=e=>{
 
 let f=
 e.target.files[0];
@@ -1041,14 +1423,17 @@ S.venue=
 x.target.result;
 
 applyVenue();
+
 render();
-persist();
+
+save();
 
 };
 
 r.readAsDataURL(f);
 
 };
+
 
 function removeVenue(){
 
@@ -1057,24 +1442,27 @@ hist();
 S.venue=null;
 
 applyVenue();
+
 render();
-persist();
+
+save();
 
 }
 
-function addTable(
+
+/* TABLES */
+
+function makeTable(
 seats,
 shape='round'
 ){
-
-hist();
 
 S.counter++;
 
 let i=
 S.tables.length;
 
-S.tables.push({
+return{
 
 id:uid(),
 
@@ -1091,19 +1479,38 @@ rot:0,
 lock:false,
 
 x:
-35+
-(i%5)*110,
+40+
+(i%5)*125,
 
 y:
 45+
-Math.floor(i/5)*105
+Math.floor(i/5)*120
 
-});
-
-render();
-persist();
+};
 
 }
+
+
+function addTable(
+seats,
+shape='round'
+){
+
+hist();
+
+S.tables.push(
+makeTable(
+seats,
+shape
+)
+);
+
+render();
+
+save();
+
+}
+
 
 function createMulti(){
 
@@ -1128,41 +1535,17 @@ mShape.value;
 hist();
 
 for(
-let k=0;
-k<q;
-k++
+let i=0;
+i<q;
+i++
 ){
 
-S.counter++;
-
-let i=
-S.tables.length;
-
-S.tables.push({
-
-id:uid(),
-
-number:S.counter,
-
-seats:se,
-
-shape:sh,
-
-scale:1,
-
-rot:0,
-
-lock:false,
-
-x:
-35+
-(i%5)*110,
-
-y:
-45+
-Math.floor(i/5)*105
-
-});
+S.tables.push(
+makeTable(
+se,
+sh
+)
+);
 
 }
 
@@ -1171,19 +1554,23 @@ hide(
 );
 
 render();
-persist();
+
+save();
 
 }
+
 
 function renumber(){
 
 hist();
 
 S.tables
+
 .sort(
 (a,b)=>
 a.number-b.number
 )
+
 .forEach(
 (t,i)=>
 t.number=i+1
@@ -1193,9 +1580,11 @@ S.counter=
 S.tables.length;
 
 render();
-persist();
+
+save();
 
 }
+
 
 function openTable(id){
 
@@ -1226,11 +1615,20 @@ t.rot||0;
 tLock.checked=
 !!t.lock;
 
+let c=
+S.guests.filter(
+g=>g.tableId===t.id
+).length;
+
+capBox.textContent=
+`Table ${t.number}: ${c}/${t.seats} seats`;
+
 show(
 'tableModal'
 );
 
 }
+
 
 function saveTable(){
 
@@ -1271,9 +1669,11 @@ hide(
 );
 
 render();
-persist();
+
+save();
 
 }
+
 
 function dupTable(){
 
@@ -1294,9 +1694,9 @@ id:uid(),
 
 number:S.counter,
 
-x:t.x+25,
+x:t.x+30,
 
-y:t.y+25,
+y:t.y+30,
 
 lock:false
 
@@ -1307,9 +1707,11 @@ hide(
 );
 
 render();
-persist();
+
+save();
 
 }
+
 
 function delTable(){
 
@@ -1339,25 +1741,344 @@ hide(
 );
 
 render();
-persist();
+
+save();
 
 }
+
+
+/* ASSIGN MANY GUESTS */
+
+function openAssign(){
+
+let t=
+S.tables.find(
+x=>x.id===editT
+);
+
+assignTitle.textContent=
+`Assign guests to Table ${t.number}`;
+
+renderAssign();
+
+hide(
+'tableModal'
+);
+
+show(
+'assignModal'
+);
+
+}
+
+
+function renderAssign(){
+
+let t=
+S.tables.find(
+x=>x.id===editT
+);
+
+let c=
+S.guests.filter(
+g=>g.tableId===t.id
+).length;
+
+assignCap.textContent=
+`${c}/${t.seats} seats filled · ${Math.max(0,t.seats-c)} available`;
+
+let q=
+(assignSearch.value||'')
+.toLowerCase();
+
+assignList.innerHTML='';
+
+S.guests
+
+.filter(
+g=>
+
+g.tableId!==t.id
+
+&&
+
+(
+!q
+
+||
+
+(
+gFirst(g)+' '+gLast(g)
+)
+.toLowerCase()
+.includes(q)
+
+)
+)
+
+.forEach(
+g=>{
+
+let row=
+document.createElement(
+'label'
+);
+
+row.className=
+'checkRow';
+
+let ct=
+S.tables.find(
+x=>x.id===g.tableId
+);
+
+row.innerHTML=
+
+`<input
+type="checkbox"
+value="${g.id}">
+
+<span style="flex:1">
+${safe(
+(gFirst(g)+' '+gLast(g)).trim()
+)}
+</span>
+
+<span class="badge">
+${ct?'T'+ct.number:'Unassigned'}
+</span>`;
+
+assignList
+.appendChild(row);
+
+}
+);
+
+}
+
+
+function assignMany(){
+
+let t=
+S.tables.find(
+x=>x.id===editT
+);
+
+let checked=
+[
+...assignList.querySelectorAll(
+'input:checked'
+)
+];
+
+let c=
+S.guests.filter(
+g=>g.tableId===t.id
+).length;
+
+let available=
+t.seats-c;
+
+if(
+checked.length>
+available
+){
+
+return toast(
+`Only ${available} seats available`
+);
+
+}
+
+hist();
+
+checked.forEach(
+ch=>{
+
+let g=
+S.guests.find(
+x=>x.id===ch.value
+);
+
+if(g){
+
+g.tableId=
+t.id;
+
+}
+
+}
+);
+
+hide(
+'assignModal'
+);
+
+render();
+
+save();
+
+}
+
+
+/* PASTE GUESTS DIRECTLY */
+
+function openPasteTable(){
+
+let t=
+S.tables.find(
+x=>x.id===editT
+);
+
+pasteTitle.textContent=
+`Paste guests into Table ${t.number}`;
+
+pasteNames.value='';
+
+hide(
+'tableModal'
+);
+
+show(
+'pasteModal'
+);
+
+}
+
+
+function parseLine(line){
+
+let p=
+line.split(',');
+
+let fn=
+(p[0]||'')
+.trim();
+
+let ln=
+(p.slice(1).join(',')||'')
+.trim();
+
+if(!ln){
+
+let w=
+line.split(/\s+/);
+
+ln=
+w.length>1
+?
+w.pop()
+:
+'';
+
+fn=
+w.join(' ');
+
+}
+
+return{
+fn:fn,
+ln:ln
+};
+
+}
+
+
+function pasteToTable(){
+
+let t=
+S.tables.find(
+x=>x.id===editT
+);
+
+let lines=
+pasteNames.value
+
+.split(/\n+/)
+
+.map(
+x=>x.trim()
+)
+
+.filter(Boolean);
+
+let c=
+S.guests.filter(
+g=>g.tableId===t.id
+).length;
+
+let available=
+t.seats-c;
+
+if(
+lines.length>
+available
+){
+
+return toast(
+`Only ${available} seats available`
+);
+
+}
+
+hist();
+
+lines.forEach(
+line=>{
+
+let p=
+parseLine(line);
+
+S.guests.push({
+
+id:uid(),
+
+firstName:p.fn,
+
+lastName:p.ln,
+
+name:
+(p.fn+' '+p.ln).trim(),
+
+tableId:t.id
+
+});
+
+}
+);
+
+hide(
+'pasteModal'
+);
+
+render();
+
+save();
+
+}
+
+
+/* VENUE ITEMS */
 
 function addObj(type){
 
 hist();
 
-let sh='rect';
+let shape='rect';
+
 let w=130;
+
 let h=70;
 
 if(
 type==='Dance Floor'
 ){
 
-sh='square';
-w=160;
-h=160;
+shape='square';
+
+w=170;
+
+h=170;
 
 }
 
@@ -1367,7 +2088,7 @@ id:uid(),
 
 type:type,
 
-shape:sh,
+shape:shape,
 
 w:w,
 
@@ -1378,19 +2099,21 @@ rot:0,
 lock:false,
 
 x:
-180+
-S.objects.length*25,
+190+
+S.objects.length*28,
 
 y:
-170+
-S.objects.length*20
+180+
+S.objects.length*22
 
 });
 
 render();
-persist();
+
+save();
 
 }
+
 
 function openObj(id){
 
@@ -1425,6 +2148,7 @@ show(
 
 }
 
+
 function saveObj(){
 
 let o=
@@ -1444,7 +2168,10 @@ o.h=
 +oH.value||80;
 
 if(
-o.shape==='round' ||
+o.shape==='round'
+
+||
+
 o.shape==='square'
 ){
 
@@ -1463,9 +2190,11 @@ hide(
 );
 
 render();
-persist();
+
+save();
 
 }
+
 
 function dupObj(){
 
@@ -1495,9 +2224,11 @@ hide(
 );
 
 render();
-persist();
+
+save();
 
 }
+
 
 function delObj(){
 
@@ -1513,9 +2244,13 @@ hide(
 );
 
 render();
-persist();
+
+save();
 
 }
+
+
+/* GUESTS */
 
 function addGuest(){
 
@@ -1548,70 +2283,49 @@ tableId:null
 });
 
 firstName.value='';
+
 lastName.value='';
 
 renderGuests();
-persist();
+
+save();
 
 }
+
 
 function addBulk(){
 
-let a=
+let lines=
 bulkNames.value
+
 .split(/\n+/)
+
 .map(
 x=>x.trim()
 )
+
 .filter(Boolean);
 
-if(!a.length)return;
+if(!lines.length)return;
 
 hist();
 
-a.forEach(
+lines.forEach(
 line=>{
 
-let parts=
-line.split(',');
-
-let fn=
-(parts[0]||'')
-.trim();
-
-let ln=
-(parts
-.slice(1)
-.join(',')||'')
-.trim();
-
-if(!ln){
-
-let words=
-line.split(/\s+/);
-
-ln=
-words.length>1
-?
-words.pop()
-:
-'';
-
-fn=
-words.join(' ');
-
-}
+let p=
+parseLine(line);
 
 S.guests.push({
 
 id:uid(),
 
-firstName:fn,
+firstName:p.fn,
 
-lastName:ln,
+lastName:p.ln,
 
 name:
-(fn+' '+ln).trim(),
+(p.fn+' '+p.ln).trim(),
 
 tableId:null
 
@@ -1627,68 +2341,96 @@ hide(
 );
 
 renderGuests();
-persist();
+
+save();
 
 }
+
 
 function gFirst(g){
 
 return
+
 g.firstName!==undefined
+
 ?
+
 g.firstName
+
 :
+
 (g.name||'')
+
 .split(/\s+/)
+
 .slice(0,-1)
+
 .join(' ');
 
 }
 
+
 function gLast(g){
 
 return
+
 g.lastName!==undefined
+
 ?
+
 g.lastName
+
 :
+
 (g.name||'')
+
 .split(/\s+/)
+
 .slice(-1)[0];
 
 }
+
 
 function renderGuests(){
 
 guestList.innerHTML='';
 
 let q=
-search.value
-.trim()
+(search.value||'')
 .toLowerCase();
 
 S.guests
 
 .filter(
 g=>
-!q ||
+
+!q
+
+||
+
 (
-(gFirst(g)+' '+gLast(g))
-.toLowerCase()
-.includes(q)
+gFirst(g)+' '+gLast(g)
 )
+
+.toLowerCase()
+
+.includes(q)
 )
 
 .forEach(
 g=>{
 
-let d=
+let r=
 document.createElement(
 'div'
 );
 
-d.className=
-'guest'+
+r.className=
+
+'guest'
+
++
+
 (
 selGuest===g.id
 ?
@@ -1702,25 +2444,30 @@ S.tables.find(
 x=>x.id===g.tableId
 );
 
-d.innerHTML=
-`<span>${safe(
-(gFirst(g)+' '+gLast(g)).trim()
-)}</span>
-<span class="badge">${
-t
-?
-'T'+t.number
-:
-'Unassigned'
-}</span>`;
+r.innerHTML=
 
-d.onclick=()=>{
+`<span>
+${safe(
+(gFirst(g)+' '+gLast(g)).trim()
+)}
+</span>
+
+<span class="badge">
+${t?'T'+t.number:'Unassigned'}
+</span>`;
+
+r.onclick=()=>{
 
 selGuest=
+
 selGuest===g.id
+
 ?
+
 null
+
 :
+
 g.id;
 
 renderGuests();
@@ -1728,14 +2475,15 @@ renderGuests();
 };
 
 guestList
-.appendChild(d);
+.appendChild(r);
 
 }
 );
 
 }
 
-function assign(tid){
+
+function assignOne(tid){
 
 let g=
 S.guests.find(
@@ -1758,15 +2506,16 @@ x=>x.tableId===tid
 ).length;
 
 if(
-c>=t.seats &&
+c>=t.seats
+
+&&
+
 g.tableId!==tid
 ){
 
-toast(
+return toast(
 'Table is full'
 );
-
-return;
 
 }
 
@@ -1778,9 +2527,178 @@ tid;
 selGuest=null;
 
 render();
-persist();
+
+save();
 
 }
+
+
+/* CHAIRS */
+
+function chairs(
+wrap,
+seats,
+shape
+){
+
+let n=
+Math.min(
+seats,
+16
+);
+
+let radius=47;
+
+if(
+shape==='round'
+){
+
+for(
+let i=0;
+i<n;
+i++
+){
+
+let angle=
+
+2*
+Math.PI*
+i/n
+
+-
+
+Math.PI/2;
+
+let chair=
+document.createElement(
+'div'
+);
+
+chair.className=
+'chair';
+
+chair.style.left=
+
+(
+55+
+Math.cos(angle)*radius
+-
+7
+)
++'px';
+
+chair.style.top=
+
+(
+55+
+Math.sin(angle)*radius
+-
+7
+)
++'px';
+
+chair.style.transform=
+
+`rotate(${
+angle*180/Math.PI+90
+}deg)`;
+
+wrap.appendChild(
+chair
+);
+
+}
+
+}else{
+
+let top=
+Math.ceil(n/2);
+
+let bottom=
+n-top;
+
+for(
+let i=0;
+i<top;
+i++
+){
+
+let chair=
+document.createElement(
+'div'
+);
+
+chair.className=
+'chair';
+
+chair.style.left=
+
+(
+10+
+i*
+(
+90/
+Math.max(
+1,
+top-1
+)
+)
+)
++'px';
+
+chair.style.top=
+'4px';
+
+wrap.appendChild(
+chair
+);
+
+}
+
+for(
+let i=0;
+i<bottom;
+i++
+){
+
+let chair=
+document.createElement(
+'div'
+);
+
+chair.className=
+'chair';
+
+chair.style.left=
+
+(
+10+
+i*
+(
+90/
+Math.max(
+1,
+bottom-1
+)
+)
+)
++'px';
+
+chair.style.top=
+'92px';
+
+wrap.appendChild(
+chair
+);
+
+}
+
+}
+
+}
+
+
+/* DRAG */
 
 function drag(
 el,
@@ -1792,17 +2710,19 @@ let sx;
 let sy;
 let ox;
 let oy;
+
 let on=false;
+
 let moved=false;
 
 el.onpointerdown=e=>{
 
 if(
-item.lock ||
-pan
+item.lock
 )return;
 
 on=true;
+
 moved=false;
 
 el.setPointerCapture(
@@ -1822,6 +2742,7 @@ oy=
 item.y;
 
 };
+
 
 el.onpointermove=e=>{
 
@@ -1858,19 +2779,16 @@ item.y+'px';
 
 };
 
+
 el.onpointerup=()=>{
 
-if(
-on &&
-moved
-){
+on=false;
 
-hist();
-persist();
+if(moved){
+
+save();
 
 }
-
-on=false;
 
 el.dataset.m=
 moved
@@ -1881,10 +2799,11 @@ moved
 
 setTimeout(
 ()=>el.dataset.m='',
-60
+70
 );
 
 };
+
 
 el.onclick=()=>{
 
@@ -1898,7 +2817,7 @@ type==='t'
 
 if(selGuest){
 
-assign(
+assignOne(
 item.id
 );
 
@@ -1922,80 +2841,138 @@ item.id
 
 }
 
+
+/* RENDER */
+
 function render(){
 
 stage
+
 .querySelectorAll(
 '.obj'
 )
+
 .forEach(
 x=>x.remove()
 );
 
+
 S.tables.forEach(
 t=>{
 
-let e=
+let wrap=
 document.createElement(
 'div'
 );
 
-e.className=
-'obj table '+
+wrap.className=
+
+'obj tableWrap '
+
++
+
 (
 t.shape==='rect'
 ?
 'rect '
 :
 ''
-)+
+)
+
++
+
 (
 t.lock
 ?
-'locked'
+'locked '
 :
 ''
 );
 
-let c=
+
+let count=
 S.guests.filter(
 g=>g.tableId===t.id
 ).length;
 
+
 if(
-c>=t.seats
+count===t.seats
 ){
 
-e.classList.add(
-'full'
+wrap.classList.add(
+'complete'
 );
 
 }
 
-e.style.left=
+
+if(
+count>t.seats
+){
+
+wrap.classList.add(
+'over'
+);
+
+}
+
+
+wrap.style.left=
 t.x+'px';
 
-e.style.top=
+wrap.style.top=
 t.y+'px';
 
-e.style.transform=
+wrap.style.transform=
+
 `scale(${t.scale||1})
 rotate(${t.rot||0}deg)`;
 
-e.innerHTML=
-`<strong>TABLE ${t.number}</strong>
-<span>${c}/${t.seats} seats</span>`;
+
+chairs(
+wrap,
+t.seats,
+t.shape
+);
+
+
+let core=
+document.createElement(
+'div'
+);
+
+core.className=
+'tableCore';
+
+core.innerHTML=
+
+`<strong>
+TABLE ${t.number}
+</strong>
+
+<span>
+${count}/${t.seats} seats
+</span>`;
+
+
+wrap.appendChild(
+core
+);
 
 drag(
-e,
+wrap,
 t,
 't'
 );
 
-stage.appendChild(e);
+stage.appendChild(
+wrap
+);
 
 }
 );
+
 
 S.objects.forEach(
 o=>{
@@ -2006,9 +2983,17 @@ document.createElement(
 );
 
 e.className=
-'obj vobj '+
-o.shape+
-' '+
+
+'obj vobj '
+
++
+o.shape
+
++
+' '
+
++
+
 (
 o.lock
 ?
@@ -2016,6 +3001,7 @@ o.lock
 :
 ''
 );
+
 
 e.style.left=
 o.x+'px';
@@ -2030,10 +3016,13 @@ e.style.height=
 o.h+'px';
 
 e.style.transform=
+
 `rotate(${o.rot||0}deg)`;
+
 
 e.textContent=
 o.type;
+
 
 drag(
 e,
@@ -2041,21 +3030,37 @@ o,
 'o'
 );
 
-stage.appendChild(e);
+
+stage.appendChild(
+e
+);
 
 }
 );
 
+
 empty.style.display=
+
 (
-S.venue ||
-S.tables.length ||
+S.venue
+
+||
+
+S.tables.length
+
+||
+
 S.objects.length
 )
+
 ?
+
 'none'
+
 :
+
 'grid';
+
 
 renderGuests();
 
@@ -2065,21 +3070,45 @@ applyTransform();
 
 }
 
+
+/* STATUS */
+
 function update(){
 
-let a=
+let assigned=
 S.guests.filter(
 g=>g.tableId
 ).length;
 
+
+let complete=
+S.tables.filter(
+t=>
+
+S.guests.filter(
+g=>g.tableId===t.id
+).length
+
+===
+
+t.seats
+
+).length;
+
+
 status.textContent=
-`${S.tables.length} tables · ${a}/${S.guests.length} guests assigned · ${S.objects.length} venue items`;
+
+`${S.tables.length} tables · ${complete} complete · ${assigned}/${S.guests.length} guests assigned`;
 
 }
+
+
+/* ZOOM */
 
 function applyTransform(){
 
 stage.style.transform=
+
 `translate(
 ${S.panX}px,
 ${S.panY}px
@@ -2088,52 +3117,184 @@ scale(${S.zoom})`;
 
 }
 
-function zoom(d){
+
+function zoomAround(
+clientX,
+clientY,
+newZoom
+){
+
+let rect=
+shell.getBoundingClientRect();
+
+let x=
+clientX-
+rect.left;
+
+let y=
+clientY-
+rect.top;
+
+
+let worldX=
+(x-S.panX)
+/S.zoom;
+
+let worldY=
+(y-S.panY)
+/S.zoom;
+
 
 S.zoom=
 Math.max(
-.4,
+.35,
 Math.min(
-2.5,
-S.zoom+d
+3.5,
+newZoom
 )
 );
 
+
+S.panX=
+x-
+worldX*
+S.zoom;
+
+S.panY=
+y-
+worldY*
+S.zoom;
+
+
 applyTransform();
-persist();
 
 }
+
+
+function zoomCenter(d){
+
+let r=
+shell.getBoundingClientRect();
+
+zoomAround(
+
+r.left+
+r.width/2,
+
+r.top+
+r.height/2,
+
+S.zoom+d
+
+);
+
+save();
+
+}
+
 
 function fit(){
 
 S.zoom=1;
+
 S.panX=0;
+
 S.panY=0;
 
 applyTransform();
-persist();
+
+save();
 
 }
 
-function togglePan(){
 
-pan=
-!pan;
+/* COMPUTER MOUSE / TRACKPAD ZOOM */
 
-panBtn.textContent=
-pan
-?
-'Pan ON'
-:
-'Pan';
+shell.addEventListener(
 
+'wheel',
+
+e=>{
+
+e.preventDefault();
+
+let factor=
+
+Math.exp(
+-e.deltaY*
+.0015
+);
+
+zoomAround(
+
+e.clientX,
+
+e.clientY,
+
+S.zoom*
+factor
+
+);
+
+clearTimeout(
+window.ws
+);
+
+window.ws=
+setTimeout(
+save,
+100
+);
+
+},
+
+{
+passive:false
 }
 
-shell.onpointerdown=e=>{
+);
 
-if(!pan)return;
 
-panStart={
+/* MOBILE PINCH ZOOM */
+
+const pointers=
+new Map();
+
+let gesture=null;
+
+
+shell.addEventListener(
+
+'pointerdown',
+
+e=>{
+
+if(
+e.target.closest(
+'.obj'
+)
+)return;
+
+
+pointers.set(
+
+e.pointerId,
+
+{
+x:e.clientX,
+y:e.clientY
+}
+
+);
+
+
+if(
+pointers.size===1
+){
+
+gesture={
+
+type:'pan',
 
 x:e.clientX,
 
@@ -2145,99 +3306,380 @@ py:S.panY
 
 };
 
+}
+
+
+if(
+pointers.size===2
+){
+
+let p=
+[
+...pointers.values()
+];
+
+let dist=
+Math.hypot(
+
+p[0].x-p[1].x,
+
+p[0].y-p[1].y
+
+);
+
+
+let cx=
+(
+p[0].x+
+p[1].x
+)
+/2;
+
+
+let cy=
+(
+p[0].y+
+p[1].y
+)
+/2;
+
+
+let r=
+shell.getBoundingClientRect();
+
+
+let sx=
+cx-r.left;
+
+let sy=
+cy-r.top;
+
+
+gesture={
+
+type:'pinch',
+
+dist:dist,
+
+zoom:S.zoom,
+
+wx:
+(sx-S.panX)
+/S.zoom,
+
+wy:
+(sy-S.panY)
+/S.zoom
+
+};
+
+}
+
+
+try{
+
 shell.setPointerCapture(
 e.pointerId
 );
 
-};
-
-shell.onpointermove=e=>{
-
-if(
-!pan ||
-!panStart
-)return;
-
-S.panX=
-panStart.px+
-e.clientX-
-panStart.x;
-
-S.panY=
-panStart.py+
-e.clientY-
-panStart.y;
-
-applyTransform();
-
-};
-
-shell.onpointerup=()=>{
-
-if(
-panStart
-){
-
-panStart=null;
-persist();
+}catch(_){}
 
 }
+);
 
-};
 
-function clearPlan(){
+shell.addEventListener(
+
+'pointermove',
+
+e=>{
 
 if(
-!confirm(
-'Clear tables, venue items and assignments?'
+!pointers.has(
+e.pointerId
 )
 )return;
 
-hist();
 
-S.tables=[];
-S.objects=[];
-S.counter=0;
+pointers.set(
 
-S.guests.forEach(
-g=>g.tableId=null
+e.pointerId,
+
+{
+x:e.clientX,
+y:e.clientY
+}
+
 );
 
-render();
-persist();
+
+if(
+pointers.size===1
+
+&&
+
+gesture?.type==='pan'
+){
+
+S.panX=
+
+gesture.px
+
++
+
+e.clientX
+
+-
+
+gesture.x;
+
+
+S.panY=
+
+gesture.py
+
++
+
+e.clientY
+
+-
+
+gesture.y;
+
+
+applyTransform();
 
 }
 
+
+if(
+pointers.size===2
+){
+
+let p=
+[
+...pointers.values()
+];
+
+
+let dist=
+Math.hypot(
+
+p[0].x-p[1].x,
+
+p[0].y-p[1].y
+
+);
+
+
+let cx=
+(
+p[0].x+
+p[1].x
+)
+/2;
+
+
+let cy=
+(
+p[0].y+
+p[1].y
+)
+/2;
+
+
+let r=
+shell.getBoundingClientRect();
+
+
+let sx=
+cx-r.left;
+
+let sy=
+cy-r.top;
+
+
+if(
+gesture?.type!=='pinch'
+){
+
+gesture={
+
+type:'pinch',
+
+dist:dist,
+
+zoom:S.zoom,
+
+wx:
+(sx-S.panX)
+/S.zoom,
+
+wy:
+(sy-S.panY)
+/S.zoom
+
+};
+
+}
+
+
+S.zoom=
+
+Math.max(
+
+.35,
+
+Math.min(
+
+3.5,
+
+gesture.zoom
+
+*
+
+(
+dist/
+gesture.dist
+)
+
+)
+
+);
+
+
+S.panX=
+
+sx
+
+-
+
+gesture.wx*
+S.zoom;
+
+
+S.panY=
+
+sy
+
+-
+
+gesture.wy*
+S.zoom;
+
+
+applyTransform();
+
+}
+
+}
+);
+
+
+function endPointer(e){
+
+pointers.delete(
+e.pointerId
+);
+
+
+if(
+pointers.size===1
+){
+
+let p=
+[
+...pointers.values()
+][0];
+
+
+gesture={
+
+type:'pan',
+
+x:p.x,
+
+y:p.y,
+
+px:S.panX,
+
+py:S.panY
+
+};
+
+}
+
+
+else if(
+pointers.size===0
+){
+
+gesture=null;
+
+save();
+
+}
+
+}
+
+
+shell.addEventListener(
+'pointerup',
+endPointer
+);
+
+shell.addEventListener(
+'pointercancel',
+endPointer
+);
+
+
+/* GUEST FINDER */
+
 function normalizeLetter(s){
 
-const v=
+let v=
+
 (s||'')
+
 .trim()
+
 .toUpperCase()
-.normalize('NFD')
+
+.normalize(
+'NFD'
+)
+
 .replace(
 /[\u0300-\u036f]/g,
 ''
 );
 
+
 return
+
 v.charAt(0)
+
 ||
+
 '#';
 
 }
 
+
 function buildFinder(){
 
-const groups={};
+let groups={};
+
 
 S.guests.forEach(
 g=>{
 
-const letter=
+let letter=
 normalizeLetter(
 gLast(g)
 );
+
 
 if(
 !groups[letter]
@@ -2247,111 +3689,120 @@ groups[letter]=[];
 
 }
 
-groups[letter].push(g);
+
+groups[letter]
+.push(g);
 
 }
 );
 
-const greek=
-'ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ'
-.split('');
 
-const latin=
-'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-.split('');
+let order=[
 
-const order=[
-...greek,
-...latin,
+...'ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ',
+
+...'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+
 '#'
+
 ];
 
+
 alphaList.innerHTML='';
+
 
 order
 
 .filter(
-l=>
-groups[l]?.length
+letter=>
+groups[letter]?.length
 )
 
 .forEach(
 letter=>{
 
-groups[letter]
-.sort(
-(a,b)=>
-gLast(a)
-.localeCompare(
-gLast(b),
-'el'
-)
-);
 
-const group=
-document.createElement(
-'div'
-);
-
-group.className=
-'alphaGroup';
-
-const title=
+let title=
 document.createElement(
 'div'
 );
 
 title.className=
-'alphaLetter';
+'alpha';
 
 title.textContent=
 letter;
 
-group.appendChild(
+alphaList.appendChild(
 title
 );
 
+
 groups[letter]
+
+.sort(
+(a,b)=>
+
+gLast(a)
+.localeCompare(
+gLast(b),
+'el'
+)
+)
+
 .forEach(
 g=>{
 
-const t=
+let t=
 S.tables.find(
 x=>x.id===g.tableId
 );
 
-const row=
+
+let row=
 document.createElement(
 'div'
 );
 
 row.className=
-'alphaRow';
+'frow';
+
 
 row.innerHTML=
+
 `<div>
-<b>${safe(gLast(g))}</b>
-${safe(gFirst(g))}
+
+<b>
+${safe(
+gLast(g)
+)}
+</b>
+
+${safe(
+gFirst(g)
+)}
+
 </div>
+
 <div>
+
 ${t?'TABLE '+t.number:'UNASSIGNED'}
+
 </div>`;
 
-group.appendChild(
+
+alphaList.appendChild(
 row
 );
 
 }
 );
 
-alphaList.appendChild(
-group
-);
-
 }
 );
 
 }
+
 
 function openExport(){
 
@@ -2363,41 +3814,57 @@ show(
 
 }
 
+
+/* EXPORT PNG */
+
 async function exportPlanPNG(){
 
 hide(
 'exportModal'
 );
 
-const oldTransform=
+
+let old=
 stage.style.transform;
+
 
 stage.style.transform=
 'none';
 
-const canvas=
+
+let canvas=
+
 await html2canvas(
+
 shell,
+
 {
+
 scale:3,
+
 useCORS:true,
-backgroundColor:'#ffffff'
+
+backgroundColor:'#fff'
+
 }
+
 );
+
 
 stage.style.transform=
-oldTransform;
+old;
+
 
 downloadCanvas(
-canvas,
-'seatly-venue-plan.png'
-);
 
-toast(
-'Venue PNG ready'
+canvas,
+
+'seatly-venue-plan.png'
+
 );
 
 }
+
 
 async function exportFinderPNG(){
 
@@ -2407,25 +3874,36 @@ hide(
 'exportModal'
 );
 
-const canvas=
+
+let canvas=
+
 await html2canvas(
-finderExport,
+
+finder,
+
 {
+
 scale:3,
-backgroundColor:'#ffffff'
+
+backgroundColor:'#fff'
+
 }
+
 );
+
 
 downloadCanvas(
-canvas,
-'seatly-guest-finder.png'
-);
 
-toast(
-'Guest Finder PNG ready'
+canvas,
+
+'seatly-guest-finder.png'
+
 );
 
 }
+
+
+/* PDF */
 
 async function exportPDF(){
 
@@ -2435,12 +3913,14 @@ hide(
 'exportModal'
 );
 
-const {
+
+let {
 jsPDF
 }=
 window.jspdf;
 
-const pdf=
+
+let pdf=
 new jsPDF({
 
 orientation:
@@ -2454,117 +3934,120 @@ format:
 
 });
 
-const oldTransform=
+
+let old=
 stage.style.transform;
+
 
 stage.style.transform=
 'none';
 
-const planCanvas=
+
+let planCanvas=
+
 await html2canvas(
+
 shell,
+
 {
-scale:2.5,
+
+scale:2.4,
+
 useCORS:true,
-backgroundColor:'#ffffff'
+
+backgroundColor:'#fff'
+
 }
+
 );
+
 
 stage.style.transform=
-oldTransform;
+old;
 
-const planData=
-planCanvas
-.toDataURL(
-'image/png'
-);
 
 pdf.addImage(
-planData,
-'PNG',
-5,
-5,
-287,
-200,
-'FAST'
-);
 
-const finderCanvas=
-await html2canvas(
-finderExport,
-{
-scale:2.2,
-backgroundColor:'#ffffff'
-}
-);
-
-const img=
-finderCanvas
-.toDataURL(
+planCanvas.toDataURL(
 'image/png'
+),
+
+'PNG',
+
+5,
+
+5,
+
+287,
+
+200,
+
+'FAST'
+
 );
 
-const pageW=210;
-const pageH=297;
-const margin=8;
 
-const drawW=
-pageW-
-margin*2;
+let finderCanvas=
 
-const ratio=
-drawW/
-finderCanvas.width;
+await html2canvas(
 
-const totalH=
-finderCanvas.height*
-ratio;
+finder,
 
-let y=0;
+{
 
-while(
-y<totalH
-){
+scale:2,
+
+backgroundColor:'#fff'
+
+}
+
+);
+
 
 pdf.addPage(
 'a4',
 'portrait'
 );
 
+
 pdf.addImage(
-img,
+
+finderCanvas.toDataURL(
+'image/png'
+),
+
 'PNG',
-margin,
-margin-y,
-drawW,
-totalH,
-'FAST'
-);
 
-y+=
+8,
+
+8,
+
+194,
+
+finderCanvas.height*
 (
-pageH-
-margin*2
+194/
+finderCanvas.width
+),
+
+'FAST'
+
 );
 
-}
 
 pdf.save(
 'seatly-complete-wedding-plan.pdf'
 );
 
-toast(
-'PDF ready'
-);
-
 }
+
 
 function downloadCanvas(
 canvas,
 name
 ){
 
-const a=
+let a=
 document.createElement(
 'a'
 );
@@ -2581,6 +4064,43 @@ a.click();
 
 }
 
+
+/* CLEAR */
+
+function clearPlan(){
+
+if(
+!confirm(
+'Clear tables, venue items and assignments?'
+)
+)return;
+
+
+hist();
+
+
+S.tables=[];
+
+S.objects=[];
+
+S.counter=0;
+
+
+S.guests.forEach(
+g=>
+g.tableId=null
+);
+
+
+render();
+
+save();
+
+}
+
+
+/* UI HELPERS */
+
 function show(id){
 
 document
@@ -2590,6 +4110,7 @@ document
 
 }
 
+
 function hide(id){
 
 document
@@ -2598,6 +4119,7 @@ document
 'none';
 
 }
+
 
 function toast(x){
 
@@ -2611,17 +4133,23 @@ t.textContent=x;
 t.style.display=
 'block';
 
+
 clearTimeout(
 window.tt
 );
 
+
 window.tt=
 setTimeout(
+
 ()=>t.style.display='none',
-1700
+
+1600
+
 );
 
 }
+
 
 function safe(s){
 
@@ -2633,10 +4161,10 @@ document.createElement(
 d.textContent=
 s||'';
 
-return
-d.innerHTML;
+return d.innerHTML;
 
 }
+
 
 load();
 
