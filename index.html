@@ -3,29 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Seatly 2.2</title>
+<title>Seatly 2.3</title>
 
 <style>
 *{box-sizing:border-box}
 
-:root{
---ink:#202020;
---paper:#fff;
---bg:#f4f2ee;
---line:#e5dfd7;
---soft:#f1ede8;
---muted:#777;
---green:#dff3e4;
---greenB:#34784a;
---danger:#a83b32
-}
-
 html,body{
 margin:0;
 height:100%;
-font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-background:var(--bg);
-color:var(--ink)
+font-family:system-ui,-apple-system,sans-serif;
+background:#f4f2ee;
+color:#202020
 }
 
 body{overflow:hidden}
@@ -36,71 +24,63 @@ button{
 border:0;
 border-radius:10px;
 padding:9px 11px;
-background:var(--ink);
-color:#fff;
-font-weight:750;
-cursor:pointer
+background:#202020;
+color:white;
+font-weight:700
 }
 
-button.sec{
-background:#fff;
-color:var(--ink);
-border:1px solid var(--line)
+.sec{
+background:white;
+color:#202020;
+border:1px solid #ddd
 }
 
-button.soft{
-background:var(--soft);
-color:var(--ink)
+.soft{
+background:#efebe6;
+color:#202020
 }
 
-button.danger{background:var(--danger)}
-
-.topbar{
-height:58px;
-background:#fff;
-border-bottom:1px solid var(--line);
+.top{
+height:56px;
+background:white;
+border-bottom:1px solid #e6e0d8;
 display:flex;
 align-items:center;
 justify-content:space-between;
-padding:0 14px;
+padding:0 12px;
 position:relative;
-z-index:70
+z-index:100
 }
 
 .logo{
-font-size:25px;
-font-weight:900;
-letter-spacing:-1px
+font-size:24px;
+font-weight:900
 }
 
-.logo span{font-weight:400}
-
-.topActions{
-display:flex;
-gap:6px
+.logo span{
+font-weight:400
 }
 
 .app{
-height:calc(100vh - 58px);
+height:calc(100vh - 56px);
 display:grid;
-grid-template-columns:68px 280px 1fr
+grid-template-columns:62px 270px 1fr
 }
 
 .rail{
 background:#202020;
-padding:8px 5px;
+padding:6px 4px;
 display:flex;
 flex-direction:column;
-gap:6px;
-z-index:60
+gap:5px;
+z-index:80
 }
 
-.railBtn{
-height:58px;
+.rail button{
+height:54px;
 background:transparent;
-color:#fff;
-font-size:10px;
 padding:4px;
+font-size:9px;
 display:flex;
 flex-direction:column;
 align-items:center;
@@ -108,41 +88,36 @@ justify-content:center;
 gap:3px
 }
 
-.railBtn b{font-size:18px}
+.rail button b{
+font-size:17px
+}
 
-.railBtn.active{
-background:#fff;
+.rail button.active{
+background:white;
 color:#202020
 }
 
 .panel{
-background:#fff;
-border-right:1px solid var(--line);
+background:white;
+border-right:1px solid #e5dfd7;
 padding:14px;
 overflow:auto;
 position:relative;
-z-index:50
+z-index:70
 }
 
 .panel h2{
-font-size:18px;
-margin:0 0 4px
+margin:0 0 5px
 }
 
 .hint{
 font-size:12px;
-color:var(--muted);
+color:#777;
 line-height:1.4;
 margin-bottom:12px
 }
 
-.section{
-border-top:1px solid #eee8e1;
-padding-top:12px;
-margin-top:12px
-}
-
-.grid2{
+.grid{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:7px
@@ -150,43 +125,43 @@ gap:7px
 
 .field{
 width:100%;
-border:1px solid #d6cfc7;
-border-radius:10px;
-padding:10px;
-background:#fff
+padding:9px;
+border:1px solid #d7d0c8;
+border-radius:9px;
+background:white
 }
 
 .upload{
 display:block;
 text-align:center;
-padding:20px 10px;
-border:1.5px dashed #bbb2a8;
-border-radius:14px;
-background:#faf9f7;
-cursor:pointer
+padding:18px;
+border:1.5px dashed #bbb;
+border-radius:13px;
+background:#faf9f7
 }
 
-.upload input{display:none}
+.upload input{
+display:none
+}
 
-.panelClose{display:none}
+.close{
+display:none
+}
 
 .work{
-padding:10px;
+padding:7px;
 background:#ebe8e3;
-min-width:0;
-position:relative
+min-width:0
 }
 
 .canvas{
 width:100%;
 height:100%;
-background:#fff;
-border:1px solid var(--line);
-border-radius:16px;
+background:white;
+border-radius:14px;
 position:relative;
 overflow:hidden;
-touch-action:none;
-box-shadow:0 10px 28px #0001
+touch-action:none
 }
 
 .stage{
@@ -195,14 +170,14 @@ inset:0;
 transform-origin:0 0
 }
 
-.venueBg{
+.venue{
 position:absolute;
 inset:0;
-background:#fff center/contain no-repeat;
+background:white center/contain no-repeat;
 pointer-events:none
 }
 
-.objectLayer{
+.layer{
 position:absolute;
 inset:0
 }
@@ -224,238 +199,178 @@ user-select:none
 }
 
 .table{
-width:106px;
-height:106px;
+width:100px;
+height:100px;
 display:flex;
 align-items:center;
-justify-content:center;
-cursor:grab
+justify-content:center
 }
 
 .table.selected,
-.venueObj.selected{
+.vobj.selected{
 outline:3px solid #2224;
-outline-offset:4px
+outline-offset:3px
 }
 
 .core{
-width:66px;
-height:66px;
+width:62px;
+height:62px;
 border:2px solid #222;
 border-radius:50%;
-background:#fff;
+background:white;
 display:flex;
 flex-direction:column;
 align-items:center;
 justify-content:center;
-box-shadow:0 4px 12px #0002;
+box-shadow:0 3px 10px #0002;
 z-index:2
 }
 
-.core b{font-size:11px}
+.core b{
+font-size:10px
+}
 
 .core span{
 font-size:9px;
 color:#666
 }
 
-.table.complete .core{
-background:var(--green);
-border-color:var(--greenB)
+.complete .core{
+background:#dff3e4;
+border-color:#34784a
 }
 
 .chair{
 position:absolute;
-width:13px;
-height:13px;
-border:1.4px solid #555;
-background:#fff;
+width:12px;
+height:12px;
+border:1.3px solid #555;
+background:white;
 border-radius:3px
 }
 
-.venueObj{
+.vobj{
 border:2px dashed #666;
-background:#ffffffe9;
-border-radius:12px;
+background:#ffffffe8;
+border-radius:11px;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:12px;
-font-weight:800;
-cursor:grab
+font-size:11px;
+font-weight:800
 }
 
-.context{
+.ctx{
 position:absolute;
+top:8px;
 left:50%;
-top:10px;
 transform:translateX(-50%);
 display:none;
+gap:4px;
 align-items:center;
-gap:5px;
-background:#fff;
-border:1px solid var(--line);
-border-radius:12px;
+background:white;
+border:1px solid #ddd;
+border-radius:11px;
+padding:5px;
+z-index:40
+}
+
+.ctx input,
+.ctx select{
+width:68px;
 padding:6px;
-z-index:25;
-box-shadow:0 8px 24px #0002
+border:1px solid #ddd;
+border-radius:7px
 }
 
-.context input,
-.context select{
-width:76px;
-padding:7px;
-border:1px solid var(--line);
-border-radius:8px
-}
-
-.context button{
-padding:7px 9px
+.ctx button{
+padding:6px 8px
 }
 
 .trash{
 position:absolute;
 left:50%;
-bottom:18px;
+bottom:55px;
 transform:translateX(-50%);
 display:none;
-align-items:center;
-gap:7px;
-background:#fff;
-border:2px solid var(--line);
+background:white;
+border:2px solid #ddd;
 border-radius:999px;
-padding:10px 18px;
-z-index:30;
-font-size:13px;
+padding:9px 15px;
+z-index:45;
+font-size:12px;
 font-weight:800
 }
 
 .trash.hot{
 background:#ffe5e2;
-border-color:#b23b30;
-color:#9c3027
+border-color:#b23b30
 }
 
 .zoom{
 position:absolute;
-right:18px;
-bottom:18px;
+right:8px;
+bottom:8px;
 display:flex;
 gap:4px;
-background:#fff;
-border:1px solid var(--line);
-border-radius:11px;
-padding:5px;
-z-index:20
+background:white;
+border:1px solid #ddd;
+border-radius:10px;
+padding:4px;
+z-index:35
 }
 
 .zoom button{
-padding:7px 9px
+padding:6px 8px
 }
 
 .status{
 position:absolute;
-left:18px;
-bottom:18px;
-background:#fff;
-border:1px solid var(--line);
+left:8px;
+bottom:8px;
+background:white;
+border:1px solid #ddd;
 border-radius:999px;
-padding:7px 10px;
-z-index:20;
-font-size:11px;
-color:#666
+padding:6px 9px;
+font-size:10px;
+color:#666;
+z-index:35
 }
 
-.guestRow{
-display:grid;
-grid-template-columns:1fr auto;
+.guest{
+display:flex;
+justify-content:space-between;
 gap:6px;
-align-items:center;
 padding:8px 0;
-border-bottom:1px solid #eee
+border-bottom:1px solid #eee;
+font-size:12px
 }
 
-.guestRow .name{
-font-size:13px;
-font-weight:700
+.section{
+border-top:1px solid #eee;
+padding-top:10px;
+margin-top:10px
 }
-
-.guestRow .meta{
-font-size:11px;
-color:#777
-}
-
-.mini{
-padding:6px 8px;
-font-size:11px
-}
-
-.voiceBox{
-display:none;
-border:1px solid var(--line);
-background:#faf9f7;
-border-radius:12px;
-padding:9px;
-margin-top:8px
-}
-
-.voiceRow{
-font-size:12px;
-padding:6px 0;
-border-bottom:1px solid #eee
-}
-
-.toast{
-position:fixed;
-left:50%;
-bottom:18px;
-transform:translateX(-50%);
-background:#202020;
-color:#fff;
-padding:10px 14px;
-border-radius:10px;
-display:none;
-z-index:100
-}
-
-/* MOBILE */
 
 @media(max-width:800px){
 
-.topbar{height:54px}
-
-.topActions .desktopOnly{
-display:none
-}
-
 .app{
-height:calc(100vh - 54px);
 grid-template-columns:56px 1fr
 }
 
 .rail{
-padding:6px 3px
+padding:5px 3px
 }
 
-.railBtn{
-height:52px;
-font-size:9px
-}
-
-.railBtn b{
-font-size:16px
+.rail button{
+height:50px
 }
 
 .work{
 grid-column:2;
-padding:5px
+padding:4px
 }
 
-/*
-IMPORTANT:
-Το panel στο κινητό είναι bottom sheet.
-Δεν μένει κολλημένο αριστερά.
-*/
 .panel{
 position:fixed;
 left:56px;
@@ -463,57 +378,39 @@ right:0;
 bottom:0;
 top:auto;
 width:auto;
-max-height:46vh;
+max-height:48vh;
 display:none;
 border-right:0;
-border-top:1px solid var(--line);
+border-top:1px solid #ddd;
 border-radius:18px 18px 0 0;
-padding:50px 14px 14px;
+padding:48px 13px 13px;
 box-shadow:0 -10px 30px #0003;
-z-index:65
+z-index:90
 }
 
 .panel.open{
 display:block
 }
 
-.panelClose{
+.close{
 display:block;
 position:absolute;
 right:10px;
-top:9px;
+top:8px;
 width:34px;
 height:34px;
 padding:0;
 border-radius:50%;
-background:var(--soft);
-color:#202020;
-border:1px solid var(--line);
+background:#efebe6;
+color:#222;
+border:1px solid #ddd;
 font-size:20px
 }
 
-.context{
+.ctx{
 max-width:94%;
 overflow:auto;
 white-space:nowrap
-}
-
-.status{
-left:8px;
-bottom:8px;
-max-width:58%;
-white-space:nowrap;
-overflow:hidden;
-text-overflow:ellipsis
-}
-
-.zoom{
-right:8px;
-bottom:8px
-}
-
-.trash{
-bottom:58px
 }
 
 }
@@ -522,77 +419,40 @@ bottom:58px
 
 <body>
 
-<header class="topbar">
-
-<div class="logo">
-seat<span>ly</span>
-</div>
-
-<div class="topActions">
-
-<button class="sec desktopOnly" onclick="undo()">
-↶ Undo
-</button>
-
-<button class="sec desktopOnly" onclick="redo()">
-↷ Redo
-</button>
-
-<button onclick="toast('Finish / Export θα προστεθεί αφού κλειδώσουμε τον editor')">
-Finish
-</button>
-
-</div>
-
+<header class="top">
+<div class="logo">seat<span>ly</span></div>
+<button onclick="toast('Finish / Export αργότερα')">Finish</button>
 </header>
 
 <div class="app">
 
 <nav class="rail">
 
-<button
-class="railBtn"
-id="navVenue"
-onclick="togglePanel('venue')">
+<button id="bVenue" onclick="togglePanel('venue')">
 <b>▧</b>
 Venue
 </button>
 
-<button
-class="railBtn"
-id="navTables"
-onclick="togglePanel('tables')">
+<button id="bTables" onclick="togglePanel('tables')">
 <b>◉</b>
 Tables
 </button>
 
-<button
-class="railBtn"
-id="navGuests"
-onclick="togglePanel('guests')">
+<button id="bGuests" onclick="togglePanel('guests')">
 <b>♙</b>
 Guests
 </button>
 
-<button
-class="railBtn"
-id="navObjects"
-onclick="togglePanel('objects')">
+<button id="bObjects" onclick="togglePanel('objects')">
 <b>◇</b>
 Objects
 </button>
 
 </nav>
 
-<aside
-class="panel"
-id="panel">
+<aside class="panel" id="panel">
 
-<button
-class="panelClose"
-onclick="closePanel()">
-×
-</button>
+<button class="close" onclick="closePanel()">×</button>
 
 <div id="panelContent"></div>
 
@@ -600,79 +460,39 @@ onclick="closePanel()">
 
 <main class="work">
 
-<div
-class="canvas"
-id="canvas">
+<div class="canvas" id="canvas">
 
-<div
-class="stage"
-id="stage">
+<div class="stage" id="stage">
 
-<div
-class="venueBg"
-id="venueBg">
+<div class="venue" id="venue"></div>
+
+<div class="empty" id="empty">
+Upload a venue or add a table
 </div>
 
-<div
-class="empty"
-id="empty">
-
-<div>
-
-<div style="font-size:32px">
-♡
-</div>
-
-<b>Your wedding plan</b>
-
-<div style="font-size:12px;margin-top:5px">
-Upload a venue plan or add your first table.
-</div>
+<div class="layer" id="layer"></div>
 
 </div>
 
+<div class="ctx" id="ctx"></div>
+
+<div class="trash" id="trash">
+🗑 Drop to delete
 </div>
 
-<div
-class="objectLayer"
-id="objectLayer">
-</div>
-
-</div>
-
-<div
-class="context"
-id="context">
-</div>
-
-<div
-class="trash"
-id="trash">
-🗑 Drop here to delete
-</div>
-
-<div
-class="status"
-id="status">
-</div>
+<div class="status" id="status"></div>
 
 <div class="zoom">
 
-<button
-class="sec"
-onclick="zoomCenter(.9)">
+<button class="sec" onclick="zoom(.9)">
 −
 </button>
 
-<button
-class="sec"
-onclick="fitView()">
+<button class="sec" onclick="fit()">
 Fit
 </button>
 
-<button
-class="sec"
-onclick="zoomCenter(1.1)">
+<button class="sec" onclick="zoom(1.1)">
 ＋
 </button>
 
@@ -685,8 +505,19 @@ onclick="zoomCenter(1.1)">
 </div>
 
 <div
-class="toast"
-id="toast">
+id="toast"
+style="
+position:fixed;
+left:50%;
+bottom:18px;
+transform:translateX(-50%);
+background:#222;
+color:#fff;
+padding:9px 13px;
+border-radius:10px;
+display:none;
+z-index:120
+">
 </div>
 
 <script>
@@ -695,7 +526,7 @@ let S={
 venue:null,
 tables:[],
 guests:[],
-venueObjects:[],
+objs:[],
 counter:0,
 view:{
 scale:1,
@@ -706,72 +537,60 @@ y:0
 
 let selected=null;
 let activePanel=null;
-let historyStack=[];
-let futureStack=[];
-let recognition=null;
-let voiceDraft=[];
 
-const $=id=>document.getElementById(id);
+const $=x=>
+document.getElementById(x);
 
 const canvas=$('canvas');
 const stage=$('stage');
-const venueBg=$('venueBg');
-const objectLayer=$('objectLayer');
-const context=$('context');
+const layer=$('layer');
+const venue=$('venue');
+const ctx=$('ctx');
 const trash=$('trash');
 
-const uid=()=>window.crypto&&crypto.randomUUID
+const uid=()=>
+crypto.randomUUID
 ?crypto.randomUUID()
 :String(Date.now()+Math.random());
 
-function isMobile(){
-return window.innerWidth<=800;
-}
 
-function snapshot(){
-return JSON.stringify(S);
-}
+function mobile(){
 
-function checkpoint(){
-
-historyStack.push(snapshot());
-
-if(historyStack.length>30){
-historyStack.shift();
-}
-
-futureStack=[];
+return innerWidth<=800;
 
 }
+
 
 function save(){
 
 try{
 
 localStorage.setItem(
-'seatly_2_2',
-snapshot()
+'seatly23',
+JSON.stringify(S)
 );
 
 }catch(e){}
 
-updateStatus();
+status();
 
 }
+
 
 function load(){
 
 try{
 
-const saved=
+let s=
+localStorage.getItem('seatly23') ||
 localStorage.getItem('seatly_2_2') ||
 localStorage.getItem('seatly2');
 
-if(saved){
+if(s){
 
 S=Object.assign(
 S,
-JSON.parse(saved)
+JSON.parse(s)
 );
 
 }
@@ -781,74 +600,28 @@ JSON.parse(saved)
 applyVenue();
 
 render();
-
-if(!isMobile()){
-openPanel('venue');
-}
-
-}
-
-function undo(){
-
-if(!historyStack.length)return;
-
-futureStack.push(snapshot());
-
-S=JSON.parse(
-historyStack.pop()
-);
-
-selected=null;
-
-applyVenue();
-
-render();
-
-save();
-
-}
-
-function redo(){
-
-if(!futureStack.length)return;
-
-historyStack.push(snapshot());
-
-S=JSON.parse(
-futureStack.pop()
-);
-
-selected=null;
-
-applyVenue();
-
-render();
-
-save();
 
 }
 
 
 /* PANEL */
 
-function setActiveButton(type){
+function setActive(t){
 
-['venue','tables','guests','objects']
+['Venue','Tables','Guests','Objects']
 .forEach(x=>{
 
-const id=
-'nav'+
-x[0].toUpperCase()+
-x.slice(1);
-
-$(id).classList.toggle(
+$('b'+x)
+.classList
+.toggle(
 'active',
-x===type
+x.toLowerCase()===t
 );
 
 });
 
 }
+
 
 function closePanel(){
 
@@ -858,43 +631,16 @@ $('panel')
 
 activePanel=null;
 
-setActiveButton(null);
+setActive('');
 
 }
 
-function openPanel(type){
 
-activePanel=type;
-
-setActiveButton(type);
-
-$('panel')
-.classList
-.add('open');
-
-if(type==='venue'){
-renderVenuePanel();
-}
-
-if(type==='tables'){
-renderTablesPanel();
-}
-
-if(type==='guests'){
-renderGuestsPanel();
-}
-
-if(type==='objects'){
-renderObjectsPanel();
-}
-
-}
-
-function togglePanel(type){
+function togglePanel(t){
 
 if(
-isMobile() &&
-activePanel===type &&
+mobile() &&
+activePanel===t &&
 $('panel').classList.contains('open')
 ){
 
@@ -904,29 +650,54 @@ return;
 
 }
 
-openPanel(type);
+activePanel=t;
+
+setActive(t);
+
+$('panel')
+.classList
+.add('open');
+
+if(t==='venue'){
+venuePanel();
+}
+
+if(t==='tables'){
+tablesPanel();
+}
+
+if(t==='guests'){
+guestsPanel();
+}
+
+if(t==='objects'){
+objectsPanel();
+}
 
 }
 
-function closePanelAfterAction(){
 
-if(isMobile()){
+function afterAction(){
+
+if(mobile()){
+
 closePanel();
-}
 
 }
 
+}
 
-/* VENUE PANEL */
 
-function renderVenuePanel(){
+/* VENUE */
 
-$('panelContent').innerHTML=`
+function venuePanel(){
+
+panelContent.innerHTML=`
 
 <h2>Venue</h2>
 
 <div class="hint">
-Upload your venue plan and then work directly on it.
+Upload your plan. It stays aligned with the tables.
 </div>
 
 <label class="upload">
@@ -938,11 +709,11 @@ Upload your venue plan and then work directly on it.
 <b>
 ${S.venue
 ?'Replace venue'
-:'Upload venue plan'}
+:'Upload venue'}
 </b>
 
 <input
-id="venueInput"
+id="file"
 type="file"
 accept="image/*">
 
@@ -952,43 +723,29 @@ ${S.venue
 ?`
 <button
 class="sec"
-style="width:100%;margin-top:8px"
+style="width:100%;margin-top:7px"
 onclick="removeVenue()">
-Remove venue
+Remove
 </button>
 `
 :''}
 
-<div class="section">
-
-<b>Canvas controls</b>
-
-<div
-class="hint"
-style="margin-top:5px">
-
-Pinch with two fingers on mobile.
-Use mouse wheel or Fit / + / − on computer.
-
-</div>
-
-</div>
-
 `;
 
-$('venueInput').onchange=e=>{
+$('file').onchange=e=>{
 
-const file=e.target.files[0];
+let f=
+e.target.files[0];
 
-if(!file)return;
+if(!f)return;
 
-const reader=new FileReader();
+let r=
+new FileReader();
 
-reader.onload=x=>{
+r.onload=x=>{
 
-checkpoint();
-
-S.venue=x.target.result;
+S.venue=
+x.target.result;
 
 applyVenue();
 
@@ -996,30 +753,56 @@ render();
 
 save();
 
-closePanelAfterAction();
+afterAction();
 
 };
 
-reader.readAsDataURL(file);
+r.readAsDataURL(f);
 
 };
 
 }
 
 
+function applyVenue(){
+
+venue.style.backgroundImage=
+
+S.venue
+?`url("${S.venue}")`
+:'none';
+
+}
+
+
+function removeVenue(){
+
+S.venue=null;
+
+applyVenue();
+
+render();
+
+save();
+
+venuePanel();
+
+}
+
+
 /* TABLE PANEL */
 
-function renderTablesPanel(){
+function tablesPanel(){
 
-$('panelContent').innerHTML=`
+panelContent.innerHTML=`
 
 <h2>Tables</h2>
 
 <div class="hint">
-Choose seats. The table appears immediately on the canvas.
+Choose seats. The menu closes automatically.
 </div>
 
-<div class="grid2">
+<div class="grid">
 
 <button
 class="soft"
@@ -1049,14 +832,8 @@ onclick="addTable(16)">
 
 <div class="section">
 
-<b>Add multiple tables</b>
-
-<div
-class="grid2"
-style="margin-top:7px">
-
 <input
-id="bulkQty"
+id="qty"
 class="field"
 type="number"
 value="5"
@@ -1065,29 +842,122 @@ max="50">
 
 <select
 id="bulkSeats"
-class="field">
+class="field"
+style="margin-top:6px">
 
 <option>8</option>
-
-<option selected>
-10
-</option>
-
+<option selected>10</option>
 <option>12</option>
-
 <option>16</option>
 
 </select>
 
-</div>
-
 <button
-style="width:100%;margin-top:7px"
+style="width:100%;margin-top:6px"
 onclick="addMany()">
 
-Add tables
+Add multiple
 
 </button>
+
+</div>
+
+`;
+
+}
+
+
+/* GUESTS */
+
+function guestsPanel(){
+
+let rows=
+
+S.guests
+.map(g=>{
+
+let t=
+S.tables.find(
+x=>x.id===g.tableId
+);
+
+return `
+
+<div class="guest">
+
+<span>
+
+${esc(g.name)}
+
+<br>
+
+<small>
+${t
+?'Table '+t.number
+:'Unassigned'}
+</small>
+
+</span>
+
+<span>
+
+<button
+class="sec"
+style="padding:5px"
+onclick="editGuest('${g.id}')">
+Edit
+</button>
+
+<button
+style="padding:5px;background:#a83b32"
+onclick="delGuest('${g.id}')">
+×
+</button>
+
+</span>
+
+</div>
+
+`;
+
+})
+.join('');
+
+
+panelContent.innerHTML=`
+
+<h2>Guests</h2>
+
+<div class="hint">
+Simple guest list.
+</div>
+
+<input
+id="gName"
+class="field"
+placeholder="Name / Όνομα">
+
+<select
+id="gTable"
+class="field"
+style="margin-top:6px">
+
+${tableOpts()}
+
+</select>
+
+<button
+style="width:100%;margin-top:6px"
+onclick="addGuest()">
+
+Add guest
+
+</button>
+
+<div class="section">
+
+${rows||
+'<div class="hint">No guests yet</div>'}
 
 </div>
 
@@ -1098,39 +968,35 @@ Add tables
 
 /* OBJECTS */
 
-function renderObjectsPanel(){
+function objectsPanel(){
 
-$('panelContent').innerHTML=`
+panelContent.innerHTML=`
 
 <h2>Objects</h2>
 
-<div class="hint">
-Add only the things that help you understand the space.
-</div>
-
-<div class="grid2">
+<div class="grid">
 
 <button
 class="soft"
-onclick="addObject('Dance Floor',170,170)">
+onclick="addObj('Dance Floor',160,160)">
 Dance Floor
 </button>
 
 <button
 class="soft"
-onclick="addObject('DJ',120,60)">
+onclick="addObj('DJ',110,55)">
 DJ
 </button>
 
 <button
 class="soft"
-onclick="addObject('Bar',150,60)">
+onclick="addObj('Bar',130,55)">
 Bar
 </button>
 
 <button
 class="soft"
-onclick="addObject('Stage',170,70)">
+onclick="addObj('Stage',150,65)">
 Stage
 </button>
 
@@ -1141,159 +1007,14 @@ Stage
 }
 
 
-/* GUEST PANEL */
-
-function renderGuestsPanel(){
-
-const rows=
-S.guests
-.map(g=>{
-
-const t=
-S.tables.find(
-x=>x.id===g.tableId
-);
-
-return `
-
-<div class="guestRow">
-
-<div>
-
-<div class="name">
-${escapeHtml(g.name)}
-</div>
-
-<div class="meta">
-${t
-?'Table '+t.number
-:'Unassigned'}
-</div>
-
-</div>
-
-<div>
-
-<button
-class="sec mini"
-onclick="editGuest('${g.id}')">
-Edit
-</button>
-
-<button
-class="danger mini"
-onclick="deleteGuest('${g.id}')">
-×
-</button>
-
-</div>
-
-</div>
-
-`;
-
-})
-.join('');
-
-$('panelContent').innerHTML=`
-
-<h2>Guests</h2>
-
-<div class="hint">
-Speak or type. Keep it fast.
-</div>
-
-<button
-id="micBtn"
-style="width:100%;padding:13px"
-onclick="toggleMic()">
-
-🎙 Speak guests
-
-</button>
-
-<div
-class="voiceBox"
-id="voiceBox">
-</div>
-
-<div class="section">
-
-<input
-id="guestName"
-class="field"
-placeholder="Name / Όνομα">
-
-<select
-id="guestTable"
-class="field"
-style="margin-top:7px">
-
-${tableOptions()}
-
-</select>
-
-<button
-style="width:100%;margin-top:7px"
-onclick="addGuestManual()">
-
-Add guest
-
-</button>
-
-</div>
-
-<div class="section">
-
-${rows||
-'<div class="hint">No guests yet.</div>'}
-
-</div>
-
-`;
-
-}
-
-
-/* VENUE */
-
-function applyVenue(){
-
-venueBg.style.backgroundImage=
-S.venue
-?`url("${S.venue}")`
-:'none';
-
-}
-
-function removeVenue(){
-
-checkpoint();
-
-S.venue=null;
-
-applyVenue();
-
-render();
-
-save();
-
-if(activePanel==='venue'){
-renderVenuePanel();
-}
-
-}
-
-
 /* ADD TABLE */
 
 function addTable(seats){
 
-checkpoint();
-
 S.counter++;
 
-const i=S.tables.length;
+let i=
+S.tables.length;
 
 S.tables.push({
 
@@ -1303,9 +1024,13 @@ number:S.counter,
 
 seats:seats,
 
-x:80+(i%5)*125,
+x:
+70+
+(i%5)*115,
 
-y:95+Math.floor(i/5)*120,
+y:
+85+
+Math.floor(i/5)*110,
 
 scale:1,
 
@@ -1317,34 +1042,52 @@ render();
 
 save();
 
-closePanelAfterAction();
+afterAction();
 
 }
 
 
-/* ADD MANY TABLES */
+/* ADD MANY */
 
 function addMany(){
 
-const qty=
+let n=
 Math.max(
 1,
 Math.min(
 50,
-+$('bulkQty').value||1
++$('qty').value||1
 )
 );
 
-const seats=
+let s=
 +$('bulkSeats').value;
 
-checkpoint();
+for(
+let k=0;
+k<n;
+k++
+){
 
-for(let k=0;k<qty;k++){
+addTableNoClose(s);
+
+}
+
+render();
+
+save();
+
+afterAction();
+
+}
+
+
+function addTableNoClose(seats){
 
 S.counter++;
 
-const i=S.tables.length;
+let i=
+S.tables.length;
 
 S.tables.push({
 
@@ -1354,37 +1097,31 @@ number:S.counter,
 
 seats:seats,
 
-x:70+(i%5)*125,
+x:
+70+
+(i%5)*115,
 
-y:90+Math.floor(i/5)*120,
+y:
+85+
+Math.floor(i/5)*110,
 
 scale:1,
 
 rotation:0
 
 });
-
-}
-
-render();
-
-save();
-
-closePanelAfterAction();
 
 }
 
 
 /* ADD OBJECT */
 
-function addObject(label,w,h){
+function addObj(label,w,h){
 
-checkpoint();
+let i=
+S.objs.length;
 
-const i=
-S.venueObjects.length;
-
-S.venueObjects.push({
+S.objs.push({
 
 id:uid(),
 
@@ -1394,9 +1131,13 @@ w:w,
 
 h:h,
 
-x:220+i*28,
+x:
+180+
+i*25,
 
-y:170+i*22,
+y:
+160+
+i*20,
 
 scale:1,
 
@@ -1408,52 +1149,65 @@ render();
 
 save();
 
-closePanelAfterAction();
+afterAction();
 
 }
 
 
-/* CREATE CHAIRS */
+/* CHAIRS */
 
-function createChairs(el,seats){
+function chairs(el,n){
 
-const n=
+n=
 Math.min(
-seats,
+n,
 16
 );
 
-const radius=45;
+let r=42;
 
-for(let i=0;i<n;i++){
+for(
+let i=0;
+i<n;
+i++
+){
 
-const angle=
-2*Math.PI*i/n-
+let a=
+
+2*
+Math.PI*
+i/n
+
+-
+
 Math.PI/2;
 
-const chair=
-document.createElement('div');
+let c=
+document.createElement(
+'div'
+);
 
-chair.className='chair';
+c.className='chair';
 
-chair.style.left=
+c.style.left=
+
 (
-53+
-Math.cos(angle)*radius-
-6.5
-)+'px';
+50+
+Math.cos(a)*r-
+6
+)
++'px';
 
-chair.style.top=
+c.style.top=
+
 (
-53+
-Math.sin(angle)*radius-
-6.5
-)+'px';
+50+
+Math.sin(a)*r-
+6
+)
++'px';
 
-chair.style.transform=
-`rotate(${angle*180/Math.PI+90}deg)`;
-
-el.appendChild(chair);
+el.appendChild(c);
 
 }
 
@@ -1464,135 +1218,162 @@ el.appendChild(chair);
 
 function render(){
 
-objectLayer.innerHTML='';
+layer.innerHTML='';
 
-S.tables.forEach(table=>{
+S.tables.forEach(t=>{
 
-const count=
+let count=
+
 S.guests.filter(
-g=>g.tableId===table.id
+g=>g.tableId===t.id
 ).length;
 
-const el=
-document.createElement('div');
-
-el.className=
-'obj table'+
-(count===table.seats
-?' complete'
-:'')+
-(selected?.id===table.id
-?' selected'
-:'');
-
-el.style.left=
-table.x+'px';
-
-el.style.top=
-table.y+'px';
-
-el.style.transform=
-`scale(${table.scale}) rotate(${table.rotation}deg)`;
-
-createChairs(
-el,
-table.seats
+let e=
+document.createElement(
+'div'
 );
 
-const core=
-document.createElement('div');
+e.className=
 
-core.className='core';
+'obj table'
 
-core.innerHTML=
-`<b>TABLE ${table.number}</b><span>${count}/${table.seats}</span>`;
++
 
-el.appendChild(core);
+(
+count===t.seats
+?' complete'
+:''
+)
 
-attachDrag(
-el,
-table,
++
+
+(
+selected?.id===t.id
+?' selected'
+:''
+);
+
+e.style.left=
+t.x+'px';
+
+e.style.top=
+t.y+'px';
+
+e.style.transform=
+
+`scale(${t.scale}) rotate(${t.rotation}deg)`;
+
+chairs(
+e,
+t.seats
+);
+
+let c=
+document.createElement(
+'div'
+);
+
+c.className='core';
+
+c.innerHTML=
+
+`<b>TABLE ${t.number}</b><span>${count}/${t.seats}</span>`;
+
+e.appendChild(c);
+
+drag(
+e,
+t,
 'table'
 );
 
-objectLayer.appendChild(el);
+layer.appendChild(e);
 
 });
 
 
-S.venueObjects.forEach(obj=>{
+S.objs.forEach(o=>{
 
-const el=
-document.createElement('div');
-
-el.className=
-'obj venueObj'+
-(selected?.id===obj.id
-?' selected'
-:'');
-
-el.style.left=
-obj.x+'px';
-
-el.style.top=
-obj.y+'px';
-
-el.style.width=
-obj.w+'px';
-
-el.style.height=
-obj.h+'px';
-
-el.style.transform=
-`scale(${obj.scale}) rotate(${obj.rotation}deg)`;
-
-el.textContent=
-obj.label;
-
-attachDrag(
-el,
-obj,
-'object'
+let e=
+document.createElement(
+'div'
 );
 
-objectLayer.appendChild(el);
+e.className=
+
+'obj vobj'
+
++
+
+(
+selected?.id===o.id
+?' selected'
+:''
+);
+
+e.style.left=
+o.x+'px';
+
+e.style.top=
+o.y+'px';
+
+e.style.width=
+o.w+'px';
+
+e.style.height=
+o.h+'px';
+
+e.style.transform=
+
+`scale(${o.scale}) rotate(${o.rotation}deg)`;
+
+e.textContent=
+o.label;
+
+drag(
+e,
+o,
+'obj'
+);
+
+layer.appendChild(e);
 
 });
 
 
 $('empty').style.display=
+
 (
 S.venue ||
 S.tables.length ||
-S.venueObjects.length
+S.objs.length
 )
+
 ?'none'
 :'grid';
 
 applyView();
 
-renderContext();
+renderCtx();
 
-updateStatus();
+status();
 
 }
 
 
-/* DRAG + DELETE */
+/* DRAG */
 
-function attachDrag(el,item,kind){
+function drag(
+el,
+item,
+kind
+){
 
-let startX=0;
-
-let startY=0;
-
-let originX=0;
-
-let originY=0;
-
-let dragging=false;
-
-let moved=false;
+let sx;
+let sy;
+let ox;
+let oy;
+let on=false;
 
 
 el.onpointerdown=e=>{
@@ -1604,7 +1385,7 @@ id:item.id,
 kind:kind
 };
 
-renderContext();
+renderCtx();
 
 document
 .querySelectorAll('.obj')
@@ -1612,21 +1393,19 @@ document
 x=>x.classList.remove('selected')
 );
 
-el.classList.add('selected');
+el.classList.add(
+'selected'
+);
 
-startX=e.clientX;
+sx=e.clientX;
+sy=e.clientY;
+ox=item.x;
+oy=item.y;
 
-startY=e.clientY;
+on=true;
 
-originX=item.x;
-
-originY=item.y;
-
-dragging=true;
-
-moved=false;
-
-trash.style.display='flex';
+trash.style.display=
+'block';
 
 try{
 
@@ -1641,18 +1420,18 @@ e.pointerId
 
 el.onpointermove=e=>{
 
-if(!dragging)return;
-
-moved=true;
+if(!on)return;
 
 item.x=
-originX+
-(e.clientX-startX)/
+
+ox+
+(e.clientX-sx)/
 S.view.scale;
 
 item.y=
-originY+
-(e.clientY-startY)/
+
+oy+
+(e.clientY-sy)/
 S.view.scale;
 
 el.style.left=
@@ -1661,10 +1440,10 @@ item.x+'px';
 el.style.top=
 item.y+'px';
 
-const r=
+let r=
 trash.getBoundingClientRect();
 
-const hot=
+let hot=
 
 e.clientX>=r.left &&
 
@@ -1684,26 +1463,32 @@ hot
 
 el.onpointerup=e=>{
 
-if(!dragging)return;
+if(!on)return;
 
-dragging=false;
+on=false;
 
-const remove=
-trash.classList.contains('hot');
+let hot=
 
-trash.style.display='none';
+trash
+.classList
+.contains('hot');
 
-trash.classList.remove('hot');
+trash.style.display=
+'none';
 
-if(remove){
+trash
+.classList
+.remove('hot');
 
-checkpoint();
+if(hot){
 
 if(kind==='table'){
 
 S.guests.forEach(g=>{
 
-if(g.tableId===item.id){
+if(
+g.tableId===item.id
+){
 
 g.tableId=null;
 
@@ -1712,14 +1497,16 @@ g.tableId=null;
 });
 
 S.tables=
+
 S.tables.filter(
 x=>x.id!==item.id
 );
 
 }else{
 
-S.venueObjects=
-S.venueObjects.filter(
+S.objs=
+
+S.objs.filter(
 x=>x.id!==item.id
 );
 
@@ -1729,45 +1516,39 @@ selected=null;
 
 render();
 
-save();
-
-return;
-
 }
 
-if(moved){
 save();
-}
 
 };
 
 
 el.onpointercancel=()=>{
 
-dragging=false;
+on=false;
 
-trash.style.display='none';
-
-trash.classList.remove('hot');
+trash.style.display=
+'none';
 
 };
 
 }
 
 
-/* SELECTED TOOLBAR */
+/* CONTEXT TOOLBAR */
 
-function renderContext(){
+function renderCtx(){
 
 if(!selected){
 
-context.style.display='none';
+ctx.style.display=
+'none';
 
 return;
 
 }
 
-const item=
+let item=
 
 selected.kind==='table'
 
@@ -1775,78 +1556,78 @@ selected.kind==='table'
 x=>x.id===selected.id
 )
 
-:S.venueObjects.find(
+:S.objs.find(
 x=>x.id===selected.id
 );
 
 
 if(!item){
 
-selected=null;
+ctx.style.display=
+'none';
 
-context.style.display='none';
+selected=null;
 
 return;
 
 }
 
 
-if(selected.kind==='table'){
+if(
+selected.kind==='table'
+){
 
-const count=
+let n=
+
 S.guests.filter(
 g=>g.tableId===item.id
 ).length;
 
-context.innerHTML=`
+ctx.innerHTML=`
 
-<b>Table</b>
+<b>T</b>
 
 <input
-id="ctxNumber"
+id="num"
 type="number"
-min="1"
 value="${item.number}">
 
-<select id="ctxSeats">
+<select id="seatSel">
 
 ${[8,10,12,16]
 .map(
-n=>
-`<option ${n===item.seats?'selected':''}>${n}</option>`
+x=>
+`<option ${x===item.seats?'selected':''}>${x}</option>`
 )
 .join('')}
 
 </select>
 
-<span
-style="font-size:11px;color:#777">
-
-${count}/${item.seats}
-
+<span>
+${n}/${item.seats}
 </span>
 
 <button
 class="sec"
-onclick="saveTableContext()">
+onclick="saveCtx()">
 ✓
 </button>
 
 <button
 class="sec"
-onclick="scaleSelected(.9)">
+onclick="resize(.9)">
 −
 </button>
 
 <button
 class="sec"
-onclick="scaleSelected(1.1)">
+onclick="resize(1.1)">
 ＋
 </button>
 
 <button
 class="sec"
-onclick="rotateSelected()">
+onclick="rotate()">
 ↻
 </button>
 
@@ -1854,25 +1635,25 @@ onclick="rotateSelected()">
 
 }else{
 
-context.innerHTML=`
+ctx.innerHTML=`
 
 <b>${item.label}</b>
 
 <button
 class="sec"
-onclick="scaleSelected(.9)">
+onclick="resize(.9)">
 −
 </button>
 
 <button
 class="sec"
-onclick="scaleSelected(1.1)">
+onclick="resize(1.1)">
 ＋
 </button>
 
 <button
 class="sec"
-onclick="rotateSelected()">
+onclick="rotate()">
 ↻
 </button>
 
@@ -1880,52 +1661,48 @@ onclick="rotateSelected()">
 
 }
 
-context.style.display='flex';
+ctx.style.display=
+'flex';
 
 }
 
 
-/* SAVE TABLE */
+function saveCtx(){
 
-function saveTableContext(){
+let t=
 
-const table=
 S.tables.find(
 x=>x.id===selected.id
 );
 
-if(!table)return;
+let s=
++$('seatSel').value;
 
-const seats=
-+$('ctxSeats').value;
+let c=
 
-const count=
 S.guests.filter(
-g=>g.tableId===table.id
+g=>g.tableId===t.id
 ).length;
 
-if(seats<count){
+if(s<c){
 
-toast(
-'This table already has '+
-count+
+return toast(
+'Table already has '+
+c+
 ' guests'
 );
 
-return;
-
 }
 
-checkpoint();
+t.number=
 
-table.number=
 Math.max(
 1,
-+$('ctxNumber').value||1
++$('num').value||1
 );
 
-table.seats=
-seats;
+t.seats=
+s;
 
 render();
 
@@ -1934,32 +1711,27 @@ save();
 }
 
 
-/* SCALE */
+function resize(m){
 
-function scaleSelected(mult){
+let a=
 
-if(!selected)return;
-
-const list=
 selected.kind==='table'
 ?S.tables
-:S.venueObjects;
+:S.objs;
 
-const item=
-list.find(
+let o=
+
+a.find(
 x=>x.id===selected.id
 );
 
-if(!item)return;
+o.scale=
 
-checkpoint();
-
-item.scale=
 Math.max(
 .5,
 Math.min(
 2.2,
-item.scale*mult
+o.scale*m
 )
 );
 
@@ -1970,28 +1742,28 @@ save();
 }
 
 
-/* ROTATE */
+function rotate(){
 
-function rotateSelected(){
+let a=
 
-if(!selected)return;
-
-const list=
 selected.kind==='table'
 ?S.tables
-:S.venueObjects;
+:S.objs;
 
-const item=
-list.find(
+let o=
+
+a.find(
 x=>x.id===selected.id
 );
 
-if(!item)return;
+o.rotation=
 
-checkpoint();
-
-item.rotation=
-(item.rotation+15)%360;
+(
+o.rotation+
+15
+)
+%
+360;
 
 render();
 
@@ -2000,20 +1772,16 @@ save();
 }
 
 
-/* TAP CANVAS */
+/* CANVAS TAP */
 
 canvas.addEventListener(
 'pointerdown',
 e=>{
 
-/*
-Στο κινητό:
-αν πατήσεις στον καμβά,
-κλείνει το ανοιχτό menu.
-*/
+if(mobile()){
 
-if(isMobile()){
 closePanel();
+
 }
 
 if(
@@ -2022,13 +1790,13 @@ e.target===canvas ||
 
 e.target===stage ||
 
-e.target===objectLayer
+e.target===layer
 
 ){
 
 selected=null;
 
-renderContext();
+renderCtx();
 
 document
 .querySelectorAll('.obj')
@@ -2053,9 +1821,7 @@ stage.style.transform=
 }
 
 
-/* FIT */
-
-function fitView(){
+function fit(){
 
 S.view={
 scale:1,
@@ -2070,65 +1836,46 @@ save();
 }
 
 
-/* ZOOM */
+function zoom(m){
 
-function zoomCenter(mult){
-
-const r=
+let r=
 canvas.getBoundingClientRect();
 
-zoomAround(
+let cx=
+r.width/2;
 
-r.left+r.width/2,
+let cy=
+r.height/2;
 
-r.top+r.height/2,
+let wx=
 
-S.view.scale*mult
-
-);
-
-}
-
-
-function zoomAround(
-clientX,
-clientY,
-newScale
-){
-
-const r=
-canvas.getBoundingClientRect();
-
-const x=
-clientX-r.left;
-
-const y=
-clientY-r.top;
-
-const worldX=
-(x-S.view.x)/
+(cx-S.view.x)/
 S.view.scale;
 
-const worldY=
-(y-S.view.y)/
+let wy=
+
+(cy-S.view.y)/
 S.view.scale;
 
 S.view.scale=
+
 Math.max(
 .4,
 Math.min(
 3,
-newScale
+S.view.scale*m
 )
 );
 
 S.view.x=
-x-
-worldX*S.view.scale;
+
+cx-
+wx*S.view.scale;
 
 S.view.y=
-y-
-worldY*S.view.scale;
+
+cy-
+wy*S.view.scale;
 
 applyView();
 
@@ -2137,46 +1884,12 @@ save();
 }
 
 
-/* COMPUTER MOUSE WHEEL ZOOM */
+/* PINCH */
 
-canvas.addEventListener(
-'wheel',
-e=>{
-
-if(
-e.target.closest('.obj')
-)return;
-
-e.preventDefault();
-
-zoomAround(
-
-e.clientX,
-
-e.clientY,
-
-S.view.scale*
-(
-e.deltaY<0
-?1.08
-:.92
-)
-
-);
-
-},
-{
-passive:false
-}
-);
-
-
-/* MOBILE PINCH */
-
-const pointers=
+let P=
 new Map();
 
-let pinch=null;
+let pin=null;
 
 
 canvas.addEventListener(
@@ -2185,9 +1898,10 @@ e=>{
 
 if(
 e.target.closest('.obj')
-)return;
+)
+return;
 
-pointers.set(
+P.set(
 e.pointerId,
 {
 x:e.clientX,
@@ -2195,55 +1909,57 @@ y:e.clientY
 }
 );
 
-if(pointers.size===2){
+if(P.size===2){
 
-const pts=
-[...pointers.values()];
+let p=
+[...P.values()];
 
-const distance=
+let d=
 Math.hypot(
 
-pts[0].x-
-pts[1].x,
+p[0].x-p[1].x,
 
-pts[0].y-
-pts[1].y
+p[0].y-p[1].y
 
 );
 
-const cx=
-(
-pts[0].x+
-pts[1].x
-)/2;
-
-const cy=
-(
-pts[0].y+
-pts[1].y
-)/2;
-
-const r=
+let r=
 canvas.getBoundingClientRect();
 
-const lx=
-cx-r.left;
+let cx=
 
-const ly=
-cy-r.top;
+(
+p[0].x+
+p[1].x
+)/2
 
-pinch={
+-
 
-distance:distance,
+r.left;
 
-scale:S.view.scale,
+let cy=
 
-worldX:
-(lx-S.view.x)/
+(
+p[0].y+
+p[1].y
+)/2
+
+-
+
+r.top;
+
+pin={
+
+d:d,
+
+s:S.view.scale,
+
+wx:
+(cx-S.view.x)/
 S.view.scale,
 
-worldY:
-(ly-S.view.y)/
+wy:
+(cy-S.view.y)/
 S.view.scale
 
 };
@@ -2259,12 +1975,13 @@ canvas.addEventListener(
 e=>{
 
 if(
-!pointers.has(
+!P.has(
 e.pointerId
 )
-)return;
+)
+return;
 
-pointers.set(
+P.set(
 e.pointerId,
 {
 x:e.clientX,
@@ -2273,67 +1990,66 @@ y:e.clientY
 );
 
 if(
-pointers.size===2 &&
-pinch
+P.size===2 &&
+pin
 ){
 
-const pts=
-[...pointers.values()];
+let p=
+[...P.values()];
 
-const distance=
+let d=
 Math.hypot(
 
-pts[0].x-
-pts[1].x,
+p[0].x-p[1].x,
 
-pts[0].y-
-pts[1].y
+p[0].y-p[1].y
 
 );
 
-const cx=
-(
-pts[0].x+
-pts[1].x
-)/2;
-
-const cy=
-(
-pts[0].y+
-pts[1].y
-)/2;
-
-const r=
+let r=
 canvas.getBoundingClientRect();
 
-const lx=
-cx-r.left;
+let cx=
 
-const ly=
-cy-r.top;
+(
+p[0].x+
+p[1].x
+)/2
+
+-
+
+r.left;
+
+let cy=
+
+(
+p[0].y+
+p[1].y
+)/2
+
+-
+
+r.top;
 
 S.view.scale=
+
 Math.max(
 .4,
 Math.min(
 3,
-pinch.scale*
-(
-distance/
-pinch.distance
-)
+pin.s*d/pin.d
 )
 );
 
 S.view.x=
-lx-
-pinch.worldX*
-S.view.scale;
+
+cx-
+pin.wx*S.view.scale;
 
 S.view.y=
-ly-
-pinch.worldY*
-S.view.scale;
+
+cy-
+pin.wy*S.view.scale;
 
 applyView();
 
@@ -2343,17 +2059,17 @@ applyView();
 );
 
 
-function endPointer(e){
+function pend(e){
 
-pointers.delete(
+P.delete(
 e.pointerId
 );
 
 if(
-pointers.size<2
+P.size<2
 ){
 
-pinch=null;
+pin=null;
 
 save();
 
@@ -2363,22 +2079,24 @@ save();
 
 canvas.addEventListener(
 'pointerup',
-endPointer
+pend
 );
 
 canvas.addEventListener(
 'pointercancel',
-endPointer
+pend
 );
 
 
-/* TABLE OPTIONS */
+/* GUESTS */
 
-function tableOptions(current=''){
+function tableOpts(){
 
 return
 
-'<option value="">Unassigned</option>'+
+'<option value="">Unassigned</option>'
+
++
 
 S.tables
 
@@ -2391,7 +2109,7 @@ a.number-b.number
 
 .map(
 t=>
-`<option value="${t.id}" ${current===t.id?'selected':''}>Table ${t.number}</option>`
+`<option value="${t.id}">Table ${t.number}</option>`
 )
 
 .join('');
@@ -2399,70 +2117,26 @@ t=>
 }
 
 
-/* CHECK SEAT */
+function addGuest(){
 
-function tableHasSeat(
-tableId,
-excludeGuestId=null
-){
-
-const table=
-S.tables.find(
-x=>x.id===tableId
-);
-
-if(!table)return false;
-
-const count=
-S.guests.filter(
-
-g=>
-g.tableId===tableId &&
-
-g.id!==excludeGuestId
-
-).length;
-
-return count<table.seats;
-
-}
-
-
-/* ADD GUEST */
-
-function addGuestManual(){
-
-const name=
-$('guestName')
+let n=
+$('gName')
 .value
 .trim();
 
-const tableId=
-$('guestTable').value||
+let id=
+$('gTable').value||
 null;
 
-if(!name)return;
-
-if(
-tableId &&
-!tableHasSeat(tableId)
-){
-
-toast('Table is full');
-
-return;
-
-}
-
-checkpoint();
+if(!n)return;
 
 S.guests.push({
 
 id:uid(),
 
-name:name,
+name:n,
 
-tableId:tableId
+tableId:id
 
 });
 
@@ -2470,134 +2144,101 @@ render();
 
 save();
 
-if(isMobile()){
-
-closePanel();
-
-}else{
-
-renderGuestsPanel();
+afterAction();
 
 }
 
-}
-
-
-/* EDIT GUEST */
 
 function editGuest(id){
 
-const guest=
+let g=
+
 S.guests.find(
 x=>x.id===id
 );
 
-if(!guest)return;
+let n=
 
-const newName=
 prompt(
 'Guest name',
-guest.name
+g.name
 );
 
-if(newName===null)return;
+if(
+n===null ||
+!n.trim()
+)
+return;
 
-const name=
-newName.trim();
+let cur=
 
-if(!name)return;
-
-const currentNumber=
-
-guest.tableId
+g.tableId
 
 ?(
 S.tables.find(
-t=>t.id===guest.tableId
+t=>t.id===g.tableId
 )?.number||
 ''
 )
 
 :'';
 
-const answer=
+let ans=
+
 prompt(
 
-'Table number (leave empty for unassigned)',
+'Table number (empty = unassigned)',
 
-currentNumber
+cur
 
 );
 
-if(answer===null)return;
+if(ans===null)return;
 
-let tableId=null;
+let tid=null;
 
-if(answer.trim()){
+if(ans.trim()){
 
-const table=
+let t=
+
 S.tables.find(
-
-t=>
-String(t.number)
-===answer.trim()
-
+x=>
+String(x.number)
+===ans.trim()
 );
 
-if(!table){
+if(!t){
 
-toast(
+return toast(
 'Table not found'
 );
 
-return;
+}
+
+tid=
+t.id;
 
 }
 
-if(
-!tableHasSeat(
-table.id,
-guest.id
-)
-){
+g.name=
+n.trim();
 
-toast(
-'Table is full'
-);
-
-return;
-
-}
-
-tableId=
-table.id;
-
-}
-
-checkpoint();
-
-guest.name=
-name;
-
-guest.tableId=
-tableId;
+g.tableId=
+tid;
 
 render();
 
 save();
 
-renderGuestsPanel();
+guestsPanel();
 
 }
 
 
-/* DELETE GUEST */
-
-function deleteGuest(id){
-
-checkpoint();
+function delGuest(id){
 
 S.guests=
+
 S.guests.filter(
 x=>x.id!==id
 );
@@ -2606,279 +2247,22 @@ render();
 
 save();
 
-renderGuestsPanel();
-
-}
-
-
-/* MICROPHONE */
-
-function toggleMic(){
-
-if(recognition){
-
-recognition.stop();
-
-return;
-
-}
-
-const SR=
-
-window.SpeechRecognition ||
-
-window.webkitSpeechRecognition;
-
-if(!SR){
-
-toast(
-'Voice recognition is not supported in this browser.'
-);
-
-return;
-
-}
-
-recognition=
-new SR();
-
-recognition.lang=
-'el-GR';
-
-recognition.continuous=
-true;
-
-recognition.interimResults=
-false;
-
-$('micBtn').textContent=
-'■ Stop listening';
-
-recognition.onresult=e=>{
-
-for(
-let i=e.resultIndex;
-i<e.results.length;
-i++
-){
-
-parseVoice(
-e.results[i][0].transcript
-);
-
-}
-
-};
-
-recognition.onerror=()=>{
-
-toast(
-'Try speaking a little slower.'
-);
-
-};
-
-recognition.onend=()=>{
-
-recognition=null;
-
-if($('micBtn')){
-
-$('micBtn').textContent=
-'🎙 Speak guests';
-
-}
-
-};
-
-recognition.start();
-
-}
-
-
-/* VOICE PARSER */
-
-function parseVoice(text){
-
-text
-
-.split(/[,.؛;]+/)
-
-.map(
-x=>x.trim()
-)
-
-.filter(Boolean)
-
-.forEach(part=>{
-
-const match=
-
-part.match(
-
-/(.+?)\s+(?:τραπέζι|τραπεζι|table)\s*(\d+)/i
-
-);
-
-voiceDraft.push(
-
-match
-
-?{
-name:match[1].trim(),
-table:+match[2]
-}
-
-:{
-name:part,
-table:null
-}
-
-);
-
-});
-
-renderVoiceDraft();
-
-}
-
-
-/* VOICE PREVIEW */
-
-function renderVoiceDraft(){
-
-const box=
-$('voiceBox');
-
-if(!box)return;
-
-box.style.display=
-'block';
-
-box.innerHTML=
-
-voiceDraft
-
-.map(
-v=>
-`
-
-<div class="voiceRow">
-
-${escapeHtml(v.name)}
-
-→
-
-${v.table
-?'Table '+v.table
-:'Unassigned'}
-
-</div>
-
-`
-)
-
-.join('')
-
-+
-
-`
-
-<button
-style="width:100%;margin-top:8px"
-onclick="confirmVoiceGuests()">
-
-Add ${voiceDraft.length} guests
-
-</button>
-
-`;
-
-}
-
-
-/* CONFIRM VOICE */
-
-function confirmVoiceGuests(){
-
-if(
-!voiceDraft.length
-)return;
-
-checkpoint();
-
-voiceDraft.forEach(v=>{
-
-let tableId=null;
-
-if(v.table){
-
-const table=
-S.tables.find(
-x=>x.number===v.table
-);
-
-if(
-table &&
-tableHasSeat(table.id)
-){
-
-tableId=
-table.id;
-
-}
-
-}
-
-S.guests.push({
-
-id:uid(),
-
-name:v.name,
-
-tableId:tableId
-
-});
-
-});
-
-const count=
-voiceDraft.length;
-
-voiceDraft=[];
-
-render();
-
-save();
-
-if(isMobile()){
-
-closePanel();
-
-}else{
-
-renderGuestsPanel();
-
-}
-
-toast(
-count+
-' guests added'
-);
+guestsPanel();
 
 }
 
 
 /* STATUS */
 
-function updateStatus(){
+function status(){
 
-const seated=
+let seated=
+
 S.guests.filter(
 g=>g.tableId
 ).length;
 
-const complete=
+let full=
 
 S.tables.filter(
 
@@ -2894,37 +2278,35 @@ g=>g.tableId===t.id
 
 $('status').textContent=
 
-`${S.tables.length} tables · ${seated}/${S.guests.length} seated · ${complete} complete`;
+`${S.tables.length} tables · ${seated}/${S.guests.length} seated · ${full} complete`;
 
 }
 
 
 /* TOAST */
 
-function toast(message){
+function toast(m){
 
-const el=
+let t=
 $('toast');
 
-el.textContent=
-message;
+t.textContent=
+m;
 
-el.style.display=
+t.style.display=
 'block';
 
 clearTimeout(
-window.toastTimer
+window.tt
 );
 
-window.toastTimer=
+window.tt=
 setTimeout(
-()=>{
 
-el.style.display=
-'none';
+()=>t.style.display='none',
 
-},
-1700
+1600
+
 );
 
 }
@@ -2932,13 +2314,15 @@ el.style.display=
 
 /* SAFE TEXT */
 
-function escapeHtml(text){
+function esc(s){
 
-const d=
-document.createElement('div');
+let d=
+document.createElement(
+'div'
+);
 
 d.textContent=
-text||'';
+s||'';
 
 return d.innerHTML;
 
