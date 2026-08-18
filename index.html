@@ -3,17 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Seatly 2.3</title>
+<title>Seatly 3.0</title>
 
 <style>
 *{box-sizing:border-box}
 
+:root{
+--bg:#f5f3ef;
+--paper:#fff;
+--ink:#1f1f1f;
+--muted:#777;
+--line:#e6e0d8;
+--soft:#f2eee9;
+--green:#dff3e4;
+--greenB:#33764a;
+--danger:#a43a32;
+}
+
 html,body{
 margin:0;
 height:100%;
-font-family:system-ui,-apple-system,sans-serif;
-background:#f4f2ee;
-color:#202020
+font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+background:var(--bg);
+color:var(--ink)
 }
 
 body{overflow:hidden}
@@ -24,52 +36,64 @@ button{
 border:0;
 border-radius:10px;
 padding:9px 11px;
-background:#202020;
-color:white;
-font-weight:700
+background:#1f1f1f;
+color:#fff;
+font-weight:750;
+cursor:pointer
 }
 
-.sec{
-background:white;
-color:#202020;
-border:1px solid #ddd
+button.sec{
+background:#fff;
+color:var(--ink);
+border:1px solid var(--line)
 }
 
-.soft{
-background:#efebe6;
-color:#202020
+button.soft{
+background:var(--soft);
+color:var(--ink)
 }
 
-.top{
-height:56px;
-background:white;
-border-bottom:1px solid #e6e0d8;
+button.danger{
+background:var(--danger)
+}
+
+/* TOP */
+
+.topbar{
+height:58px;
+background:#fff;
+border-bottom:1px solid var(--line);
 display:flex;
 align-items:center;
 justify-content:space-between;
-padding:0 12px;
+padding:0 14px;
 position:relative;
 z-index:100
 }
 
 .logo{
-font-size:24px;
-font-weight:900
+font-size:25px;
+font-weight:900;
+letter-spacing:-1px
 }
 
 .logo span{
 font-weight:400
 }
 
+/* APP */
+
 .app{
-height:calc(100vh - 56px);
+height:calc(100vh - 58px);
 display:grid;
-grid-template-columns:62px 270px 1fr
+grid-template-columns:64px 260px 1fr
 }
 
+/* LEFT TOOLBAR */
+
 .rail{
-background:#202020;
-padding:6px 4px;
+background:#1f1f1f;
+padding:7px 4px;
 display:flex;
 flex-direction:column;
 gap:5px;
@@ -77,7 +101,7 @@ z-index:80
 }
 
 .rail button{
-height:54px;
+height:56px;
 background:transparent;
 padding:4px;
 font-size:9px;
@@ -93,13 +117,15 @@ font-size:17px
 }
 
 .rail button.active{
-background:white;
-color:#202020
+background:#fff;
+color:#1f1f1f
 }
 
+/* PANEL */
+
 .panel{
-background:white;
-border-right:1px solid #e5dfd7;
+background:#fff;
+border-right:1px solid var(--line);
 padding:14px;
 overflow:auto;
 position:relative;
@@ -107,17 +133,18 @@ z-index:70
 }
 
 .panel h2{
-margin:0 0 5px
+font-size:18px;
+margin:0 0 4px
 }
 
 .hint{
 font-size:12px;
-color:#777;
+color:var(--muted);
 line-height:1.4;
 margin-bottom:12px
 }
 
-.grid{
+.grid2{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:7px
@@ -126,15 +153,15 @@ gap:7px
 .field{
 width:100%;
 padding:9px;
-border:1px solid #d7d0c8;
-border-radius:9px;
-background:white
+border:1px solid #d8d1c9;
+border-radius:10px;
+background:#fff
 }
 
 .upload{
 display:block;
 text-align:center;
-padding:18px;
+padding:18px 10px;
 border:1.5px dashed #bbb;
 border-radius:13px;
 background:#faf9f7
@@ -144,12 +171,20 @@ background:#faf9f7
 display:none
 }
 
-.close{
+.section{
+border-top:1px solid #eee8e1;
+padding-top:11px;
+margin-top:11px
+}
+
+.panelClose{
 display:none
 }
 
+/* CANVAS */
+
 .work{
-padding:7px;
+padding:8px;
 background:#ebe8e3;
 min-width:0
 }
@@ -157,11 +192,13 @@ min-width:0
 .canvas{
 width:100%;
 height:100%;
-background:white;
-border-radius:14px;
+background:#fff;
+border:1px solid var(--line);
+border-radius:16px;
 position:relative;
 overflow:hidden;
-touch-action:none
+touch-action:none;
+box-shadow:0 10px 28px #0001
 }
 
 .stage{
@@ -170,14 +207,14 @@ inset:0;
 transform-origin:0 0
 }
 
-.venue{
+.venueBg{
 position:absolute;
 inset:0;
-background:white center/contain no-repeat;
+background:#fff center/contain no-repeat;
 pointer-events:none
 }
 
-.layer{
+.objectLayer{
 position:absolute;
 inset:0
 }
@@ -192,6 +229,8 @@ color:#999;
 pointer-events:none
 }
 
+/* TABLES */
+
 .obj{
 position:absolute;
 touch-action:none;
@@ -199,30 +238,31 @@ user-select:none
 }
 
 .table{
-width:100px;
-height:100px;
+width:104px;
+height:104px;
 display:flex;
 align-items:center;
-justify-content:center
+justify-content:center;
+cursor:grab
 }
 
 .table.selected,
 .vobj.selected{
 outline:3px solid #2224;
-outline-offset:3px
+outline-offset:4px
 }
 
 .core{
-width:62px;
-height:62px;
+width:64px;
+height:64px;
 border:2px solid #222;
 border-radius:50%;
-background:white;
+background:#fff;
 display:flex;
 flex-direction:column;
 align-items:center;
 justify-content:center;
-box-shadow:0 3px 10px #0002;
+box-shadow:0 4px 12px #0002;
 z-index:2
 }
 
@@ -235,9 +275,9 @@ font-size:9px;
 color:#666
 }
 
-.complete .core{
-background:#dff3e4;
-border-color:#34784a
+.table.complete .core{
+background:var(--green);
+border-color:var(--greenB)
 }
 
 .chair{
@@ -245,116 +285,186 @@ position:absolute;
 width:12px;
 height:12px;
 border:1.3px solid #555;
-background:white;
+background:#fff;
 border-radius:3px
 }
+
+/* OBJECTS */
 
 .vobj{
 border:2px dashed #666;
 background:#ffffffe8;
-border-radius:11px;
+border-radius:12px;
 display:flex;
 align-items:center;
 justify-content:center;
 font-size:11px;
-font-weight:800
+font-weight:800;
+cursor:grab
 }
 
-.ctx{
+/* TABLE TOOLBAR */
+
+.context{
 position:absolute;
-top:8px;
 left:50%;
+top:10px;
 transform:translateX(-50%);
 display:none;
-gap:4px;
 align-items:center;
-background:white;
-border:1px solid #ddd;
-border-radius:11px;
-padding:5px;
-z-index:40
-}
-
-.ctx input,
-.ctx select{
-width:68px;
+gap:5px;
+background:#fff;
+border:1px solid var(--line);
+border-radius:12px;
 padding:6px;
-border:1px solid #ddd;
-border-radius:7px
+z-index:30;
+box-shadow:0 8px 24px #0002
 }
 
-.ctx button{
+.context input,
+.context select{
+width:70px;
+padding:6px;
+border:1px solid var(--line);
+border-radius:8px
+}
+
+.context button{
 padding:6px 8px
 }
 
-.trash{
-position:absolute;
-left:50%;
-bottom:55px;
-transform:translateX(-50%);
-display:none;
-background:white;
-border:2px solid #ddd;
-border-radius:999px;
-padding:9px 15px;
-z-index:45;
-font-size:12px;
-font-weight:800
-}
-
-.trash.hot{
-background:#ffe5e2;
-border-color:#b23b30
-}
+/* ZOOM */
 
 .zoom{
 position:absolute;
-right:8px;
-bottom:8px;
+right:10px;
+bottom:10px;
 display:flex;
 gap:4px;
-background:white;
-border:1px solid #ddd;
-border-radius:10px;
+background:#fff;
+border:1px solid var(--line);
+border-radius:11px;
 padding:4px;
-z-index:35
+z-index:25
 }
 
 .zoom button{
 padding:6px 8px
 }
 
+/* STATUS */
+
 .status{
 position:absolute;
-left:8px;
-bottom:8px;
-background:white;
-border:1px solid #ddd;
+left:10px;
+bottom:10px;
+background:#fff;
+border:1px solid var(--line);
 border-radius:999px;
 padding:6px 9px;
 font-size:10px;
 color:#666;
-z-index:35
+z-index:25
 }
 
-.guest{
+/* TRASH */
+
+.trash{
+position:absolute;
+left:50%;
+bottom:58px;
+transform:translateX(-50%);
+display:none;
+background:#fff;
+border:2px solid var(--line);
+border-radius:999px;
+padding:9px 15px;
+z-index:35;
+font-size:12px;
+font-weight:800
+}
+
+.trash.hot{
+background:#ffe7e3;
+border-color:#b23b30
+}
+
+/* GUEST PANEL */
+
+.guestSheet{
+position:fixed;
+right:0;
+top:58px;
+bottom:0;
+width:320px;
+background:#fff;
+border-left:1px solid var(--line);
+box-shadow:-10px 0 30px #0002;
+z-index:95;
+display:none;
+padding:16px;
+overflow:auto
+}
+
+.guestSheet.open{
+display:block
+}
+
+.guestSheet h2{
+margin:0 0 3px
+}
+
+.sheetTop{
 display:flex;
 justify-content:space-between;
-gap:6px;
-padding:8px 0;
-border-bottom:1px solid #eee;
-font-size:12px
+align-items:center;
+gap:8px
 }
 
-.section{
-border-top:1px solid #eee;
-padding-top:10px;
-margin-top:10px
+.guestRow{
+display:grid;
+grid-template-columns:1fr auto;
+gap:6px;
+align-items:center;
+padding:8px 0;
+border-bottom:1px solid #eee
 }
+
+.guestRow .name{
+font-size:13px;
+font-weight:700
+}
+
+.guestRow button{
+padding:5px 7px;
+font-size:11px
+}
+
+.voicePreview{
+display:none;
+background:#faf9f7;
+border:1px solid var(--line);
+border-radius:10px;
+padding:8px;
+margin-top:8px
+}
+
+.voiceItem{
+font-size:12px;
+padding:5px 0;
+border-bottom:1px solid #eee
+}
+
+/* MOBILE */
 
 @media(max-width:800px){
 
+.topbar{
+height:54px
+}
+
 .app{
+height:calc(100vh - 54px);
 grid-template-columns:56px 1fr
 }
 
@@ -378,10 +488,10 @@ right:0;
 bottom:0;
 top:auto;
 width:auto;
-max-height:48vh;
+max-height:44vh;
 display:none;
 border-right:0;
-border-top:1px solid #ddd;
+border-top:1px solid var(--line);
 border-radius:18px 18px 0 0;
 padding:48px 13px 13px;
 box-shadow:0 -10px 30px #0003;
@@ -392,7 +502,7 @@ z-index:90
 display:block
 }
 
-.close{
+.panelClose{
 display:block;
 position:absolute;
 right:10px;
@@ -401,16 +511,26 @@ width:34px;
 height:34px;
 padding:0;
 border-radius:50%;
-background:#efebe6;
+background:var(--soft);
 color:#222;
-border:1px solid #ddd;
+border:1px solid var(--line);
 font-size:20px
 }
 
-.ctx{
+.context{
 max-width:94%;
 overflow:auto;
 white-space:nowrap
+}
+
+.guestSheet{
+top:54px;
+left:56px;
+right:0;
+bottom:0;
+width:auto;
+border-left:0;
+box-shadow:none
 }
 
 }
@@ -419,44 +539,56 @@ white-space:nowrap
 
 <body>
 
-<header class="top">
-<div class="logo">seat<span>ly</span></div>
-<button onclick="toast('Finish / Export αργότερα')">Finish</button>
+<header class="topbar">
+
+<div class="logo">
+seat<span>ly</span>
+</div>
+
+<button onclick="toast('Finish / Export θα προστεθεί μετά')">
+Finish
+</button>
+
 </header>
+
 
 <div class="app">
 
 <nav class="rail">
 
-<button id="bVenue" onclick="togglePanel('venue')">
+<button id="navVenue" onclick="togglePanel('venue')">
 <b>▧</b>
 Venue
 </button>
 
-<button id="bTables" onclick="togglePanel('tables')">
+<button id="navTables" onclick="togglePanel('tables')">
 <b>◉</b>
 Tables
 </button>
 
-<button id="bGuests" onclick="togglePanel('guests')">
-<b>♙</b>
-Guests
-</button>
-
-<button id="bObjects" onclick="togglePanel('objects')">
+<button id="navObjects" onclick="togglePanel('objects')">
 <b>◇</b>
 Objects
 </button>
 
+<button id="navGuests" onclick="togglePanel('guests')">
+<b>♙</b>
+All Guests
+</button>
+
 </nav>
+
 
 <aside class="panel" id="panel">
 
-<button class="close" onclick="closePanel()">×</button>
+<button class="panelClose" onclick="closePanel()">
+×
+</button>
 
 <div id="panelContent"></div>
 
 </aside>
+
 
 <main class="work">
 
@@ -464,35 +596,53 @@ Objects
 
 <div class="stage" id="stage">
 
-<div class="venue" id="venue"></div>
+<div class="venueBg" id="venueBg"></div>
 
 <div class="empty" id="empty">
-Upload a venue or add a table
+
+<div>
+
+<div style="font-size:32px">
+♡
 </div>
 
-<div class="layer" id="layer"></div>
+<b>Your wedding plan</b>
+
+<div style="font-size:12px;margin-top:4px">
+Upload a venue or add your first table.
+</div>
 
 </div>
 
-<div class="ctx" id="ctx"></div>
+</div>
+
+<div class="objectLayer" id="objectLayer"></div>
+
+</div>
+
+
+<div class="context" id="context"></div>
+
 
 <div class="trash" id="trash">
 🗑 Drop to delete
 </div>
 
+
 <div class="status" id="status"></div>
+
 
 <div class="zoom">
 
-<button class="sec" onclick="zoom(.9)">
+<button class="sec" onclick="zoomOut()">
 −
 </button>
 
-<button class="sec" onclick="fit()">
+<button class="sec" onclick="fitView()">
 Fit
 </button>
 
-<button class="sec" onclick="zoom(1.1)">
+<button class="sec" onclick="zoomIn()">
 ＋
 </button>
 
@@ -503,6 +653,76 @@ Fit
 </main>
 
 </div>
+
+
+<!-- TABLE GUESTS -->
+
+<aside class="guestSheet" id="guestSheet">
+
+<div class="sheetTop">
+
+<div>
+
+<h2 id="guestSheetTitle">
+Table
+</h2>
+
+<div
+class="hint"
+id="guestSheetMeta">
+</div>
+
+</div>
+
+<button
+class="sec"
+onclick="closeGuestSheet()">
+×
+</button>
+
+</div>
+
+
+<input
+id="tableGuestName"
+class="field"
+placeholder="Guest name / Όνομα">
+
+
+<button
+style="width:100%;margin-top:7px"
+onclick="addGuestToSelectedTable()">
+
++ Add guest
+
+</button>
+
+
+<button
+id="micBtn"
+class="soft"
+style="width:100%;margin-top:7px"
+onclick="toggleMic()">
+
+🎙 Speak names
+
+</button>
+
+
+<div
+class="voicePreview"
+id="voicePreview">
+</div>
+
+
+<div class="section">
+
+<div id="tableGuestList"></div>
+
+</div>
+
+</aside>
+
 
 <div
 id="toast"
@@ -516,81 +736,128 @@ color:#fff;
 padding:9px 13px;
 border-radius:10px;
 display:none;
-z-index:120
-">
+z-index:120">
 </div>
+
 
 <script>
 
 let S={
+
 venue:null,
+
 tables:[],
+
 guests:[],
+
 objs:[],
+
 counter:0,
+
 view:{
 scale:1,
 x:0,
 y:0
 }
+
 };
 
+
 let selected=null;
+
 let activePanel=null;
 
-const $=x=>
-document.getElementById(x);
+let selectedTableForGuests=null;
+
+let recognition=null;
+
+let voiceDraft=[];
+
+
+const $=
+id=>document.getElementById(id);
+
 
 const canvas=$('canvas');
+
 const stage=$('stage');
-const layer=$('layer');
-const venue=$('venue');
-const ctx=$('ctx');
+
+const venueBg=$('venueBg');
+
+const objectLayer=$('objectLayer');
+
+const context=$('context');
+
 const trash=$('trash');
 
-const uid=()=>
+
+const uid=()=>{
+
+if(
+window.crypto &&
 crypto.randomUUID
-?crypto.randomUUID()
-:String(Date.now()+Math.random());
+){
 
-
-function mobile(){
-
-return innerWidth<=800;
+return crypto.randomUUID();
 
 }
 
+return String(
+Date.now()+Math.random()
+);
+
+};
+
+
+const mobile=()=>innerWidth<=800;
+
+
+/* SAVE */
 
 function save(){
 
 try{
 
 localStorage.setItem(
-'seatly23',
+'seatly30',
 JSON.stringify(S)
 );
 
 }catch(e){}
 
-status();
+updateStatus();
 
 }
 
+
+/* LOAD OLD DATA TOO */
 
 function load(){
 
 try{
 
-let s=
-localStorage.getItem('seatly23') ||
-localStorage.getItem('seatly_2_2') ||
+let x=
+
+localStorage.getItem('seatly30')
+
+||
+
+localStorage.getItem('seatly23')
+
+||
+
+localStorage.getItem('seatly_2_2')
+
+||
+
 localStorage.getItem('seatly2');
 
-if(s){
+
+if(x){
 
 S=Object.assign(
 S,
-JSON.parse(s)
+JSON.parse(x)
 );
 
 }
@@ -604,18 +871,27 @@ render();
 }
 
 
-/* PANEL */
+/* NAVIGATION */
 
-function setActive(t){
+function setActive(type){
 
-['Venue','Tables','Guests','Objects']
+[
+'Venue',
+'Tables',
+'Objects',
+'Guests'
+]
+
 .forEach(x=>{
 
-$('b'+x)
+$('nav'+x)
 .classList
 .toggle(
+
 'active',
-x.toLowerCase()===t
+
+x.toLowerCase()===type
+
 );
 
 });
@@ -636,12 +912,22 @@ setActive('');
 }
 
 
-function togglePanel(t){
+function togglePanel(type){
 
 if(
-mobile() &&
-activePanel===t &&
-$('panel').classList.contains('open')
+
+mobile()
+
+&&
+
+activePanel===type
+
+&&
+
+$('panel')
+.classList
+.contains('open')
+
 ){
 
 closePanel();
@@ -650,28 +936,38 @@ return;
 
 }
 
-activePanel=t;
 
-setActive(t);
+activePanel=type;
+
+setActive(type);
 
 $('panel')
 .classList
 .add('open');
 
-if(t==='venue'){
-venuePanel();
+
+if(type==='venue'){
+
+renderVenuePanel();
+
 }
 
-if(t==='tables'){
-tablesPanel();
+if(type==='tables'){
+
+renderTablesPanel();
+
 }
 
-if(t==='guests'){
-guestsPanel();
+if(type==='objects'){
+
+renderObjectsPanel();
+
 }
 
-if(t==='objects'){
-objectsPanel();
+if(type==='guests'){
+
+renderAllGuestsPanel();
+
 }
 
 }
@@ -690,15 +986,22 @@ closePanel();
 
 /* VENUE */
 
-function venuePanel(){
+function renderVenuePanel(){
 
-panelContent.innerHTML=`
+$('panelContent').innerHTML=`
 
 <h2>Venue</h2>
 
 <div class="hint">
-Upload your plan. It stays aligned with the tables.
+
+Upload your venue plan.
+
+The background stays fixed.
+
+Zoom only with − / Fit / +.
+
 </div>
+
 
 <label class="upload">
 
@@ -707,40 +1010,54 @@ Upload your plan. It stays aligned with the tables.
 <br>
 
 <b>
+
 ${S.venue
 ?'Replace venue'
 :'Upload venue'}
+
 </b>
 
+
 <input
-id="file"
+id="venueInput"
 type="file"
 accept="image/*">
 
 </label>
 
+
 ${S.venue
+
 ?`
+
 <button
 class="sec"
 style="width:100%;margin-top:7px"
 onclick="removeVenue()">
-Remove
+
+Remove venue
+
 </button>
+
 `
+
 :''}
 
 `;
 
-$('file').onchange=e=>{
+
+$('venueInput')
+.onchange=e=>{
 
 let f=
 e.target.files[0];
 
 if(!f)return;
 
+
 let r=
 new FileReader();
+
 
 r.onload=x=>{
 
@@ -757,6 +1074,7 @@ afterAction();
 
 };
 
+
 r.readAsDataURL(f);
 
 };
@@ -766,10 +1084,12 @@ r.readAsDataURL(f);
 
 function applyVenue(){
 
-venue.style.backgroundImage=
+venueBg.style.backgroundImage=
 
 S.venue
+
 ?`url("${S.venue}")`
+
 :'none';
 
 }
@@ -785,24 +1105,29 @@ render();
 
 save();
 
-venuePanel();
+renderVenuePanel();
 
 }
 
 
-/* TABLE PANEL */
+/* TABLES */
 
-function tablesPanel(){
+function renderTablesPanel(){
 
-panelContent.innerHTML=`
+$('panelContent').innerHTML=`
 
 <h2>Tables</h2>
 
 <div class="hint">
-Choose seats. The menu closes automatically.
+
+Choose a table size.
+
+The menu closes immediately.
+
 </div>
 
-<div class="grid">
+
+<div class="grid2">
 
 <button
 class="soft"
@@ -810,17 +1135,20 @@ onclick="addTable(8)">
 8 seats
 </button>
 
+
 <button
 class="soft"
 onclick="addTable(10)">
 10 seats
 </button>
 
+
 <button
 class="soft"
 onclick="addTable(12)">
 12 seats
 </button>
+
 
 <button
 class="soft"
@@ -830,15 +1158,21 @@ onclick="addTable(16)">
 
 </div>
 
+
 <div class="section">
+
+<b>Add multiple</b>
+
 
 <input
 id="qty"
 class="field"
 type="number"
-value="5"
 min="1"
-max="50">
+max="50"
+value="5"
+style="margin-top:6px">
+
 
 <select
 id="bulkSeats"
@@ -846,118 +1180,25 @@ class="field"
 style="margin-top:6px">
 
 <option>8</option>
-<option selected>10</option>
+
+<option selected>
+10
+</option>
+
 <option>12</option>
+
 <option>16</option>
 
 </select>
+
 
 <button
 style="width:100%;margin-top:6px"
 onclick="addMany()">
 
-Add multiple
+Add tables
 
 </button>
-
-</div>
-
-`;
-
-}
-
-
-/* GUESTS */
-
-function guestsPanel(){
-
-let rows=
-
-S.guests
-.map(g=>{
-
-let t=
-S.tables.find(
-x=>x.id===g.tableId
-);
-
-return `
-
-<div class="guest">
-
-<span>
-
-${esc(g.name)}
-
-<br>
-
-<small>
-${t
-?'Table '+t.number
-:'Unassigned'}
-</small>
-
-</span>
-
-<span>
-
-<button
-class="sec"
-style="padding:5px"
-onclick="editGuest('${g.id}')">
-Edit
-</button>
-
-<button
-style="padding:5px;background:#a83b32"
-onclick="delGuest('${g.id}')">
-×
-</button>
-
-</span>
-
-</div>
-
-`;
-
-})
-.join('');
-
-
-panelContent.innerHTML=`
-
-<h2>Guests</h2>
-
-<div class="hint">
-Simple guest list.
-</div>
-
-<input
-id="gName"
-class="field"
-placeholder="Name / Όνομα">
-
-<select
-id="gTable"
-class="field"
-style="margin-top:6px">
-
-${tableOpts()}
-
-</select>
-
-<button
-style="width:100%;margin-top:6px"
-onclick="addGuest()">
-
-Add guest
-
-</button>
-
-<div class="section">
-
-${rows||
-'<div class="hint">No guests yet</div>'}
 
 </div>
 
@@ -968,13 +1209,18 @@ ${rows||
 
 /* OBJECTS */
 
-function objectsPanel(){
+function renderObjectsPanel(){
 
-panelContent.innerHTML=`
+$('panelContent').innerHTML=`
 
 <h2>Objects</h2>
 
-<div class="grid">
+<div class="hint">
+Only the essentials.
+</div>
+
+
+<div class="grid2">
 
 <button
 class="soft"
@@ -982,17 +1228,20 @@ onclick="addObj('Dance Floor',160,160)">
 Dance Floor
 </button>
 
+
 <button
 class="soft"
 onclick="addObj('DJ',110,55)">
 DJ
 </button>
 
+
 <button
 class="soft"
 onclick="addObj('Bar',130,55)">
 Bar
 </button>
+
 
 <button
 class="soft"
@@ -1007,14 +1256,139 @@ Stage
 }
 
 
+/* ALL GUESTS */
+
+function renderAllGuestsPanel(){
+
+let rows=
+
+S.guests
+
+.map(g=>{
+
+let t=
+
+S.tables.find(
+x=>x.id===g.tableId
+);
+
+
+return `
+
+<div class="guestRow">
+
+<div>
+
+<div class="name">
+${esc(g.name)}
+</div>
+
+<div
+class="hint"
+style="margin:0">
+
+${t
+?'Table '+t.number
+:'Unassigned'}
+
+</div>
+
+</div>
+
+
+<div>
+
+<button
+class="sec"
+onclick="editGuest('${g.id}')">
+
+Edit
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+})
+
+.join('');
+
+
+$('panelContent').innerHTML=`
+
+<h2>All Guests</h2>
+
+<div class="hint">
+
+Search and review.
+
+Add guests mainly from each table.
+
+</div>
+
+
+<input
+id="guestSearch"
+class="field"
+placeholder="Search..."
+oninput="filterGuestRows(this.value)">
+
+
+<div
+class="section"
+id="allGuestRows">
+
+${rows
+
+||
+
+'<div class="hint">No guests yet.</div>'}
+
+</div>
+
+`;
+
+}
+
+
+function filterGuestRows(q){
+
+q=
+q.toLowerCase();
+
+
+[...$('allGuestRows').children]
+
+.forEach(r=>{
+
+r.style.display=
+
+r.textContent
+.toLowerCase()
+.includes(q)
+
+?'grid'
+
+:'none';
+
+});
+
+}
+
+
 /* ADD TABLE */
 
 function addTable(seats){
 
 S.counter++;
 
+
 let i=
 S.tables.length;
+
 
 S.tables.push({
 
@@ -1038,6 +1412,7 @@ rotation:0
 
 });
 
+
 render();
 
 save();
@@ -1047,21 +1422,30 @@ afterAction();
 }
 
 
-/* ADD MANY */
+/* MULTIPLE TABLES */
 
 function addMany(){
 
 let n=
+
 Math.max(
+
 1,
+
 Math.min(
+
 50,
+
 +$('qty').value||1
+
 )
+
 );
+
 
 let s=
 +$('bulkSeats').value;
+
 
 for(
 let k=0;
@@ -1069,25 +1453,12 @@ k<n;
 k++
 ){
 
-addTableNoClose(s);
-
-}
-
-render();
-
-save();
-
-afterAction();
-
-}
-
-
-function addTableNoClose(seats){
-
 S.counter++;
+
 
 let i=
 S.tables.length;
+
 
 S.tables.push({
 
@@ -1095,7 +1466,7 @@ id:uid(),
 
 number:S.counter,
 
-seats:seats,
+seats:s,
 
 x:
 70+
@@ -1114,12 +1485,26 @@ rotation:0
 }
 
 
-/* ADD OBJECT */
+render();
 
-function addObj(label,w,h){
+save();
+
+afterAction();
+
+}
+
+
+/* OBJECT */
+
+function addObj(
+label,
+w,
+h
+){
 
 let i=
 S.objs.length;
+
 
 S.objs.push({
 
@@ -1145,6 +1530,7 @@ rotation:0
 
 });
 
+
 render();
 
 save();
@@ -1156,7 +1542,10 @@ afterAction();
 
 /* CHAIRS */
 
-function chairs(el,n){
+function chairs(
+el,
+n
+){
 
 n=
 Math.min(
@@ -1164,7 +1553,9 @@ n,
 16
 );
 
-let r=42;
+
+let r=43;
+
 
 for(
 let i=0;
@@ -1182,30 +1573,36 @@ i/n
 
 Math.PI/2;
 
-let c=
-document.createElement(
-'div'
-);
 
-c.className='chair';
+let c=
+document.createElement('div');
+
+
+c.className=
+'chair';
+
 
 c.style.left=
 
 (
-50+
+52+
 Math.cos(a)*r-
 6
 )
+
 +'px';
+
 
 c.style.top=
 
 (
-50+
+52+
 Math.sin(a)*r-
 6
 )
+
 +'px';
+
 
 el.appendChild(c);
 
@@ -1218,7 +1615,8 @@ el.appendChild(c);
 
 function render(){
 
-layer.innerHTML='';
+objectLayer.innerHTML='';
+
 
 S.tables.forEach(t=>{
 
@@ -1228,10 +1626,10 @@ S.guests.filter(
 g=>g.tableId===t.id
 ).length;
 
+
 let e=
-document.createElement(
-'div'
-);
+document.createElement('div');
+
 
 e.className=
 
@@ -1253,41 +1651,50 @@ selected?.id===t.id
 :''
 );
 
+
 e.style.left=
 t.x+'px';
+
 
 e.style.top=
 t.y+'px';
 
+
 e.style.transform=
 
 `scale(${t.scale}) rotate(${t.rotation}deg)`;
+
 
 chairs(
 e,
 t.seats
 );
 
-let c=
-document.createElement(
-'div'
-);
 
-c.className='core';
+let c=
+document.createElement('div');
+
+
+c.className=
+'core';
+
 
 c.innerHTML=
 
 `<b>TABLE ${t.number}</b><span>${count}/${t.seats}</span>`;
 
+
 e.appendChild(c);
 
-drag(
+
+attachDrag(
 e,
 t,
 'table'
 );
 
-layer.appendChild(e);
+
+objectLayer.appendChild(e);
 
 });
 
@@ -1295,9 +1702,8 @@ layer.appendChild(e);
 S.objs.forEach(o=>{
 
 let e=
-document.createElement(
-'div'
-);
+document.createElement('div');
+
 
 e.className=
 
@@ -1311,32 +1717,40 @@ selected?.id===o.id
 :''
 );
 
+
 e.style.left=
 o.x+'px';
+
 
 e.style.top=
 o.y+'px';
 
+
 e.style.width=
 o.w+'px';
 
+
 e.style.height=
 o.h+'px';
+
 
 e.style.transform=
 
 `scale(${o.scale}) rotate(${o.rotation}deg)`;
 
+
 e.textContent=
 o.label;
 
-drag(
+
+attachDrag(
 e,
 o,
 'obj'
 );
 
-layer.appendChild(e);
+
+objectLayer.appendChild(e);
 
 });
 
@@ -1344,35 +1758,47 @@ layer.appendChild(e);
 $('empty').style.display=
 
 (
-S.venue ||
-S.tables.length ||
+S.venue
+
+||
+
+S.tables.length
+
+||
+
 S.objs.length
 )
 
 ?'none'
+
 :'grid';
+
 
 applyView();
 
-renderCtx();
+renderContext();
 
-status();
+updateStatus();
 
 }
 
 
-/* DRAG */
+/* DRAG TABLE */
 
-function drag(
+function attachDrag(
 el,
 item,
 kind
 ){
 
 let sx;
+
 let sy;
+
 let ox;
+
 let oy;
+
 let on=false;
 
 
@@ -1380,12 +1806,18 @@ el.onpointerdown=e=>{
 
 e.stopPropagation();
 
+
 selected={
+
 id:item.id,
+
 kind:kind
+
 };
 
-renderCtx();
+
+renderContext();
+
 
 document
 .querySelectorAll('.obj')
@@ -1393,19 +1825,26 @@ document
 x=>x.classList.remove('selected')
 );
 
+
 el.classList.add(
 'selected'
 );
 
+
 sx=e.clientX;
+
 sy=e.clientY;
+
 ox=item.x;
+
 oy=item.y;
 
 on=true;
 
+
 trash.style.display=
 'block';
+
 
 try{
 
@@ -1422,36 +1861,57 @@ el.onpointermove=e=>{
 
 if(!on)return;
 
+
 item.x=
 
 ox+
-(e.clientX-sx)/
+
+(e.clientX-sx)
+
+/
+
 S.view.scale;
+
 
 item.y=
 
 oy+
-(e.clientY-sy)/
+
+(e.clientY-sy)
+
+/
+
 S.view.scale;
+
 
 el.style.left=
 item.x+'px';
 
+
 el.style.top=
 item.y+'px';
+
 
 let r=
 trash.getBoundingClientRect();
 
+
 let hot=
 
-e.clientX>=r.left &&
+e.clientX>=r.left
 
-e.clientX<=r.right &&
+&&
 
-e.clientY>=r.top &&
+e.clientX<=r.right
+
+&&
+
+e.clientY>=r.top
+
+&&
 
 e.clientY<=r.bottom;
+
 
 trash.classList.toggle(
 'hot',
@@ -1461,11 +1921,13 @@ hot
 };
 
 
-el.onpointerup=e=>{
+el.onpointerup=()=>{
 
 if(!on)return;
 
+
 on=false;
+
 
 let hot=
 
@@ -1473,12 +1935,15 @@ trash
 .classList
 .contains('hot');
 
+
 trash.style.display=
 'none';
+
 
 trash
 .classList
 .remove('hot');
+
 
 if(hot){
 
@@ -1496,13 +1961,16 @@ g.tableId=null;
 
 });
 
+
 S.tables=
 
 S.tables.filter(
 x=>x.id!==item.id
 );
 
-}else{
+}
+
+else{
 
 S.objs=
 
@@ -1512,11 +1980,16 @@ x=>x.id!==item.id
 
 }
 
+
 selected=null;
+
+
+closeGuestSheet();
 
 render();
 
 }
+
 
 save();
 
@@ -1535,38 +2008,43 @@ trash.style.display=
 }
 
 
-/* CONTEXT TOOLBAR */
+/* TABLE TOOLBAR */
 
-function renderCtx(){
+function renderContext(){
 
 if(!selected){
 
-ctx.style.display=
+context.style.display=
 'none';
 
 return;
 
 }
 
+
 let item=
 
 selected.kind==='table'
 
-?S.tables.find(
+?
+
+S.tables.find(
 x=>x.id===selected.id
 )
 
-:S.objs.find(
+:
+
+S.objs.find(
 x=>x.id===selected.id
 );
 
 
 if(!item){
 
-ctx.style.display=
-'none';
-
 selected=null;
+
+context.style.display=
+'none';
 
 return;
 
@@ -1583,89 +2061,115 @@ S.guests.filter(
 g=>g.tableId===item.id
 ).length;
 
-ctx.innerHTML=`
 
-<b>T</b>
+context.innerHTML=`
+
+<b>Table</b>
+
 
 <input
-id="num"
+id="ctxNum"
 type="number"
 value="${item.number}">
 
-<select id="seatSel">
+
+<select id="ctxSeats">
 
 ${[8,10,12,16]
+
 .map(
+
 x=>
+
 `<option ${x===item.seats?'selected':''}>${x}</option>`
+
 )
+
 .join('')}
 
 </select>
 
+
 <span>
+
 ${n}/${item.seats}
+
 </span>
+
 
 <button
 class="sec"
 onclick="saveCtx()">
+
 ✓
+
 </button>
+
 
 <button
 class="sec"
-onclick="resize(.9)">
+onclick="openGuestSheet('${item.id}')">
+
+Guests
+
+</button>
+
+
+<button
+class="sec"
+onclick="resizeSel(.9)">
+
 −
+
 </button>
+
 
 <button
 class="sec"
-onclick="resize(1.1)">
+onclick="resizeSel(1.1)">
+
 ＋
-</button>
 
-<button
-class="sec"
-onclick="rotate()">
-↻
-</button>
-
-`;
-
-}else{
-
-ctx.innerHTML=`
-
-<b>${item.label}</b>
-
-<button
-class="sec"
-onclick="resize(.9)">
-−
-</button>
-
-<button
-class="sec"
-onclick="resize(1.1)">
-＋
-</button>
-
-<button
-class="sec"
-onclick="rotate()">
-↻
 </button>
 
 `;
 
 }
 
-ctx.style.display=
+else{
+
+context.innerHTML=`
+
+<b>
+${item.label}
+</b>
+
+
+<button
+class="sec"
+onclick="resizeSel(.9)">
+−
+</button>
+
+
+<button
+class="sec"
+onclick="resizeSel(1.1)">
+＋
+</button>
+
+`;
+
+}
+
+
+context.style.display=
 'flex';
 
 }
 
+
+/* SAVE TABLE */
 
 function saveCtx(){
 
@@ -1675,34 +2179,53 @@ S.tables.find(
 x=>x.id===selected.id
 );
 
-let s=
-+$('seatSel').value;
 
-let c=
+let seats=
++$('ctxSeats').value;
+
+
+let count=
 
 S.guests.filter(
 g=>g.tableId===t.id
 ).length;
 
-if(s<c){
+
+if(
+seats<count
+){
 
 return toast(
-'Table already has '+
-c+
+
+'This table already has '
+
++
+
+count
+
++
+
 ' guests'
+
 );
 
 }
+
 
 t.number=
 
 Math.max(
+
 1,
-+$('num').value||1
+
++$('ctxNum').value||1
+
 );
 
+
 t.seats=
-s;
+seats;
+
 
 render();
 
@@ -1711,29 +2234,46 @@ save();
 }
 
 
-function resize(m){
+/* RESIZE */
+
+function resizeSel(m){
 
 let a=
 
 selected.kind==='table'
-?S.tables
-:S.objs;
+
+?
+
+S.tables
+
+:
+
+S.objs;
+
 
 let o=
 
 a.find(
 x=>x.id===selected.id
 );
+
 
 o.scale=
 
 Math.max(
+
 .5,
+
 Math.min(
+
 2.2,
+
 o.scale*m
+
 )
+
 );
+
 
 render();
 
@@ -1742,40 +2282,12 @@ save();
 }
 
 
-function rotate(){
-
-let a=
-
-selected.kind==='table'
-?S.tables
-:S.objs;
-
-let o=
-
-a.find(
-x=>x.id===selected.id
-);
-
-o.rotation=
-
-(
-o.rotation+
-15
-)
-%
-360;
-
-render();
-
-save();
-
-}
-
-
-/* CANVAS TAP */
+/* TAP EMPTY CANVAS */
 
 canvas.addEventListener(
+
 'pointerdown',
+
 e=>{
 
 if(mobile()){
@@ -1784,19 +2296,26 @@ closePanel();
 
 }
 
+
 if(
 
-e.target===canvas ||
+e.target===canvas
 
-e.target===stage ||
+||
 
-e.target===layer
+e.target===stage
+
+||
+
+e.target===objectLayer
 
 ){
 
 selected=null;
 
-renderCtx();
+
+renderContext();
+
 
 document
 .querySelectorAll('.obj')
@@ -1807,10 +2326,14 @@ x=>x.classList.remove('selected')
 }
 
 }
+
 );
 
 
-/* VIEW */
+/* ==================================================
+   SIMPLE ZOOM
+   NO PINCH
+   ================================================== */
 
 function applyView(){
 
@@ -1821,13 +2344,18 @@ stage.style.transform=
 }
 
 
-function fit(){
+function fitView(){
 
 S.view={
+
 scale:1,
+
 x:0,
+
 y:0
+
 };
+
 
 applyView();
 
@@ -1836,46 +2364,38 @@ save();
 }
 
 
-function zoom(m){
+function zoomIn(){
 
-let r=
-canvas.getBoundingClientRect();
+S.view.scale=
 
-let cx=
-r.width/2;
+Math.min(
 
-let cy=
-r.height/2;
+2.5,
 
-let wx=
+S.view.scale*1.15
 
-(cx-S.view.x)/
-S.view.scale;
+);
 
-let wy=
 
-(cy-S.view.y)/
-S.view.scale;
+applyView();
+
+save();
+
+}
+
+
+function zoomOut(){
 
 S.view.scale=
 
 Math.max(
-.4,
-Math.min(
-3,
-S.view.scale*m
-)
+
+.5,
+
+S.view.scale*.87
+
 );
 
-S.view.x=
-
-cx-
-wx*S.view.scale;
-
-S.view.y=
-
-cy-
-wy*S.view.scale;
 
 applyView();
 
@@ -1884,270 +2404,272 @@ save();
 }
 
 
-/* PINCH */
+/* ==================================================
+   GUESTS INSIDE TABLE
+   ================================================== */
 
-let P=
-new Map();
+function openGuestSheet(tableId){
 
-let pin=null;
+selectedTableForGuests=
+tableId;
 
 
-canvas.addEventListener(
-'pointerdown',
-e=>{
+let t=
 
-if(
-e.target.closest('.obj')
-)
-return;
-
-P.set(
-e.pointerId,
-{
-x:e.clientX,
-y:e.clientY
-}
-);
-
-if(P.size===2){
-
-let p=
-[...P.values()];
-
-let d=
-Math.hypot(
-
-p[0].x-p[1].x,
-
-p[0].y-p[1].y
-
-);
-
-let r=
-canvas.getBoundingClientRect();
-
-let cx=
-
-(
-p[0].x+
-p[1].x
-)/2
-
--
-
-r.left;
-
-let cy=
-
-(
-p[0].y+
-p[1].y
-)/2
-
--
-
-r.top;
-
-pin={
-
-d:d,
-
-s:S.view.scale,
-
-wx:
-(cx-S.view.x)/
-S.view.scale,
-
-wy:
-(cy-S.view.y)/
-S.view.scale
-
-};
-
-}
-
-}
+S.tables.find(
+x=>x.id===tableId
 );
 
 
-canvas.addEventListener(
-'pointermove',
-e=>{
-
-if(
-!P.has(
-e.pointerId
-)
-)
-return;
-
-P.set(
-e.pointerId,
-{
-x:e.clientX,
-y:e.clientY
-}
-);
-
-if(
-P.size===2 &&
-pin
-){
-
-let p=
-[...P.values()];
-
-let d=
-Math.hypot(
-
-p[0].x-p[1].x,
-
-p[0].y-p[1].y
-
-);
-
-let r=
-canvas.getBoundingClientRect();
-
-let cx=
-
-(
-p[0].x+
-p[1].x
-)/2
-
--
-
-r.left;
-
-let cy=
-
-(
-p[0].y+
-p[1].y
-)/2
-
--
-
-r.top;
-
-S.view.scale=
-
-Math.max(
-.4,
-Math.min(
-3,
-pin.s*d/pin.d
-)
-);
-
-S.view.x=
-
-cx-
-pin.wx*S.view.scale;
-
-S.view.y=
-
-cy-
-pin.wy*S.view.scale;
-
-applyView();
-
-}
-
-}
-);
+if(!t)return;
 
 
-function pend(e){
+$('guestSheetTitle')
+.textContent=
 
-P.delete(
-e.pointerId
-);
-
-if(
-P.size<2
-){
-
-pin=null;
-
-save();
-
-}
-
-}
-
-canvas.addEventListener(
-'pointerup',
-pend
-);
-
-canvas.addEventListener(
-'pointercancel',
-pend
-);
+'Table '+t.number;
 
 
-/* GUESTS */
+refreshGuestSheet();
 
-function tableOpts(){
 
-return
-
-'<option value="">Unassigned</option>'
-
-+
-
-S.tables
-
-.slice()
-
-.sort(
-(a,b)=>
-a.number-b.number
-)
-
-.map(
-t=>
-`<option value="${t.id}">Table ${t.number}</option>`
-)
-
-.join('');
+$('guestSheet')
+.classList
+.add('open');
 
 }
 
 
-function addGuest(){
+function closeGuestSheet(){
 
-let n=
-$('gName')
+$('guestSheet')
+.classList
+.remove('open');
+
+
+selectedTableForGuests=null;
+
+
+voiceDraft=[];
+
+}
+
+
+/* REFRESH TABLE GUESTS */
+
+function refreshGuestSheet(){
+
+let t=
+
+S.tables.find(
+x=>x.id===selectedTableForGuests
+);
+
+
+if(!t)return;
+
+
+let gs=
+
+S.guests.filter(
+g=>g.tableId===t.id
+);
+
+
+$('guestSheetMeta')
+.textContent=
+
+`${gs.length}/${t.seats} guests`;
+
+
+$('tableGuestList')
+.innerHTML=
+
+gs.length
+
+?
+
+gs.map(g=>`
+
+<div class="guestRow">
+
+<div class="name">
+
+${esc(g.name)}
+
+</div>
+
+
+<div>
+
+<button
+class="sec"
+onclick="renameTableGuest('${g.id}')">
+
+Edit
+
+</button>
+
+
+<button
+class="danger"
+onclick="removeGuestFromTable('${g.id}')">
+
+×
+
+</button>
+
+</div>
+
+</div>
+
+`).join('')
+
+:
+
+'<div class="hint">No guests yet.</div>';
+
+}
+
+
+/* ADD GUEST DIRECTLY TO TABLE */
+
+function addGuestToSelectedTable(){
+
+let t=
+
+S.tables.find(
+x=>x.id===selectedTableForGuests
+);
+
+
+let name=
+
+$('tableGuestName')
 .value
 .trim();
 
-let id=
-$('gTable').value||
-null;
 
-if(!n)return;
+if(
+!t ||
+!name
+){
+
+return;
+
+}
+
+
+let count=
+
+S.guests.filter(
+g=>g.tableId===t.id
+).length;
+
+
+if(
+count>=t.seats
+){
+
+return toast(
+'Table is full'
+);
+
+}
+
 
 S.guests.push({
 
 id:uid(),
 
-name:n,
+name:name,
 
-tableId:id
+tableId:t.id
 
 });
+
+
+$('tableGuestName').value='';
+
+
+refreshGuestSheet();
 
 render();
 
 save();
 
-afterAction();
+}
+
+
+/* EDIT GUEST */
+
+function renameTableGuest(id){
+
+let g=
+
+S.guests.find(
+x=>x.id===id
+);
+
+
+let n=
+
+prompt(
+'Guest name',
+g.name
+);
+
+
+if(
+n===null ||
+!n.trim()
+){
+
+return;
 
 }
 
+
+g.name=
+n.trim();
+
+
+refreshGuestSheet();
+
+render();
+
+save();
+
+}
+
+
+/* REMOVE FROM TABLE */
+
+function removeGuestFromTable(id){
+
+let g=
+
+S.guests.find(
+x=>x.id===id
+);
+
+
+if(!g)return;
+
+
+g.tableId=null;
+
+
+refreshGuestSheet();
+
+render();
+
+save();
+
+}
+
+
+/* EDIT FROM ALL GUESTS */
 
 function editGuest(id){
 
@@ -2157,6 +2679,7 @@ S.guests.find(
 x=>x.id===id
 );
 
+
 let n=
 
 prompt(
@@ -2164,103 +2687,269 @@ prompt(
 g.name
 );
 
+
 if(
 n===null ||
 !n.trim()
-)
+){
+
 return;
 
-let cur=
-
-g.tableId
-
-?(
-S.tables.find(
-t=>t.id===g.tableId
-)?.number||
-''
-)
-
-:'';
-
-let ans=
-
-prompt(
-
-'Table number (empty = unassigned)',
-
-cur
-
-);
-
-if(ans===null)return;
-
-let tid=null;
-
-if(ans.trim()){
-
-let t=
-
-S.tables.find(
-x=>
-String(x.number)
-===ans.trim()
-);
-
-if(!t){
-
-return toast(
-'Table not found'
-);
-
 }
 
-tid=
-t.id;
-
-}
 
 g.name=
 n.trim();
 
-g.tableId=
-tid;
 
 render();
 
 save();
 
-guestsPanel();
+renderAllGuestsPanel();
 
 }
 
 
-function delGuest(id){
+/* ==================================================
+   VOICE INPUT
+   ================================================== */
 
-S.guests=
+function toggleMic(){
+
+if(recognition){
+
+recognition.stop();
+
+return;
+
+}
+
+
+let SR=
+
+window.SpeechRecognition
+
+||
+
+window.webkitSpeechRecognition;
+
+
+if(!SR){
+
+return toast(
+'Voice recognition is not supported here.'
+);
+
+}
+
+
+recognition=
+new SR();
+
+
+recognition.lang=
+'el-GR';
+
+
+recognition.continuous=
+true;
+
+
+recognition.interimResults=
+false;
+
+
+$('micBtn')
+.textContent=
+
+'■ Stop listening';
+
+
+recognition.onresult=e=>{
+
+for(
+
+let i=e.resultIndex;
+
+i<e.results.length;
+
+i++
+
+){
+
+let words=
+
+e.results[i][0]
+.transcript
+
+.split(/[,.]+/)
+
+.map(
+x=>x.trim()
+)
+
+.filter(Boolean);
+
+
+voiceDraft.push(
+...words
+);
+
+}
+
+
+renderVoicePreview();
+
+};
+
+
+recognition.onend=()=>{
+
+recognition=null;
+
+
+if($('micBtn')){
+
+$('micBtn')
+.textContent=
+
+'🎙 Speak names';
+
+}
+
+};
+
+
+recognition.start();
+
+}
+
+
+/* VOICE PREVIEW */
+
+function renderVoicePreview(){
+
+$('voicePreview')
+.style.display=
+
+'block';
+
+
+$('voicePreview')
+.innerHTML=
+
+voiceDraft
+
+.map(
+
+x=>
+
+`<div class="voiceItem">${esc(x)}</div>`
+
+)
+
+.join('')
+
++
+
+`
+
+<button
+style="width:100%;margin-top:7px"
+onclick="confirmVoiceNames()">
+
+Add ${voiceDraft.length} guests
+
+</button>
+
+`;
+
+}
+
+
+/* ADD VOICE NAMES */
+
+function confirmVoiceNames(){
+
+let t=
+
+S.tables.find(
+x=>x.id===selectedTableForGuests
+);
+
+
+if(
+!t ||
+!voiceDraft.length
+){
+
+return;
+
+}
+
+
+let free=
+
+t.seats
+
+-
 
 S.guests.filter(
-x=>x.id!==id
-);
+g=>g.tableId===t.id
+).length;
+
+
+voiceDraft
+
+.slice(
+0,
+free
+)
+
+.forEach(name=>{
+
+S.guests.push({
+
+id:uid(),
+
+name:name,
+
+tableId:t.id
+
+});
+
+});
+
+
+voiceDraft=[];
+
+
+$('voicePreview')
+.style.display=
+
+'none';
+
+
+refreshGuestSheet();
 
 render();
 
 save();
-
-guestsPanel();
 
 }
 
 
 /* STATUS */
 
-function status(){
+function updateStatus(){
 
 let seated=
 
 S.guests.filter(
 g=>g.tableId
 ).length;
+
 
 let full=
 
@@ -2272,11 +2961,15 @@ S.guests.filter(
 g=>g.tableId===t.id
 ).length
 
-===t.seats
+===
+
+t.seats
 
 ).length;
 
-$('status').textContent=
+
+$('status')
+.textContent=
 
 `${S.tables.length} tables · ${seated}/${S.guests.length} seated · ${full} complete`;
 
@@ -2290,17 +2983,22 @@ function toast(m){
 let t=
 $('toast');
 
+
 t.textContent=
 m;
 
+
 t.style.display=
 'block';
+
 
 clearTimeout(
 window.tt
 );
 
+
 window.tt=
+
 setTimeout(
 
 ()=>t.style.display='none',
@@ -2317,12 +3015,15 @@ setTimeout(
 function esc(s){
 
 let d=
+
 document.createElement(
 'div'
 );
 
+
 d.textContent=
 s||'';
+
 
 return d.innerHTML;
 
