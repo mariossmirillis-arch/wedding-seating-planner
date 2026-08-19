@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="el">
-
 <head>
 <meta charset="utf-8">
 
@@ -8,48 +7,35 @@
 name="viewport"
 content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
-<title>Seatly 4.0</title>
+<title>Seatly 4.2</title>
 
 <style>
-
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 :root{
-  --bg:#f5f3ef;
-  --paper:#ffffff;
+  --bg:#f3f1ed;
+  --paper:#fff;
   --ink:#202020;
   --muted:#777;
   --line:#e5dfd7;
   --soft:#f1ede8;
   --green:#dff3e4;
-  --greenBorder:#34784a;
+  --greenB:#34784a;
   --danger:#a43a32;
 }
 
-html,
-body{
+html,body{
   margin:0;
   height:100%;
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:var(--bg);
   color:var(--ink);
 }
 
-body{
-  overflow:hidden;
-}
+body{overflow:hidden}
 
-button,
-input,
-select{
-  font:inherit;
+button,input,select{
+  font:inherit
 }
 
 button{
@@ -57,57 +43,61 @@ button{
   border-radius:10px;
   padding:9px 11px;
   background:var(--ink);
-  color:white;
+  color:#fff;
   font-weight:700;
-  cursor:pointer;
+  cursor:pointer
 }
 
 button.secondary{
-  background:white;
+  background:#fff;
   color:var(--ink);
-  border:1px solid var(--line);
+  border:1px solid var(--line)
 }
 
 button.soft{
   background:var(--soft);
-  color:var(--ink);
+  color:var(--ink)
 }
 
 button.danger{
-  background:var(--danger);
+  background:var(--danger)
 }
 
 button:disabled{
-  opacity:.4;
+  opacity:.4
 }
 
-/* TOP BAR */
+/* TOP */
 
 .topbar{
   height:58px;
-  background:white;
+  background:#fff;
   border-bottom:1px solid var(--line);
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 14px;
+  padding:0 12px;
   position:relative;
-  z-index:100;
+  z-index:120
 }
 
 .logo{
   font-size:25px;
   font-weight:900;
-  letter-spacing:-1px;
+  letter-spacing:-1px
 }
 
-.logo span{
-  font-weight:400;
-}
+.logo span{font-weight:400}
 
 .topActions{
   display:flex;
-  gap:6px;
+  gap:5px;
+  align-items:center
+}
+
+.saved{
+  font-size:11px;
+  color:#777
 }
 
 /* APP */
@@ -115,25 +105,22 @@ button:disabled{
 .app{
   height:calc(100vh - 58px);
   display:grid;
-  grid-template-columns:
-    66px
-    265px
-    1fr;
+  grid-template-columns:64px 280px 1fr
 }
 
 /* LEFT TOOLBAR */
 
 .rail{
   background:#202020;
-  padding:7px 4px;
+  padding:6px 4px;
   display:flex;
   flex-direction:column;
   gap:5px;
-  z-index:80;
+  z-index:90
 }
 
 .rail button{
-  height:56px;
+  height:54px;
   background:transparent;
   padding:4px;
   font-size:9px;
@@ -141,82 +128,112 @@ button:disabled{
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:3px;
+  gap:3px
 }
 
 .rail button b{
-  font-size:17px;
+  font-size:17px
 }
 
 .rail button.active{
-  background:white;
-  color:#202020;
+  background:#fff;
+  color:#202020
 }
 
-/* SIDE PANEL */
+/* PANEL */
 
 .panel{
-  background:white;
+  background:#fff;
   border-right:1px solid var(--line);
   padding:14px;
   overflow:auto;
   position:relative;
-  z-index:70;
+  z-index:80
 }
 
 .panel h2{
-  font-size:18px;
-  margin:0 0 4px;
+  margin:0 0 5px;
+  font-size:18px
 }
 
 .panel h3{
-  font-size:14px;
   margin:0 0 8px;
+  font-size:14px
 }
 
 .hint{
   font-size:12px;
   color:var(--muted);
   line-height:1.45;
-  margin-bottom:12px;
+  margin-bottom:12px
 }
 
 .section{
   border-top:1px solid #eee8e1;
   padding-top:11px;
-  margin-top:11px;
+  margin-top:11px
 }
 
 .grid2{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:7px;
+  gap:7px
+}
+
+.grid4{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:6px
 }
 
 .field{
   width:100%;
-  padding:10px;
+  padding:9px;
   border:1px solid #d8d1c9;
-  border-radius:10px;
-  background:white;
+  border-radius:9px;
+  background:#fff
 }
 
 .upload{
   display:block;
   text-align:center;
-  padding:18px 10px;
+  padding:18px;
   border:1.5px dashed #bbb;
   border-radius:13px;
-  background:#faf9f7;
-  cursor:pointer;
+  background:#faf9f7
 }
 
-.upload input{
-  display:none;
+.upload input{display:none}
+
+.panelClose{display:none}
+
+/* QUICK SETUP */
+
+.presetBtn{
+  background:#f4f1ec;
+  color:#222;
+  border:1px solid #e1dbd3
 }
 
-.panelClose{
-  display:none;
+.setupCard{
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:10px;
+  margin-top:8px;
+  background:#faf9f7
+}
+
+.setupOption{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  padding:8px 0;
+  border-top:1px solid #eee
+}
+
+.setupOption:first-child{
+  border-top:0
 }
 
 /* WORKSPACE */
@@ -225,35 +242,34 @@ button:disabled{
   padding:8px;
   background:#ebe8e3;
   min-width:0;
+  display:flex;
+  align-items:center;
+  justify-content:center
 }
 
-/*
-  FIXED CANVAS
-  No zoom.
-  No pan.
-*/
 .canvas{
-  width:100%;
-  height:100%;
-  background:white;
+  width:min(100%,1200px);
+  aspect-ratio:16/10;
+  max-height:100%;
+  background:#fff;
   border:1px solid var(--line);
   border-radius:16px;
   position:relative;
   overflow:hidden;
   touch-action:none;
-  box-shadow:0 10px 28px rgba(0,0,0,.05);
+  box-shadow:0 12px 30px rgba(0,0,0,.08)
 }
 
-.venueBackground{
+.venueBg{
   position:absolute;
   inset:0;
-  background:white center/contain no-repeat;
-  pointer-events:none;
+  background:#fff center/contain no-repeat;
+  pointer-events:none
 }
 
-.objectLayer{
+.layer{
   position:absolute;
-  inset:0;
+  inset:0
 }
 
 .empty{
@@ -263,60 +279,54 @@ button:disabled{
   place-items:center;
   text-align:center;
   color:#999;
-  pointer-events:none;
+  pointer-events:none
 }
 
-/* OBJECTS */
+/* TABLES */
 
 .obj{
   position:absolute;
   touch-action:none;
-  user-select:none;
+  user-select:none
 }
-
-/* TABLE */
 
 .table{
   width:102px;
   height:102px;
   display:flex;
   align-items:center;
-  justify-content:center;
-  cursor:grab;
+  justify-content:center
 }
 
 .table.selected{
   outline:3px solid rgba(32,32,32,.18);
-  outline-offset:4px;
+  outline-offset:4px
 }
 
-.tableCore{
+.core{
   width:62px;
   height:62px;
   border:2px solid #222;
   border-radius:50%;
-  background:white;
+  background:#fff;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
   box-shadow:0 4px 12px rgba(0,0,0,.14);
-  z-index:2;
+  z-index:2
 }
 
-.tableCore b{
-  font-size:10px;
-}
+.core b{font-size:10px}
 
-.tableCore span{
+.core span{
   font-size:9px;
-  color:#666;
-  margin-top:2px;
+  color:#666
 }
 
-.table.complete .tableCore{
+.complete .core{
   background:var(--green);
-  border-color:var(--greenBorder);
+  border-color:var(--greenB)
 }
 
 .chair{
@@ -324,11 +334,9 @@ button:disabled{
   width:12px;
   height:12px;
   border:1.3px solid #555;
-  background:white;
-  border-radius:3px;
+  background:#fff;
+  border-radius:3px
 }
-
-/* VENUE OBJECT */
 
 .venueObj{
   border:2px dashed #666;
@@ -338,16 +346,15 @@ button:disabled{
   align-items:center;
   justify-content:center;
   font-size:11px;
-  font-weight:800;
-  cursor:grab;
+  font-weight:800
 }
 
 .venueObj.selected{
   outline:3px solid rgba(32,32,32,.18);
-  outline-offset:4px;
+  outline-offset:4px
 }
 
-/* CONTEXT TOOLBAR */
+/* CONTEXT */
 
 .context{
   position:absolute;
@@ -357,24 +364,24 @@ button:disabled{
   display:none;
   align-items:center;
   gap:5px;
-  background:white;
+  background:#fff;
   border:1px solid var(--line);
   border-radius:12px;
   padding:6px;
   z-index:35;
-  box-shadow:0 8px 24px rgba(0,0,0,.14);
+  box-shadow:0 8px 24px rgba(0,0,0,.14)
 }
 
 .context input,
 .context select{
-  width:67px;
+  width:66px;
   padding:6px;
   border:1px solid var(--line);
-  border-radius:8px;
+  border-radius:8px
 }
 
 .context button{
-  padding:6px 8px;
+  padding:6px 8px
 }
 
 /* TRASH */
@@ -382,21 +389,21 @@ button:disabled{
 .trash{
   position:absolute;
   left:50%;
-  bottom:18px;
+  bottom:14px;
   transform:translateX(-50%);
   display:none;
-  background:white;
+  background:#fff;
   border:2px solid var(--line);
   border-radius:999px;
   padding:9px 15px;
   z-index:40;
   font-size:12px;
-  font-weight:800;
+  font-weight:800
 }
 
 .trash.hot{
   background:#ffe7e3;
-  border-color:#b23b30;
+  border-color:#b23b30
 }
 
 /* STATUS */
@@ -405,90 +412,66 @@ button:disabled{
   position:absolute;
   left:10px;
   bottom:10px;
-  background:white;
+  background:#fff;
   border:1px solid var(--line);
   border-radius:999px;
   padding:6px 9px;
   font-size:10px;
   color:#666;
-  z-index:25;
+  z-index:25
 }
 
-/* TABLE GUEST PANEL */
+/* GUEST PANEL */
 
 .guestPanel{
   position:fixed;
   top:58px;
   right:0;
   bottom:0;
-  width:350px;
-  background:white;
+  width:370px;
+  background:#fff;
   border-left:1px solid var(--line);
   box-shadow:-10px 0 30px rgba(0,0,0,.12);
-  z-index:95;
+  z-index:110;
   display:none;
-  padding:16px;
-  overflow:auto;
+  padding:15px;
+  overflow:auto
 }
 
 .guestPanel.open{
-  display:block;
+  display:block
 }
 
 .guestHeader{
   display:flex;
-  align-items:flex-start;
   justify-content:space-between;
-  gap:10px;
-  margin-bottom:14px;
+  align-items:flex-start;
+  gap:8px;
+  margin-bottom:12px
 }
 
 .guestTitle{
   font-size:21px;
-  font-weight:850;
+  font-weight:850
 }
 
 .guestCount{
   font-size:12px;
-  color:#777;
-  margin-top:3px;
+  color:#777
 }
 
-.guestForm{
+.guestBox{
   background:#faf9f7;
   border:1px solid var(--line);
-  border-radius:14px;
-  padding:12px;
+  border-radius:13px;
+  padding:11px
 }
 
 .formLabel{
   font-size:11px;
   font-weight:750;
   color:#666;
-  margin-bottom:5px;
-}
-
-.formRow{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:6px;
-}
-
-.partyRow{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:6px;
-  margin-top:6px;
-}
-
-.partyRow input{
-  min-width:0;
-}
-
-.guestListTitle{
-  font-size:13px;
-  font-weight:800;
-  margin:15px 0 5px;
+  margin:8px 0 4px
 }
 
 .guestRow{
@@ -496,154 +479,105 @@ button:disabled{
   grid-template-columns:1fr auto;
   gap:7px;
   align-items:center;
-  padding:9px 0;
-  border-bottom:1px solid #eee;
+  padding:8px 0;
+  border-bottom:1px solid #eee
 }
 
 .guestName{
   font-size:13px;
-  font-weight:700;
+  font-weight:700
 }
 
 .guestMeta{
   font-size:11px;
-  color:#777;
-  margin-top:2px;
+  color:#777
 }
 
-.guestActions{
+.actions{
   display:flex;
-  gap:4px;
+  gap:4px
 }
 
-.guestActions button{
-  padding:5px 7px;
-  font-size:10px;
+.actions button{
+  padding:5px 6px;
+  font-size:10px
 }
 
-/* TABLE LISTS */
+/* VOICE IMPORT */
 
-.tableCard{
+.voiceBox{
   border:1px solid var(--line);
   border-radius:13px;
-  padding:10px;
-  margin-bottom:9px;
   background:#faf9f7;
+  padding:10px;
+  margin-top:9px
 }
 
-.tableCardHeader{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:8px;
-}
-
-.tableCardHeader strong{
-  font-size:14px;
-}
-
-.tableCardMeta{
-  font-size:11px;
-  color:#777;
-  margin-top:2px;
-}
-
-.listGuest{
+.voicePreviewRow{
   display:grid;
-  grid-template-columns:1fr auto;
-  gap:7px;
+  grid-template-columns:1fr 1fr 60px 70px auto;
+  gap:5px;
   align-items:center;
+  padding:6px 0;
+  border-bottom:1px solid #eee
+}
+
+.voicePreviewRow input{
+  width:100%;
+  padding:6px;
+  border:1px solid #ddd;
+  border-radius:7px
+}
+
+/* DIRECTORY */
+
+.directoryRow{
+  display:grid;
+  grid-template-columns:1fr auto auto;
+  gap:8px;
   padding:7px 0;
-  border-top:1px solid #eee;
+  border-bottom:1px solid #eee;
+  align-items:center
 }
 
-.listGuestName{
-  font-size:12px;
-  font-weight:650;
-}
-
-.listGuestMeta{
-  font-size:10px;
-  color:#777;
-}
-
-.listActions{
-  display:flex;
-  gap:4px;
-}
-
-.listActions button{
-  padding:5px 6px;
-  font-size:10px;
+.letter{
+  font-size:20px;
+  font-weight:900;
+  margin:14px 0 4px;
+  border-bottom:2px solid #222
 }
 
 /* PREVIEW */
 
-.previewOverlay{
+.overlay{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.45);
+  z-index:220;
   display:none;
   align-items:center;
   justify-content:center;
-  padding:20px;
-  z-index:200;
+  padding:18px
 }
 
-.previewOverlay.open{
-  display:flex;
+.overlay.open{
+  display:flex
 }
 
-.previewCard{
-  width:min(760px,100%);
+.modal{
+  width:min(850px,100%);
   max-height:90vh;
   overflow:auto;
-  background:white;
+  background:#fff;
   border-radius:18px;
-  padding:22px;
-  box-shadow:0 30px 80px rgba(0,0,0,.3);
+  padding:20px
 }
 
-.previewTop{
+.modalTop{
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-bottom:18px;
-}
-
-.previewTitle{
-  font-size:24px;
-  font-weight:900;
-}
-
-.letterBlock{
-  margin-bottom:18px;
-}
-
-.letterTitle{
-  font-size:22px;
-  font-weight:900;
-  border-bottom:2px solid #222;
-  padding-bottom:5px;
-  margin-bottom:5px;
-}
-
-.previewGuest{
-  display:grid;
-  grid-template-columns:1fr auto auto;
-  gap:12px;
-  padding:7px 0;
-  border-bottom:1px solid #eee;
-  font-size:13px;
-}
-
-.previewGuest strong{
-  font-weight:700;
-}
-
-.previewGuest span{
-  color:#555;
+  gap:8px;
+  align-items:center
 }
 
 /* MOBILE */
@@ -651,59 +585,79 @@ button:disabled{
 @media(max-width:800px){
 
   .topbar{
-    height:54px;
+    height:56px;
+    padding:0 7px
   }
 
-  .topActions .desktopOnly{
-    display:none;
+  .logo{
+    font-size:21px
+  }
+
+  .saved{
+    display:none
+  }
+
+  .topActions{
+    gap:3px
+  }
+
+  .topActions button{
+    padding:7px 8px;
+    font-size:11px
   }
 
   .app{
-    height:calc(100vh - 54px);
-    grid-template-columns:
-      56px
-      1fr;
+    height:calc(100vh - 56px);
+    grid-template-columns:54px 1fr
   }
 
   .rail{
-    padding:5px 3px;
+    padding:4px 2px
   }
 
   .rail button{
-    height:50px;
+    height:48px;
+    font-size:8px
   }
 
   .work{
     grid-column:2;
-    padding:4px;
+    padding:5px
+  }
+
+  .canvas{
+    width:100%;
+    aspect-ratio:16/10;
+    max-height:100%;
+    border-radius:12px
   }
 
   .panel{
     position:fixed;
-    left:56px;
+    left:54px;
     right:0;
     bottom:0;
     top:auto;
     width:auto;
-    max-height:48vh;
+    max-height:52vh;
     display:none;
     border-right:0;
     border-top:1px solid var(--line);
     border-radius:18px 18px 0 0;
-    padding:48px 13px 13px;
+    padding:46px 12px 12px;
     box-shadow:0 -10px 30px rgba(0,0,0,.18);
-    z-index:90;
+    z-index:100
   }
 
   .panel.open{
-    display:block;
+    display:block
   }
 
   .panelClose{
     display:block;
     position:absolute;
-    right:10px;
-    top:8px;
+    right:9px;
+    top:7px;
     width:34px;
     height:34px;
     padding:0;
@@ -711,37 +665,38 @@ button:disabled{
     background:var(--soft);
     color:#222;
     border:1px solid var(--line);
-    font-size:20px;
+    font-size:20px
   }
 
   .context{
     max-width:94%;
     overflow:auto;
-    white-space:nowrap;
+    white-space:nowrap
   }
 
   .guestPanel{
-    top:54px;
-    left:56px;
+    top:56px;
+    left:54px;
     right:0;
     bottom:0;
     width:auto;
     border-left:0;
-    box-shadow:none;
-    padding:14px;
+    box-shadow:none
   }
 
-  .previewCard{
-    padding:15px;
+  .voicePreviewRow{
+    grid-template-columns:1fr 1fr;
+    background:#fff;
+    padding:8px;
+    margin-bottom:6px;
+    border:1px solid #eee;
+    border-radius:9px
   }
 
-  .previewGuest{
-    grid-template-columns:1fr;
-    gap:2px;
+  .grid4{
+    grid-template-columns:repeat(2,1fr)
   }
-
 }
-
 </style>
 </head>
 
@@ -755,21 +710,27 @@ button:disabled{
 
   <div class="topActions">
 
+    <span
+    class="saved"
+    id="savedIndicator">
+      Saved ✓
+    </span>
+
     <button
-    class="secondary desktopOnly"
-    id="undoButton"
+    class="secondary"
+    id="undoBtn"
     onclick="undo()">
-      ↶ Undo
+      ↶
     </button>
 
     <button
-    class="secondary desktopOnly"
-    id="redoButton"
+    class="secondary"
+    id="redoBtn"
     onclick="redo()">
-      ↷ Redo
+      ↷
     </button>
 
-    <button onclick="toast('Finish / Export θα προστεθεί μετά')">
+    <button onclick="toast('Export will be added next')">
       Finish
     </button>
 
@@ -783,10 +744,10 @@ button:disabled{
 <nav class="rail">
 
   <button
-  id="navVenue"
-  onclick="togglePanel('venue')">
-    <b>▧</b>
-    Venue
+  id="navSetup"
+  onclick="togglePanel('setup')">
+    <b>⚡</b>
+    Setup
   </button>
 
   <button
@@ -797,10 +758,10 @@ button:disabled{
   </button>
 
   <button
-  id="navObjects"
-  onclick="togglePanel('objects')">
-    <b>◇</b>
-    Objects
+  id="navGuests"
+  onclick="togglePanel('guests')">
+    <b>♙</b>
+    Guests
   </button>
 
   <button
@@ -808,6 +769,13 @@ button:disabled{
   onclick="togglePanel('lists')">
     <b>☷</b>
     Lists
+  </button>
+
+  <button
+  id="navVenue"
+  onclick="togglePanel('venue')">
+    <b>▧</b>
+    Venue
   </button>
 
   <button
@@ -842,8 +810,8 @@ class="canvas"
 id="canvas">
 
   <div
-  class="venueBackground"
-  id="venueBackground">
+  class="venueBg"
+  id="venueBg">
   </div>
 
   <div
@@ -860,9 +828,8 @@ id="canvas">
         Your wedding plan
       </b>
 
-      <div
-      style="font-size:12px;margin-top:5px">
-        Upload a venue or add your first table.
+      <div style="font-size:12px;margin-top:5px">
+        Start with Quick Setup
       </div>
 
     </div>
@@ -870,8 +837,8 @@ id="canvas">
   </div>
 
   <div
-  class="objectLayer"
-  id="objectLayer">
+  class="layer"
+  id="layer">
   </div>
 
   <div
@@ -897,7 +864,7 @@ id="canvas">
 </div>
 
 
-<!-- TABLE GUEST PANEL -->
+<!-- TABLE GUESTS -->
 
 <aside
 class="guestPanel"
@@ -909,13 +876,13 @@ id="guestPanel">
 
     <div
     class="guestTitle"
-    id="guestPanelTitle">
+    id="guestTitle">
       Table
     </div>
 
     <div
     class="guestCount"
-    id="guestPanelCount">
+    id="guestCount">
     </div>
 
   </div>
@@ -929,61 +896,61 @@ id="guestPanel">
 </div>
 
 
-<div class="guestForm">
+<div class="guestBox">
 
   <div class="formLabel">
     Επώνυμο / Surname
   </div>
 
   <input
-  id="guestSurname"
+  id="gSurname"
   class="field"
-  placeholder="π.χ. Γεωργίου">
+  placeholder="Γεωργίου">
 
 
-  <div
-  class="formLabel"
-  style="margin-top:8px">
+  <div class="formLabel">
     Όνομα / First name
   </div>
 
   <input
-  id="guestFirstName"
+  id="gFirst"
   class="field"
-  placeholder="π.χ. Γιώργος">
+  placeholder="Γιώργος">
 
 
-  <div
-  class="formLabel"
-  style="margin-top:8px">
-    Αριθμός ατόμων / Party size
+  <div class="formLabel">
+    Αριθμός ατόμων
   </div>
 
-  <div class="partyRow">
+  <input
+  id="gParty"
+  class="field"
+  type="number"
+  min="1"
+  max="20"
+  value="1">
 
-    <input
-    id="guestPartySize"
-    class="field"
-    type="number"
-    min="1"
-    max="20"
-    value="1">
 
-    <button
-    onclick="addGuestToCurrentTable()">
-      + Add
-    </button>
+  <button
+  style="width:100%;margin-top:7px"
+  onclick="addGuestToTable()">
 
-  </div>
+    + Add guest
+
+  </button>
 
 </div>
 
 
-<div class="guestListTitle">
-  Guests at this table
+<div
+style="font-size:13px;font-weight:800;margin-top:14px">
+
+Guests at this table
+
 </div>
 
-<div id="tableGuestsList"></div>
+
+<div id="tableGuestList"></div>
 
 </aside>
 
@@ -991,36 +958,36 @@ id="guestPanel">
 <!-- ALPHABETICAL PREVIEW -->
 
 <div
-class="previewOverlay"
-id="previewOverlay">
+class="overlay"
+id="directoryOverlay">
 
-  <div class="previewCard">
+<div class="modal">
 
-    <div class="previewTop">
+  <div class="modalTop">
 
-      <div>
+    <div>
 
-        <div class="previewTitle">
-          Guest Directory
-        </div>
+      <h2 style="margin:0">
+        Alphabetical Guest Directory
+      </h2>
 
-        <div class="hint" style="margin:2px 0 0">
-          Alphabetical by surname
-        </div>
-
+      <div class="hint" style="margin:3px 0 0">
+        Surname · Name · People · Table
       </div>
-
-      <button
-      class="secondary"
-      onclick="closePreview()">
-        ×
-      </button>
 
     </div>
 
-    <div id="previewContent"></div>
+    <button
+    class="secondary"
+    onclick="closeDirectory()">
+      ×
+    </button>
 
   </div>
+
+  <div id="directoryContent"></div>
+
+</div>
 
 </div>
 
@@ -1033,18 +1000,18 @@ left:50%;
 bottom:18px;
 transform:translateX(-50%);
 background:#222;
-color:white;
+color:#fff;
 padding:9px 13px;
 border-radius:10px;
 display:none;
-z-index:250">
+z-index:300">
 </div>
 
 
 <script>
 
 /* ==================================================
-   DATA
+DATA
 ================================================== */
 
 let S={
@@ -1067,14 +1034,15 @@ let activePanel=null;
 let activeGuestTable=null;
 
 
-/* UNDO / REDO */
-
 let undoStack=[];
 
 let redoStack=[];
 
 
-/* DOM */
+let recognition=null;
+
+let voiceDraft=[];
+
 
 const $=
 id=>document.getElementById(id);
@@ -1084,12 +1052,12 @@ const canvas=
 $('canvas');
 
 
-const venueBackground=
-$('venueBackground');
+const layer=
+$('layer');
 
 
-const objectLayer=
-$('objectLayer');
+const venueBg=
+$('venueBg');
 
 
 const context=
@@ -1103,8 +1071,6 @@ $('trash');
 const mobile=
 ()=>window.innerWidth<=800;
 
-
-/* UNIQUE ID */
 
 const uid=()=>{
 
@@ -1125,10 +1091,10 @@ const uid=()=>{
 
 
 /* ==================================================
-   STATE / HISTORY
+SAVE / LOAD
 ================================================== */
 
-function cloneState(){
+function state(){
 
   return JSON.stringify(S);
 
@@ -1138,12 +1104,12 @@ function cloneState(){
 function pushHistory(){
 
   undoStack.push(
-    cloneState()
+    state()
   );
 
 
   if(
-    undoStack.length>50
+    undoStack.length>60
   ){
 
     undoStack.shift();
@@ -1154,7 +1120,7 @@ function pushHistory(){
   redoStack=[];
 
 
-  updateUndoButtons();
+  updateHistory();
 
 }
 
@@ -1163,15 +1129,11 @@ function undo(){
 
   if(
     !undoStack.length
-  ){
-
-    return;
-
-  }
+  )return;
 
 
   redoStack.push(
-    cloneState()
+    state()
   );
 
 
@@ -1193,8 +1155,7 @@ function undo(){
 
   saveOnly();
 
-
-  updateUndoButtons();
+  updateHistory();
 
 }
 
@@ -1203,15 +1164,11 @@ function redo(){
 
   if(
     !redoStack.length
-  ){
-
-    return;
-
-  }
+  )return;
 
 
   undoStack.push(
-    cloneState()
+    state()
   );
 
 
@@ -1233,44 +1190,29 @@ function redo(){
 
   saveOnly();
 
-
-  updateUndoButtons();
-
-}
-
-
-function updateUndoButtons(){
-
-  if(
-    $('undoButton')
-  ){
-
-    $('undoButton').disabled=
-    !undoStack.length;
-
-  }
-
-
-  if(
-    $('redoButton')
-  ){
-
-    $('redoButton').disabled=
-    !redoStack.length;
-
-  }
+  updateHistory();
 
 }
 
 
-/* SAVE */
+function updateHistory(){
+
+  $('undoBtn').disabled=
+  !undoStack.length;
+
+
+  $('redoBtn').disabled=
+  !redoStack.length;
+
+}
+
 
 function saveOnly(){
 
   try{
 
     localStorage.setItem(
-      'seatly40',
+      'seatly42',
       JSON.stringify(S)
     );
 
@@ -1279,12 +1221,10 @@ function saveOnly(){
 
   updateStatus();
 
-}
 
-
-function commitChange(){
-
-  saveOnly();
+  $('savedIndicator')
+  .textContent=
+  'Saved ✓';
 
 }
 
@@ -1295,19 +1235,15 @@ function load(){
 
     const old=
 
-    localStorage.getItem('seatly40')
+    localStorage.getItem('seatly42')
 
     ||
 
-    localStorage.getItem('seatly32')
+    localStorage.getItem('seatly41')
 
     ||
 
-    localStorage.getItem('seatly31')
-
-    ||
-
-    localStorage.getItem('seatly30');
+    localStorage.getItem('seatly40');
 
 
     if(old){
@@ -1331,12 +1267,8 @@ function load(){
       [];
 
 
-      /*
-      Convert older guest format
-      if needed.
-      */
-
       S.guests=
+
       (data.guests||[])
       .map(guest=>{
 
@@ -1359,11 +1291,10 @@ function load(){
         .split(/\s+/);
 
 
-        return {
+        return{
 
           id:
-          guest.id||
-          uid(),
+          guest.id||uid(),
 
           surname:
           parts.length>1
@@ -1376,7 +1307,9 @@ function load(){
           :'',
 
           partySize:
-          1,
+          Number(
+            guest.partySize||1
+          ),
 
           tableId:
           guest.tableId||null
@@ -1394,13 +1327,13 @@ function load(){
 
   render();
 
-  updateUndoButtons();
+  updateHistory();
 
 }
 
 
 /* ==================================================
-   SMART TABLE NUMBERING
+TABLE HELPERS
 ================================================== */
 
 function nextTableNumber(){
@@ -1410,40 +1343,73 @@ function nextTableNumber(){
   S.tables
   .map(
     table=>Number(table.number)
-  )
-  .filter(
-    number=>number>0
   );
 
 
-  let number=1;
+  let n=1;
 
 
   while(
-    used.includes(number)
+    used.includes(n)
   ){
 
-    number++;
+    n++;
 
   }
 
 
-  return number;
+  return n;
+
+}
+
+
+function tableUsedSeats(
+tableId,
+exclude=null
+){
+
+  return S.guests
+
+  .filter(
+    guest=>
+
+    guest.tableId===tableId
+
+    &&
+
+    guest.id!==exclude
+  )
+
+  .reduce(
+    (
+      total,
+      guest
+    )=>
+
+    total+
+
+    Number(
+      guest.partySize||1
+    ),
+
+    0
+  );
 
 }
 
 
 /* ==================================================
-   PANEL
+NAV
 ================================================== */
 
 function setActive(type){
 
   [
-    'Venue',
+    'Setup',
     'Tables',
-    'Objects',
+    'Guests',
     'Lists',
+    'Venue',
     'More'
   ]
 
@@ -1452,8 +1418,11 @@ function setActive(type){
     $('nav'+name)
     .classList
     .toggle(
+
       'active',
+
       name.toLowerCase()===type
+
     );
 
   });
@@ -1513,44 +1482,51 @@ function togglePanel(type){
   .add('open');
 
 
-  if(type==='venue'){
+  if(type==='setup'){
 
-    renderVenuePanel();
+    renderSetup();
 
   }
 
 
   if(type==='tables'){
 
-    renderTablesPanel();
+    renderTables();
 
   }
 
 
-  if(type==='objects'){
+  if(type==='guests'){
 
-    renderObjectsPanel();
+    renderGuestsManager();
 
   }
 
 
   if(type==='lists'){
 
-    renderListsPanel();
+    renderLists();
+
+  }
+
+
+  if(type==='venue'){
+
+    renderVenue();
 
   }
 
 
   if(type==='more'){
 
-    renderMorePanel();
+    renderMore();
 
   }
 
 }
 
 
-function afterPanelAction(){
+function afterAction(){
 
   if(
     mobile()
@@ -1564,10 +1540,695 @@ function afterPanelAction(){
 
 
 /* ==================================================
-   VENUE
+QUICK SETUP
 ================================================== */
 
-function renderVenuePanel(){
+function renderSetup(){
+
+  $('panelContent')
+  .innerHTML=`
+
+  <h2>
+    Quick Setup
+  </h2>
+
+  <div class="hint">
+    Start from your guest count instead of manually calculating tables.
+  </div>
+
+
+  <div class="grid4">
+
+    ${[
+      50,
+      100,
+      150,
+      200,
+      250,
+      300,
+      350,
+      400
+    ]
+
+    .map(
+      guests=>
+
+      `
+
+      <button
+      class="presetBtn"
+      onclick="showSetupOptions(${guests})">
+
+        ${guests}
+
+      </button>
+
+      `
+
+    )
+
+    .join('')}
+
+  </div>
+
+
+  <div class="section">
+
+    <h3>
+      Custom guests
+    </h3>
+
+    <input
+    id="customGuestCount"
+    class="field"
+    type="number"
+    min="1"
+    max="1000"
+    placeholder="e.g. 186">
+
+
+    <button
+    style="width:100%;margin-top:7px"
+    onclick="showCustomSetup()">
+
+      Show options
+
+    </button>
+
+  </div>
+
+
+  <div id="setupResults"></div>
+
+  `;
+
+}
+
+
+function showCustomSetup(){
+
+  const n=
+
+  Math.max(
+    1,
+    +$('customGuestCount').value||1
+  );
+
+
+  showSetupOptions(n);
+
+}
+
+
+function showSetupOptions(
+guestCount
+){
+
+  const seatOptions=
+  [
+    8,
+    10,
+    12,
+    16
+  ];
+
+
+  const rows=
+
+  seatOptions
+  .map(seats=>{
+
+    const tables=
+
+    Math.ceil(
+      guestCount/
+      seats
+    );
+
+
+    const capacity=
+
+    tables*
+    seats;
+
+
+    const spare=
+
+    capacity-
+    guestCount;
+
+
+    return{
+
+      seats,
+      tables,
+      capacity,
+      spare
+
+    };
+
+  });
+
+
+  $('setupResults')
+  .innerHTML=`
+
+  <div class="setupCard">
+
+    <strong>
+      ${guestCount} guests
+    </strong>
+
+    <div class="hint"
+    style="margin:3px 0 7px">
+
+      Choose the layout you prefer.
+
+    </div>
+
+
+    ${rows
+
+    .map(option=>`
+
+      <div class="setupOption">
+
+        <div>
+
+          <strong>
+
+            ${option.tables}
+            tables ×
+            ${option.seats}
+
+          </strong>
+
+          <div
+          style="font-size:11px;color:#777">
+
+            ${option.capacity}
+            seats
+
+            ${option.spare
+            ?`· ${option.spare} spare`
+            :'· exact'}
+
+          </div>
+
+        </div>
+
+
+        <button
+        onclick="createQuickLayout(${option.tables},${option.seats})">
+
+          Create
+
+        </button>
+
+      </div>
+
+    `)
+
+    .join('')}
+
+  </div>
+
+  `;
+
+}
+
+
+function createQuickLayout(
+tableCount,
+seats
+){
+
+  const replace=
+
+  S.tables.length
+
+  ?
+
+  confirm(
+    'Replace the current tables with this Quick Setup?'
+  )
+
+  :
+
+  true;
+
+
+  if(
+    !replace
+  )return;
+
+
+  pushHistory();
+
+
+  /*
+  Existing guests become
+  unassigned instead of deleted.
+  */
+
+  S.guests
+  .forEach(
+    guest=>{
+
+      guest.tableId=null;
+
+    }
+  );
+
+
+  S.tables=[];
+
+
+  createTableGrid(
+    tableCount,
+    seats
+  );
+
+
+  render();
+
+  saveOnly();
+
+  afterAction();
+
+}
+
+
+/* ==================================================
+RESPONSIVE GRID
+================================================== */
+
+function createTableGrid(
+qty,
+seats
+){
+
+  const rect=
+  canvas.getBoundingClientRect();
+
+
+  let scale=1;
+
+
+  if(qty>=10){
+
+    scale=.82;
+
+  }
+
+
+  if(qty>=18){
+
+    scale=.68;
+
+  }
+
+
+  if(qty>=28){
+
+    scale=.56;
+
+  }
+
+
+  if(qty>=38){
+
+    scale=.48;
+
+  }
+
+
+  const spacingX=
+  105*
+  scale;
+
+
+  const spacingY=
+  105*
+  scale;
+
+
+  const usableWidth=
+  rect.width-
+  25;
+
+
+  const usableHeight=
+  rect.height-
+  70;
+
+
+  let columns=
+
+  Math.max(
+    1,
+    Math.floor(
+      usableWidth/
+      spacingX
+    )
+  );
+
+
+  columns=
+
+  Math.min(
+    columns,
+    qty
+  );
+
+
+  let rows=
+
+  Math.ceil(
+    qty/
+    columns
+  );
+
+
+  while(
+
+    rows*
+    spacingY
+    >
+    usableHeight
+
+    &&
+
+    columns<qty
+
+  ){
+
+    columns++;
+
+
+    rows=
+
+    Math.ceil(
+      qty/
+      columns
+    );
+
+  }
+
+
+  const gridWidth=
+
+  (
+    columns-1
+  )
+
+  *
+  spacingX;
+
+
+  const gridHeight=
+
+  (
+    rows-1
+  )
+
+  *
+  spacingY;
+
+
+  const startX=
+
+  Math.max(
+
+    5,
+
+    rect.width/2
+    -
+    gridWidth/2
+    -
+    51*
+    scale
+
+  );
+
+
+  const startY=
+
+  Math.max(
+
+    45,
+
+    rect.height/2
+    -
+    gridHeight/2
+    -
+    51*
+    scale
+
+  );
+
+
+  for(
+    let i=0;
+    i<qty;
+    i++
+  ){
+
+    const col=
+    i%
+    columns;
+
+
+    const row=
+    Math.floor(
+      i/
+      columns
+    );
+
+
+    S.tables.push({
+
+      id:uid(),
+
+      number:
+      nextTableNumber(),
+
+      seats:
+      seats,
+
+      x:
+      startX+
+      col*
+      spacingX,
+
+      y:
+      startY+
+      row*
+      spacingY,
+
+      scale:
+      scale
+
+    });
+
+  }
+
+}
+
+
+/* ==================================================
+TABLE PANEL
+================================================== */
+
+function renderTables(){
+
+  $('panelContent')
+  .innerHTML=`
+
+  <h2>
+    Tables
+  </h2>
+
+  <div class="hint">
+    Add individual tables or a custom number.
+  </div>
+
+
+  <div class="grid2">
+
+    <button
+    class="soft"
+    onclick="addSingleTable(8)">
+      8 seats
+    </button>
+
+    <button
+    class="soft"
+    onclick="addSingleTable(10)">
+      10 seats
+    </button>
+
+    <button
+    class="soft"
+    onclick="addSingleTable(12)">
+      12 seats
+    </button>
+
+    <button
+    class="soft"
+    onclick="addSingleTable(16)">
+      16 seats
+    </button>
+
+  </div>
+
+
+  <div class="section">
+
+    <input
+    id="manualQty"
+    class="field"
+    type="number"
+    min="1"
+    max="60"
+    value="5">
+
+
+    <select
+    id="manualSeats"
+    class="field"
+    style="margin-top:7px">
+
+      <option>8</option>
+
+      <option selected>
+        10
+      </option>
+
+      <option>12</option>
+
+      <option>16</option>
+
+    </select>
+
+
+    <button
+    style="width:100%;margin-top:7px"
+    onclick="addManualMultiple()">
+
+      Add multiple
+
+    </button>
+
+  </div>
+
+  `;
+
+}
+
+
+function addSingleTable(
+seats
+){
+
+  pushHistory();
+
+
+  const rect=
+  canvas.getBoundingClientRect();
+
+
+  const offset=
+
+  (
+    S.tables.length%
+    6
+  )
+
+  *
+  16;
+
+
+  S.tables.push({
+
+    id:uid(),
+
+    number:
+    nextTableNumber(),
+
+    seats:
+    seats,
+
+    x:
+    Math.max(
+      5,
+      rect.width/2-
+      51+
+      offset
+    ),
+
+    y:
+    Math.max(
+      45,
+      rect.height/2-
+      51+
+      offset
+    ),
+
+    scale:1
+
+  });
+
+
+  render();
+
+  saveOnly();
+
+  afterAction();
+
+}
+
+
+function addManualMultiple(){
+
+  const qty=
+
+  Math.max(
+    1,
+    Math.min(
+      60,
+      +$('manualQty').value||1
+    )
+  );
+
+
+  const seats=
+  +$('manualSeats').value;
+
+
+  pushHistory();
+
+
+  createTableGrid(
+    qty,
+    seats
+  );
+
+
+  render();
+
+  saveOnly();
+
+  afterAction();
+
+}
+
+
+/* ==================================================
+VENUE
+================================================== */
+
+function renderVenue(){
 
   $('panelContent')
   .innerHTML=`
@@ -1577,9 +2238,9 @@ function renderVenuePanel(){
   </h2>
 
   <div class="hint">
-    The canvas is fixed.
-    Only tables and venue objects move.
+    Landscape background. It never moves.
   </div>
+
 
   <label class="upload">
 
@@ -1588,10 +2249,13 @@ function renderVenuePanel(){
     <br>
 
     <b>
+
       ${S.venue
       ?'Replace venue'
       :'Upload venue'}
+
     </b>
+
 
     <input
     id="venueFile"
@@ -1599,6 +2263,7 @@ function renderVenuePanel(){
     accept="image/*">
 
   </label>
+
 
   ${S.venue
 
@@ -1647,14 +2312,16 @@ function renderVenuePanel(){
 
       render();
 
-      commitChange();
+      saveOnly();
 
-      afterPanelAction();
+      afterAction();
 
     };
 
 
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(
+      file
+    );
 
   };
 
@@ -1663,7 +2330,7 @@ function renderVenuePanel(){
 
 function applyVenue(){
 
-  venueBackground
+  venueBg
   .style
   .backgroundImage=
 
@@ -1688,710 +2355,23 @@ function removeVenue(){
 
   render();
 
-  commitChange();
+  saveOnly();
 
-  renderVenuePanel();
+  renderVenue();
 
 }
 
 
 /* ==================================================
-   TABLES
-================================================== */
-
-function renderTablesPanel(){
-
-  $('panelContent')
-  .innerHTML=`
-
-  <h2>
-    Tables
-  </h2>
-
-  <div class="hint">
-    New tables always appear inside the visible canvas.
-  </div>
-
-  <div class="grid2">
-
-    <button
-    class="soft"
-    onclick="addTable(8)">
-      8 seats
-    </button>
-
-    <button
-    class="soft"
-    onclick="addTable(10)">
-      10 seats
-    </button>
-
-    <button
-    class="soft"
-    onclick="addTable(12)">
-      12 seats
-    </button>
-
-    <button
-    class="soft"
-    onclick="addTable(16)">
-      16 seats
-    </button>
-
-  </div>
-
-
-  <div class="section">
-
-    <h3>
-      Add multiple
-    </h3>
-
-    <input
-    id="multipleQty"
-    class="field"
-    type="number"
-    min="1"
-    max="50"
-    value="5">
-
-
-    <select
-    id="multipleSeats"
-    class="field"
-    style="margin-top:7px">
-
-      <option>8</option>
-
-      <option selected>
-        10
-      </option>
-
-      <option>12</option>
-
-      <option>16</option>
-
-    </select>
-
-
-    <button
-    style="width:100%;margin-top:7px"
-    onclick="addMultipleTables()">
-
-      Add tables
-
-    </button>
-
-  </div>
-
-  `;
-
-}
-
-
-/* SINGLE TABLE — CENTER */
-
-function addTable(seats){
-
-  pushHistory();
-
-
-  const rect=
-  canvas.getBoundingClientRect();
-
-
-  const existing=
-  S.tables.length;
-
-
-  const offset=
-  (existing%5)*12;
-
-
-  const x=
-
-  Math.max(
-    8,
-    rect.width/2
-    -
-    51
-    +
-    offset
-  );
-
-
-  const y=
-
-  Math.max(
-    45,
-    rect.height/2
-    -
-    51
-    +
-    offset
-  );
-
-
-  S.tables.push({
-
-    id:uid(),
-
-    number:
-    nextTableNumber(),
-
-    seats:
-    seats,
-
-    x:
-    x,
-
-    y:
-    y,
-
-    scale:1
-
-  });
-
-
-  render();
-
-  commitChange();
-
-  afterPanelAction();
-
-}
-
-
-/* MULTIPLE TABLES — RESPONSIVE CENTERED GRID */
-
-function addMultipleTables(){
-
-  const qty=
-
-  Math.max(
-
-    1,
-
-    Math.min(
-
-      50,
-
-      +$('multipleQty').value||1
-
-    )
-
-  );
-
-
-  const seats=
-  +$('multipleSeats').value;
-
-
-  pushHistory();
-
-
-  const rect=
-  canvas.getBoundingClientRect();
-
-
-  const canvasWidth=
-  rect.width;
-
-
-  const canvasHeight=
-  rect.height;
-
-
-  /*
-  Slightly smaller initial size
-  if many tables are added.
-  */
-
-  let defaultScale=1;
-
-
-  if(qty>10){
-
-    defaultScale=.8;
-
-  }
-
-
-  if(qty>20){
-
-    defaultScale=.65;
-
-  }
-
-
-  const spacingX=
-  108*defaultScale;
-
-
-  const spacingY=
-  108*defaultScale;
-
-
-  const safeWidth=
-  Math.max(
-    120,
-    canvasWidth-30
-  );
-
-
-  const maxColumns=
-
-  Math.max(
-
-    1,
-
-    Math.floor(
-      safeWidth/
-      spacingX
-    )
-
-  );
-
-
-  const columns=
-
-  Math.min(
-    qty,
-    Math.min(
-      maxColumns,
-      5
-    )
-  );
-
-
-  const rows=
-
-  Math.ceil(
-    qty/
-    columns
-  );
-
-
-  const gridWidth=
-
-  (
-    columns-1
-  )
-
-  *
-
-  spacingX;
-
-
-  const gridHeight=
-
-  (
-    rows-1
-  )
-
-  *
-
-  spacingY;
-
-
-  let startX=
-
-  canvasWidth/2
-
-  -
-
-  gridWidth/2
-
-  -
-
-  51;
-
-
-  let startY=
-
-  canvasHeight/2
-
-  -
-
-  gridHeight/2
-
-  -
-
-  51;
-
-
-  startX=
-  Math.max(
-    8,
-    startX
-  );
-
-
-  startY=
-  Math.max(
-    45,
-    startY
-  );
-
-
-  for(
-    let i=0;
-    i<qty;
-    i++
-  ){
-
-    const column=
-    i%columns;
-
-
-    const row=
-    Math.floor(
-      i/columns
-    );
-
-
-    S.tables.push({
-
-      id:uid(),
-
-      number:
-      nextTableNumber(),
-
-      seats:
-      seats,
-
-      x:
-      startX+
-      column*
-      spacingX,
-
-      y:
-      startY+
-      row*
-      spacingY,
-
-      scale:
-      defaultScale
-
-    });
-
-  }
-
-
-  render();
-
-  commitChange();
-
-  afterPanelAction();
-
-}
-
-
-/* ==================================================
-   OBJECTS
-================================================== */
-
-function renderObjectsPanel(){
-
-  $('panelContent')
-  .innerHTML=`
-
-  <h2>
-    Venue Objects
-  </h2>
-
-  <div class="hint">
-    Add only what helps describe the venue.
-  </div>
-
-  <div class="grid2">
-
-    <button
-    class="soft"
-    onclick="addObject('Dance Floor',160,160)">
-      Dance Floor
-    </button>
-
-    <button
-    class="soft"
-    onclick="addObject('DJ',110,55)">
-      DJ
-    </button>
-
-    <button
-    class="soft"
-    onclick="addObject('Bar',130,55)">
-      Bar
-    </button>
-
-    <button
-    class="soft"
-    onclick="addObject('Stage',150,65)">
-      Stage
-    </button>
-
-  </div>
-
-  `;
-
-}
-
-
-function addObject(
-label,
-width,
-height
-){
-
-  pushHistory();
-
-
-  const rect=
-  canvas.getBoundingClientRect();
-
-
-  S.objects.push({
-
-    id:uid(),
-
-    label:
-    label,
-
-    width:
-    width,
-
-    height:
-    height,
-
-    x:
-    Math.max(
-      10,
-      rect.width/2
-      -
-      width/2
-    ),
-
-    y:
-    Math.max(
-      50,
-      rect.height/2
-      -
-      height/2
-    ),
-
-    scale:1
-
-  });
-
-
-  render();
-
-  commitChange();
-
-  afterPanelAction();
-
-}
-
-
-/* ==================================================
-   CLEAR / RESET
-================================================== */
-
-function renderMorePanel(){
-
-  $('panelContent')
-  .innerHTML=`
-
-  <h2>
-    More
-  </h2>
-
-  <div class="hint">
-    Use these only when you want to restart part or all of the plan.
-  </div>
-
-
-  <button
-  class="secondary"
-  style="width:100%"
-  onclick="undo()">
-
-    ↶ Undo last change
-
-  </button>
-
-
-  <button
-  class="secondary"
-  style="width:100%;margin-top:7px"
-  onclick="redo()">
-
-    ↷ Redo
-
-  </button>
-
-
-  <div class="section">
-
-    <button
-    class="danger"
-    style="width:100%"
-    onclick="clearLayout()">
-
-      Clear Layout
-
-    </button>
-
-    <div
-    class="hint"
-    style="margin-top:6px">
-
-      Removes all tables and venue objects.
-      Guests remain saved but become unassigned.
-
-    </div>
-
-  </div>
-
-
-  <div class="section">
-
-    <button
-    class="danger"
-    style="width:100%"
-    onclick="resetEverything()">
-
-      Reset Everything
-
-    </button>
-
-    <div
-    class="hint"
-    style="margin-top:6px">
-
-      Removes venue, tables, guests and objects.
-
-    </div>
-
-  </div>
-
-  `;
-
-}
-
-
-function clearLayout(){
-
-  const ok=
-
-  confirm(
-    'Clear all tables and venue objects? Guests will remain saved but unassigned.'
-  );
-
-
-  if(!ok)return;
-
-
-  pushHistory();
-
-
-  S.tables=[];
-
-  S.objects=[];
-
-
-  S.guests
-  .forEach(
-    guest=>{
-
-      guest.tableId=null;
-
-    }
-  );
-
-
-  selected=null;
-
-  closeGuestPanel();
-
-
-  render();
-
-  commitChange();
-
-
-  if(
-    activePanel==='more'
-  ){
-
-    renderMorePanel();
-
-  }
-
-}
-
-
-function resetEverything(){
-
-  const ok=
-
-  confirm(
-    'Reset everything? This removes venue, tables, guests and objects.'
-  );
-
-
-  if(!ok)return;
-
-
-  pushHistory();
-
-
-  S={
-
-    venue:null,
-
-    tables:[],
-
-    guests:[],
-
-    objects:[]
-
-  };
-
-
-  selected=null;
-
-  closeGuestPanel();
-
-
-  applyVenue();
-
-  render();
-
-  commitChange();
-
-
-  if(
-    activePanel==='more'
-  ){
-
-    renderMorePanel();
-
-  }
-
-}
-
-
-/* ==================================================
-   CHAIRS
+CHAIRS
 ================================================== */
 
 function createChairs(
-element,
+el,
 count
 ){
 
-  const seats=
+  const n=
 
   Math.min(
     count,
@@ -2404,7 +2384,7 @@ count
 
   for(
     let i=0;
-    i<seats;
+    i<n;
     i++
   ){
 
@@ -2412,7 +2392,7 @@ count
 
     2*
     Math.PI*
-    i/seats
+    i/n
 
     -
 
@@ -2455,7 +2435,7 @@ count
     +'px';
 
 
-    element.appendChild(
+    el.appendChild(
       chair
     );
 
@@ -2465,80 +2445,38 @@ count
 
 
 /* ==================================================
-   PARTY SIZE
-================================================== */
-
-function tableUsedSeats(
-tableId,
-excludeGuestId=null
-){
-
-  return S.guests
-
-  .filter(
-    guest=>
-
-    guest.tableId===tableId
-
-    &&
-
-    guest.id!==excludeGuestId
-  )
-
-  .reduce(
-    (
-      total,
-      guest
-    )=>
-
-    total+
-
-    Math.max(
-      1,
-      Number(
-        guest.partySize
-      )||1
-    ),
-
-    0
-  );
-
-}
-
-
-/* ==================================================
-   RENDER CANVAS
+RENDER
 ================================================== */
 
 function render(){
 
-  objectLayer.innerHTML='';
+  layer.innerHTML='';
 
 
   S.tables
   .forEach(table=>{
 
-    const usedSeats=
+    const used=
+
     tableUsedSeats(
       table.id
     );
 
 
-    const element=
+    const el=
     document.createElement(
       'div'
     );
 
 
-    element.className=
+    el.className=
 
     'obj table'
 
     +
 
     (
-      usedSeats===
-      table.seats
+      used===table.seats
       ?' complete'
       :''
     )
@@ -2546,28 +2484,27 @@ function render(){
     +
 
     (
-      selected?.id===
-      table.id
+      selected?.id===table.id
       ?' selected'
       :''
     );
 
 
-    element.style.left=
+    el.style.left=
     table.x+'px';
 
 
-    element.style.top=
+    el.style.top=
     table.y+'px';
 
 
-    element.style.transform=
+    el.style.transform=
 
     `scale(${table.scale||1})`;
 
 
     createChairs(
-      element,
+      el,
       table.seats
     );
 
@@ -2579,7 +2516,7 @@ function render(){
 
 
     core.className=
-    'tableCore';
+    'core';
 
 
     core.innerHTML=
@@ -2591,88 +2528,25 @@ function render(){
     </b>
 
     <span>
-      ${usedSeats}/${table.seats}
+      ${used}/${table.seats}
     </span>
 
     `;
 
 
-    element.appendChild(
+    el.appendChild(
       core
     );
 
 
     attachDrag(
-      element,
-      table,
-      'table'
+      el,
+      table
     );
 
 
-    objectLayer.appendChild(
-      element
-    );
-
-  });
-
-
-  S.objects
-  .forEach(item=>{
-
-    const element=
-    document.createElement(
-      'div'
-    );
-
-
-    element.className=
-
-    'obj venueObj'
-
-    +
-
-    (
-      selected?.id===
-      item.id
-      ?' selected'
-      :''
-    );
-
-
-    element.style.left=
-    item.x+'px';
-
-
-    element.style.top=
-    item.y+'px';
-
-
-    element.style.width=
-    item.width+'px';
-
-
-    element.style.height=
-    item.height+'px';
-
-
-    element.style.transform=
-
-    `scale(${item.scale||1})`;
-
-
-    element.textContent=
-    item.label;
-
-
-    attachDrag(
-      element,
-      item,
-      'object'
-    );
-
-
-    objectLayer.appendChild(
-      element
+    layer.appendChild(
+      el
     );
 
   });
@@ -2688,10 +2562,6 @@ function render(){
     ||
 
     S.tables.length
-
-    ||
-
-    S.objects.length
   )
 
   ?'none'
@@ -2707,85 +2577,78 @@ function render(){
 
 
 /* ==================================================
-   DRAG
+DRAG
 ================================================== */
 
 function attachDrag(
-element,
-item,
-kind
+el,
+table
 ){
 
-  let startX;
-  let startY;
+  let sx;
+  let sy;
 
-  let originalX;
-  let originalY;
+  let ox;
+  let oy;
 
   let active=false;
 
-  let moved=false;
-
-  let snapshotBeforeDrag=null;
+  let before=null;
 
 
-  element.onpointerdown=e=>{
+  el.onpointerdown=e=>{
 
     e.stopPropagation();
 
 
     selected={
 
-      id:item.id,
+      id:table.id,
 
-      kind:kind
+      kind:'table'
 
     };
 
 
     document
-    .querySelectorAll('.obj')
+    .querySelectorAll('.table')
     .forEach(
-      el=>
-      el.classList.remove(
-        'selected'
-      )
+      item=>
+      item
+      .classList
+      .remove('selected')
     );
 
 
-    element
+    el
     .classList
-    .add(
-      'selected'
-    );
+    .add('selected');
 
 
     renderContext();
 
 
-    startX=
+    sx=
     e.clientX;
 
 
-    startY=
+    sy=
     e.clientY;
 
 
-    originalX=
-    item.x;
+    ox=
+    table.x;
 
 
-    originalY=
-    item.y;
-
-
-    snapshotBeforeDrag=
-    cloneState();
+    oy=
+    table.y;
 
 
     active=true;
 
-    moved=false;
+
+    before=
+    state();
 
 
     trash.style.display=
@@ -2794,7 +2657,7 @@ kind
 
     try{
 
-      element.setPointerCapture(
+      el.setPointerCapture(
         e.pointerId
       );
 
@@ -2803,66 +2666,47 @@ kind
   };
 
 
-  element.onpointermove=e=>{
+  el.onpointermove=e=>{
 
     if(
       !active
     )return;
 
 
-    const dx=
-    e.clientX-startX;
+    table.x=
+
+    ox+
+    e.clientX-
+    sx;
 
 
-    const dy=
-    e.clientY-startY;
+    table.y=
 
+    oy+
+    e.clientY-
+    sy;
 
-    if(
-      Math.abs(dx)+
-      Math.abs(dy)
-      >4
-    ){
-
-      moved=true;
-
-    }
-
-
-    item.x=
-    originalX+
-    dx;
-
-
-    item.y=
-    originalY+
-    dy;
-
-
-    /*
-    Keep objects reachable
-    inside the fixed canvas.
-    */
 
     const rect=
-    canvas.getBoundingClientRect();
+    canvas
+    .getBoundingClientRect();
 
 
-    item.x=
+    table.x=
 
     Math.max(
 
-      -20,
+      -10,
 
       Math.min(
         rect.width-40,
-        item.x
+        table.x
       )
 
     );
 
 
-    item.y=
+    table.y=
 
     Math.max(
 
@@ -2870,57 +2714,53 @@ kind
 
       Math.min(
         rect.height-40,
-        item.y
+        table.y
       )
 
     );
 
 
-    element.style.left=
-    item.x+'px';
+    el.style.left=
+    table.x+'px';
 
 
-    element.style.top=
-    item.y+'px';
+    el.style.top=
+    table.y+'px';
 
 
-    const trashRect=
+    const bin=
     trash
     .getBoundingClientRect();
 
 
-    const overTrash=
+    const over=
 
-    e.clientX>=
-    trashRect.left
-
-    &&
-
-    e.clientX<=
-    trashRect.right
+    e.clientX>=bin.left
 
     &&
 
-    e.clientY>=
-    trashRect.top
+    e.clientX<=bin.right
 
     &&
 
-    e.clientY<=
-    trashRect.bottom;
+    e.clientY>=bin.top
+
+    &&
+
+    e.clientY<=bin.bottom;
 
 
     trash
     .classList
     .toggle(
       'hot',
-      overTrash
+      over
     );
 
   };
 
 
-  element.onpointerup=()=>{
+  el.onpointerup=()=>{
 
     if(
       !active
@@ -2930,13 +2770,11 @@ kind
     active=false;
 
 
-    const shouldDelete=
+    const remove=
 
     trash
     .classList
-    .contains(
-      'hot'
-    );
+    .contains('hot');
 
 
     trash.style.display=
@@ -2945,36 +2783,26 @@ kind
 
     trash
     .classList
-    .remove(
-      'hot'
-    );
+    .remove('hot');
 
 
-    if(
-      shouldDelete
-    ){
+    if(remove){
 
-      if(
-        snapshotBeforeDrag
-      ){
-
-        undoStack.push(
-          snapshotBeforeDrag
-        );
-
-        redoStack=[];
-
-      }
+      undoStack.push(
+        before
+      );
 
 
-      deleteCanvasItem(
-        item.id,
-        kind,
+      redoStack=[];
+
+
+      deleteTable(
+        table.id,
         false
       );
 
 
-      updateUndoButtons();
+      updateHistory();
 
       return;
 
@@ -2982,23 +2810,13 @@ kind
 
 
     if(
-      moved
-      &&
-      snapshotBeforeDrag
+      before!==
+      state()
     ){
 
       undoStack.push(
-        snapshotBeforeDrag
+        before
       );
-
-
-      if(
-        undoStack.length>50
-      ){
-
-        undoStack.shift();
-
-      }
 
 
       redoStack=[];
@@ -3006,123 +2824,17 @@ kind
 
       saveOnly();
 
-      updateUndoButtons();
+      updateHistory();
 
     }
 
   };
 
-
-  element.onpointercancel=()=>{
-
-    active=false;
-
-
-    trash.style.display=
-    'none';
-
-
-    trash
-    .classList
-    .remove(
-      'hot'
-    );
-
-  };
-
 }
 
 
 /* ==================================================
-   DELETE ITEM
-================================================== */
-
-function deleteCanvasItem(
-id,
-kind,
-createHistory=true
-){
-
-  if(
-    createHistory
-  ){
-
-    pushHistory();
-
-  }
-
-
-  if(
-    kind==='table'
-  ){
-
-    S.guests
-    .forEach(
-      guest=>{
-
-        if(
-          guest.tableId===id
-        ){
-
-          guest.tableId=null;
-
-        }
-
-      }
-    );
-
-
-    S.tables=
-
-    S.tables.filter(
-      table=>
-      table.id!==id
-    );
-
-  }
-
-  else{
-
-    S.objects=
-
-    S.objects.filter(
-      item=>
-      item.id!==id
-    );
-
-  }
-
-
-  if(
-    activeGuestTable===id
-  ){
-
-    closeGuestPanel();
-
-  }
-
-
-  selected=null;
-
-
-  render();
-
-  commitChange();
-
-
-  if(
-    activePanel==='lists'
-  ){
-
-    renderListsPanel();
-
-  }
-
-}
-
-
-/* ==================================================
-   TABLE TOOLBAR
+CONTEXT TOOLBAR
 ================================================== */
 
 function renderContext(){
@@ -3139,31 +2851,15 @@ function renderContext(){
   }
 
 
-  const item=
-
-  selected.kind==='table'
-
-  ?
+  const table=
 
   S.tables.find(
     table=>
     table.id===selected.id
-  )
-
-  :
-
-  S.objects.find(
-    object=>
-    object.id===selected.id
   );
 
 
-  if(
-    !item
-  ){
-
-    selected=null;
-
+  if(!table){
 
     context.style.display=
     'none';
@@ -3173,105 +2869,97 @@ function renderContext(){
   }
 
 
-  if(
-    selected.kind==='table'
-  ){
+  const used=
 
-    const usedSeats=
-    tableUsedSeats(
-      item.id
-    );
+  tableUsedSeats(
+    table.id
+  );
 
 
-    context.innerHTML=`
+  context.innerHTML=`
 
-    <b>
-      Table
-    </b>
+  <b>
+    T
+  </b>
 
-    <input
-    id="tableNumberInput"
-    type="number"
-    min="1"
-    value="${item.number}">
 
-    <select
-    id="tableSeatsInput">
+  <input
+  id="ctxNumber"
+  type="number"
+  min="1"
+  value="${table.number}">
 
-      ${[8,10,12,16]
 
-      .map(
-        seats=>
+  <select id="ctxSeats">
 
-        `<option
-        ${seats===item.seats
-        ?'selected'
-        :''}>
+    ${[8,10,12,16]
 
-        ${seats}
+    .map(
+      seats=>
 
-        </option>`
+      `<option
+      ${seats===table.seats
+      ?'selected'
+      :''}>
 
-      )
+      ${seats}
 
-      .join('')}
+      </option>`
 
-    </select>
+    )
 
-    <span>
-      ${usedSeats}/${item.seats}
-    </span>
+    .join('')}
 
-    <button
-    class="secondary"
-    onclick="saveTableSettings()">
-      ✓
-    </button>
+  </select>
 
-    <button
-    onclick="openTableGuests('${item.id}')">
-      Guests
-    </button>
 
-    <button
-    class="secondary"
-    onclick="resizeSelected(.9)">
-      −
-    </button>
+  <span>
+    ${used}/${table.seats}
+  </span>
 
-    <button
-    class="secondary"
-    onclick="resizeSelected(1.1)">
-      ＋
-    </button>
 
-    `;
+  <button
+  class="secondary"
+  onclick="saveTableSettings()">
+    ✓
+  </button>
 
-  }
 
-  else{
+  <button
+  onclick="openTableGuests('${table.id}')">
 
-    context.innerHTML=`
+    Guests
 
-    <b>
-      ${safe(item.label)}
-    </b>
+  </button>
 
-    <button
-    class="secondary"
-    onclick="resizeSelected(.9)">
-      −
-    </button>
 
-    <button
-    class="secondary"
-    onclick="resizeSelected(1.1)">
-      ＋
-    </button>
+  <button
+  class="secondary"
+  onclick="duplicateTable()">
 
-    `;
+    Copy
 
-  }
+  </button>
+
+
+  <button
+  class="secondary"
+  onclick="resizeTable(.9)">
+
+    −
+
+  </button>
+
+
+  <button
+  class="secondary"
+  onclick="resizeTable(1.1)">
+
+    ＋
+
+  </button>
+
+  `;
 
 
   context.style.display=
@@ -3279,10 +2967,6 @@ function renderContext(){
 
 }
 
-
-/* ==================================================
-   TABLE SETTINGS
-================================================== */
 
 function saveTableSettings(){
 
@@ -3300,16 +2984,12 @@ function saveTableSettings(){
   const number=
 
   Math.max(
-
     1,
-
-    +$('tableNumberInput').value
-    ||1
-
+    +$('ctxNumber').value||1
   );
 
 
-  const duplicate=
+  const exists=
 
   S.tables.find(
     other=>
@@ -3323,12 +3003,10 @@ function saveTableSettings(){
   );
 
 
-  if(
-    duplicate
-  ){
+  if(exists){
 
     toast(
-      'That table number already exists'
+      'Table number already exists'
     );
 
     return;
@@ -3337,7 +3015,7 @@ function saveTableSettings(){
 
 
   const seats=
-  +$('tableSeatsInput').value;
+  +$('ctxSeats').value;
 
 
   const used=
@@ -3351,7 +3029,7 @@ function saveTableSettings(){
   ){
 
     toast(
-      `This table already has ${used} people`
+      'Not enough seats for current guests'
     );
 
     return;
@@ -3372,36 +3050,63 @@ function saveTableSettings(){
 
   render();
 
-  commitChange();
-
-
-  if(
-    activeGuestTable===
-    table.id
-  ){
-
-    refreshTableGuests();
-
-  }
-
-
-  if(
-    activePanel==='lists'
-  ){
-
-    renderListsPanel();
-
-  }
+  saveOnly();
 
 }
 
 
-/* ==================================================
-   RESIZE
-================================================== */
+function duplicateTable(){
 
-function resizeSelected(
-multiplier
+  if(
+    !selected
+  )return;
+
+
+  const table=
+
+  S.tables.find(
+    table=>
+    table.id===selected.id
+  );
+
+
+  if(!table)return;
+
+
+  pushHistory();
+
+
+  S.tables.push({
+
+    id:uid(),
+
+    number:
+    nextTableNumber(),
+
+    seats:
+    table.seats,
+
+    x:
+    table.x+25,
+
+    y:
+    table.y+25,
+
+    scale:
+    table.scale||1
+
+  });
+
+
+  render();
+
+  saveOnly();
+
+}
+
+
+function resizeTable(
+m
 ){
 
   if(
@@ -3409,42 +3114,33 @@ multiplier
   )return;
 
 
-  const list=
+  const table=
 
-  selected.kind==='table'
-
-  ?S.tables
-
-  :S.objects;
-
-
-  const item=
-
-  list.find(
-    item=>
-    item.id===selected.id
+  S.tables.find(
+    table=>
+    table.id===selected.id
   );
 
 
-  if(!item)return;
+  if(!table)return;
 
 
   pushHistory();
 
 
-  item.scale=
+  table.scale=
 
   Math.max(
 
-    .55,
+    .45,
 
     Math.min(
 
       1.8,
 
-      (item.scale||1)
+      (table.scale||1)
       *
-      multiplier
+      m
 
     )
 
@@ -3453,64 +3149,62 @@ multiplier
 
   render();
 
-  commitChange();
+  saveOnly();
+
+}
+
+
+function deleteTable(
+id,
+history=true
+){
+
+  if(history){
+
+    pushHistory();
+
+  }
+
+
+  S.guests
+  .forEach(
+    guest=>{
+
+      if(
+        guest.tableId===id
+      ){
+
+        guest.tableId=null;
+
+      }
+
+    }
+  );
+
+
+  S.tables=
+
+  S.tables.filter(
+    table=>
+    table.id!==id
+  );
+
+
+  selected=null;
+
+
+  closeGuestPanel();
+
+
+  render();
+
+  saveOnly();
 
 }
 
 
 /* ==================================================
-   EMPTY CANVAS TAP
-================================================== */
-
-canvas.addEventListener(
-
-'pointerdown',
-
-e=>{
-
-  if(
-    mobile()
-  ){
-
-    closePanel();
-
-  }
-
-
-  if(
-
-    e.target===canvas
-
-    ||
-
-    e.target===objectLayer
-
-  ){
-
-    selected=null;
-
-
-    renderContext();
-
-
-    document
-    .querySelectorAll('.obj')
-    .forEach(
-      item=>
-      item.classList.remove(
-        'selected'
-      )
-    );
-
-  }
-
-}
-
-);
-
-
-/* ==================================================
-   GUEST PANEL
+GUESTS PANEL
 ================================================== */
 
 function openTableGuests(
@@ -3542,17 +3236,6 @@ tableId
 
   refreshTableGuests();
 
-
-  setTimeout(
-    ()=>{
-
-      $('guestSurname')
-      .focus();
-
-    },
-    100
-  );
-
 }
 
 
@@ -3563,13 +3246,10 @@ function closeGuestPanel(){
   .remove('open');
 
 
-  activeGuestTable=
-  null;
+  activeGuestTable=null;
 
 }
 
-
-/* REFRESH TABLE GUESTS */
 
 function refreshTableGuests(){
 
@@ -3593,32 +3273,30 @@ function refreshTableGuests(){
   const guests=
 
   S.guests
+
   .filter(
     guest=>
     guest.tableId===table.id
+  )
+
+  .sort(
+    compareGuests
   );
 
 
-  const used=
-
-  tableUsedSeats(
-    table.id
-  );
-
-
-  $('guestPanelTitle')
+  $('guestTitle')
   .textContent=
 
   `Table ${table.number}`;
 
 
-  $('guestPanelCount')
+  $('guestCount')
   .textContent=
 
-  `${used} of ${table.seats} seats filled`;
+  `${tableUsedSeats(table.id)} of ${table.seats} seats filled`;
 
 
-  $('tableGuestsList')
+  $('tableGuestList')
   .innerHTML=
 
   guests.length
@@ -3626,12 +3304,6 @@ function refreshTableGuests(){
   ?
 
   guests
-
-  .slice()
-
-  .sort(
-    compareGuests
-  )
 
   .map(
     guest=>
@@ -3645,7 +3317,7 @@ function refreshTableGuests(){
         <div class="guestName">
 
           ${safe(
-            fullGuestName(
+            guestFullName(
               guest
             )
           )}
@@ -3664,7 +3336,7 @@ function refreshTableGuests(){
       </div>
 
 
-      <div class="guestActions">
+      <div class="actions">
 
         <button
         class="secondary"
@@ -3696,8 +3368,11 @@ function refreshTableGuests(){
 
   `
 
-  <div class="hint">
+  <div class="hint"
+  style="margin-top:10px">
+
     No guests yet.
+
   </div>
 
   `;
@@ -3705,11 +3380,7 @@ function refreshTableGuests(){
 }
 
 
-/* ==================================================
-   ADD GUEST
-================================================== */
-
-function addGuestToCurrentTable(){
+function addGuestToTable(){
 
   const table=
 
@@ -3724,14 +3395,14 @@ function addGuestToCurrentTable(){
 
   const surname=
 
-  $('guestSurname')
+  $('gSurname')
   .value
   .trim();
 
 
   const firstName=
 
-  $('guestFirstName')
+  $('gFirst')
   .value
   .trim();
 
@@ -3746,8 +3417,7 @@ function addGuestToCurrentTable(){
 
       20,
 
-      +$('guestPartySize').value
-      ||1
+      +$('gParty').value||1
 
     )
 
@@ -3759,7 +3429,7 @@ function addGuestToCurrentTable(){
   ){
 
     toast(
-      'Add a surname'
+      'Add surname'
     );
 
     return;
@@ -3767,22 +3437,21 @@ function addGuestToCurrentTable(){
   }
 
 
-  const used=
+  const free=
 
+  table.seats-
   tableUsedSeats(
     table.id
   );
 
 
   if(
-    used+
-    partySize
-    >
-    table.seats
+    partySize>
+    free
   ){
 
     toast(
-      `Only ${table.seats-used} seats are available`
+      `Only ${free} seats available`
     );
 
     return;
@@ -3797,13 +3466,10 @@ function addGuestToCurrentTable(){
 
     id:uid(),
 
-    surname:
     surname,
 
-    firstName:
     firstName,
 
-    partySize:
     partySize,
 
     tableId:
@@ -3812,28 +3478,780 @@ function addGuestToCurrentTable(){
   });
 
 
-  $('guestSurname').value='';
+  $('gSurname').value='';
 
-  $('guestFirstName').value='';
+  $('gFirst').value='';
 
-  $('guestPartySize').value=1;
+  $('gParty').value=1;
 
 
   refreshTableGuests();
 
   render();
 
-  commitChange();
-
-
-  $('guestSurname')
-  .focus();
+  saveOnly();
 
 }
 
 
 /* ==================================================
-   EDIT GUEST
+GUEST MANAGER + VOICE
+================================================== */
+
+function renderGuestsManager(){
+
+  $('panelContent')
+  .innerHTML=`
+
+  <h2>
+    Guests
+  </h2>
+
+  <div class="hint">
+
+    Add manually or speak:
+    “Γεωργίου Γιώργος, 2 άτομα, τραπέζι 1”.
+
+  </div>
+
+
+  <button
+  id="voiceStartBtn"
+  style="width:100%"
+  onclick="toggleVoice()">
+
+    🎙 Voice Import
+
+  </button>
+
+
+  <div
+  id="voiceStatus"
+  class="hint"
+  style="margin-top:6px">
+
+    Voice is optional and depends on browser support.
+
+  </div>
+
+
+  <div
+  class="section">
+
+    <h3>
+      Manual guest
+    </h3>
+
+
+    <input
+    id="manualSurname"
+    class="field"
+    placeholder="Surname">
+
+
+    <input
+    id="manualFirst"
+    class="field"
+    style="margin-top:6px"
+    placeholder="First name">
+
+
+    <input
+    id="manualParty"
+    class="field"
+    style="margin-top:6px"
+    type="number"
+    min="1"
+    value="1"
+    placeholder="People">
+
+
+    <input
+    id="manualTable"
+    class="field"
+    style="margin-top:6px"
+    type="number"
+    min="1"
+    placeholder="Table number">
+
+
+    <button
+    style="width:100%;margin-top:7px"
+    onclick="addManualGuest()">
+
+      Add guest
+
+    </button>
+
+  </div>
+
+
+  <div
+  id="voiceDraftArea">
+  </div>
+
+  `;
+
+}
+
+
+function addManualGuest(){
+
+  const surname=
+
+  $('manualSurname')
+  .value
+  .trim();
+
+
+  const firstName=
+
+  $('manualFirst')
+  .value
+  .trim();
+
+
+  const partySize=
+
+  Math.max(
+    1,
+    +$('manualParty').value||1
+  );
+
+
+  const tableNumber=
+  +$('manualTable').value;
+
+
+  const table=
+
+  S.tables.find(
+    table=>
+    Number(table.number)===
+    tableNumber
+  );
+
+
+  if(
+    !surname
+  ){
+
+    toast(
+      'Add surname'
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !table
+  ){
+
+    toast(
+      'Table not found'
+    );
+
+    return;
+
+  }
+
+
+  const free=
+
+  table.seats-
+  tableUsedSeats(
+    table.id
+  );
+
+
+  if(
+    partySize>
+    free
+  ){
+
+    toast(
+      `Only ${free} seats available`
+    );
+
+    return;
+
+  }
+
+
+  pushHistory();
+
+
+  S.guests.push({
+
+    id:uid(),
+
+    surname,
+
+    firstName,
+
+    partySize,
+
+    tableId:
+    table.id
+
+  });
+
+
+  render();
+
+  saveOnly();
+
+
+  renderGuestsManager();
+
+
+  toast(
+    'Guest added'
+  );
+
+}
+
+
+/* ==================================================
+VOICE
+================================================== */
+
+function toggleVoice(){
+
+  if(recognition){
+
+    recognition.stop();
+
+    return;
+
+  }
+
+
+  const SR=
+
+  window.SpeechRecognition
+
+  ||
+
+  window.webkitSpeechRecognition;
+
+
+  if(!SR){
+
+    toast(
+      'Voice recognition is not available in this browser'
+    );
+
+    return;
+
+  }
+
+
+  recognition=
+  new SR();
+
+
+  recognition.lang=
+  'el-GR';
+
+
+  recognition.continuous=
+  true;
+
+
+  recognition.interimResults=
+  false;
+
+
+  $('voiceStartBtn')
+  .textContent=
+
+  '■ Stop listening';
+
+
+  $('voiceStatus')
+  .textContent=
+
+  'Listening…';
+
+
+  recognition.onresult=e=>{
+
+    for(
+      let i=e.resultIndex;
+      i<e.results.length;
+      i++
+    ){
+
+      parseVoiceText(
+        e.results[i][0].transcript
+      );
+
+    }
+
+
+    renderVoiceDraft();
+
+  };
+
+
+  recognition.onerror=()=>{
+
+    toast(
+      'Voice could not understand clearly'
+    );
+
+  };
+
+
+  recognition.onend=()=>{
+
+    recognition=null;
+
+
+    if(
+      $('voiceStartBtn')
+    ){
+
+      $('voiceStartBtn')
+      .textContent=
+
+      '🎙 Voice Import';
+
+    }
+
+
+    if(
+      $('voiceStatus')
+    ){
+
+      $('voiceStatus')
+      .textContent=
+
+      'Review the preview before adding guests.';
+
+    }
+
+  };
+
+
+  recognition.start();
+
+}
+
+
+/*
+Expected examples:
+
+Γεωργίου Γιώργος 2 άτομα τραπέζι 1
+
+Αντωνίου Μαρία 3 άτομα τραπέζι 5
+*/
+
+function parseVoiceText(
+text
+){
+
+  const chunks=
+
+  text
+
+  .split(
+    /[.;,]+/
+  )
+
+  .map(
+    item=>item.trim()
+  )
+
+  .filter(Boolean);
+
+
+  chunks
+  .forEach(chunk=>{
+
+    const tableMatch=
+
+    chunk.match(
+      /(?:τραπέζι|τραπεζι|table)\s*(\d+)/i
+    );
+
+
+    const peopleMatch=
+
+    chunk.match(
+      /(\d+)\s*(?:άτομα|ατομα|people|persons?)/i
+    );
+
+
+    const tableNumber=
+
+    tableMatch
+    ?Number(tableMatch[1])
+    :1;
+
+
+    const partySize=
+
+    peopleMatch
+    ?Number(peopleMatch[1])
+    :1;
+
+
+    let cleaned=
+
+    chunk
+
+    .replace(
+      /(?:τραπέζι|τραπεζι|table)\s*\d+/ig,
+      ''
+    )
+
+    .replace(
+      /\d+\s*(?:άτομα|ατομα|people|persons?)/ig,
+      ''
+    )
+
+    .trim();
+
+
+    const names=
+
+    cleaned
+    .split(/\s+/)
+    .filter(Boolean);
+
+
+    /*
+    Default speech format:
+    Surname FirstName
+    */
+
+    const surname=
+
+    names[0]||'';
+
+
+    const firstName=
+
+    names
+    .slice(1)
+    .join(' ');
+
+
+    if(
+      surname
+    ){
+
+      voiceDraft.push({
+
+        id:uid(),
+
+        surname,
+
+        firstName,
+
+        partySize,
+
+        tableNumber
+
+      });
+
+    }
+
+  });
+
+}
+
+
+/* ==================================================
+VOICE PREVIEW
+================================================== */
+
+function renderVoiceDraft(){
+
+  if(
+    !voiceDraft.length
+  ){
+
+    $('voiceDraftArea')
+    .innerHTML='';
+
+    return;
+
+  }
+
+
+  $('voiceDraftArea')
+  .innerHTML=`
+
+  <div class="voiceBox">
+
+    <h3>
+      Voice Preview
+    </h3>
+
+    <div class="hint">
+      Correct anything before Add All.
+    </div>
+
+
+    ${voiceDraft
+
+    .map(
+      (
+        guest,
+        index
+      )=>
+
+      `
+
+      <div class="voicePreviewRow">
+
+        <input
+        value="${safeAttr(guest.surname)}"
+        onchange="voiceDraft[${index}].surname=this.value">
+
+
+        <input
+        value="${safeAttr(guest.firstName)}"
+        onchange="voiceDraft[${index}].firstName=this.value">
+
+
+        <input
+        type="number"
+        min="1"
+        value="${guest.partySize}"
+        onchange="voiceDraft[${index}].partySize=Math.max(1,+this.value||1)">
+
+
+        <input
+        type="number"
+        min="1"
+        value="${guest.tableNumber}"
+        onchange="voiceDraft[${index}].tableNumber=Math.max(1,+this.value||1)">
+
+
+        <button
+        class="danger"
+        onclick="removeVoiceDraft(${index})">
+
+          ×
+
+        </button>
+
+      </div>
+
+      `
+
+    )
+
+    .join('')}
+
+
+    <button
+    style="width:100%;margin-top:8px"
+    onclick="confirmVoiceGuests()">
+
+      Add All Guests
+
+    </button>
+
+
+    <button
+    class="secondary"
+    style="width:100%;margin-top:6px"
+    onclick="clearVoiceDraft()">
+
+      Clear Preview
+
+    </button>
+
+  </div>
+
+  `;
+
+}
+
+
+function removeVoiceDraft(
+index
+){
+
+  voiceDraft.splice(
+    index,
+    1
+  );
+
+
+  renderVoiceDraft();
+
+}
+
+
+function clearVoiceDraft(){
+
+  voiceDraft=[];
+
+
+  renderVoiceDraft();
+
+}
+
+
+function confirmVoiceGuests(){
+
+  if(
+    !voiceDraft.length
+  )return;
+
+
+  /*
+  Validate all guests first.
+  */
+
+  const temporaryUsage={};
+
+
+  S.tables
+  .forEach(table=>{
+
+    temporaryUsage[
+      table.id
+    ]=
+
+    tableUsedSeats(
+      table.id
+    );
+
+  });
+
+
+  for(
+    const guest
+    of voiceDraft
+  ){
+
+    const table=
+
+    S.tables.find(
+      table=>
+
+      Number(table.number)===
+      Number(guest.tableNumber)
+    );
+
+
+    if(!table){
+
+      toast(
+        `Table ${guest.tableNumber} not found`
+      );
+
+      return;
+
+    }
+
+
+    const used=
+
+    temporaryUsage[
+      table.id
+    ]||0;
+
+
+    if(
+      used+
+      Number(guest.partySize||1)
+      >
+      table.seats
+    ){
+
+      toast(
+        `Not enough seats at Table ${table.number}`
+      );
+
+      return;
+
+    }
+
+
+    temporaryUsage[
+      table.id
+    ]=
+
+    used+
+    Number(
+      guest.partySize||1
+    );
+
+  }
+
+
+  pushHistory();
+
+
+  voiceDraft
+  .forEach(guest=>{
+
+    const table=
+
+    S.tables.find(
+      table=>
+
+      Number(table.number)===
+      Number(guest.tableNumber)
+    );
+
+
+    S.guests.push({
+
+      id:uid(),
+
+      surname:
+      guest.surname.trim(),
+
+      firstName:
+      guest.firstName.trim(),
+
+      partySize:
+      Number(
+        guest.partySize||1
+      ),
+
+      tableId:
+      table.id
+
+    });
+
+  });
+
+
+  const count=
+  voiceDraft.length;
+
+
+  voiceDraft=[];
+
+
+  render();
+
+  saveOnly();
+
+  renderGuestsManager();
+
+
+  toast(
+    `${count} guests added`
+  );
+
+}
+
+
+/* ==================================================
+EDIT / MOVE / DELETE GUEST
 ================================================== */
 
 function editGuest(id){
@@ -3861,11 +4279,7 @@ function editGuest(id){
     surname===null
     ||
     !surname.trim()
-  ){
-
-    return;
-
-  }
+  )return;
 
 
   const firstName=
@@ -3878,45 +4292,20 @@ function editGuest(id){
 
   if(
     firstName===null
-  ){
-
-    return;
-
-  }
+  )return;
 
 
-  const partyAnswer=
+  const party=
 
   prompt(
-    'Number of people',
+    'People',
     guest.partySize||1
   );
 
 
   if(
-    partyAnswer===null
-  ){
-
-    return;
-
-  }
-
-
-  const partySize=
-
-  Math.max(
-
-    1,
-
-    Math.min(
-
-      20,
-
-      +partyAnswer||1
-
-    )
-
-  );
+    party===null
+  )return;
 
 
   const table=
@@ -3927,11 +4316,19 @@ function editGuest(id){
   );
 
 
-  if(
-    table
-  ){
+  const size=
 
-    const usedWithout=
+  Math.max(
+    1,
+    +party||1
+  );
+
+
+  if(table){
+
+    const free=
+
+    table.seats-
 
     tableUsedSeats(
       table.id,
@@ -3940,14 +4337,12 @@ function editGuest(id){
 
 
     if(
-      usedWithout+
-      partySize
-      >
-      table.seats
+      size>
+      free
     ){
 
       toast(
-        'Not enough seats at this table'
+        'Not enough seats'
       );
 
       return;
@@ -3969,12 +4364,12 @@ function editGuest(id){
 
 
   guest.partySize=
-  partySize;
+  size;
 
 
   render();
 
-  commitChange();
+  saveOnly();
 
 
   if(
@@ -3990,16 +4385,12 @@ function editGuest(id){
     activePanel==='lists'
   ){
 
-    renderListsPanel();
+    renderLists();
 
   }
 
 }
 
-
-/* ==================================================
-   MOVE GUEST
-================================================== */
 
 function moveGuest(id){
 
@@ -4014,7 +4405,7 @@ function moveGuest(id){
   if(!guest)return;
 
 
-  const currentTable=
+  const current=
 
   S.tables.find(
     table=>
@@ -4026,10 +4417,10 @@ function moveGuest(id){
 
   prompt(
 
-    'Move to table number. Leave empty for Unassigned.',
+    'Move to table number',
 
-    currentTable
-    ?currentTable.number
+    current
+    ?current.number
     :''
 
   );
@@ -4037,48 +4428,16 @@ function moveGuest(id){
 
   if(
     answer===null
-  ){
-
-    return;
-
-  }
-
-
-  if(
-    !answer.trim()
-  ){
-
-    pushHistory();
-
-
-    guest.tableId=null;
-
-
-    render();
-
-    commitChange();
-
-
-    if(
-      activePanel==='lists'
-    ){
-
-      renderListsPanel();
-
-    }
-
-
-    return;
-
-  }
+  )return;
 
 
   const table=
 
   S.tables.find(
     table=>
-    String(table.number)===
-    answer.trim()
+
+    Number(table.number)===
+    Number(answer)
   );
 
 
@@ -4093,7 +4452,9 @@ function moveGuest(id){
   }
 
 
-  const used=
+  const free=
+
+  table.seats-
 
   tableUsedSeats(
     table.id,
@@ -4102,14 +4463,12 @@ function moveGuest(id){
 
 
   if(
-    used+
-    guest.partySize
-    >
-    table.seats
+    guest.partySize>
+    free
   ){
 
     toast(
-      'Not enough seats at that table'
+      'Not enough seats'
     );
 
     return;
@@ -4126,23 +4485,12 @@ function moveGuest(id){
 
   render();
 
-  commitChange();
+  saveOnly();
 
-
-  if(
-    activePanel==='lists'
-  ){
-
-    renderListsPanel();
-
-  }
+  renderLists();
 
 }
 
-
-/* ==================================================
-   UNASSIGN
-================================================== */
 
 function unassignGuest(id){
 
@@ -4165,7 +4513,7 @@ function unassignGuest(id){
 
   render();
 
-  commitChange();
+  saveOnly();
 
 
   if(
@@ -4176,21 +4524,8 @@ function unassignGuest(id){
 
   }
 
-
-  if(
-    activePanel==='lists'
-  ){
-
-    renderListsPanel();
-
-  }
-
 }
 
-
-/* ==================================================
-   DELETE GUEST COMPLETELY
-================================================== */
 
 function deleteGuest(id){
 
@@ -4207,23 +4542,14 @@ function deleteGuest(id){
 
   render();
 
-  commitChange();
-
-
-  if(
-    activeGuestTable
-  ){
-
-    refreshTableGuests();
-
-  }
+  saveOnly();
 
 
   if(
     activePanel==='lists'
   ){
 
-    renderListsPanel();
+    renderLists();
 
   }
 
@@ -4231,10 +4557,10 @@ function deleteGuest(id){
 
 
 /* ==================================================
-   LISTS
+LISTS
 ================================================== */
 
-function renderListsPanel(){
+function renderLists(){
 
   const cards=
 
@@ -4263,145 +4589,102 @@ function renderListsPanel(){
     );
 
 
-    const people=
+    return`
 
-    tableUsedSeats(
-      table.id
-    );
+    <div class="setupCard">
 
+      <div
+      style="display:flex;justify-content:space-between;align-items:center">
 
-    const guestRows=
+        <strong>
+          Table ${table.number}
+        </strong>
 
-    guests.length
+        <span
+        style="font-size:11px;color:#777">
 
-    ?
+          ${tableUsedSeats(table.id)}/${table.seats}
 
-    guests.map(
-      guest=>
-
-      `
-
-      <div class="listGuest">
-
-        <div>
-
-          <div class="listGuestName">
-
-            ${safe(
-              fullGuestName(
-                guest
-              )
-            )}
-
-          </div>
-
-          <div class="listGuestMeta">
-
-            ${guest.partySize}
-            ${guest.partySize===1
-            ?'person'
-            :'people'}
-
-          </div>
-
-        </div>
-
-
-        <div class="listActions">
-
-          <button
-          class="secondary"
-          onclick="editGuest('${guest.id}')">
-
-            Edit
-
-          </button>
-
-          <button
-          class="secondary"
-          onclick="moveGuest('${guest.id}')">
-
-            Move
-
-          </button>
-
-          <button
-          class="danger"
-          onclick="deleteGuest('${guest.id}')">
-
-            ×
-
-          </button>
-
-        </div>
+        </span>
 
       </div>
 
-      `
 
-    )
+      ${guests.length
 
-    .join('')
+      ?
 
-    :
+      guests
 
-    `
-
-    <div class="hint"
-    style="margin:7px 0 0">
-
-      No guests yet.
-
-    </div>
-
-    `;
-
-
-    return `
-
-    <div
-    class="tableCard"
-    data-search="
-    table ${table.number}
-    ${guests
       .map(
         guest=>
-        fullGuestName(
-          guest
-        )
-      )
-      .join(' ')
-    }
-    ">
 
-      <div class="tableCardHeader">
+        `
 
-        <div>
+        <div class="guestRow">
 
-          <strong>
-            Table ${table.number}
-          </strong>
+          <div>
 
-          <div class="tableCardMeta">
+            <div class="guestName">
 
-            ${people}/${table.seats}
-            people
+              ${safe(
+                guestFullName(
+                  guest
+                )
+              )}
+
+            </div>
+
+            <div class="guestMeta">
+
+              ${guest.partySize}
+              people
+
+            </div>
+
+          </div>
+
+
+          <div class="actions">
+
+            <button
+            class="secondary"
+            onclick="editGuest('${guest.id}')">
+
+              Edit
+
+            </button>
+
+            <button
+            class="secondary"
+            onclick="moveGuest('${guest.id}')">
+
+              Move
+
+            </button>
 
           </div>
 
         </div>
 
-        <button
-        class="secondary"
-        onclick="openTableGuests('${table.id}')">
+        `
 
-          Open
+      )
 
-        </button>
+      .join('')
+
+      :
+
+      `
+
+      <div class="hint"
+      style="margin-top:7px">
+
+        No guests
 
       </div>
 
-      ${guestRows}
+      `}
 
     </div>
 
@@ -4412,100 +4695,6 @@ function renderListsPanel(){
   .join('');
 
 
-  const unassigned=
-
-  S.guests
-  .filter(
-    guest=>
-    !guest.tableId
-  );
-
-
-  const unassignedHtml=
-
-  unassigned.length
-
-  ?
-
-  `
-
-  <div class="section">
-
-    <h3>
-      Unassigned Guests
-    </h3>
-
-    ${unassigned
-
-    .sort(
-      compareGuests
-    )
-
-    .map(
-      guest=>
-
-      `
-
-      <div class="listGuest">
-
-        <div>
-
-          <div class="listGuestName">
-
-            ${safe(
-              fullGuestName(
-                guest
-              )
-            )}
-
-          </div>
-
-          <div class="listGuestMeta">
-
-            ${guest.partySize}
-            ${guest.partySize===1
-            ?'person'
-            :'people'}
-
-          </div>
-
-        </div>
-
-        <div class="listActions">
-
-          <button
-          class="secondary"
-          onclick="editGuest('${guest.id}')">
-
-            Edit
-
-          </button>
-
-          <button
-          class="secondary"
-          onclick="moveGuest('${guest.id}')">
-
-            Assign
-
-          </button>
-
-        </div>
-
-      </div>
-
-      `
-
-    )
-
-    .join('')}
-
-  </div>
-
-  `
-
-  :'';
-
-
   $('panelContent')
   .innerHTML=`
 
@@ -4514,21 +4703,15 @@ function renderListsPanel(){
   </h2>
 
   <div class="hint">
-    Review every table and every guest.
+    Every table and every guest.
   </div>
-
-  <input
-  id="listSearch"
-  class="field"
-  placeholder="Search surname, name or table..."
-  oninput="filterLists(this.value)">
 
 
   <button
-  style="width:100%;margin-top:7px"
-  onclick="openAlphabeticalPreview()">
+  style="width:100%"
+  onclick="openDirectory()">
 
-    Alphabetical Preview
+    Alphabetical Directory
 
   </button>
 
@@ -4540,59 +4723,20 @@ function renderListsPanel(){
 
   </div>
 
-
-  ${unassignedHtml}
-
   `;
 
 }
 
 
-function filterLists(value){
-
-  const query=
-  value
-  .toLowerCase();
-
-
-  document
-  .querySelectorAll(
-    '.tableCard'
-  )
-
-  .forEach(card=>{
-
-    card.style.display=
-
-    card
-    .dataset
-    .search
-    .toLowerCase()
-    .includes(query)
-
-    ?'block'
-
-    :'none';
-
-  });
-
-}
-
-
 /* ==================================================
-   ALPHABETICAL PREVIEW
+DIRECTORY
 ================================================== */
 
-function openAlphabeticalPreview(){
+function openDirectory(){
 
-  const assigned=
+  const guests=
 
   S.guests
-
-  .filter(
-    guest=>
-    guest.tableId
-  )
 
   .slice()
 
@@ -4604,14 +4748,27 @@ function openAlphabeticalPreview(){
   const groups={};
 
 
-  assigned
+  guests
   .forEach(guest=>{
 
     const letter=
 
-    firstLetter(
-      guest.surname
-    );
+    (
+      guest.surname||
+      '#'
+    )
+
+    .trim()
+
+    .charAt(0)
+
+    .toLocaleUpperCase(
+      'el-GR'
+    )
+
+    ||
+
+    '#';
 
 
     if(
@@ -4633,11 +4790,11 @@ function openAlphabeticalPreview(){
 
   const letters=
 
-  Object
-  .keys(groups)
+  Object.keys(groups)
 
   .sort(
     (a,b)=>
+
     a.localeCompare(
       b,
       'el'
@@ -4645,7 +4802,8 @@ function openAlphabeticalPreview(){
   );
 
 
-  const html=
+  $('directoryContent')
+  .innerHTML=
 
   letters.length
 
@@ -4655,9 +4813,16 @@ function openAlphabeticalPreview(){
 
   .map(letter=>{
 
-    const rows=
+    return`
 
-    groups[letter]
+    <div class="letter">
+
+      ${safe(letter)}
+
+    </div>
+
+
+    ${groups[letter]
 
     .map(guest=>{
 
@@ -4669,28 +4834,28 @@ function openAlphabeticalPreview(){
       );
 
 
-      return `
+      return`
 
-      <div class="previewGuest">
+      <div class="directoryRow">
 
         <strong>
 
           ${safe(
-            fullGuestName(
+            guestFullName(
               guest
             )
           )}
 
         </strong>
 
+
         <span>
 
           ${guest.partySize}
-          ${guest.partySize===1
-          ?'person'
-          :'people'}
+          people
 
         </span>
+
 
         <span>
 
@@ -4707,22 +4872,7 @@ function openAlphabeticalPreview(){
 
     })
 
-    .join('');
-
-
-    return `
-
-    <div class="letterBlock">
-
-      <div class="letterTitle">
-
-        ${safe(letter)}
-
-      </div>
-
-      ${rows}
-
-    </div>
+    .join('')}
 
     `;
 
@@ -4732,30 +4882,19 @@ function openAlphabeticalPreview(){
 
   :
 
-  `
-
-  <div class="hint">
-    No assigned guests yet.
-  </div>
-
-  `;
+  '<div class="hint">No guests yet.</div>';
 
 
-  $('previewContent')
-  .innerHTML=
-  html;
-
-
-  $('previewOverlay')
+  $('directoryOverlay')
   .classList
   .add('open');
 
 }
 
 
-function closePreview(){
+function closeDirectory(){
 
-  $('previewOverlay')
+  $('directoryOverlay')
   .classList
   .remove('open');
 
@@ -4763,12 +4902,214 @@ function closePreview(){
 
 
 /* ==================================================
-   STATUS
+MORE
+================================================== */
+
+function renderMore(){
+
+  $('panelContent')
+  .innerHTML=`
+
+  <h2>
+    More
+  </h2>
+
+
+  <button
+  class="secondary"
+  style="width:100%"
+  onclick="undo()">
+
+    ↶ Undo
+
+  </button>
+
+
+  <button
+  class="secondary"
+  style="width:100%;margin-top:7px"
+  onclick="redo()">
+
+    ↷ Redo
+
+  </button>
+
+
+  <div class="section">
+
+    <button
+    class="danger"
+    style="width:100%"
+    onclick="clearTables()">
+
+      Clear Tables
+
+    </button>
+
+  </div>
+
+
+  <div class="section">
+
+    <button
+    class="danger"
+    style="width:100%"
+    onclick="resetEverything()">
+
+      Reset Everything
+
+    </button>
+
+  </div>
+
+  `;
+
+}
+
+
+function clearTables(){
+
+  if(
+    !confirm(
+      'Delete all tables? Guests will become unassigned.'
+    )
+  )return;
+
+
+  pushHistory();
+
+
+  S.tables=[];
+
+
+  S.guests
+  .forEach(
+    guest=>{
+
+      guest.tableId=null;
+
+    }
+  );
+
+
+  selected=null;
+
+
+  render();
+
+  saveOnly();
+
+}
+
+
+function resetEverything(){
+
+  if(
+    !confirm(
+      'Delete the entire project?'
+    )
+  )return;
+
+
+  pushHistory();
+
+
+  S={
+
+    venue:null,
+
+    tables:[],
+
+    guests:[],
+
+    objects:[]
+
+  };
+
+
+  selected=null;
+
+
+  applyVenue();
+
+  render();
+
+  saveOnly();
+
+}
+
+
+/* ==================================================
+CANVAS TAP
+================================================== */
+
+canvas.addEventListener(
+'pointerdown',
+e=>{
+
+  if(
+    mobile()
+  ){
+
+    closePanel();
+
+  }
+
+
+  if(
+    e.target===canvas
+    ||
+    e.target===layer
+  ){
+
+    selected=null;
+
+
+    context.style.display=
+    'none';
+
+
+    document
+    .querySelectorAll('.table')
+    .forEach(
+      el=>
+      el
+      .classList
+      .remove('selected')
+    );
+
+  }
+
+}
+);
+
+
+/* ==================================================
+STATUS
 ================================================== */
 
 function updateStatus(){
 
-  const seatedPeople=
+  const people=
+
+  S.guests
+
+  .reduce(
+    (
+      total,
+      guest
+    )=>
+
+    total+
+    Number(
+      guest.partySize||1
+    ),
+
+    0
+  );
+
+
+  const seated=
 
   S.guests
 
@@ -4792,61 +5133,23 @@ function updateStatus(){
   );
 
 
-  const totalPeople=
-
-  S.guests
-
-  .reduce(
-    (
-      total,
-      guest
-    )=>
-
-    total+
-    Number(
-      guest.partySize||1
-    ),
-
-    0
-  );
-
-
-  const completeTables=
-
-  S.tables
-
-  .filter(
-    table=>
-
-    tableUsedSeats(
-      table.id
-    )
-
-    ===
-
-    table.seats
-  )
-
-  .length;
-
-
   $('status')
   .textContent=
 
-  `${S.tables.length} tables · ${seatedPeople}/${totalPeople} people seated · ${completeTables} complete`;
+  `${S.tables.length} tables · ${seated}/${people} people seated`;
 
 }
 
 
 /* ==================================================
-   GUEST HELPERS
+HELPERS
 ================================================== */
 
-function fullGuestName(
+function guestFullName(
 guest
 ){
 
-  return [
+  return[
 
     guest.surname||'',
 
@@ -4866,7 +5169,7 @@ a,
 b
 ){
 
-  const surnameCompare=
+  const surname=
 
   (
     a.surname||''
@@ -4886,15 +5189,15 @@ b
 
 
   if(
-    surnameCompare!==0
+    surname!==0
   ){
 
-    return surnameCompare;
+    return surname;
 
   }
 
 
-  return (
+  return(
 
     a.firstName||''
 
@@ -4915,75 +5218,6 @@ b
 }
 
 
-function firstLetter(text){
-
-  const clean=
-
-  (
-    text||''
-  )
-
-  .trim();
-
-
-  if(
-    !clean
-  ){
-
-    return '#';
-
-  }
-
-
-  return clean
-  .charAt(0)
-  .toLocaleUpperCase(
-    'el-GR'
-  );
-
-}
-
-
-/* ==================================================
-   TOAST
-================================================== */
-
-function toast(message){
-
-  const element=
-  $('toast');
-
-
-  element.textContent=
-  message;
-
-
-  element.style.display=
-  'block';
-
-
-  clearTimeout(
-    window.toastTimer
-  );
-
-
-  window.toastTimer=
-
-  setTimeout(
-    ()=>{
-
-      element.style.display=
-      'none';
-
-    },
-    1700
-  );
-
-}
-
-
-/* SAFE HTML */
-
 function safe(text){
 
   const div=
@@ -5001,8 +5235,71 @@ function safe(text){
 }
 
 
+function safeAttr(text){
+
+  return String(
+    text||''
+  )
+
+  .replace(
+    /&/g,
+    '&amp;'
+  )
+
+  .replace(
+    /"/g,
+    '&quot;'
+  )
+
+  .replace(
+    /</g,
+    '&lt;'
+  )
+
+  .replace(
+    />/g,
+    '&gt;'
+  );
+
+}
+
+
+function toast(message){
+
+  const el=
+  $('toast');
+
+
+  el.textContent=
+  message;
+
+
+  el.style.display=
+  'block';
+
+
+  clearTimeout(
+    window.toastTimer
+  );
+
+
+  window.toastTimer=
+
+  setTimeout(
+    ()=>{
+
+      el.style.display=
+      'none';
+
+    },
+    1700
+  );
+
+}
+
+
 /* ==================================================
-   START
+START
 ================================================== */
 
 load();
