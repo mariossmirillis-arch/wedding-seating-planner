@@ -1,1242 +1,700 @@
 <!doctype html>
-
 <html lang="el">
-
 <head>
-
 <meta charset="utf-8">
-
-<meta
-name="viewport"
-content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-
-<title>Seatly 4.4</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Seatly 4.5</title>
 
 <style>
-
-*{
-box-sizing:border-box
-}
+*{box-sizing:border-box}
 
 :root{
-
---bg:#f3f1ed;
---paper:#ffffff;
---ink:#202020;
---muted:#777;
---line:#e4ded6;
---soft:#f2eee9;
-
---green:#dff3e4;
---greenBorder:#34784a;
-
---danger:#a43a32;
---dangerSoft:#fff0ee;
-
+  --bg:#f3f1ed;
+  --paper:#fff;
+  --ink:#202020;
+  --muted:#777;
+  --line:#e5dfd7;
+  --soft:#f2eee9;
+  --green:#dff3e4;
+  --greenB:#34784a;
+  --danger:#a43a32;
+  --dangerSoft:#fff0ee;
 }
 
-html,
-body{
-
-margin:0;
-
-width:100%;
-height:100%;
-
-font-family:
-system-ui,
--apple-system,
-BlinkMacSystemFont,
-"Segoe UI",
-sans-serif;
-
-background:var(--bg);
-
-color:var(--ink);
-
+html,body{
+  margin:0;
+  width:100%;
+  height:100%;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--ink);
 }
 
-body{
-overflow:hidden
-}
+body{overflow:hidden}
 
-button,
-input,
-select{
-
-font:inherit
-
-}
+button,input,select{font:inherit}
 
 button{
-
-border:0;
-
-border-radius:10px;
-
-padding:9px 11px;
-
-background:var(--ink);
-
-color:#fff;
-
-font-weight:700;
-
-cursor:pointer
-
+  border:0;
+  border-radius:10px;
+  padding:9px 11px;
+  background:var(--ink);
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
 }
 
 button.secondary{
-
-background:#fff;
-
-color:var(--ink);
-
-border:1px solid var(--line)
-
+  background:#fff;
+  color:var(--ink);
+  border:1px solid var(--line);
 }
 
 button.soft{
-
-background:var(--soft);
-
-color:var(--ink)
-
+  background:var(--soft);
+  color:var(--ink);
 }
 
 button.danger{
-
-background:var(--danger);
-
-color:#fff
-
+  background:var(--danger);
+  color:#fff;
 }
 
 button.dangerSoft{
-
-background:var(--dangerSoft);
-
-color:var(--danger);
-
-border:1px solid #efc8c3
-
+  background:var(--dangerSoft);
+  color:var(--danger);
+  border:1px solid #efc8c3;
 }
 
 button:disabled{
-
-opacity:.35
-
+  opacity:.38;
+  cursor:default;
 }
 
-/* =========================
-TOP
-========================= */
+/* TOP */
 
 .topbar{
-
-height:58px;
-
-background:#fff;
-
-border-bottom:1px solid var(--line);
-
-display:flex;
-
-align-items:center;
-
-justify-content:space-between;
-
-padding:0 12px;
-
-position:relative;
-
-z-index:120
-
+  height:58px;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 12px;
+  position:relative;
+  z-index:120;
 }
 
 .logo{
-
-font-size:25px;
-
-font-weight:900;
-
-letter-spacing:-1px
-
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:-1px;
 }
 
-.logo span{
-
-font-weight:400
-
-}
+.logo span{font-weight:400}
 
 .topActions{
-
-display:flex;
-
-align-items:center;
-
-gap:5px
-
+  display:flex;
+  align-items:center;
+  gap:5px;
 }
 
 .saved{
-
-font-size:11px;
-
-color:#777
-
+  font-size:11px;
+  color:#777;
 }
 
-/* =========================
-APP
-========================= */
+/* APP */
 
 .app{
-
-height:calc(100vh - 58px);
-
-display:grid;
-
-grid-template-columns:
-64px
-280px
-1fr
-
+  height:calc(100vh - 58px);
+  display:grid;
+  grid-template-columns:64px 280px 1fr;
 }
 
-/* =========================
-LEFT TOOLBAR
-========================= */
+/* LEFT TOOLBAR */
 
 .rail{
-
-background:#202020;
-
-padding:6px 4px;
-
-display:flex;
-
-flex-direction:column;
-
-gap:5px;
-
-z-index:90
-
+  background:#202020;
+  padding:6px 4px;
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  z-index:90;
 }
 
 .rail button{
-
-height:54px;
-
-background:transparent;
-
-padding:4px;
-
-font-size:9px;
-
-display:flex;
-
-flex-direction:column;
-
-align-items:center;
-
-justify-content:center;
-
-gap:3px
-
+  height:54px;
+  background:transparent;
+  padding:4px;
+  font-size:9px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
 }
 
-.rail button b{
-
-font-size:17px
-
-}
+.rail button b{font-size:17px}
 
 .rail button.active{
-
-background:#fff;
-
-color:#202020
-
+  background:#fff;
+  color:#202020;
 }
 
-/* =========================
-SIDE PANEL
-========================= */
+/* PANEL */
 
 .panel{
-
-background:#fff;
-
-border-right:1px solid var(--line);
-
-padding:14px;
-
-overflow:auto;
-
-position:relative;
-
-z-index:80
-
+  background:#fff;
+  border-right:1px solid var(--line);
+  padding:14px;
+  overflow:auto;
+  position:relative;
+  z-index:80;
 }
 
 .panel h2{
-
-font-size:18px;
-
-margin:0 0 5px
-
+  font-size:18px;
+  margin:0 0 5px;
 }
 
 .panel h3{
-
-font-size:14px;
-
-margin:0 0 8px
-
+  font-size:14px;
+  margin:0 0 8px;
 }
 
 .hint{
-
-font-size:12px;
-
-color:var(--muted);
-
-line-height:1.45;
-
-margin-bottom:12px
-
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.45;
+  margin-bottom:12px;
 }
 
 .section{
-
-border-top:1px solid #eee8e1;
-
-padding-top:11px;
-
-margin-top:11px
-
+  border-top:1px solid #eee8e1;
+  padding-top:11px;
+  margin-top:11px;
 }
 
 .field{
-
-width:100%;
-
-padding:9px;
-
-border:1px solid #d8d1c9;
-
-border-radius:9px;
-
-background:#fff
-
+  width:100%;
+  padding:9px;
+  border:1px solid #d8d1c9;
+  border-radius:9px;
+  background:#fff;
 }
 
 .grid2{
-
-display:grid;
-
-grid-template-columns:1fr 1fr;
-
-gap:7px
-
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
 }
 
 .grid4{
-
-display:grid;
-
-grid-template-columns:repeat(4,1fr);
-
-gap:6px
-
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:6px;
 }
 
-.panelClose{
+.panelClose{display:none}
 
-display:none
-
-}
-
-/* =========================
-QUICK SETUP
-========================= */
+/* QUICK SETUP */
 
 .quickButton{
-
-background:#f5f2ed;
-
-color:#222;
-
-border:1px solid #e1dbd3;
-
-padding:12px 4px
-
-}
-
-.quickButton:hover{
-
-background:#ece7e0
-
+  background:#f5f2ed;
+  color:#222;
+  border:1px solid #e1dbd3;
+  padding:12px 4px;
 }
 
 .setupCard{
-
-border:1px solid var(--line);
-
-border-radius:14px;
-
-background:#faf9f7;
-
-padding:11px;
-
-margin-top:10px
-
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#faf9f7;
+  padding:11px;
+  margin-top:10px;
 }
 
 .setupTitle{
-
-font-size:17px;
-
-font-weight:850
-
+  font-size:17px;
+  font-weight:850;
 }
 
 .setupOption{
-
-display:grid;
-
-grid-template-columns:1fr auto;
-
-gap:8px;
-
-align-items:center;
-
-padding:10px 0;
-
-border-top:1px solid #ece7e1
-
-}
-
-.setupOption:first-of-type{
-
-margin-top:8px
-
-}
-
-.setupOption strong{
-
-font-size:13px
-
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+  align-items:center;
+  padding:10px 0;
+  border-top:1px solid #ece7e1;
 }
 
 .setupMeta{
-
-font-size:11px;
-
-color:#777;
-
-margin-top:2px
-
+  font-size:11px;
+  color:#777;
+  margin-top:2px;
 }
 
-/* =========================
-WORKSPACE
-========================= */
+/* WORKSPACE */
 
 .work{
-
-background:#eae7e2;
-
-padding:10px;
-
-min-width:0;
-
-min-height:0;
-
-overflow:hidden;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center
-
+  background:#eae7e2;
+  padding:8px;
+  min-width:0;
+  min-height:0;
+  overflow:hidden;
+  display:flex;
+  align-items:stretch;
+  justify-content:center;
 }
 
 .canvasWrap{
-
-width:100%;
-
-height:100%;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-overflow:hidden
-
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:stretch;
+  justify-content:center;
 }
-
-/*
-DESKTOP:
-wide workspace.
-*/
 
 .canvas{
-
-position:relative;
-
-width:min(100%,1200px);
-
-aspect-ratio:16/10;
-
-max-height:100%;
-
-background:#fff;
-
-border:1px solid var(--line);
-
-border-radius:16px;
-
-overflow:hidden;
-
-touch-action:none;
-
-box-shadow:
-0 12px 30px rgba(0,0,0,.08)
-
+  position:relative;
+  width:min(100%,1300px);
+  height:100%;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  overflow:hidden;
+  touch-action:none;
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
 }
 
-/*
-Background never moves.
-*/
-
 .venueBg{
-
-position:absolute;
-
-inset:0;
-
-background:
-#fff
-center
-/
-contain
-no-repeat;
-
-pointer-events:none
-
+  position:absolute;
+  inset:0;
+  background:#fff center/contain no-repeat;
+  pointer-events:none;
 }
 
 .layer{
-
-position:absolute;
-
-inset:0
-
+  position:absolute;
+  inset:0;
 }
 
 .empty{
-
-position:absolute;
-
-inset:0;
-
-display:grid;
-
-place-items:center;
-
-text-align:center;
-
-color:#999;
-
-pointer-events:none
-
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  color:#999;
+  pointer-events:none;
 }
 
-/* =========================
-TABLE
-========================= */
+/* TABLES */
 
 .obj{
-
-position:absolute;
-
-touch-action:none;
-
-user-select:none
-
+  position:absolute;
+  touch-action:none;
+  user-select:none;
 }
 
 .table{
-
-width:100px;
-
-height:100px;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-cursor:grab
-
+  width:82px;
+  height:82px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:grab;
 }
 
 .table.selected{
-
-outline:3px solid rgba(32,32,32,.17);
-
-outline-offset:3px
-
+  outline:3px solid rgba(32,32,32,.17);
+  outline-offset:3px;
 }
 
 .core{
-
-width:60px;
-
-height:60px;
-
-border:2px solid #222;
-
-border-radius:50%;
-
-background:#fff;
-
-display:flex;
-
-flex-direction:column;
-
-align-items:center;
-
-justify-content:center;
-
-box-shadow:
-0 4px 12px rgba(0,0,0,.13);
-
-z-index:2
-
+  width:48px;
+  height:48px;
+  border:2px solid #222;
+  border-radius:50%;
+  background:#fff;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 4px 12px rgba(0,0,0,.13);
+  z-index:2;
 }
 
 .core b{
-
-font-size:9px
-
+  font-size:8px;
 }
 
 .core span{
-
-font-size:9px;
-
-color:#666;
-
-margin-top:2px
-
+  font-size:8px;
+  color:#666;
+  margin-top:2px;
 }
 
 .table.complete .core{
-
-background:var(--green);
-
-border-color:var(--greenBorder)
-
+  background:var(--green);
+  border-color:var(--greenB);
 }
 
 .chair{
-
-position:absolute;
-
-width:11px;
-
-height:11px;
-
-border:1.2px solid #555;
-
-background:#fff;
-
-border-radius:3px
-
+  position:absolute;
+  width:9px;
+  height:9px;
+  border:1.1px solid #555;
+  background:#fff;
+  border-radius:3px;
 }
 
-/* =========================
-CONTEXT BAR
-========================= */
+/* CONTEXT */
 
 .context{
-
-position:absolute;
-
-left:50%;
-
-top:8px;
-
-transform:translateX(-50%);
-
-display:none;
-
-align-items:center;
-
-gap:5px;
-
-background:#fff;
-
-border:1px solid var(--line);
-
-border-radius:12px;
-
-padding:5px;
-
-z-index:40;
-
-box-shadow:
-0 8px 22px rgba(0,0,0,.14)
-
+  position:absolute;
+  left:50%;
+  top:8px;
+  transform:translateX(-50%);
+  display:none;
+  align-items:center;
+  gap:5px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:5px;
+  z-index:40;
+  box-shadow:0 8px 22px rgba(0,0,0,.14);
 }
 
 .context input,
 .context select{
-
-width:64px;
-
-padding:6px;
-
-border:1px solid var(--line);
-
-border-radius:8px
-
+  width:62px;
+  padding:6px;
+  border:1px solid var(--line);
+  border-radius:8px;
 }
 
 .context button{
-
-padding:6px 7px;
-
-font-size:11px
-
+  padding:6px 7px;
+  font-size:11px;
 }
 
-/* =========================
-TRASH
-========================= */
+/* TRASH */
 
 .trash{
-
-position:absolute;
-
-left:50%;
-
-bottom:12px;
-
-transform:translateX(-50%);
-
-display:none;
-
-background:#fff;
-
-border:2px solid var(--line);
-
-border-radius:999px;
-
-padding:8px 15px;
-
-font-size:11px;
-
-font-weight:800;
-
-z-index:45
-
+  position:absolute;
+  left:50%;
+  bottom:12px;
+  transform:translateX(-50%);
+  display:none;
+  background:#fff;
+  border:2px solid var(--line);
+  border-radius:999px;
+  padding:8px 15px;
+  font-size:11px;
+  font-weight:800;
+  z-index:45;
 }
 
 .trash.hot{
-
-background:#ffe7e3;
-
-border-color:#b23b30
-
+  background:#ffe7e3;
+  border-color:#b23b30;
 }
 
-/* =========================
-STATUS
-========================= */
+/* STATUS */
 
 .status{
-
-position:absolute;
-
-left:8px;
-
-bottom:8px;
-
-background:#fff;
-
-border:1px solid var(--line);
-
-border-radius:999px;
-
-padding:6px 9px;
-
-font-size:10px;
-
-color:#666;
-
-z-index:30
-
+  position:absolute;
+  left:8px;
+  bottom:8px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:6px 9px;
+  font-size:10px;
+  color:#666;
+  z-index:30;
 }
 
-/* =========================
-GUEST PANEL
-========================= */
+/* GUEST PANEL */
 
 .guestPanel{
-
-position:fixed;
-
-top:58px;
-
-right:0;
-
-bottom:0;
-
-width:370px;
-
-background:#fff;
-
-border-left:1px solid var(--line);
-
-box-shadow:
--10px 0 30px rgba(0,0,0,.12);
-
-z-index:110;
-
-display:none;
-
-padding:15px;
-
-overflow:auto
-
+  position:fixed;
+  top:58px;
+  right:0;
+  bottom:0;
+  width:370px;
+  background:#fff;
+  border-left:1px solid var(--line);
+  box-shadow:-10px 0 30px rgba(0,0,0,.12);
+  z-index:110;
+  display:none;
+  padding:15px;
+  overflow:auto;
 }
 
-.guestPanel.open{
-
-display:block
-
-}
+.guestPanel.open{display:block}
 
 .guestHeader{
-
-display:flex;
-
-align-items:flex-start;
-
-justify-content:space-between;
-
-gap:8px;
-
-margin-bottom:12px
-
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:8px;
+  margin-bottom:12px;
 }
 
 .guestTitle{
-
-font-size:21px;
-
-font-weight:850
-
+  font-size:21px;
+  font-weight:850;
 }
 
 .guestCount{
-
-font-size:12px;
-
-color:#777
-
+  font-size:12px;
+  color:#777;
 }
 
 .guestBox{
-
-background:#faf9f7;
-
-border:1px solid var(--line);
-
-border-radius:13px;
-
-padding:11px
-
+  background:#faf9f7;
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:11px;
 }
 
 .formLabel{
-
-font-size:11px;
-
-font-weight:750;
-
-color:#666;
-
-margin:8px 0 4px
-
+  font-size:11px;
+  font-weight:750;
+  color:#666;
+  margin:8px 0 4px;
 }
 
 .guestRow{
-
-display:grid;
-
-grid-template-columns:1fr auto;
-
-gap:6px;
-
-align-items:center;
-
-padding:8px 0;
-
-border-bottom:1px solid #eee
-
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:6px;
+  align-items:center;
+  padding:8px 0;
+  border-bottom:1px solid #eee;
 }
 
 .guestName{
-
-font-size:13px;
-
-font-weight:700
-
+  font-size:13px;
+  font-weight:700;
 }
 
 .guestMeta{
-
-font-size:11px;
-
-color:#777
-
+  font-size:11px;
+  color:#777;
 }
 
 .actions{
-
-display:flex;
-
-gap:4px
-
+  display:flex;
+  gap:4px;
 }
 
 .actions button{
-
-font-size:10px;
-
-padding:5px 6px
-
+  font-size:10px;
+  padding:5px 6px;
 }
 
-/* =========================
-DIRECTORY
-========================= */
+/* DIRECTORY */
 
 .directoryLetter{
-
-font-size:20px;
-
-font-weight:900;
-
-border-bottom:2px solid #222;
-
-margin:15px 0 5px
-
+  font-size:20px;
+  font-weight:900;
+  border-bottom:2px solid #222;
+  margin:15px 0 5px;
 }
 
 .directoryRow{
-
-display:grid;
-
-grid-template-columns:1fr auto auto auto;
-
-gap:8px;
-
-align-items:center;
-
-padding:8px 0;
-
-border-bottom:1px solid #eee;
-
-font-size:12px
-
+  display:grid;
+  grid-template-columns:1fr auto auto auto;
+  gap:8px;
+  align-items:center;
+  padding:8px 0;
+  border-bottom:1px solid #eee;
+  font-size:12px;
 }
 
-.directoryRow strong{
-
-font-size:13px
-
-}
-
-/* =========================
-OVERLAY
-========================= */
+/* OVERLAY */
 
 .overlay{
-
-position:fixed;
-
-inset:0;
-
-background:rgba(0,0,0,.45);
-
-display:none;
-
-align-items:center;
-
-justify-content:center;
-
-padding:18px;
-
-z-index:220
-
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  z-index:220;
 }
 
-.overlay.open{
-
-display:flex
-
-}
+.overlay.open{display:flex}
 
 .modal{
-
-width:min(850px,100%);
-
-max-height:90vh;
-
-overflow:auto;
-
-background:#fff;
-
-border-radius:18px;
-
-padding:20px
-
+  width:min(850px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:18px;
+  padding:20px;
 }
 
 .modalTop{
-
-display:flex;
-
-align-items:center;
-
-justify-content:space-between;
-
-gap:8px
-
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
 }
 
-/* =========================
-MOBILE
-========================= */
+/* MOBILE */
 
 @media(max-width:800px){
 
-.topbar{
-
-height:56px;
-
-padding:0 7px
-
-}
-
-.logo{
-
-font-size:21px
-
-}
-
-.saved{
-
-display:none
-
-}
-
-.topActions{
-
-gap:3px
-
-}
-
-.topActions button{
-
-font-size:11px;
-
-padding:7px 8px
-
-}
-
-.app{
-
-height:calc(100vh - 56px);
-
-grid-template-columns:
-54px
-1fr
-
-}
-
-.rail{
-
-padding:4px 2px
-
-}
-
-.rail button{
-
-height:48px;
-
-font-size:8px
-
-}
-
-.work{
-
-grid-column:2;
-
-padding:5px;
-
-align-items:flex-start
-
-}
-
-.canvasWrap{
-
-align-items:flex-start
-
-}
-
-/*
-IMPORTANT:
-Mobile is now 4:3,
-not short landscape.
-*/
-
-.canvas{
-
-width:100%;
-
-height:auto;
-
-aspect-ratio:4/3;
-
-max-height:calc(100vh - 68px);
-
-border-radius:12px
-
-}
-
-.panel{
-
-position:fixed;
-
-left:54px;
-
-right:0;
-
-bottom:0;
-
-top:auto;
-
-width:auto;
-
-max-height:55vh;
-
-display:none;
-
-border-right:0;
-
-border-top:1px solid var(--line);
-
-border-radius:18px 18px 0 0;
-
-padding:46px 12px 12px;
-
-box-shadow:
-0 -10px 30px rgba(0,0,0,.18);
-
-z-index:100
-
-}
-
-.panel.open{
-
-display:block
-
-}
-
-.panelClose{
-
-display:block;
-
-position:absolute;
-
-right:9px;
-
-top:7px;
-
-width:34px;
-
-height:34px;
-
-padding:0;
-
-border-radius:50%;
-
-background:var(--soft);
-
-color:#222;
-
-border:1px solid var(--line);
-
-font-size:20px
-
-}
-
-.guestPanel{
-
-top:56px;
-
-left:54px;
-
-right:0;
-
-bottom:0;
-
-width:auto;
-
-border-left:0;
-
-box-shadow:none
-
-}
-
-.grid4{
-
-grid-template-columns:repeat(2,1fr)
-
-}
-
-.context{
-
-max-width:95%;
-
-overflow:auto;
-
-white-space:nowrap
-
-}
-
-.directoryRow{
-
-grid-template-columns:1fr auto
-
-}
-
+  .topbar{
+    height:56px;
+    padding:0 7px;
+  }
+
+  .logo{
+    font-size:21px;
+  }
+
+  .saved{
+    display:none;
+  }
+
+  .topActions{
+    gap:3px;
+  }
+
+  .topActions button{
+    font-size:11px;
+    padding:7px 8px;
+  }
+
+  .app{
+    height:calc(100vh - 56px);
+    grid-template-columns:54px 1fr;
+  }
+
+  .rail{
+    padding:4px 2px;
+  }
+
+  .rail button{
+    height:48px;
+    font-size:8px;
+  }
+
+  .work{
+    grid-column:2;
+    padding:4px;
+    align-items:stretch;
+  }
+
+  /*
+  BIGGER MOBILE WORKSPACE:
+  almost full available screen height.
+  */
+
+  .canvasWrap{
+    align-items:stretch;
+  }
+
+  .canvas{
+    width:100%;
+    height:100%;
+    max-height:none;
+    border-radius:12px;
+  }
+
+  .panel{
+    position:fixed;
+    left:54px;
+    right:0;
+    bottom:0;
+    top:auto;
+    width:auto;
+    max-height:55vh;
+    display:none;
+    border-right:0;
+    border-top:1px solid var(--line);
+    border-radius:18px 18px 0 0;
+    padding:46px 12px 12px;
+    box-shadow:0 -10px 30px rgba(0,0,0,.18);
+    z-index:100;
+  }
+
+  .panel.open{
+    display:block;
+  }
+
+  .panelClose{
+    display:block;
+    position:absolute;
+    right:9px;
+    top:7px;
+    width:34px;
+    height:34px;
+    padding:0;
+    border-radius:50%;
+    background:var(--soft);
+    color:#222;
+    border:1px solid var(--line);
+    font-size:20px;
+  }
+
+  .guestPanel{
+    top:56px;
+    left:54px;
+    right:0;
+    bottom:0;
+    width:auto;
+    border-left:0;
+    box-shadow:none;
+  }
+
+  .grid4{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .context{
+    max-width:95%;
+    overflow:auto;
+    white-space:nowrap;
+  }
+
+  .directoryRow{
+    grid-template-columns:1fr auto;
+  }
+
+  .table{
+    width:72px;
+    height:72px;
+  }
+
+  .core{
+    width:42px;
+    height:42px;
+  }
+
+  .core b{
+    font-size:7px;
+  }
+
+  .core span{
+    font-size:7px;
+  }
+
+  .chair{
+    width:8px;
+    height:8px;
+  }
 }
 
 </style>
-
 </head>
 
 <body>
@@ -1249,9 +707,7 @@ seat<span>ly</span>
 
 <div class="topActions">
 
-<span
-class="saved"
-id="savedIndicator">
+<span class="saved" id="savedIndicator">
 Saved ✓
 </span>
 
@@ -1269,8 +725,7 @@ onclick="redo()">
 ↷
 </button>
 
-<button
-onclick="toast('PDF / PNG export will be added next')">
+<button onclick="toast('PDF / PNG export will be added next')">
 Finish
 </button>
 
@@ -1328,9 +783,7 @@ More
 </nav>
 
 
-<aside
-class="panel"
-id="panel">
+<aside class="panel" id="panel">
 
 <button
 class="panelClose"
@@ -1347,18 +800,11 @@ onclick="closePanel()">
 
 <div class="canvasWrap">
 
-<div
-class="canvas"
-id="canvas">
+<div class="canvas" id="canvas">
 
-<div
-class="venueBg"
-id="venueBg">
-</div>
+<div class="venueBg" id="venueBg"></div>
 
-<div
-class="empty"
-id="empty">
+<div class="empty" id="empty">
 
 <div>
 
@@ -1378,26 +824,15 @@ Start with Quick Setup
 
 </div>
 
-<div
-class="layer"
-id="layer">
-</div>
+<div class="layer" id="layer"></div>
 
-<div
-class="context"
-id="context">
-</div>
+<div class="context" id="context"></div>
 
-<div
-class="trash"
-id="trash">
+<div class="trash" id="trash">
 🗑 Drop to delete
 </div>
 
-<div
-class="status"
-id="status">
-</div>
+<div class="status" id="status"></div>
 
 </div>
 
@@ -1408,26 +843,19 @@ id="status">
 </div>
 
 
-<!-- TABLE GUESTS -->
+<!-- TABLE GUEST PANEL -->
 
-<aside
-class="guestPanel"
-id="guestPanel">
+<aside class="guestPanel" id="guestPanel">
 
 <div class="guestHeader">
 
 <div>
 
-<div
-class="guestTitle"
-id="guestTitle">
+<div class="guestTitle" id="guestTitle">
 Table
 </div>
 
-<div
-class="guestCount"
-id="guestCount">
-</div>
+<div class="guestCount" id="guestCount"></div>
 
 </div>
 
@@ -1509,9 +937,7 @@ Clear
 
 <!-- DIRECTORY -->
 
-<div
-class="overlay"
-id="directoryOverlay">
+<div class="overlay" id="directoryOverlay">
 
 <div class="modal">
 
@@ -1578,793 +1004,634 @@ z-index:300">
 
 <script>
 
-/* =========================
-STATE
-========================= */
+/* STATE */
 
 let S={
-
-venue:null,
-
-tables:[],
-
-guests:[]
-
+  venue:null,
+  tables:[],
+  guests:[]
 };
 
-
 let selected=null;
-
 let activePanel=null;
-
 let activeGuestTable=null;
 
-
 let undoStack=[];
-
 let redoStack=[];
 
+const $=id=>document.getElementById(id);
 
-const $=
-id=>document.getElementById(id);
+const canvas=$('canvas');
+const layer=$('layer');
+const venueBg=$('venueBg');
+const context=$('context');
+const trash=$('trash');
 
-
-const canvas=
-$('canvas');
-
-
-const layer=
-$('layer');
-
-
-const venueBg=
-$('venueBg');
-
-
-const context=
-$('context');
-
-
-const trash=
-$('trash');
-
-
-const mobile=
-()=>window.innerWidth<=800;
-
+const mobile=()=>window.innerWidth<=800;
 
 function uid(){
 
-if(
-window.crypto &&
-crypto.randomUUID
-){
+  if(
+    window.crypto &&
+    crypto.randomUUID
+  ){
+    return crypto.randomUUID();
+  }
 
-return crypto.randomUUID();
-
-}
-
-return String(
-Date.now()+Math.random()
-);
-
+  return String(
+    Date.now()+Math.random()
+  );
 }
 
 
-/* =========================
-SAVE / HISTORY
-========================= */
+/* HISTORY */
 
 function state(){
-
-return JSON.stringify(S);
-
+  return JSON.stringify(S);
 }
-
 
 function pushHistory(){
 
-undoStack.push(
-state()
-);
+  undoStack.push(
+    state()
+  );
 
+  if(
+    undoStack.length>60
+  ){
+    undoStack.shift();
+  }
 
-if(
-undoStack.length>60
-){
+  redoStack=[];
 
-undoStack.shift();
-
+  updateHistory();
 }
-
-
-redoStack=[];
-
-
-updateHistory();
-
-}
-
 
 function updateHistory(){
 
-$('undoBtn').disabled=
-!undoStack.length;
+  $('undoBtn').disabled=
+  !undoStack.length;
 
-
-$('redoBtn').disabled=
-!redoStack.length;
-
+  $('redoBtn').disabled=
+  !redoStack.length;
 }
-
-
-function saveOnly(){
-
-try{
-
-localStorage.setItem(
-'seatly44',
-JSON.stringify(S)
-);
-
-}catch(e){}
-
-
-$('savedIndicator')
-.textContent=
-'Saved ✓';
-
-
-updateStatus();
-
-}
-
 
 function undo(){
 
-if(
-!undoStack.length
-)return;
+  if(
+    !undoStack.length
+  )return;
 
+  redoStack.push(
+    state()
+  );
 
-redoStack.push(
-state()
-);
+  S=
+  JSON.parse(
+    undoStack.pop()
+  );
 
+  selected=null;
 
-S=
-JSON.parse(
-undoStack.pop()
-);
+  closeGuestPanel();
 
+  applyVenue();
 
-selected=null;
+  render();
 
+  saveOnly();
 
-closeGuestPanel();
-
-
-applyVenue();
-
-render();
-
-saveOnly();
-
-updateHistory();
-
+  updateHistory();
 }
-
 
 function redo(){
 
-if(
-!redoStack.length
-)return;
+  if(
+    !redoStack.length
+  )return;
 
+  undoStack.push(
+    state()
+  );
 
-undoStack.push(
-state()
-);
+  S=
+  JSON.parse(
+    redoStack.pop()
+  );
 
+  selected=null;
 
-S=
-JSON.parse(
-redoStack.pop()
-);
+  closeGuestPanel();
 
+  applyVenue();
 
-selected=null;
+  render();
 
+  saveOnly();
 
-closeGuestPanel();
-
-
-applyVenue();
-
-render();
-
-saveOnly();
-
-updateHistory();
-
+  updateHistory();
 }
 
 
-/* =========================
-LOAD
-========================= */
+/* SAVE */
+
+function saveOnly(){
+
+  try{
+
+    localStorage.setItem(
+      'seatly45',
+      JSON.stringify(S)
+    );
+
+  }catch(e){}
+
+  $('savedIndicator')
+  .textContent=
+  'Saved ✓';
+
+  updateStatus();
+}
+
+
+/* LOAD */
 
 function load(){
 
-try{
+  try{
 
-const old=
+    const old=
 
-localStorage.getItem('seatly44')
+    localStorage.getItem('seatly45')
 
-||
+    ||
 
-localStorage.getItem('seatly43')
+    localStorage.getItem('seatly44')
 
-||
+    ||
 
-localStorage.getItem('seatly42')
-
-||
-
-localStorage.getItem('seatly41');
+    localStorage.getItem('seatly43');
 
 
-if(old){
+    if(old){
 
-const data=
-JSON.parse(old);
+      const data=
+      JSON.parse(old);
 
+      S.venue=
+      data.venue||null;
 
-S.venue=
-data.venue||null;
+      S.tables=
+      data.tables||[];
 
+      S.guests=
 
-S.tables=
-data.tables||[];
+      (data.guests||[])
 
+      .map(guest=>{
 
-S.guests=
+        if(
+          guest.surname!==undefined
+        ){
 
-(data.guests||[])
+          return{
 
-.map(guest=>{
+            id:
+            guest.id||uid(),
 
-if(
-guest.surname!==undefined
-){
+            surname:
+            guest.surname||'',
 
-return{
+            firstName:
+            guest.firstName||'',
 
-id:
-guest.id||uid(),
+            partySize:
+            Math.max(
+              1,
+              Number(
+                guest.partySize||1
+              )
+            ),
 
-surname:
-guest.surname||'',
+            tableId:
+            guest.tableId||null
 
-firstName:
-guest.firstName||'',
+          };
+        }
 
-partySize:
-Math.max(
-1,
-Number(
-guest.partySize||1
-)
-),
+        const parts=
 
-tableId:
-guest.tableId||null
+        String(
+          guest.name||''
+        )
 
-};
+        .trim()
+        .split(/\s+/);
 
+        return{
+
+          id:
+          guest.id||uid(),
+
+          surname:
+          parts.length>1
+          ?parts[parts.length-1]
+          :parts[0]||'',
+
+          firstName:
+          parts.length>1
+          ?parts.slice(0,-1).join(' ')
+          :'',
+
+          partySize:1,
+
+          tableId:
+          guest.tableId||null
+
+        };
+
+      });
+
+    }
+
+  }catch(e){}
+
+  applyVenue();
+
+  render();
+
+  updateHistory();
 }
 
 
-const oldName=
-guest.name||'';
-
-
-const parts=
-
-oldName
-.trim()
-.split(/\s+/);
-
-
-return{
-
-id:
-guest.id||uid(),
-
-surname:
-parts.length>1
-?parts[parts.length-1]
-:parts[0]||'',
-
-firstName:
-parts.length>1
-?parts.slice(0,-1).join(' ')
-:'',
-
-partySize:1,
-
-tableId:
-guest.tableId||null
-
-};
-
-});
-
-}
-
-}catch(e){}
-
-
-applyVenue();
-
-render();
-
-updateHistory();
-
-}
-
-
-/* =========================
-NAVIGATION
-========================= */
+/* NAV */
 
 function setActive(type){
 
-[
-'Setup',
-'Tables',
-'Guests',
-'Lists',
-'Venue',
-'More'
-]
+  [
+    'Setup',
+    'Tables',
+    'Guests',
+    'Lists',
+    'Venue',
+    'More'
+  ]
 
-.forEach(name=>{
+  .forEach(name=>{
 
-$('nav'+name)
-.classList
-.toggle(
+    $('nav'+name)
+    .classList
+    .toggle(
+      'active',
+      name.toLowerCase()===type
+    );
 
-'active',
-
-name.toLowerCase()===type
-
-);
-
-});
-
+  });
 }
-
 
 function closePanel(){
 
-$('panel')
-.classList
-.remove('open');
+  $('panel')
+  .classList
+  .remove('open');
 
+  activePanel=null;
 
-activePanel=null;
-
-
-setActive('');
-
+  setActive('');
 }
-
 
 function togglePanel(type){
 
-if(
+  if(
 
-mobile()
+    mobile()
 
-&&
+    &&
 
-activePanel===type
+    activePanel===type
 
-&&
+    &&
 
-$('panel')
-.classList
-.contains('open')
+    $('panel')
+    .classList
+    .contains('open')
 
-){
+  ){
 
-closePanel();
+    closePanel();
 
-return;
+    return;
+  }
 
+  activePanel=
+  type;
+
+  setActive(type);
+
+  $('panel')
+  .classList
+  .add('open');
+
+
+  if(type==='setup'){
+    renderSetup();
+  }
+
+  if(type==='tables'){
+    renderTablesPanel();
+  }
+
+  if(type==='guests'){
+    renderGuestManager();
+  }
+
+  if(type==='lists'){
+    renderLists();
+  }
+
+  if(type==='venue'){
+    renderVenuePanel();
+  }
+
+  if(type==='more'){
+    renderMore();
+  }
 }
-
-
-activePanel=
-type;
-
-
-setActive(type);
-
-
-$('panel')
-.classList
-.add('open');
-
-
-if(type==='setup'){
-
-renderSetup();
-
-}
-
-
-if(type==='tables'){
-
-renderTablesPanel();
-
-}
-
-
-if(type==='guests'){
-
-renderGuestManager();
-
-}
-
-
-if(type==='lists'){
-
-renderLists();
-
-}
-
-
-if(type==='venue'){
-
-renderVenuePanel();
-
-}
-
-
-if(type==='more'){
-
-renderMore();
-
-}
-
-}
-
 
 function closeAfterAction(){
 
-if(
-mobile()
-){
-
-closePanel();
-
-}
-
+  if(
+    mobile()
+  ){
+    closePanel();
+  }
 }
 
 
-/* =========================
-TABLE HELPERS
-========================= */
+/* HELPERS */
 
 function nextTableNumber(){
 
-const numbers=
+  const numbers=
 
-S.tables
-.map(
-table=>
-Number(table.number)
-);
+  S.tables
+  .map(
+    table=>
+    Number(table.number)
+  );
 
+  let number=1;
 
-let number=1;
+  while(
+    numbers.includes(number)
+  ){
+    number++;
+  }
 
-
-while(
-numbers.includes(number)
-){
-
-number++;
-
+  return number;
 }
-
-
-return number;
-
-}
-
 
 function tableUsedSeats(
 tableId,
 excludeGuestId=null
 ){
 
-return S.guests
+  return S.guests
 
-.filter(
-guest=>
+  .filter(
+    guest=>
 
-guest.tableId===tableId
+    guest.tableId===tableId
 
-&&
+    &&
 
-guest.id!==excludeGuestId
-)
+    guest.id!==excludeGuestId
+  )
 
-.reduce(
+  .reduce(
+    (
+      total,
+      guest
+    )=>
 
-(
-total,
-guest
-)=>
-
-total+
-Number(
-guest.partySize||1
-),
-
-0
-
-);
-
+    total+
+    Number(
+      guest.partySize||1
+    ),
+    0
+  );
 }
 
 
-/* =========================
-QUICK SETUP
-========================= */
+/* QUICK SETUP */
 
 function renderSetup(){
 
-$('panelContent')
-.innerHTML=`
+  $('panelContent')
+  .innerHTML=`
 
-<h2>
-Quick Setup
-</h2>
+  <h2>
+  Quick Setup
+  </h2>
 
-<div class="hint">
+  <div class="hint">
+  Choose the number of guests.
+  Seatly calculates the tables.
+  </div>
 
-Choose the number of guests.
+  <div class="grid4">
 
-Seatly will calculate the number of tables for you.
+  ${[
+    50,
+    100,
+    150,
+    200,
+    250,
+    300,
+    350,
+    400
+  ]
 
-</div>
+  .map(
+    guestCount=>
 
+    `
 
-<div class="grid4">
+    <button
+    class="quickButton"
+    onclick="showQuickOptions(${guestCount})">
 
-${[
-50,
-100,
-150,
-200,
-250,
-300,
-350,
-400
-]
+    ${guestCount}
 
-.map(
-guestCount=>
+    <br>
 
-`
+    <span style="font-size:9px">
+    Guests
+    </span>
 
-<button
-class="quickButton"
-onclick="showQuickOptions(${guestCount})">
+    </button>
 
-${guestCount}
+    `
+  )
 
-<br>
+  .join('')}
 
-<span style="font-size:9px">
-Guests
-</span>
-
-</button>
-
-`
-
-)
-
-.join('')}
-
-</div>
+  </div>
 
 
-<div class="section">
+  <div class="section">
 
-<h3>
-Custom guest count
-</h3>
+  <h3>
+  Custom guest count
+  </h3>
 
-<input
-id="customGuestCount"
-class="field"
-type="number"
-min="1"
-max="1000"
-placeholder="e.g. 186">
+  <input
+  id="customGuestCount"
+  class="field"
+  type="number"
+  min="1"
+  max="1000"
+  placeholder="e.g. 186">
 
-<button
-style="width:100%;margin-top:7px"
-onclick="customQuickSetup()">
+  <button
+  style="width:100%;margin-top:7px"
+  onclick="customQuickSetup()">
 
-Calculate Tables
+  Calculate Tables
 
-</button>
+  </button>
 
-</div>
+  </div>
 
 
-<div id="quickResults"></div>
+  <div id="quickResults"></div>
 
-`;
-
+  `;
 }
-
 
 function customQuickSetup(){
 
-const number=
+  const number=
 
-Math.max(
-1,
-+$('customGuestCount').value||1
-);
+  Math.max(
+    1,
+    +$('customGuestCount').value||1
+  );
 
-
-showQuickOptions(
-number
-);
-
+  showQuickOptions(
+    number
+  );
 }
-
-
-/*
-THIS IS THE NEW QUICK SETUP.
-*/
 
 function showQuickOptions(
 guestCount
 ){
 
-const choices=
+  const choices=
 
-[
-8,
-10,
-12,
-16
-]
+  [
+    8,
+    10,
+    12,
+    16
+  ]
 
-.map(seats=>{
+  .map(seats=>{
 
-const tableCount=
+    const tableCount=
 
-Math.ceil(
-guestCount/
-seats
-);
+    Math.ceil(
+      guestCount/
+      seats
+    );
 
+    const capacity=
 
-const capacity=
+    tableCount*
+    seats;
 
-tableCount*
-seats;
+    return{
 
+      seats,
+      tableCount,
+      capacity,
+      spare:
+      capacity-
+      guestCount
 
-return{
+    };
 
-seats:seats,
-
-tableCount:tableCount,
-
-capacity:capacity,
-
-spare:
-capacity-
-guestCount
-
-};
-
-});
+  });
 
 
-$('quickResults')
-.innerHTML=`
+  $('quickResults')
+  .innerHTML=`
 
-<div class="setupCard">
+  <div class="setupCard">
 
-<div class="setupTitle">
+  <div class="setupTitle">
 
-${guestCount} Guests
+  ${guestCount} Guests
 
-</div>
+  </div>
 
-<div
-class="hint"
-style="margin:3px 0 6px">
+  <div
+  class="hint"
+  style="margin:3px 0 6px">
 
-Choose how many seats you want per table.
+  Choose seats per table.
 
-</div>
+  </div>
 
 
-${choices
+  ${choices
 
-.map(choice=>`
+  .map(choice=>`
 
-<div class="setupOption">
+  <div class="setupOption">
 
-<div>
+  <div>
 
-<strong>
+  <strong>
 
-${choice.tableCount}
-Tables ×
-${choice.seats}
-Seats
+  ${choice.tableCount}
+  Tables ×
+  ${choice.seats}
+  Seats
 
-</strong>
+  </strong>
 
-<div class="setupMeta">
+  <div class="setupMeta">
 
-${choice.capacity}
-total seats
+  ${choice.capacity}
+  total seats
 
-${choice.spare===0
+  ${choice.spare===0
+  ?'· Exact'
+  :`· ${choice.spare} spare`}
 
-?'· Exact'
+  </div>
 
-:`· ${choice.spare} spare`
+  </div>
 
+
+  <button
+  onclick="createQuickSetup(${choice.tableCount},${choice.seats},${guestCount})">
+
+  Create Layout
+
+  </button>
+
+  </div>
+
+  `)
+
+  .join('')}
+
+  </div>
+
+  `;
 }
-
-</div>
-
-</div>
-
-
-<button
-onclick="createQuickSetup(${choice.tableCount},${choice.seats},${guestCount})">
-
-Create Layout
-
-</button>
-
-</div>
-
-`)
-
-.join('')}
-
-
-</div>
-
-`;
-
-}
-
-
-/*
-Actually creates the layout.
-*/
 
 function createQuickSetup(
 tableCount,
@@ -2372,3430 +1639,2861 @@ seats,
 guestCount
 ){
 
-let proceed=true;
+  let proceed=true;
 
+  if(
+    S.tables.length
+  ){
 
-if(
-S.tables.length
-){
+    proceed=
+    confirm(
 
-proceed=
-confirm(
+      `Replace the current layout with ${tableCount} tables?`
 
-`Replace the current layout with ${tableCount} tables?`
+    );
 
-);
+  }
 
+  if(!proceed)return;
+
+  pushHistory();
+
+  S.guests
+  .forEach(
+    guest=>{
+
+      guest.tableId=null;
+
+    }
+  );
+
+  S.tables=[];
+
+  createGrid(
+    tableCount,
+    seats
+  );
+
+  render();
+
+  saveOnly();
+
+  closeAfterAction();
+
+  toast(
+    `${tableCount} tables created`
+  );
 }
 
 
-if(
-!proceed
-)return;
-
-
-pushHistory();
-
-
-/*
-Keep guests, but unassign them.
-*/
-
-S.guests
-.forEach(
-guest=>{
-
-guest.tableId=null;
-
-}
-);
-
-
-S.tables=[];
-
-
-/*
-Create responsive centered grid.
-*/
-
-createGrid(
-tableCount,
-seats
-);
-
-
-render();
-
-saveOnly();
-
-closeAfterAction();
-
-
-toast(
-
-`${tableCount} tables created for approximately ${guestCount} guests`
-
-);
-
-}
-
-
-/* =========================
-RESPONSIVE GRID
-========================= */
+/* RESPONSIVE GRID */
 
 function createGrid(
 qty,
 seats
 ){
 
-const rect=
-canvas.getBoundingClientRect();
+  const rect=
+  canvas.getBoundingClientRect();
 
+  const width=
+  rect.width;
 
-const width=
-rect.width;
+  const height=
+  rect.height;
 
+  /*
+  Tables start smaller now.
+  */
 
-const height=
-rect.height;
+  let scale=.72;
 
+  if(qty>=10){
+    scale=.62;
+  }
 
-/*
-Scale automatically.
-*/
+  if(qty>=18){
+    scale=.54;
+  }
 
-let scale=1;
+  if(qty>=28){
+    scale=.46;
+  }
 
+  if(qty>=38){
+    scale=.40;
+  }
 
-if(
-qty>=10
-){
+  const itemSize=
+  82*
+  scale;
 
-scale=.82;
+  const gapX=
+  12;
 
+  const gapY=
+  12;
+
+  const usableWidth=
+  Math.max(
+    100,
+    width-
+    18
+  );
+
+  const usableHeight=
+  Math.max(
+    100,
+    height-
+    60
+  );
+
+  let columns=
+
+  Math.max(
+
+    1,
+
+    Math.floor(
+
+      usableWidth/
+
+      (
+        itemSize+
+        gapX
+      )
+
+    )
+
+  );
+
+  columns=
+
+  Math.min(
+    columns,
+    qty
+  );
+
+  let rows=
+
+  Math.ceil(
+    qty/
+    columns
+  );
+
+  while(
+
+    rows*
+    (
+      itemSize+
+      gapY
+    )
+    >
+    usableHeight
+
+    &&
+
+    columns<
+    qty
+
+  ){
+
+    columns++;
+
+    rows=
+
+    Math.ceil(
+      qty/
+      columns
+    );
+
+  }
+
+  let finalScale=
+  scale;
+
+  const requiredHeight=
+
+  rows*
+  (
+    82*
+    finalScale+
+    gapY
+  );
+
+  if(
+    requiredHeight>
+    usableHeight
+  ){
+
+    finalScale=
+
+    Math.max(
+
+      .30,
+
+      finalScale*
+      usableHeight/
+      requiredHeight
+
+    );
+
+  }
+
+  const stepX=
+
+  82*
+  finalScale+
+  gapX;
+
+  const stepY=
+
+  82*
+  finalScale+
+  gapY;
+
+  const gridWidth=
+
+  (
+    columns-1
+  )
+  *
+  stepX;
+
+  const gridHeight=
+
+  (
+    rows-1
+  )
+  *
+  stepY;
+
+  const startX=
+
+  Math.max(
+
+    5,
+
+    width/2
+    -
+    gridWidth/2
+    -
+    41*
+    finalScale
+
+  );
+
+  const startY=
+
+  Math.max(
+
+    35,
+
+    height/2
+    -
+    gridHeight/2
+    -
+    41*
+    finalScale
+
+  );
+
+  for(
+    let i=0;
+    i<qty;
+    i++
+  ){
+
+    const column=
+    i%
+    columns;
+
+    const row=
+
+    Math.floor(
+      i/
+      columns
+    );
+
+    S.tables.push({
+
+      id:uid(),
+
+      number:
+      nextTableNumber(),
+
+      seats:
+      seats,
+
+      x:
+      startX+
+      column*
+      stepX,
+
+      y:
+      startY+
+      row*
+      stepY,
+
+      scale:
+      finalScale
+
+    });
+
+  }
 }
 
 
-if(
-qty>=18
-){
-
-scale=.68;
-
-}
-
-
-if(
-qty>=26
-){
-
-scale=.58;
-
-}
-
-
-if(
-qty>=36
-){
-
-scale=.5;
-
-}
-
-
-const itemWidth=
-100*
-scale;
-
-
-const itemHeight=
-100*
-scale;
-
-
-const gapX=
-12;
-
-
-const gapY=
-12;
-
-
-const availableWidth=
-Math.max(
-100,
-width-
-20
-);
-
-
-const availableHeight=
-Math.max(
-100,
-height-
-55
-);
-
-
-let columns=
-
-Math.max(
-
-1,
-
-Math.floor(
-
-availableWidth/
-
-(
-itemWidth+
-gapX
-)
-
-)
-
-);
-
-
-columns=
-
-Math.min(
-columns,
-qty
-);
-
-
-let rows=
-
-Math.ceil(
-qty/
-columns
-);
-
-
-/*
-If too tall, increase columns.
-*/
-
-while(
-
-rows*
-(
-itemHeight+
-gapY
-)
->
-availableHeight
-
-&&
-
-columns<
-qty
-
-){
-
-columns++;
-
-
-rows=
-
-Math.ceil(
-qty/
-columns
-);
-
-}
-
-
-/*
-If still too large,
-shrink tables again.
-*/
-
-let finalScale=
-scale;
-
-
-const requiredHeight=
-
-rows*
-(
-100*
-finalScale+
-gapY
-);
-
-
-if(
-requiredHeight>
-availableHeight
-){
-
-finalScale=
-
-Math.max(
-
-.38,
-
-finalScale*
-availableHeight/
-requiredHeight
-
-);
-
-}
-
-
-const stepX=
-
-100*
-finalScale+
-gapX;
-
-
-const stepY=
-
-100*
-finalScale+
-gapY;
-
-
-const gridWidth=
-
-(columns-1)
-*
-stepX;
-
-
-const gridHeight=
-
-(rows-1)
-*
-stepY;
-
-
-const startX=
-
-Math.max(
-
-5,
-
-width/2
--
-gridWidth/2
--
-50*
-finalScale
-
-);
-
-
-const startY=
-
-Math.max(
-
-38,
-
-height/2
--
-gridHeight/2
--
-50*
-finalScale
-
-);
-
-
-for(
-let i=0;
-i<qty;
-i++
-){
-
-const column=
-i%
-columns;
-
-
-const row=
-
-Math.floor(
-i/
-columns
-);
-
-
-S.tables.push({
-
-id:uid(),
-
-number:
-nextTableNumber(),
-
-seats:
-seats,
-
-x:
-startX+
-column*
-stepX,
-
-y:
-startY+
-row*
-stepY,
-
-scale:
-finalScale
-
-});
-
-}
-
-}
-
-
-/* =========================
-TABLE PANEL
-========================= */
+/* TABLE PANEL */
 
 function renderTablesPanel(){
 
-$('panelContent')
-.innerHTML=`
+  $('panelContent')
+  .innerHTML=`
 
-<h2>
-Tables
-</h2>
+  <h2>
+  Tables
+  </h2>
 
-<div class="hint">
+  <div class="hint">
+  Smaller tables by default.
+  </div>
 
-Add individual tables or a custom number of tables.
+  <div class="grid2">
 
-</div>
+  <button
+  class="soft"
+  onclick="addSingleTable(8)">
+  8 seats
+  </button>
 
+  <button
+  class="soft"
+  onclick="addSingleTable(10)">
+  10 seats
+  </button>
 
-<div class="grid2">
+  <button
+  class="soft"
+  onclick="addSingleTable(12)">
+  12 seats
+  </button>
 
-<button
-class="soft"
-onclick="addSingleTable(8)">
-8 seats
-</button>
+  <button
+  class="soft"
+  onclick="addSingleTable(16)">
+  16 seats
+  </button>
 
-<button
-class="soft"
-onclick="addSingleTable(10)">
-10 seats
-</button>
-
-<button
-class="soft"
-onclick="addSingleTable(12)">
-12 seats
-</button>
-
-<button
-class="soft"
-onclick="addSingleTable(16)">
-16 seats
-</button>
-
-</div>
+  </div>
 
 
-<div class="section">
+  <div class="section">
 
-<h3>
-Add multiple
-</h3>
+  <h3>
+  Add multiple
+  </h3>
 
-<input
-id="multiQty"
-class="field"
-type="number"
-min="1"
-max="60"
-value="5">
+  <input
+  id="multiQty"
+  class="field"
+  type="number"
+  min="1"
+  max="60"
+  value="5">
 
-<select
-id="multiSeats"
-class="field"
-style="margin-top:7px">
+  <select
+  id="multiSeats"
+  class="field"
+  style="margin-top:7px">
 
-<option>
-8
-</option>
+  <option>8</option>
 
-<option selected>
-10
-</option>
+  <option selected>
+  10
+  </option>
 
-<option>
-12
-</option>
+  <option>12</option>
 
-<option>
-16
-</option>
+  <option>16</option>
 
-</select>
+  </select>
 
-<button
-style="width:100%;margin-top:7px"
-onclick="addMultipleTables()">
+  <button
+  style="width:100%;margin-top:7px"
+  onclick="addMultipleTables()">
 
-Add Multiple Tables
+  Add Multiple Tables
 
-</button>
+  </button>
 
-</div>
+  </div>
 
-`;
-
+  `;
 }
-
 
 function addSingleTable(
 seats
 ){
 
-pushHistory();
+  pushHistory();
 
+  const rect=
+  canvas.getBoundingClientRect();
 
-const rect=
-canvas.getBoundingClientRect();
+  const index=
+  S.tables.length;
 
+  const offset=
 
-const index=
-S.tables.length;
+  (index%6)*
+  12;
 
+  S.tables.push({
 
-const offset=
+    id:uid(),
 
-(index%6)*
-14;
+    number:
+    nextTableNumber(),
 
+    seats:
+    seats,
 
-S.tables.push({
+    x:
+    Math.max(
+      5,
+      rect.width/2-
+      41+
+      offset
+    ),
 
-id:uid(),
+    y:
+    Math.max(
+      40,
+      rect.height/2-
+      41+
+      offset
+    ),
 
-number:
-nextTableNumber(),
+    scale:.82
 
-seats:
-seats,
+  });
 
-x:
-Math.max(
-5,
-rect.width/2-
-50+
-offset
-),
+  render();
 
-y:
-Math.max(
-40,
-rect.height/2-
-50+
-offset
-),
+  saveOnly();
 
-scale:1
-
-});
-
-
-render();
-
-saveOnly();
-
-closeAfterAction();
-
+  closeAfterAction();
 }
-
 
 function addMultipleTables(){
 
-const qty=
+  const qty=
 
-Math.max(
+  Math.max(
 
-1,
+    1,
 
-Math.min(
+    Math.min(
 
-60,
+      60,
 
-+$('multiQty').value||1
+      +$('multiQty').value||1
 
-)
+    )
 
-);
+  );
 
+  const seats=
+  +$('multiSeats').value;
 
-const seats=
-+$('multiSeats').value;
+  pushHistory();
 
+  createGrid(
+    qty,
+    seats
+  );
 
-pushHistory();
+  render();
 
+  saveOnly();
 
-createGrid(
-qty,
-seats
-);
-
-
-render();
-
-saveOnly();
-
-closeAfterAction();
-
+  closeAfterAction();
 }
 
 
-/* =========================
-VENUE
-========================= */
+/* VENUE */
 
 function renderVenuePanel(){
 
-$('panelContent')
-.innerHTML=`
+  $('panelContent')
+  .innerHTML=`
 
-<h2>
-Venue
-</h2>
+  <h2>
+  Venue
+  </h2>
 
-<div class="hint">
+  <div class="hint">
+  Large fixed background.
+  It fills almost the whole screen on mobile.
+  </div>
 
-The background stays fixed.
+  <label
+  class="setupCard"
+  style="
+  display:block;
+  text-align:center;
+  cursor:pointer">
 
-Mobile uses a larger 4:3 workspace.
+  📷
 
-</div>
+  <br>
 
+  <strong>
 
-<label
-class="setupCard"
-style="
-display:block;
-text-align:center;
-cursor:pointer">
+  ${S.venue
+  ?'Replace Venue'
+  :'Upload Venue'}
 
-📷
+  </strong>
 
-<br>
+  <input
+  id="venueInput"
+  type="file"
+  accept="image/*"
+  style="display:none">
 
-<strong>
-
-${S.venue
-?'Replace Venue'
-:'Upload Venue'}
-
-</strong>
-
-
-<input
-id="venueInput"
-type="file"
-accept="image/*"
-style="display:none">
-
-</label>
+  </label>
 
 
-${S.venue
+  ${S.venue
 
-?`
+  ?`
 
-<button
-class="secondary"
-style="width:100%;margin-top:8px"
-onclick="removeVenue()">
+  <button
+  class="secondary"
+  style="width:100%;margin-top:8px"
+  onclick="removeVenue()">
 
-Remove Venue
+  Remove Venue
 
-</button>
+  </button>
 
-`
+  `
 
-:''}
+  :''}
 
-`;
-
-
-$('venueInput')
-.onchange=e=>{
-
-const file=
-e.target.files[0];
+  `;
 
 
-if(!file)
-return;
+  $('venueInput')
+  .onchange=e=>{
 
+    const file=
+    e.target.files[0];
 
-const reader=
-new FileReader();
+    if(!file)return;
 
+    const reader=
+    new FileReader();
 
-reader.onload=result=>{
+    reader.onload=result=>{
 
-pushHistory();
+      pushHistory();
 
+      S.venue=
+      result.target.result;
 
-S.venue=
-result.target.result;
+      applyVenue();
 
+      render();
 
-applyVenue();
+      saveOnly();
 
-render();
+      closeAfterAction();
 
-saveOnly();
+    };
 
-closeAfterAction();
+    reader.readAsDataURL(
+      file
+    );
 
-};
-
-
-reader.readAsDataURL(
-file
-);
-
-};
-
+  };
 }
-
 
 function applyVenue(){
 
-venueBg
-.style
-.backgroundImage=
+  venueBg
+  .style
+  .backgroundImage=
 
-S.venue
+  S.venue
 
-?`url("${S.venue}")`
+  ?`url("${S.venue}")`
 
-:'none';
-
+  :'none';
 }
-
 
 function removeVenue(){
 
-pushHistory();
+  pushHistory();
 
+  S.venue=null;
 
-S.venue=null;
+  applyVenue();
 
+  render();
 
-applyVenue();
+  saveOnly();
 
-render();
-
-saveOnly();
-
-renderVenuePanel();
-
+  renderVenuePanel();
 }
 
 
-/* =========================
-CHAIRS
-========================= */
+/* CHAIRS */
 
 function createChairs(
 element,
 seats
 ){
 
-const count=
+  const count=
 
-Math.min(
-seats,
-16
-);
+  Math.min(
+    seats,
+    16
+  );
 
+  const radius=34;
 
-const radius=41;
+  for(
+    let i=0;
+    i<count;
+    i++
+  ){
 
+    const angle=
 
-for(
-let i=0;
-i<count;
-i++
-){
+    2*
+    Math.PI*
+    i/count
 
-const angle=
+    -
 
-2*
-Math.PI*
-i/count
+    Math.PI/2;
 
--
+    const chair=
+    document.createElement(
+      'div'
+    );
 
-Math.PI/2;
+    chair.className=
+    'chair';
 
+    chair.style.left=
 
-const chair=
-document.createElement(
-'div'
-);
+    (
+      41+
+      Math.cos(angle)*
+      radius
+      -
+      4.5
+    )
 
+    +'px';
 
-chair.className=
-'chair';
+    chair.style.top=
 
+    (
+      41+
+      Math.sin(angle)*
+      radius
+      -
+      4.5
+    )
 
-chair.style.left=
+    +'px';
 
-(
-50+
-Math.cos(angle)*
-radius
--
-5.5
-)
-
-+'px';
-
-
-chair.style.top=
-
-(
-50+
-Math.sin(angle)*
-radius
--
-5.5
-)
-
-+'px';
-
-
-element.appendChild(
-chair
-);
-
-}
-
+    element.appendChild(
+      chair
+    );
+  }
 }
 
 
-/* =========================
-RENDER TABLES
-========================= */
+/* RENDER */
 
 function render(){
 
-layer.innerHTML='';
+  layer.innerHTML='';
+
+  S.tables
+  .forEach(table=>{
+
+    const used=
+
+    tableUsedSeats(
+      table.id
+    );
+
+    const element=
+
+    document.createElement(
+      'div'
+    );
+
+    element.className=
+
+    'obj table'
+
+    +
+
+    (
+      used===table.seats
+      ?' complete'
+      :''
+    )
+
+    +
+
+    (
+      selected?.id===table.id
+      ?' selected'
+      :''
+    );
+
+    element.style.left=
+    table.x+'px';
+
+    element.style.top=
+    table.y+'px';
+
+    element.style.transform=
+
+    `scale(${table.scale||1})`;
+
+    createChairs(
+      element,
+      table.seats
+    );
+
+    const core=
+
+    document.createElement(
+      'div'
+    );
+
+    core.className=
+    'core';
+
+    core.innerHTML=
+
+    `
+
+    <b>
+    TABLE ${table.number}
+    </b>
+
+    <span>
+    ${used}/${table.seats}
+    </span>
+
+    `;
+
+    element.appendChild(
+      core
+    );
+
+    attachDrag(
+      element,
+      table
+    );
+
+    layer.appendChild(
+      element
+    );
+  });
 
 
-S.tables
-.forEach(table=>{
+  $('empty')
+  .style
+  .display=
 
-const used=
+  (
+    S.venue
+    ||
+    S.tables.length
+  )
 
-tableUsedSeats(
-table.id
-);
+  ?'none'
 
+  :'grid';
 
-const element=
+  renderContext();
 
-document.createElement(
-'div'
-);
-
-
-element.className=
-
-'obj table'
-
-+
-
-(
-used===table.seats
-?' complete'
-:''
-)
-
-+
-
-(
-selected?.id===table.id
-?' selected'
-:''
-);
-
-
-element.style.left=
-table.x+'px';
-
-
-element.style.top=
-table.y+'px';
-
-
-element.style.transform=
-
-`scale(${table.scale||1})`;
-
-
-createChairs(
-element,
-table.seats
-);
-
-
-const core=
-
-document.createElement(
-'div'
-);
-
-
-core.className=
-'core';
-
-
-core.innerHTML=
-
-`
-
-<b>
-TABLE ${table.number}
-</b>
-
-<span>
-${used}/${table.seats}
-</span>
-
-`;
-
-
-element.appendChild(
-core
-);
-
-
-attachDrag(
-element,
-table
-);
-
-
-layer.appendChild(
-element
-);
-
-});
-
-
-$('empty')
-.style
-.display=
-
-(
-S.venue
-
-||
-
-S.tables.length
-)
-
-?'none'
-
-:'grid';
-
-
-renderContext();
-
-updateStatus();
-
+  updateStatus();
 }
 
 
-/* =========================
-DRAG TABLE
-========================= */
+/* DRAG */
 
 function attachDrag(
 element,
 table
 ){
 
-let startX;
+  let startX;
+  let startY;
+  let originalX;
+  let originalY;
+  let active=false;
+  let beforeState=null;
 
-let startY;
+  element.onpointerdown=e=>{
 
-let originalX;
+    e.stopPropagation();
 
-let originalY;
+    selected={
+      id:table.id,
+      kind:'table'
+    };
 
-let active=false;
+    document
+    .querySelectorAll('.table')
+    .forEach(
+      item=>
+      item.classList.remove(
+        'selected'
+      )
+    );
 
-let beforeState=null;
+    element.classList.add(
+      'selected'
+    );
 
+    renderContext();
 
-element.onpointerdown=e=>{
+    startX=
+    e.clientX;
 
-e.stopPropagation();
+    startY=
+    e.clientY;
 
+    originalX=
+    table.x;
 
-selected={
+    originalY=
+    table.y;
 
-id:table.id,
+    beforeState=
+    state();
 
-kind:'table'
+    active=true;
 
-};
+    trash.style.display=
+    'block';
 
+    try{
 
-document
-.querySelectorAll('.table')
-.forEach(
-item=>
-item.classList.remove(
-'selected'
-)
-);
+      element.setPointerCapture(
+        e.pointerId
+      );
 
+    }catch(error){}
+  };
 
-element.classList.add(
-'selected'
-);
 
+  element.onpointermove=e=>{
 
-renderContext();
+    if(!active)return;
 
+    table.x=
 
-startX=
-e.clientX;
+    originalX+
+    e.clientX-
+    startX;
 
+    table.y=
 
-startY=
-e.clientY;
+    originalY+
+    e.clientY-
+    startY;
 
+    const rect=
+    canvas.getBoundingClientRect();
 
-originalX=
-table.x;
+    table.x=
 
+    Math.max(
 
-originalY=
-table.y;
+      -5,
 
+      Math.min(
+        rect.width-
+        30,
+        table.x
+      )
 
-beforeState=
-state();
+    );
 
+    table.y=
 
-active=true;
+    Math.max(
 
+      28,
 
-trash.style.display=
-'block';
+      Math.min(
+        rect.height-
+        30,
+        table.y
+      )
 
+    );
 
-try{
+    element.style.left=
+    table.x+'px';
 
-element.setPointerCapture(
-e.pointerId
-);
+    element.style.top=
+    table.y+'px';
 
-}catch(error){}
+    const bin=
+    trash.getBoundingClientRect();
 
-};
+    const isOverTrash=
 
+    e.clientX>=bin.left
 
-element.onpointermove=e=>{
+    &&
 
-if(
-!active
-)return;
+    e.clientX<=bin.right
 
+    &&
 
-table.x=
+    e.clientY>=bin.top
 
-originalX+
-e.clientX-
-startX;
+    &&
 
+    e.clientY<=bin.bottom;
 
-table.y=
+    trash.classList.toggle(
+      'hot',
+      isOverTrash
+    );
+  };
 
-originalY+
-e.clientY-
-startY;
 
+  element.onpointerup=()=>{
 
-const rect=
-canvas.getBoundingClientRect();
+    if(!active)return;
 
+    active=false;
 
-table.x=
+    const deleteIt=
 
-Math.max(
+    trash
+    .classList
+    .contains(
+      'hot'
+    );
 
--10,
+    trash.style.display=
+    'none';
 
-Math.min(
-rect.width-
-35,
-table.x
-)
+    trash.classList.remove(
+      'hot'
+    );
 
-);
+    if(deleteIt){
 
+      undoStack.push(
+        beforeState
+      );
 
-table.y=
+      redoStack=[];
 
-Math.max(
+      deleteTable(
+        table.id,
+        false
+      );
 
-30,
+      updateHistory();
 
-Math.min(
-rect.height-
-35,
-table.y
-)
+      return;
+    }
 
-);
+    if(
+      beforeState!==state()
+    ){
 
+      undoStack.push(
+        beforeState
+      );
 
-element.style.left=
-table.x+'px';
+      redoStack=[];
 
+      saveOnly();
 
-element.style.top=
-table.y+'px';
+      updateHistory();
+    }
+  };
 
+  element.onpointercancel=()=>{
 
-const bin=
-trash.getBoundingClientRect();
+    active=false;
 
+    trash.style.display=
+    'none';
 
-const isOverTrash=
-
-e.clientX>=bin.left
-
-&&
-
-e.clientX<=bin.right
-
-&&
-
-e.clientY>=bin.top
-
-&&
-
-e.clientY<=bin.bottom;
-
-
-trash.classList.toggle(
-'hot',
-isOverTrash
-);
-
-};
-
-
-element.onpointerup=()=>{
-
-if(
-!active
-)return;
-
-
-active=false;
-
-
-const deleteIt=
-
-trash
-.classList
-.contains(
-'hot'
-);
-
-
-trash.style.display=
-'none';
-
-
-trash.classList.remove(
-'hot'
-);
-
-
-if(
-deleteIt
-){
-
-undoStack.push(
-beforeState
-);
-
-
-redoStack=[];
-
-
-deleteTable(
-table.id,
-false
-);
-
-
-updateHistory();
-
-
-return;
-
+    trash.classList.remove(
+      'hot'
+    );
+  };
 }
 
 
-if(
-beforeState!==state()
-){
-
-undoStack.push(
-beforeState
-);
-
-
-redoStack=[];
-
-
-saveOnly();
-
-updateHistory();
-
-}
-
-};
-
-
-element.onpointercancel=()=>{
-
-active=false;
-
-
-trash.style.display=
-'none';
-
-
-trash.classList.remove(
-'hot'
-);
-
-};
-
-}
-
-
-/* =========================
-SELECTED TABLE BAR
-========================= */
+/* CONTEXT */
 
 function renderContext(){
 
-if(
-!selected
-){
+  if(!selected){
 
-context.style.display=
-'none';
+    context.style.display=
+    'none';
 
-return;
+    return;
+  }
 
+  const table=
+
+  S.tables.find(
+    table=>
+    table.id===selected.id
+  );
+
+  if(!table){
+
+    context.style.display=
+    'none';
+
+    return;
+  }
+
+  const used=
+
+  tableUsedSeats(
+    table.id
+  );
+
+  context.innerHTML=`
+
+  <b>T</b>
+
+  <input
+  id="tableNumber"
+  type="number"
+  min="1"
+  value="${table.number}">
+
+  <select id="tableSeats">
+
+  ${[
+    8,
+    10,
+    12,
+    16
+  ]
+
+  .map(
+    seats=>
+
+    `
+
+    <option
+    ${seats===table.seats
+    ?'selected'
+    :''}>
+
+    ${seats}
+
+    </option>
+
+    `
+  )
+
+  .join('')}
+
+  </select>
+
+  <span>
+  ${used}/${table.seats}
+  </span>
+
+  <button
+  class="secondary"
+  onclick="saveTableSettings()">
+  ✓
+  </button>
+
+  <button
+  onclick="openTableGuests('${table.id}')">
+  Guests
+  </button>
+
+  <button
+  class="secondary"
+  onclick="duplicateTable()">
+  Copy
+  </button>
+
+  <button
+  class="secondary"
+  onclick="resizeSelected(.9)">
+  −
+  </button>
+
+  <button
+  class="secondary"
+  onclick="resizeSelected(1.1)">
+  ＋
+  </button>
+
+  `;
+
+  context.style.display=
+  'flex';
 }
-
-
-const table=
-
-S.tables.find(
-table=>
-table.id===selected.id
-);
-
-
-if(
-!table
-){
-
-context.style.display=
-'none';
-
-return;
-
-}
-
-
-const used=
-
-tableUsedSeats(
-table.id
-);
-
-
-context.innerHTML=`
-
-<b>
-T
-</b>
-
-
-<input
-id="tableNumber"
-type="number"
-min="1"
-value="${table.number}">
-
-
-<select id="tableSeats">
-
-${[
-8,
-10,
-12,
-16
-]
-
-.map(
-seats=>
-
-`
-
-<option
-${seats===table.seats
-?'selected'
-:''}>
-
-${seats}
-
-</option>
-
-`
-
-)
-
-.join('')}
-
-</select>
-
-
-<span>
-
-${used}/${table.seats}
-
-</span>
-
-
-<button
-class="secondary"
-onclick="saveTableSettings()">
-
-✓
-
-</button>
-
-
-<button
-onclick="openTableGuests('${table.id}')">
-
-Guests
-
-</button>
-
-
-<button
-class="secondary"
-onclick="duplicateTable()">
-
-Copy
-
-</button>
-
-
-<button
-class="secondary"
-onclick="resizeSelected(.9)">
-
-−
-
-</button>
-
-
-<button
-class="secondary"
-onclick="resizeSelected(1.1)">
-
-＋
-
-</button>
-
-`;
-
-
-context.style.display=
-'flex';
-
-}
-
 
 function saveTableSettings(){
 
-const table=
+  const table=
 
-S.tables.find(
-table=>
-table.id===selected.id
-);
+  S.tables.find(
+    table=>
+    table.id===selected.id
+  );
 
+  if(!table)return;
 
-if(!table)
-return;
+  const number=
 
+  Math.max(
+    1,
+    +$('tableNumber').value||1
+  );
 
-const number=
+  const duplicate=
 
-Math.max(
-1,
-+$('tableNumber').value||1
-);
+  S.tables.find(
+    other=>
 
+    other.id!==table.id
 
-const duplicate=
+    &&
 
-S.tables.find(
-other=>
+    Number(other.number)===
+    number
+  );
 
-other.id!==table.id
+  if(duplicate){
 
-&&
+    toast(
+      'This table number already exists'
+    );
 
-Number(other.number)===
-number
-);
+    return;
+  }
 
+  const seats=
+  +$('tableSeats').value;
 
-if(
-duplicate
-){
+  const used=
 
-toast(
-'This table number already exists'
-);
+  tableUsedSeats(
+    table.id
+  );
 
-return;
+  if(
+    seats<used
+  ){
 
+    toast(
+      `This table already has ${used} people`
+    );
+
+    return;
+  }
+
+  pushHistory();
+
+  table.number=
+  number;
+
+  table.seats=
+  seats;
+
+  render();
+
+  saveOnly();
 }
-
-
-const seats=
-+$('tableSeats').value;
-
-
-const used=
-
-tableUsedSeats(
-table.id
-);
-
-
-if(
-seats<used
-){
-
-toast(
-`This table already has ${used} people`
-);
-
-return;
-
-}
-
-
-pushHistory();
-
-
-table.number=
-number;
-
-
-table.seats=
-seats;
-
-
-render();
-
-saveOnly();
-
-}
-
 
 function duplicateTable(){
 
-if(
-!selected
-)return;
+  if(!selected)return;
 
+  const table=
 
-const table=
+  S.tables.find(
+    table=>
+    table.id===selected.id
+  );
 
-S.tables.find(
-table=>
-table.id===selected.id
-);
+  if(!table)return;
 
+  pushHistory();
 
-if(!table)
-return;
+  const rect=
+  canvas.getBoundingClientRect();
 
+  S.tables.push({
 
-pushHistory();
+    id:uid(),
 
+    number:
+    nextTableNumber(),
 
-const rect=
-canvas.getBoundingClientRect();
+    seats:
+    table.seats,
 
+    x:
+    Math.min(
+      rect.width-
+      55,
+      table.x+
+      25
+    ),
 
-S.tables.push({
+    y:
+    Math.min(
+      rect.height-
+      55,
+      table.y+
+      25
+    ),
 
-id:uid(),
+    scale:
+    table.scale||1
 
-number:
-nextTableNumber(),
+  });
 
-seats:
-table.seats,
+  render();
 
-x:
-Math.min(
-rect.width-
-60,
-table.x+
-30
-),
-
-y:
-Math.min(
-rect.height-
-60,
-table.y+
-30
-),
-
-scale:
-table.scale||1
-
-});
-
-
-render();
-
-saveOnly();
-
+  saveOnly();
 }
-
 
 function resizeSelected(
 multiplier
 ){
 
-if(
-!selected
-)return;
+  if(!selected)return;
 
+  const table=
 
-const table=
+  S.tables.find(
+    table=>
+    table.id===selected.id
+  );
 
-S.tables.find(
-table=>
-table.id===selected.id
-);
+  if(!table)return;
 
+  pushHistory();
 
-if(!table)
-return;
+  table.scale=
 
+  Math.max(
 
-pushHistory();
+    .30,
 
+    Math.min(
 
-table.scale=
+      1.8,
 
-Math.max(
+      (table.scale||1)
+      *
+      multiplier
 
-.4,
+    )
 
-Math.min(
+  );
 
-1.8,
+  render();
 
-(table.scale||1)
-*
-multiplier
-
-)
-
-);
-
-
-render();
-
-saveOnly();
-
+  saveOnly();
 }
-
 
 function deleteTable(
 id,
 history=true
 ){
 
-if(
-history
-){
+  if(history){
 
-pushHistory();
+    pushHistory();
+  }
 
+  S.guests
+  .forEach(
+    guest=>{
+
+      if(
+        guest.tableId===id
+      ){
+
+        guest.tableId=null;
+      }
+    }
+  );
+
+  S.tables=
+
+  S.tables.filter(
+    table=>
+    table.id!==id
+  );
+
+  selected=null;
+
+  closeGuestPanel();
+
+  render();
+
+  saveOnly();
 }
 
 
-S.guests
-.forEach(
-guest=>{
-
-if(
-guest.tableId===id
-){
-
-guest.tableId=null;
-
-}
-
-}
-);
-
-
-S.tables=
-
-S.tables.filter(
-table=>
-table.id!==id
-);
-
-
-selected=null;
-
-
-closeGuestPanel();
-
-
-render();
-
-saveOnly();
-
-}
-
-
-/* =========================
-GUEST PANEL
-========================= */
+/* GUEST PANEL */
 
 function openTableGuests(
 tableId
 ){
 
-const table=
+  const table=
 
-S.tables.find(
-table=>
-table.id===tableId
-);
+  S.tables.find(
+    table=>
+    table.id===tableId
+  );
 
+  if(!table)return;
 
-if(!table)
-return;
+  activeGuestTable=
+  tableId;
 
+  closePanel();
 
-activeGuestTable=
-tableId;
+  $('guestPanel')
+  .classList
+  .add('open');
 
-
-closePanel();
-
-
-$('guestPanel')
-.classList
-.add('open');
-
-
-refreshTableGuests();
-
+  refreshTableGuests();
 }
-
 
 function closeGuestPanel(){
 
-$('guestPanel')
-.classList
-.remove('open');
+  $('guestPanel')
+  .classList
+  .remove('open');
 
-
-activeGuestTable=null;
-
+  activeGuestTable=null;
 }
-
 
 function refreshTableGuests(){
 
-const table=
+  const table=
 
-S.tables.find(
-table=>
-table.id===activeGuestTable
-);
+  S.tables.find(
+    table=>
+    table.id===activeGuestTable
+  );
 
+  if(!table){
 
-if(!table){
+    closeGuestPanel();
 
-closeGuestPanel();
+    return;
+  }
 
-return;
+  const guests=
 
+  S.guests
+
+  .filter(
+    guest=>
+    guest.tableId===table.id
+  )
+
+  .sort(
+    compareGuests
+  );
+
+  $('guestTitle')
+  .textContent=
+
+  `Table ${table.number}`;
+
+  $('guestCount')
+  .textContent=
+
+  `${tableUsedSeats(table.id)} of ${table.seats} seats filled`;
+
+  $('tableGuestList')
+  .innerHTML=
+
+  guests.length
+
+  ?
+
+  guests
+
+  .map(
+    guest=>
+
+    `
+
+    <div class="guestRow">
+
+    <div>
+
+    <div class="guestName">
+
+    ${safe(
+      guestFullName(
+        guest
+      )
+    )}
+
+    </div>
+
+    <div class="guestMeta">
+
+    ${guest.partySize}
+    ${guest.partySize===1
+    ?'person'
+    :'people'}
+
+    </div>
+
+    </div>
+
+    <div class="actions">
+
+    <button
+    class="secondary"
+    onclick="editGuest('${guest.id}')">
+
+    Edit
+
+    </button>
+
+    <button
+    class="danger"
+    onclick="deleteGuestConfirm('${guest.id}')">
+
+    Delete
+
+    </button>
+
+    </div>
+
+    </div>
+
+    `
+  )
+
+  .join('')
+
+  :
+
+  `
+
+  <div
+  class="hint"
+  style="margin-top:10px">
+
+  No guests yet.
+
+  </div>
+
+  `;
 }
-
-
-const guests=
-
-S.guests
-
-.filter(
-guest=>
-guest.tableId===table.id
-)
-
-.sort(
-compareGuests
-);
-
-
-$('guestTitle')
-.textContent=
-
-`Table ${table.number}`;
-
-
-$('guestCount')
-.textContent=
-
-`${tableUsedSeats(table.id)} of ${table.seats} seats filled`;
-
-
-$('tableGuestList')
-.innerHTML=
-
-guests.length
-
-?
-
-guests
-
-.map(
-guest=>
-
-`
-
-<div class="guestRow">
-
-<div>
-
-<div class="guestName">
-
-${safe(
-guestFullName(
-guest
-)
-)}
-
-</div>
-
-<div class="guestMeta">
-
-${guest.partySize}
-${guest.partySize===1
-?'person'
-:'people'}
-
-</div>
-
-</div>
-
-
-<div class="actions">
-
-<button
-class="secondary"
-onclick="editGuest('${guest.id}')">
-
-Edit
-
-</button>
-
-<button
-class="danger"
-onclick="deleteGuestConfirm('${guest.id}')">
-
-Delete
-
-</button>
-
-</div>
-
-</div>
-
-`
-
-)
-
-.join('')
-
-:
-
-`
-
-<div
-class="hint"
-style="margin-top:10px">
-
-No guests yet.
-
-</div>
-
-`;
-
-}
-
-
-/* =========================
-ADD GUEST TO TABLE
-========================= */
 
 function addGuestToTable(){
 
-const table=
+  const table=
 
-S.tables.find(
-table=>
-table.id===activeGuestTable
-);
+  S.tables.find(
+    table=>
+    table.id===activeGuestTable
+  );
 
+  if(!table)return;
 
-if(!table)
-return;
+  const surname=
 
+  $('gSurname')
+  .value
+  .trim();
 
-const surname=
+  const firstName=
 
-$('gSurname')
-.value
-.trim();
+  $('gFirst')
+  .value
+  .trim();
 
+  const partySize=
 
-const firstName=
+  Math.max(
 
-$('gFirst')
-.value
-.trim();
+    1,
 
+    Math.min(
 
-const partySize=
+      20,
 
-Math.max(
+      +$('gParty').value||1
 
-1,
+    )
 
-Math.min(
+  );
 
-20,
+  if(!surname){
 
-+$('gParty').value||1
+    toast(
+      'Add a surname'
+    );
 
-)
+    return;
+  }
 
-);
+  const available=
 
+  table.seats-
+  tableUsedSeats(
+    table.id
+  );
 
-if(
-!surname
-){
+  if(
+    partySize>
+    available
+  ){
 
-toast(
-'Add a surname'
-);
+    toast(
+      `Only ${available} seats available`
+    );
 
-return;
+    return;
+  }
 
+  pushHistory();
+
+  S.guests.push({
+
+    id:uid(),
+
+    surname:surname,
+
+    firstName:firstName,
+
+    partySize:partySize,
+
+    tableId:
+    table.id
+
+  });
+
+  $('gSurname').value='';
+
+  $('gFirst').value='';
+
+  $('gParty').value=1;
+
+  refreshTableGuests();
+
+  render();
+
+  saveOnly();
 }
-
-
-const available=
-
-table.seats-
-tableUsedSeats(
-table.id
-);
-
-
-if(
-partySize>
-available
-){
-
-toast(
-`Only ${available} seats available`
-);
-
-return;
-
-}
-
-
-pushHistory();
-
-
-S.guests.push({
-
-id:uid(),
-
-surname:surname,
-
-firstName:firstName,
-
-partySize:partySize,
-
-tableId:
-table.id
-
-});
-
-
-$('gSurname').value='';
-
-$('gFirst').value='';
-
-$('gParty').value=1;
-
-
-refreshTableGuests();
-
-render();
-
-saveOnly();
-
-}
-
-
-/* =========================
-CLEAR CURRENT TABLE GUESTS
-========================= */
 
 function clearCurrentTableGuests(){
 
-const table=
+  const table=
 
-S.tables.find(
-table=>
-table.id===activeGuestTable
-);
+  S.tables.find(
+    table=>
+    table.id===activeGuestTable
+  );
 
+  if(!table)return;
 
-if(!table)
-return;
+  const ids=
 
+  S.guests
 
-const ids=
+  .filter(
+    guest=>
+    guest.tableId===table.id
+  )
 
-S.guests
+  .map(
+    guest=>
+    guest.id
+  );
 
-.filter(
-guest=>
-guest.tableId===table.id
-)
+  if(!ids.length){
 
-.map(
-guest=>
-guest.id
-);
+    toast(
+      'No guests at this table'
+    );
 
+    return;
+  }
 
-if(
-!ids.length
-){
+  if(
+    !confirm(
+      `Delete all guests from Table ${table.number}?`
+    )
+  ){
+    return;
+  }
 
-toast(
-'No guests at this table'
-);
+  pushHistory();
 
-return;
+  S.guests=
 
+  S.guests.filter(
+    guest=>
+    !ids.includes(
+      guest.id
+    )
+  );
+
+  refreshTableGuests();
+
+  render();
+
+  saveOnly();
 }
 
 
-if(
-
-!confirm(
-
-`Delete all guests from Table ${table.number}?`
-
-)
-
-){
-
-return;
-
-}
-
-
-pushHistory();
-
-
-S.guests=
-
-S.guests.filter(
-guest=>
-!ids.includes(
-guest.id
-)
-);
-
-
-refreshTableGuests();
-
-render();
-
-saveOnly();
-
-}
-
-
-/* =========================
-GUEST MANAGER
-========================= */
+/* GUEST MANAGER */
 
 function renderGuestManager(){
 
-$('panelContent')
-.innerHTML=`
+  const voiceSupported=
 
-<h2>
-Guests
-</h2>
+  !!(
+    window.SpeechRecognition
+    ||
+    window.webkitSpeechRecognition
+  );
 
-<div class="hint">
+  $('panelContent')
+  .innerHTML=`
 
-Add guests directly here or from each table.
+  <h2>
+  Guests
+  </h2>
 
-</div>
-
-
-<input
-id="manualSurname"
-class="field"
-placeholder="Surname">
-
-
-<input
-id="manualFirst"
-class="field"
-style="margin-top:6px"
-placeholder="First name">
+  <div class="hint">
+  Add guests manually.
+  </div>
 
 
-<input
-id="manualParty"
-class="field"
-style="margin-top:6px"
-type="number"
-min="1"
-value="1"
-placeholder="People">
+  ${
+    voiceSupported
+
+    ?`
+
+    <div class="setupCard">
+
+    <strong>
+    🎙 Voice
+    </strong>
+
+    <div
+    class="hint"
+    style="margin:4px 0 0">
+
+    Voice support is available in this browser,
+    but it may still be limited on some iPhone configurations.
+
+    </div>
+
+    </div>
+
+    `
+
+    :`
+
+    <div class="setupCard">
+
+    <strong>
+    🎙 Voice unavailable
+    </strong>
+
+    <div
+    class="hint"
+    style="margin:4px 0 0">
+
+    This browser does not provide reliable speech recognition.
+
+    Manual guest entry remains fully available.
+
+    </div>
+
+    </div>
+
+    `
+  }
 
 
-<input
-id="manualTable"
-class="field"
-style="margin-top:6px"
-type="number"
-min="1"
-placeholder="Table number">
+  <div class="section">
+
+  <input
+  id="manualSurname"
+  class="field"
+  placeholder="Surname">
+
+  <input
+  id="manualFirst"
+  class="field"
+  style="margin-top:6px"
+  placeholder="First name">
+
+  <input
+  id="manualParty"
+  class="field"
+  style="margin-top:6px"
+  type="number"
+  min="1"
+  value="1"
+  placeholder="People">
+
+  <input
+  id="manualTable"
+  class="field"
+  style="margin-top:6px"
+  type="number"
+  min="1"
+  placeholder="Table number">
+
+  <button
+  style="width:100%;margin-top:7px"
+  onclick="addManualGuest()">
+
+  Add Guest
+
+  </button>
+
+  </div>
 
 
-<button
-style="width:100%;margin-top:7px"
-onclick="addManualGuest()">
+  <div class="section">
 
-Add Guest
+  <button
+  class="dangerSoft"
+  style="width:100%"
+  onclick="clearGuestList()">
 
-</button>
+  Delete Entire Guest List
 
+  </button>
 
-<div class="section">
+  </div>
 
-<button
-class="dangerSoft"
-style="width:100%"
-onclick="clearGuestList()">
-
-Delete Entire Guest List
-
-</button>
-
-</div>
-
-`;
-
+  `;
 }
-
 
 function addManualGuest(){
 
-const surname=
+  const surname=
 
-$('manualSurname')
-.value
-.trim();
+  $('manualSurname')
+  .value
+  .trim();
 
+  const firstName=
 
-const firstName=
+  $('manualFirst')
+  .value
+  .trim();
 
-$('manualFirst')
-.value
-.trim();
+  const partySize=
 
+  Math.max(
+    1,
+    +$('manualParty').value||1
+  );
 
-const partySize=
+  const tableNumber=
 
-Math.max(
-1,
-+$('manualParty').value||1
-);
+  +$('manualTable').value;
 
+  const table=
 
-const tableNumber=
+  S.tables.find(
+    table=>
 
-+$('manualTable').value;
+    Number(table.number)===
+    tableNumber
+  );
 
+  if(!surname){
 
-const table=
+    toast(
+      'Add surname'
+    );
 
-S.tables.find(
-table=>
+    return;
+  }
 
-Number(table.number)===
-tableNumber
-);
+  if(!table){
 
+    toast(
+      'Table not found'
+    );
 
-if(
-!surname
-){
+    return;
+  }
 
-toast(
-'Add surname'
-);
+  const available=
 
-return;
+  table.seats-
+  tableUsedSeats(
+    table.id
+  );
 
+  if(
+    partySize>
+    available
+  ){
+
+    toast(
+      `Only ${available} seats available`
+    );
+
+    return;
+  }
+
+  pushHistory();
+
+  S.guests.push({
+
+    id:uid(),
+
+    surname:surname,
+
+    firstName:firstName,
+
+    partySize:partySize,
+
+    tableId:
+    table.id
+
+  });
+
+  render();
+
+  saveOnly();
+
+  renderGuestManager();
+
+  toast(
+    'Guest added'
+  );
 }
 
 
-if(
-!table
-){
-
-toast(
-'Table not found'
-);
-
-return;
-
-}
-
-
-const available=
-
-table.seats-
-tableUsedSeats(
-table.id
-);
-
-
-if(
-partySize>
-available
-){
-
-toast(
-`Only ${available} seats available`
-);
-
-return;
-
-}
-
-
-pushHistory();
-
-
-S.guests.push({
-
-id:uid(),
-
-surname:surname,
-
-firstName:firstName,
-
-partySize:partySize,
-
-tableId:
-table.id
-
-});
-
-
-render();
-
-saveOnly();
-
-renderGuestManager();
-
-
-toast(
-'Guest added'
-);
-
-}
-
-
-/* =========================
-EDIT GUEST
-========================= */
+/* EDIT GUEST */
 
 function editGuest(id){
 
-const guest=
+  const guest=
 
-S.guests.find(
-guest=>
-guest.id===id
-);
+  S.guests.find(
+    guest=>
+    guest.id===id
+  );
 
+  if(!guest)return;
 
-if(!guest)
-return;
+  const surname=
 
+  prompt(
+    'Surname',
+    guest.surname||''
+  );
 
-const surname=
+  if(
+    surname===null
+    ||
+    !surname.trim()
+  ){
+    return;
+  }
 
-prompt(
-'Surname',
-guest.surname||''
-);
+  const firstName=
 
+  prompt(
+    'First name',
+    guest.firstName||''
+  );
 
-if(
-surname===null
-||
-!surname.trim()
-){
+  if(
+    firstName===null
+  ){
+    return;
+  }
 
-return;
+  const people=
 
+  prompt(
+    'Number of people',
+    guest.partySize||1
+  );
+
+  if(
+    people===null
+  ){
+    return;
+  }
+
+  const partySize=
+
+  Math.max(
+    1,
+    +people||1
+  );
+
+  const currentTable=
+
+  S.tables.find(
+    table=>
+    table.id===guest.tableId
+  );
+
+  const tableNumber=
+
+  prompt(
+
+    'Table number',
+
+    currentTable
+    ?currentTable.number
+    :''
+
+  );
+
+  if(
+    tableNumber===null
+  ){
+    return;
+  }
+
+  let targetTable=null;
+
+  if(
+    tableNumber.trim()
+  ){
+
+    targetTable=
+
+    S.tables.find(
+      table=>
+
+      Number(table.number)===
+      Number(tableNumber)
+    );
+
+    if(!targetTable){
+
+      toast(
+        'Table not found'
+      );
+
+      return;
+    }
+
+    const available=
+
+    targetTable.seats-
+
+    tableUsedSeats(
+      targetTable.id,
+      guest.id
+    );
+
+    if(
+      partySize>
+      available
+    ){
+
+      toast(
+        'Not enough seats at that table'
+      );
+
+      return;
+    }
+  }
+
+  pushHistory();
+
+  guest.surname=
+  surname.trim();
+
+  guest.firstName=
+  firstName.trim();
+
+  guest.partySize=
+  partySize;
+
+  guest.tableId=
+
+  targetTable
+  ?targetTable.id
+  :null;
+
+  render();
+
+  saveOnly();
+
+  if(
+    activeGuestTable
+  ){
+    refreshTableGuests();
+  }
+
+  if(
+    activePanel==='lists'
+  ){
+    renderLists();
+  }
 }
 
 
-const firstName=
-
-prompt(
-'First name',
-guest.firstName||''
-);
-
-
-if(
-firstName===null
-){
-
-return;
-
-}
-
-
-const people=
-
-prompt(
-'Number of people',
-guest.partySize||1
-);
-
-
-if(
-people===null
-){
-
-return;
-
-}
-
-
-const partySize=
-
-Math.max(
-1,
-+people||1
-);
-
-
-const currentTable=
-
-S.tables.find(
-table=>
-table.id===guest.tableId
-);
-
-
-const tableNumber=
-
-prompt(
-
-'Table number',
-
-currentTable
-?currentTable.number
-:''
-
-);
-
-
-if(
-tableNumber===null
-){
-
-return;
-
-}
-
-
-let targetTable=null;
-
-
-if(
-tableNumber.trim()
-){
-
-targetTable=
-
-S.tables.find(
-table=>
-
-Number(table.number)===
-Number(tableNumber)
-);
-
-
-if(
-!targetTable
-){
-
-toast(
-'Table not found'
-);
-
-return;
-
-}
-
-
-const available=
-
-targetTable.seats-
-
-tableUsedSeats(
-targetTable.id,
-guest.id
-);
-
-
-if(
-partySize>
-available
-){
-
-toast(
-'Not enough seats at that table'
-);
-
-return;
-
-}
-
-}
-
-
-pushHistory();
-
-
-guest.surname=
-surname.trim();
-
-
-guest.firstName=
-firstName.trim();
-
-
-guest.partySize=
-partySize;
-
-
-guest.tableId=
-
-targetTable
-?targetTable.id
-:null;
-
-
-render();
-
-saveOnly();
-
-
-if(
-activeGuestTable
-){
-
-refreshTableGuests();
-
-}
-
-
-if(
-activePanel==='lists'
-){
-
-renderLists();
-
-}
-
-}
-
-
-/* =========================
-DELETE ONE GUEST
-========================= */
+/* DELETE GUEST */
 
 function deleteGuestConfirm(id){
 
-const guest=
+  const guest=
 
-S.guests.find(
-guest=>
-guest.id===id
-);
+  S.guests.find(
+    guest=>
+    guest.id===id
+  );
 
+  if(!guest)return;
 
-if(!guest)
-return;
+  if(
+    !confirm(
+      `Delete ${guestFullName(guest)}?`
+    )
+  ){
+    return;
+  }
 
+  pushHistory();
 
-if(
+  S.guests=
 
-!confirm(
+  S.guests.filter(
+    guest=>
+    guest.id!==id
+  );
 
-`Delete ${guestFullName(guest)}?`
+  render();
 
-)
+  saveOnly();
 
-){
+  if(
+    activeGuestTable
+  ){
+    refreshTableGuests();
+  }
 
-return;
+  if(
+    activePanel==='lists'
+  ){
+    renderLists();
+  }
 
+  if(
+    $('directoryOverlay')
+    .classList
+    .contains('open')
+  ){
+    openDirectory();
+  }
 }
-
-
-pushHistory();
-
-
-S.guests=
-
-S.guests.filter(
-guest=>
-guest.id!==id
-);
-
-
-render();
-
-saveOnly();
-
-
-if(
-activeGuestTable
-){
-
-refreshTableGuests();
-
-}
-
-
-if(
-activePanel==='lists'
-){
-
-renderLists();
-
-}
-
-
-if(
-$('directoryOverlay')
-.classList
-.contains('open')
-){
-
-openDirectory();
-
-}
-
-}
-
-
-/* =========================
-DELETE ALL GUESTS
-========================= */
 
 function clearGuestList(){
 
-if(
-!S.guests.length
-){
+  if(
+    !S.guests.length
+  ){
 
-toast(
-'Guest list is empty'
-);
+    toast(
+      'Guest list is empty'
+    );
 
-return;
+    return;
+  }
 
+  if(
+    !confirm(
+      `Delete all ${S.guests.length} guest entries?`
+    )
+  ){
+    return;
+  }
+
+  pushHistory();
+
+  S.guests=[];
+
+  render();
+
+  saveOnly();
+
+  if(
+    activeGuestTable
+  ){
+    refreshTableGuests();
+  }
+
+  if(
+    activePanel==='guests'
+  ){
+    renderGuestManager();
+  }
+
+  if(
+    activePanel==='lists'
+  ){
+    renderLists();
+  }
+
+  if(
+    $('directoryOverlay')
+    .classList
+    .contains('open')
+  ){
+    openDirectory();
+  }
+
+  toast(
+    'Guest list deleted — Undo available'
+  );
 }
 
 
-if(
-
-!confirm(
-
-`Delete all ${S.guests.length} guest entries?`
-
-)
-
-){
-
-return;
-
-}
-
-
-pushHistory();
-
-
-S.guests=[];
-
-
-render();
-
-saveOnly();
-
-
-if(
-activeGuestTable
-){
-
-refreshTableGuests();
-
-}
-
-
-if(
-activePanel==='guests'
-){
-
-renderGuestManager();
-
-}
-
-
-if(
-activePanel==='lists'
-){
-
-renderLists();
-
-}
-
-
-if(
-$('directoryOverlay')
-.classList
-.contains('open')
-){
-
-openDirectory();
-
-}
-
-
-toast(
-'Guest list deleted — Undo available'
-);
-
-}
-
-
-/* =========================
-LISTS
-========================= */
+/* LISTS */
 
 function renderLists(){
 
-const cards=
+  const cards=
 
-S.tables
+  S.tables
 
-.slice()
+  .slice()
 
-.sort(
-(a,b)=>
-a.number-b.number
-)
+  .sort(
+    (a,b)=>
+    a.number-b.number
+  )
 
-.map(table=>{
+  .map(table=>{
 
-const guests=
+    const guests=
 
-S.guests
+    S.guests
 
-.filter(
-guest=>
-guest.tableId===table.id
-)
+    .filter(
+      guest=>
+      guest.tableId===table.id
+    )
 
-.sort(
-compareGuests
-);
+    .sort(
+      compareGuests
+    );
 
+    const guestHtml=
 
-const guestHtml=
+    guests.length
 
-guests.length
+    ?
 
-?
+    guests
 
-guests
+    .map(
+      guest=>
 
-.map(
-guest=>
+      `
 
-`
+      <div class="guestRow">
 
-<div class="guestRow">
+      <div>
 
-<div>
+      <div class="guestName">
 
-<div class="guestName">
+      ${safe(
+        guestFullName(
+          guest
+        )
+      )}
 
-${safe(
-guestFullName(
-guest
-)
-)}
+      </div>
 
-</div>
+      <div class="guestMeta">
 
-<div class="guestMeta">
+      ${guest.partySize}
+      people
 
-${guest.partySize}
-people
+      </div>
 
-</div>
+      </div>
 
-</div>
+      <div class="actions">
 
-<div class="actions">
+      <button
+      class="secondary"
+      onclick="editGuest('${guest.id}')">
 
-<button
-class="secondary"
-onclick="editGuest('${guest.id}')">
+      Edit
 
-Edit
+      </button>
 
-</button>
+      <button
+      class="danger"
+      onclick="deleteGuestConfirm('${guest.id}')">
 
-<button
-class="danger"
-onclick="deleteGuestConfirm('${guest.id}')">
+      Delete
 
-Delete
+      </button>
 
-</button>
+      </div>
 
-</div>
+      </div>
 
-</div>
+      `
+    )
 
-`
+    .join('')
 
-)
+    :
 
-.join('')
+    `
 
-:
+    <div
+    class="hint"
+    style="margin-top:7px">
 
-`
+    No guests
 
-<div
-class="hint"
-style="margin-top:7px">
+    </div>
 
-No guests
+    `;
 
-</div>
+    return`
 
-`;
+    <div class="setupCard">
 
+    <div
+    style="
+    display:flex;
+    justify-content:space-between;
+    align-items:center">
 
-return`
+    <div>
 
-<div class="setupCard">
+    <strong>
+    Table ${table.number}
+    </strong>
 
-<div
-style="
-display:flex;
-justify-content:space-between;
-align-items:center">
+    <div class="setupMeta">
 
-<div>
+    ${tableUsedSeats(table.id)}/${table.seats}
+    people
 
-<strong>
-Table ${table.number}
-</strong>
+    </div>
 
-<div class="setupMeta">
+    </div>
 
-${tableUsedSeats(table.id)}/${table.seats}
-people
+    <button
+    class="secondary"
+    onclick="openTableGuests('${table.id}')">
 
-</div>
+    Open
 
-</div>
+    </button>
 
-<button
-class="secondary"
-onclick="openTableGuests('${table.id}')">
+    </div>
 
-Open
+    ${guestHtml}
 
-</button>
+    </div>
 
-</div>
+    `;
+  })
 
-${guestHtml}
+  .join('');
 
-</div>
 
-`;
+  $('panelContent')
+  .innerHTML=`
 
-})
+  <h2>
+  Seating Lists
+  </h2>
 
-.join('');
+  <div class="hint">
+  Every table with its guests.
+  </div>
 
+  <button
+  style="width:100%"
+  onclick="openDirectory()">
 
-$('panelContent')
-.innerHTML=`
+  Alphabetical Directory
 
-<h2>
-Seating Lists
-</h2>
+  </button>
 
-<div class="hint">
+  <button
+  class="dangerSoft"
+  style="width:100%;margin-top:7px"
+  onclick="clearGuestList()">
 
-Every table with its guests.
+  Delete Entire Guest List
 
-</div>
+  </button>
 
-<button
-style="width:100%"
-onclick="openDirectory()">
+  <div class="section">
 
-Alphabetical Directory
+  ${cards||
 
-</button>
+  '<div class="hint">No tables yet.</div>'}
 
-<button
-class="dangerSoft"
-style="width:100%;margin-top:7px"
-onclick="clearGuestList()">
+  </div>
 
-Delete Entire Guest List
-
-</button>
-
-<div class="section">
-
-${cards||
-
-'<div class="hint">No tables yet.</div>'}
-
-</div>
-
-`;
-
+  `;
 }
 
 
-/* =========================
-DIRECTORY
-========================= */
+/* DIRECTORY */
 
 function openDirectory(){
 
-const guests=
+  const guests=
 
-S.guests
+  S.guests
 
-.slice()
+  .slice()
 
-.sort(
-compareGuests
-);
+  .sort(
+    compareGuests
+  );
 
+  const groups={};
 
-const groups={};
+  guests
+  .forEach(
+    guest=>{
 
+      const surname=
 
-guests
-.forEach(
-guest=>{
+      (guest.surname||'')
+      .trim();
 
-const surname=
+      const letter=
 
-(guest.surname||'')
-.trim();
+      surname
 
+      ?surname
+      .charAt(0)
+      .toLocaleUpperCase(
+        'el-GR'
+      )
 
-const letter=
+      :'#';
 
-surname
+      if(
+        !groups[letter]
+      ){
+        groups[letter]=[];
+      }
 
-?surname
-.charAt(0)
-.toLocaleUpperCase(
-'el-GR'
-)
+      groups[letter]
+      .push(
+        guest
+      );
+    }
+  );
 
-:'#';
+  const letters=
 
+  Object
+  .keys(
+    groups
+  )
 
-if(
-!groups[letter]
-){
+  .sort(
+    (a,b)=>
 
-groups[letter]=[];
+    a.localeCompare(
+      b,
+      'el'
+    )
+  );
 
+  $('directoryContent')
+  .innerHTML=
+
+  letters.length
+
+  ?
+
+  letters
+
+  .map(
+    letter=>{
+
+      return`
+
+      <div class="directoryLetter">
+
+      ${safe(
+        letter
+      )}
+
+      </div>
+
+      ${groups[letter]
+
+      .map(
+        guest=>{
+
+          const table=
+
+          S.tables.find(
+            table=>
+            table.id===guest.tableId
+          );
+
+          return`
+
+          <div class="directoryRow">
+
+          <strong>
+
+          ${safe(
+            guestFullName(
+              guest
+            )
+          )}
+
+          </strong>
+
+          <span>
+
+          ${guest.partySize}
+          people
+
+          </span>
+
+          <span>
+
+          Table
+          ${table
+          ?table.number
+          :'—'}
+
+          </span>
+
+          <button
+          class="danger"
+          style="font-size:10px;padding:5px"
+          onclick="deleteGuestConfirm('${guest.id}')">
+
+          Delete
+
+          </button>
+
+          </div>
+
+          `;
+        }
+      )
+
+      .join('')}
+
+      `;
+    }
+  )
+
+  .join('')
+
+  :
+
+  `
+
+  <div class="hint">
+
+  No guests yet.
+
+  </div>
+
+  `;
+
+  $('directoryOverlay')
+  .classList
+  .add('open');
 }
-
-
-groups[letter]
-.push(
-guest
-);
-
-}
-);
-
-
-const letters=
-
-Object
-.keys(
-groups
-)
-
-.sort(
-(a,b)=>
-
-a.localeCompare(
-b,
-'el'
-)
-
-);
-
-
-$('directoryContent')
-.innerHTML=
-
-letters.length
-
-?
-
-letters
-
-.map(
-letter=>{
-
-return`
-
-<div class="directoryLetter">
-
-${safe(
-letter
-)}
-
-</div>
-
-${groups[letter]
-
-.map(
-guest=>{
-
-const table=
-
-S.tables.find(
-table=>
-table.id===guest.tableId
-);
-
-
-return`
-
-<div class="directoryRow">
-
-<strong>
-
-${safe(
-guestFullName(
-guest
-)
-)}
-
-</strong>
-
-<span>
-
-${guest.partySize}
-people
-
-</span>
-
-<span>
-
-Table
-${table
-?table.number
-:'—'}
-
-</span>
-
-<button
-class="danger"
-style="font-size:10px;padding:5px"
-onclick="deleteGuestConfirm('${guest.id}')">
-
-Delete
-
-</button>
-
-</div>
-
-`;
-
-}
-)
-
-.join('')}
-
-`;
-
-}
-)
-
-.join('')
-
-:
-
-`
-
-<div class="hint">
-
-No guests yet.
-
-</div>
-
-`;
-
-
-$('directoryOverlay')
-.classList
-.add('open');
-
-}
-
 
 function closeDirectory(){
 
-$('directoryOverlay')
-.classList
-.remove('open');
-
+  $('directoryOverlay')
+  .classList
+  .remove('open');
 }
 
 
-/* =========================
-MORE
-========================= */
+/* MORE */
 
 function renderMore(){
 
-$('panelContent')
-.innerHTML=`
+  $('panelContent')
+  .innerHTML=`
 
-<h2>
-More
-</h2>
+  <h2>
+  More
+  </h2>
 
-<button
-class="secondary"
-style="width:100%"
-onclick="undo()">
+  <button
+  class="secondary"
+  style="width:100%"
+  onclick="undo()">
 
-↶ Undo
+  ↶ Undo
 
-</button>
+  </button>
 
-<button
-class="secondary"
-style="width:100%;margin-top:7px"
-onclick="redo()">
+  <button
+  class="secondary"
+  style="width:100%;margin-top:7px"
+  onclick="redo()">
 
-↷ Redo
+  ↷ Redo
 
-</button>
+  </button>
 
-<div class="section">
+  <div class="section">
 
-<button
-class="dangerSoft"
-style="width:100%"
-onclick="clearGuestList()">
+  <button
+  class="dangerSoft"
+  style="width:100%"
+  onclick="clearGuestList()">
 
-Delete Guest List
+  Delete Guest List
 
-</button>
+  </button>
 
-</div>
+  </div>
 
-<div class="section">
+  <div class="section">
 
-<button
-class="danger"
-style="width:100%"
-onclick="clearTables()">
+  <button
+  class="danger"
+  style="width:100%"
+  onclick="clearTables()">
 
-Clear Tables
+  Clear Tables
 
-</button>
+  </button>
 
-</div>
+  </div>
 
-<div class="section">
+  <div class="section">
 
-<button
-class="danger"
-style="width:100%"
-onclick="resetEverything()">
+  <button
+  class="danger"
+  style="width:100%"
+  onclick="resetEverything()">
 
-Reset Everything
+  Reset Everything
 
-</button>
+  </button>
 
-</div>
+  </div>
 
-`;
-
+  `;
 }
-
 
 function clearTables(){
 
-if(
-!S.tables.length
-){
+  if(
+    !S.tables.length
+  ){
 
-toast(
-'No tables to delete'
-);
+    toast(
+      'No tables to delete'
+    );
 
-return;
+    return;
+  }
 
+  if(
+    !confirm(
+      'Delete all tables? Guests will stay saved but become unassigned.'
+    )
+  ){
+    return;
+  }
+
+  pushHistory();
+
+  S.tables=[];
+
+  S.guests
+  .forEach(
+    guest=>{
+      guest.tableId=null;
+    }
+  );
+
+  selected=null;
+
+  closeGuestPanel();
+
+  render();
+
+  saveOnly();
 }
-
-
-if(
-
-!confirm(
-'Delete all tables? Guests will stay saved but become unassigned.'
-)
-
-){
-
-return;
-
-}
-
-
-pushHistory();
-
-
-S.tables=[];
-
-
-S.guests
-.forEach(
-guest=>{
-
-guest.tableId=null;
-
-}
-);
-
-
-selected=null;
-
-
-closeGuestPanel();
-
-
-render();
-
-saveOnly();
-
-}
-
 
 function resetEverything(){
 
-if(
+  if(
+    !confirm(
+      'Delete the entire seating plan?'
+    )
+  ){
+    return;
+  }
 
-!confirm(
-'Delete the entire seating plan?'
-)
+  pushHistory();
 
-){
+  S={
+    venue:null,
+    tables:[],
+    guests:[]
+  };
 
-return;
+  selected=null;
 
+  closeGuestPanel();
+
+  applyVenue();
+
+  render();
+
+  saveOnly();
 }
 
 
-pushHistory();
-
-
-S={
-
-venue:null,
-
-tables:[],
-
-guests:[]
-
-};
-
-
-selected=null;
-
-
-closeGuestPanel();
-
-
-applyVenue();
-
-render();
-
-saveOnly();
-
-}
-
-
-/* =========================
-CANVAS TAP
-========================= */
+/* CANVAS TAP */
 
 canvas.addEventListener(
-
 'pointerdown',
-
 e=>{
 
-if(
-mobile()
-){
+  if(
+    mobile()
+  ){
+    closePanel();
+  }
 
-closePanel();
+  if(
+    e.target===canvas
+    ||
+    e.target===layer
+  ){
 
+    selected=null;
+
+    context.style.display=
+    'none';
+
+    document
+    .querySelectorAll('.table')
+    .forEach(
+      table=>
+      table.classList.remove(
+        'selected'
+      )
+    );
+  }
 }
-
-
-if(
-
-e.target===canvas
-
-||
-
-e.target===layer
-
-){
-
-selected=null;
-
-
-context.style.display=
-'none';
-
-
-document
-.querySelectorAll('.table')
-.forEach(
-table=>
-table.classList.remove(
-'selected'
-)
-);
-
-}
-
-}
-
 );
 
 
-/* =========================
-STATUS
-========================= */
+/* STATUS */
 
 function updateStatus(){
 
-const totalPeople=
+  const totalPeople=
 
-S.guests
+  S.guests
 
-.reduce(
+  .reduce(
+    (
+      total,
+      guest
+    )=>
 
-(
-total,
-guest
-)=>
+    total+
+    Number(
+      guest.partySize||1
+    ),
+    0
+  );
 
-total+
-Number(
-guest.partySize||1
-),
+  const seatedPeople=
 
-0
+  S.guests
 
-);
+  .filter(
+    guest=>
+    guest.tableId
+  )
 
+  .reduce(
+    (
+      total,
+      guest
+    )=>
 
-const seatedPeople=
+    total+
+    Number(
+      guest.partySize||1
+    ),
+    0
+  );
 
-S.guests
+  $('status')
+  .textContent=
 
-.filter(
-guest=>
-guest.tableId
-)
-
-.reduce(
-
-(
-total,
-guest
-)=>
-
-total+
-Number(
-guest.partySize||1
-),
-
-0
-
-);
-
-
-$('status')
-.textContent=
-
-`${S.tables.length} tables · ${seatedPeople}/${totalPeople} people seated`;
-
+  `${S.tables.length} tables · ${seatedPeople}/${totalPeople} people seated`;
 }
 
 
-/* =========================
-HELPERS
-========================= */
+/* HELPERS */
 
 function guestFullName(
 guest
 ){
 
-return[
+  return[
+    guest.surname||'',
+    guest.firstName||''
+  ]
 
-guest.surname||'',
+  .filter(Boolean)
 
-guest.firstName||''
-
-]
-
-.filter(Boolean)
-
-.join(' ');
-
+  .join(' ');
 }
-
 
 function compareGuests(
 a,
 b
 ){
 
-const surname=
+  const surname=
 
-(a.surname||'')
+  (a.surname||'')
 
-.localeCompare(
+  .localeCompare(
+    b.surname||'',
+    'el',
+    {
+      sensitivity:'base'
+    }
+  );
 
-b.surname||'',
+  if(
+    surname!==0
+  ){
+    return surname;
+  }
 
-'el',
+  return(
+    a.firstName||''
+  )
 
-{
-sensitivity:'base'
+  .localeCompare(
+    b.firstName||'',
+    'el',
+    {
+      sensitivity:'base'
+    }
+  );
 }
-
-);
-
-
-if(
-surname!==0
-){
-
-return surname;
-
-}
-
-
-return(
-
-a.firstName||''
-
-)
-
-.localeCompare(
-
-b.firstName||'',
-
-'el',
-
-{
-sensitivity:'base'
-}
-
-);
-
-}
-
 
 function safe(text){
 
-const div=
+  const div=
 
-document.createElement(
-'div'
-);
+  document.createElement(
+    'div'
+  );
 
+  div.textContent=
+  text||'';
 
-div.textContent=
-text||'';
-
-
-return div.innerHTML;
-
+  return div.innerHTML;
 }
-
 
 function toast(message){
 
-const element=
-$('toast');
+  const element=
+  $('toast');
 
+  element.textContent=
+  message;
 
-element.textContent=
-message;
+  element.style.display=
+  'block';
 
+  clearTimeout(
+    window.toastTimer
+  );
 
-element.style.display=
-'block';
+  window.toastTimer=
 
+  setTimeout(
+    ()=>{
 
-clearTimeout(
-window.toastTimer
-);
+      element.style.display=
+      'none';
 
-
-window.toastTimer=
-
-setTimeout(
-
-()=>{
-
-element.style.display=
-'none';
-
-},
-
-1800
-
-);
-
+    },
+    1800
+  );
 }
 
 
-/* =========================
-START
-========================= */
+/* START */
 
 load();
 
 </script>
 
 </body>
-
 </html>
