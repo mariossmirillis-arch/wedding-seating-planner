@@ -1,806 +1,1421 @@
 <!doctype html>
 <html lang="el">
+
 <head>
+
 <meta charset="utf-8">
 
 <meta
 name="viewport"
 content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
-<title>Seatly 4.2</title>
+<title>Seatly 4.3</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+box-sizing:border-box
+}
 
 :root{
-  --bg:#f3f1ed;
-  --paper:#fff;
-  --ink:#202020;
-  --muted:#777;
-  --line:#e5dfd7;
-  --soft:#f1ede8;
-  --green:#dff3e4;
-  --greenB:#34784a;
-  --danger:#a43a32;
+
+--bg:#f3f1ed;
+--paper:#fff;
+--ink:#202020;
+--muted:#777;
+--line:#e5dfd7;
+--soft:#f1ede8;
+
+--green:#dff3e4;
+--greenB:#34784a;
+
+--danger:#a43a32;
+--dangerSoft:#fff0ee;
+
 }
 
-html,body{
-  margin:0;
-  height:100%;
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:var(--bg);
-  color:var(--ink);
+html,
+body{
+
+margin:0;
+
+height:100%;
+
+font-family:
+system-ui,
+-apple-system,
+BlinkMacSystemFont,
+"Segoe UI",
+sans-serif;
+
+background:var(--bg);
+
+color:var(--ink);
+
 }
 
-body{overflow:hidden}
+body{
+overflow:hidden
+}
 
-button,input,select{
-  font:inherit
+button,
+input,
+select{
+
+font:inherit
+
 }
 
 button{
-  border:0;
-  border-radius:10px;
-  padding:9px 11px;
-  background:var(--ink);
-  color:#fff;
-  font-weight:700;
-  cursor:pointer
+
+border:0;
+
+border-radius:10px;
+
+padding:9px 11px;
+
+background:var(--ink);
+
+color:#fff;
+
+font-weight:700;
+
+cursor:pointer;
+
 }
 
 button.secondary{
-  background:#fff;
-  color:var(--ink);
-  border:1px solid var(--line)
+
+background:#fff;
+
+color:var(--ink);
+
+border:1px solid var(--line);
+
 }
 
 button.soft{
-  background:var(--soft);
-  color:var(--ink)
+
+background:var(--soft);
+
+color:var(--ink);
+
 }
 
 button.danger{
-  background:var(--danger)
+
+background:var(--danger);
+
+color:white;
+
+}
+
+button.dangerSoft{
+
+background:var(--dangerSoft);
+
+color:var(--danger);
+
+border:1px solid #efc7c2;
+
 }
 
 button:disabled{
-  opacity:.4
+
+opacity:.35;
+
+cursor:default;
+
 }
 
-/* TOP */
+
+/* =========================
+TOP
+========================= */
 
 .topbar{
-  height:58px;
-  background:#fff;
-  border-bottom:1px solid var(--line);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 12px;
-  position:relative;
-  z-index:120
+
+height:58px;
+
+background:#fff;
+
+border-bottom:1px solid var(--line);
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+padding:0 12px;
+
+position:relative;
+
+z-index:120;
+
 }
 
 .logo{
-  font-size:25px;
-  font-weight:900;
-  letter-spacing:-1px
+
+font-size:25px;
+
+font-weight:900;
+
+letter-spacing:-1px;
+
 }
 
-.logo span{font-weight:400}
+.logo span{
+
+font-weight:400;
+
+}
 
 .topActions{
-  display:flex;
-  gap:5px;
-  align-items:center
+
+display:flex;
+
+gap:5px;
+
+align-items:center;
+
 }
 
 .saved{
-  font-size:11px;
-  color:#777
+
+font-size:11px;
+
+color:#777;
+
 }
 
-/* APP */
+
+/* =========================
+APP
+========================= */
 
 .app{
-  height:calc(100vh - 58px);
-  display:grid;
-  grid-template-columns:64px 280px 1fr
+
+height:calc(100vh - 58px);
+
+display:grid;
+
+grid-template-columns:
+64px
+285px
+1fr;
+
 }
 
-/* LEFT TOOLBAR */
+
+/* =========================
+LEFT MENU
+========================= */
 
 .rail{
-  background:#202020;
-  padding:6px 4px;
-  display:flex;
-  flex-direction:column;
-  gap:5px;
-  z-index:90
+
+background:#202020;
+
+padding:6px 4px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:5px;
+
+z-index:90;
+
 }
 
 .rail button{
-  height:54px;
-  background:transparent;
-  padding:4px;
-  font-size:9px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:3px
+
+height:54px;
+
+background:transparent;
+
+padding:4px;
+
+font-size:9px;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+
+gap:3px;
+
 }
 
 .rail button b{
-  font-size:17px
+
+font-size:17px;
+
 }
 
 .rail button.active{
-  background:#fff;
-  color:#202020
+
+background:#fff;
+
+color:#202020;
+
 }
 
-/* PANEL */
+
+/* =========================
+PANEL
+========================= */
 
 .panel{
-  background:#fff;
-  border-right:1px solid var(--line);
-  padding:14px;
-  overflow:auto;
-  position:relative;
-  z-index:80
+
+background:#fff;
+
+border-right:1px solid var(--line);
+
+padding:14px;
+
+overflow:auto;
+
+position:relative;
+
+z-index:80;
+
 }
 
 .panel h2{
-  margin:0 0 5px;
-  font-size:18px
+
+margin:0 0 5px;
+
+font-size:18px;
+
 }
 
 .panel h3{
-  margin:0 0 8px;
-  font-size:14px
+
+margin:0 0 8px;
+
+font-size:14px;
+
 }
 
 .hint{
-  font-size:12px;
-  color:var(--muted);
-  line-height:1.45;
-  margin-bottom:12px
+
+font-size:12px;
+
+color:var(--muted);
+
+line-height:1.45;
+
+margin-bottom:12px;
+
 }
 
 .section{
-  border-top:1px solid #eee8e1;
-  padding-top:11px;
-  margin-top:11px
+
+border-top:1px solid #eee8e1;
+
+padding-top:11px;
+
+margin-top:11px;
+
 }
 
 .grid2{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:7px
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:7px;
+
 }
 
 .grid4{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:6px
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:6px;
+
 }
 
 .field{
-  width:100%;
-  padding:9px;
-  border:1px solid #d8d1c9;
-  border-radius:9px;
-  background:#fff
+
+width:100%;
+
+padding:9px;
+
+border:1px solid #d8d1c9;
+
+border-radius:9px;
+
+background:#fff;
+
 }
 
 .upload{
-  display:block;
-  text-align:center;
-  padding:18px;
-  border:1.5px dashed #bbb;
-  border-radius:13px;
-  background:#faf9f7
+
+display:block;
+
+text-align:center;
+
+padding:18px;
+
+border:1.5px dashed #bbb;
+
+border-radius:13px;
+
+background:#faf9f7;
+
 }
 
-.upload input{display:none}
+.upload input{
 
-.panelClose{display:none}
+display:none
 
-/* QUICK SETUP */
+}
+
+.panelClose{
+
+display:none;
+
+}
+
+
+/* =========================
+QUICK SETUP
+========================= */
 
 .presetBtn{
-  background:#f4f1ec;
-  color:#222;
-  border:1px solid #e1dbd3
+
+background:#f4f1ec;
+
+color:#222;
+
+border:1px solid #e1dbd3;
+
 }
 
 .setupCard{
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:10px;
-  margin-top:8px;
-  background:#faf9f7
+
+border:1px solid var(--line);
+
+border-radius:12px;
+
+padding:10px;
+
+margin-top:8px;
+
+background:#faf9f7;
+
 }
 
 .setupOption{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:8px;
-  padding:8px 0;
-  border-top:1px solid #eee
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+gap:8px;
+
+padding:8px 0;
+
+border-top:1px solid #eee;
+
 }
 
 .setupOption:first-child{
-  border-top:0
+
+border-top:0;
+
 }
 
-/* WORKSPACE */
+
+/* =========================
+WORKSPACE
+========================= */
 
 .work{
-  padding:8px;
-  background:#ebe8e3;
-  min-width:0;
-  display:flex;
-  align-items:center;
-  justify-content:center
+
+padding:8px;
+
+background:#ebe8e3;
+
+min-width:0;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+overflow:hidden;
+
 }
 
 .canvas{
-  width:min(100%,1200px);
-  aspect-ratio:16/10;
-  max-height:100%;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:16px;
-  position:relative;
-  overflow:hidden;
-  touch-action:none;
-  box-shadow:0 12px 30px rgba(0,0,0,.08)
+
+width:min(100%,1200px);
+
+aspect-ratio:16/10;
+
+max-height:100%;
+
+background:#fff;
+
+border:1px solid var(--line);
+
+border-radius:16px;
+
+position:relative;
+
+overflow:hidden;
+
+touch-action:none;
+
+box-shadow:
+0 12px 30px rgba(0,0,0,.08);
+
 }
 
 .venueBg{
-  position:absolute;
-  inset:0;
-  background:#fff center/contain no-repeat;
-  pointer-events:none
+
+position:absolute;
+
+inset:0;
+
+background:
+#fff
+center
+/
+contain
+no-repeat;
+
+pointer-events:none;
+
 }
 
 .layer{
-  position:absolute;
-  inset:0
+
+position:absolute;
+
+inset:0;
+
 }
 
 .empty{
-  position:absolute;
-  inset:0;
-  display:grid;
-  place-items:center;
-  text-align:center;
-  color:#999;
-  pointer-events:none
+
+position:absolute;
+
+inset:0;
+
+display:grid;
+
+place-items:center;
+
+text-align:center;
+
+color:#999;
+
+pointer-events:none;
+
 }
 
-/* TABLES */
+
+/* =========================
+TABLE
+========================= */
 
 .obj{
-  position:absolute;
-  touch-action:none;
-  user-select:none
+
+position:absolute;
+
+touch-action:none;
+
+user-select:none;
+
 }
 
 .table{
-  width:102px;
-  height:102px;
-  display:flex;
-  align-items:center;
-  justify-content:center
+
+width:102px;
+
+height:102px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
 }
 
 .table.selected{
-  outline:3px solid rgba(32,32,32,.18);
-  outline-offset:4px
+
+outline:3px solid rgba(32,32,32,.18);
+
+outline-offset:4px;
+
 }
 
 .core{
-  width:62px;
-  height:62px;
-  border:2px solid #222;
-  border-radius:50%;
-  background:#fff;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 4px 12px rgba(0,0,0,.14);
-  z-index:2
+
+width:62px;
+
+height:62px;
+
+border:2px solid #222;
+
+border-radius:50%;
+
+background:#fff;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+
+box-shadow:
+0 4px 12px rgba(0,0,0,.14);
+
+z-index:2;
+
 }
 
-.core b{font-size:10px}
+.core b{
+
+font-size:10px;
+
+}
 
 .core span{
-  font-size:9px;
-  color:#666
+
+font-size:9px;
+
+color:#666;
+
 }
 
 .complete .core{
-  background:var(--green);
-  border-color:var(--greenB)
+
+background:var(--green);
+
+border-color:var(--greenB);
+
 }
 
 .chair{
-  position:absolute;
-  width:12px;
-  height:12px;
-  border:1.3px solid #555;
-  background:#fff;
-  border-radius:3px
+
+position:absolute;
+
+width:12px;
+
+height:12px;
+
+border:1.3px solid #555;
+
+background:#fff;
+
+border-radius:3px;
+
 }
 
-.venueObj{
-  border:2px dashed #666;
-  background:rgba(255,255,255,.9);
-  border-radius:12px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:11px;
-  font-weight:800
-}
 
-.venueObj.selected{
-  outline:3px solid rgba(32,32,32,.18);
-  outline-offset:4px
-}
-
-/* CONTEXT */
+/* =========================
+CONTEXT
+========================= */
 
 .context{
-  position:absolute;
-  left:50%;
-  top:10px;
-  transform:translateX(-50%);
-  display:none;
-  align-items:center;
-  gap:5px;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:6px;
-  z-index:35;
-  box-shadow:0 8px 24px rgba(0,0,0,.14)
+
+position:absolute;
+
+left:50%;
+
+top:10px;
+
+transform:translateX(-50%);
+
+display:none;
+
+align-items:center;
+
+gap:5px;
+
+background:#fff;
+
+border:1px solid var(--line);
+
+border-radius:12px;
+
+padding:6px;
+
+z-index:35;
+
+box-shadow:
+0 8px 24px rgba(0,0,0,.14);
+
 }
 
 .context input,
 .context select{
-  width:66px;
-  padding:6px;
-  border:1px solid var(--line);
-  border-radius:8px
+
+width:66px;
+
+padding:6px;
+
+border:1px solid var(--line);
+
+border-radius:8px;
+
 }
 
 .context button{
-  padding:6px 8px
+
+padding:6px 8px;
+
 }
 
-/* TRASH */
+
+/* =========================
+TRASH
+========================= */
 
 .trash{
-  position:absolute;
-  left:50%;
-  bottom:14px;
-  transform:translateX(-50%);
-  display:none;
-  background:#fff;
-  border:2px solid var(--line);
-  border-radius:999px;
-  padding:9px 15px;
-  z-index:40;
-  font-size:12px;
-  font-weight:800
+
+position:absolute;
+
+left:50%;
+
+bottom:14px;
+
+transform:translateX(-50%);
+
+display:none;
+
+background:#fff;
+
+border:2px solid var(--line);
+
+border-radius:999px;
+
+padding:9px 15px;
+
+z-index:40;
+
+font-size:12px;
+
+font-weight:800;
+
 }
 
 .trash.hot{
-  background:#ffe7e3;
-  border-color:#b23b30
+
+background:#ffe7e3;
+
+border-color:#b23b30;
+
 }
 
-/* STATUS */
+
+/* =========================
+STATUS
+========================= */
 
 .status{
-  position:absolute;
-  left:10px;
-  bottom:10px;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:999px;
-  padding:6px 9px;
-  font-size:10px;
-  color:#666;
-  z-index:25
+
+position:absolute;
+
+left:10px;
+
+bottom:10px;
+
+background:#fff;
+
+border:1px solid var(--line);
+
+border-radius:999px;
+
+padding:6px 9px;
+
+font-size:10px;
+
+color:#666;
+
+z-index:25;
+
 }
 
-/* GUEST PANEL */
+
+/* =========================
+TABLE GUEST PANEL
+========================= */
 
 .guestPanel{
-  position:fixed;
-  top:58px;
-  right:0;
-  bottom:0;
-  width:370px;
-  background:#fff;
-  border-left:1px solid var(--line);
-  box-shadow:-10px 0 30px rgba(0,0,0,.12);
-  z-index:110;
-  display:none;
-  padding:15px;
-  overflow:auto
+
+position:fixed;
+
+top:58px;
+
+right:0;
+
+bottom:0;
+
+width:375px;
+
+background:#fff;
+
+border-left:1px solid var(--line);
+
+box-shadow:
+-10px 0 30px rgba(0,0,0,.12);
+
+z-index:110;
+
+display:none;
+
+padding:15px;
+
+overflow:auto;
+
 }
 
 .guestPanel.open{
-  display:block
+
+display:block;
+
 }
 
 .guestHeader{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:8px;
-  margin-bottom:12px
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:flex-start;
+
+gap:8px;
+
+margin-bottom:12px;
+
 }
 
 .guestTitle{
-  font-size:21px;
-  font-weight:850
+
+font-size:21px;
+
+font-weight:850;
+
 }
 
 .guestCount{
-  font-size:12px;
-  color:#777
+
+font-size:12px;
+
+color:#777;
+
 }
 
 .guestBox{
-  background:#faf9f7;
-  border:1px solid var(--line);
-  border-radius:13px;
-  padding:11px
+
+background:#faf9f7;
+
+border:1px solid var(--line);
+
+border-radius:13px;
+
+padding:11px;
+
 }
 
 .formLabel{
-  font-size:11px;
-  font-weight:750;
-  color:#666;
-  margin:8px 0 4px
+
+font-size:11px;
+
+font-weight:750;
+
+color:#666;
+
+margin:8px 0 4px;
+
 }
 
 .guestRow{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:7px;
-  align-items:center;
-  padding:8px 0;
-  border-bottom:1px solid #eee
+
+display:grid;
+
+grid-template-columns:1fr auto;
+
+gap:7px;
+
+align-items:center;
+
+padding:9px 0;
+
+border-bottom:1px solid #eee;
+
 }
 
 .guestName{
-  font-size:13px;
-  font-weight:700
+
+font-size:13px;
+
+font-weight:700;
+
+cursor:pointer;
+
+}
+
+.guestName:hover{
+
+text-decoration:underline;
+
 }
 
 .guestMeta{
-  font-size:11px;
-  color:#777
+
+font-size:11px;
+
+color:#777;
+
 }
 
 .actions{
-  display:flex;
-  gap:4px
+
+display:flex;
+
+gap:4px;
+
 }
 
 .actions button{
-  padding:5px 6px;
-  font-size:10px
+
+padding:5px 6px;
+
+font-size:10px;
+
 }
 
-/* VOICE IMPORT */
+
+/* =========================
+VOICE PREVIEW
+========================= */
 
 .voiceBox{
-  border:1px solid var(--line);
-  border-radius:13px;
-  background:#faf9f7;
-  padding:10px;
-  margin-top:9px
+
+border:1px solid var(--line);
+
+border-radius:13px;
+
+background:#faf9f7;
+
+padding:10px;
+
+margin-top:9px;
+
 }
 
 .voicePreviewRow{
-  display:grid;
-  grid-template-columns:1fr 1fr 60px 70px auto;
-  gap:5px;
-  align-items:center;
-  padding:6px 0;
-  border-bottom:1px solid #eee
+
+display:grid;
+
+grid-template-columns:
+1fr
+1fr
+55px
+65px
+auto;
+
+gap:5px;
+
+align-items:center;
+
+padding:6px 0;
+
+border-bottom:1px solid #eee;
+
 }
 
 .voicePreviewRow input{
-  width:100%;
-  padding:6px;
-  border:1px solid #ddd;
-  border-radius:7px
+
+width:100%;
+
+padding:6px;
+
+border:1px solid #ddd;
+
+border-radius:7px;
+
 }
 
-/* DIRECTORY */
+
+/* =========================
+DIRECTORY
+========================= */
 
 .directoryRow{
-  display:grid;
-  grid-template-columns:1fr auto auto;
-  gap:8px;
-  padding:7px 0;
-  border-bottom:1px solid #eee;
-  align-items:center
+
+display:grid;
+
+grid-template-columns:1fr auto auto auto;
+
+gap:8px;
+
+padding:8px 0;
+
+border-bottom:1px solid #eee;
+
+align-items:center;
+
+}
+
+.directoryName{
+
+font-weight:700;
+
+cursor:pointer;
+
+}
+
+.directoryName:hover{
+
+text-decoration:underline;
+
 }
 
 .letter{
-  font-size:20px;
-  font-weight:900;
-  margin:14px 0 4px;
-  border-bottom:2px solid #222
+
+font-size:20px;
+
+font-weight:900;
+
+margin:14px 0 4px;
+
+border-bottom:2px solid #222;
+
 }
 
-/* PREVIEW */
+
+/* =========================
+OVERLAY
+========================= */
 
 .overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.45);
-  z-index:220;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:18px
+
+position:fixed;
+
+inset:0;
+
+background:rgba(0,0,0,.45);
+
+z-index:220;
+
+display:none;
+
+align-items:center;
+
+justify-content:center;
+
+padding:18px;
+
 }
 
 .overlay.open{
-  display:flex
+
+display:flex;
+
 }
 
 .modal{
-  width:min(850px,100%);
-  max-height:90vh;
-  overflow:auto;
-  background:#fff;
-  border-radius:18px;
-  padding:20px
+
+width:min(880px,100%);
+
+max-height:90vh;
+
+overflow:auto;
+
+background:#fff;
+
+border-radius:18px;
+
+padding:20px;
+
 }
 
 .modalTop{
-  display:flex;
-  justify-content:space-between;
-  gap:8px;
-  align-items:center
+
+display:flex;
+
+justify-content:space-between;
+
+gap:8px;
+
+align-items:center;
+
 }
 
-/* MOBILE */
+
+/* =========================
+MOBILE
+========================= */
 
 @media(max-width:800px){
 
-  .topbar{
-    height:56px;
-    padding:0 7px
-  }
+.topbar{
 
-  .logo{
-    font-size:21px
-  }
+height:56px;
 
-  .saved{
-    display:none
-  }
+padding:0 7px;
 
-  .topActions{
-    gap:3px
-  }
-
-  .topActions button{
-    padding:7px 8px;
-    font-size:11px
-  }
-
-  .app{
-    height:calc(100vh - 56px);
-    grid-template-columns:54px 1fr
-  }
-
-  .rail{
-    padding:4px 2px
-  }
-
-  .rail button{
-    height:48px;
-    font-size:8px
-  }
-
-  .work{
-    grid-column:2;
-    padding:5px
-  }
-
-  .canvas{
-    width:100%;
-    aspect-ratio:16/10;
-    max-height:100%;
-    border-radius:12px
-  }
-
-  .panel{
-    position:fixed;
-    left:54px;
-    right:0;
-    bottom:0;
-    top:auto;
-    width:auto;
-    max-height:52vh;
-    display:none;
-    border-right:0;
-    border-top:1px solid var(--line);
-    border-radius:18px 18px 0 0;
-    padding:46px 12px 12px;
-    box-shadow:0 -10px 30px rgba(0,0,0,.18);
-    z-index:100
-  }
-
-  .panel.open{
-    display:block
-  }
-
-  .panelClose{
-    display:block;
-    position:absolute;
-    right:9px;
-    top:7px;
-    width:34px;
-    height:34px;
-    padding:0;
-    border-radius:50%;
-    background:var(--soft);
-    color:#222;
-    border:1px solid var(--line);
-    font-size:20px
-  }
-
-  .context{
-    max-width:94%;
-    overflow:auto;
-    white-space:nowrap
-  }
-
-  .guestPanel{
-    top:56px;
-    left:54px;
-    right:0;
-    bottom:0;
-    width:auto;
-    border-left:0;
-    box-shadow:none
-  }
-
-  .voicePreviewRow{
-    grid-template-columns:1fr 1fr;
-    background:#fff;
-    padding:8px;
-    margin-bottom:6px;
-    border:1px solid #eee;
-    border-radius:9px
-  }
-
-  .grid4{
-    grid-template-columns:repeat(2,1fr)
-  }
 }
+
+.logo{
+
+font-size:21px;
+
+}
+
+.saved{
+
+display:none;
+
+}
+
+.topActions{
+
+gap:3px;
+
+}
+
+.topActions button{
+
+padding:7px 8px;
+
+font-size:11px;
+
+}
+
+.app{
+
+height:calc(100vh - 56px);
+
+grid-template-columns:
+54px
+1fr;
+
+}
+
+.rail{
+
+padding:4px 2px;
+
+}
+
+.rail button{
+
+height:48px;
+
+font-size:8px;
+
+}
+
+.work{
+
+grid-column:2;
+
+padding:5px;
+
+}
+
+.canvas{
+
+width:100%;
+
+aspect-ratio:16/10;
+
+max-height:100%;
+
+border-radius:12px;
+
+}
+
+.panel{
+
+position:fixed;
+
+left:54px;
+
+right:0;
+
+bottom:0;
+
+top:auto;
+
+width:auto;
+
+max-height:54vh;
+
+display:none;
+
+border-right:0;
+
+border-top:1px solid var(--line);
+
+border-radius:18px 18px 0 0;
+
+padding:46px 12px 12px;
+
+box-shadow:
+0 -10px 30px rgba(0,0,0,.18);
+
+z-index:100;
+
+}
+
+.panel.open{
+
+display:block;
+
+}
+
+.panelClose{
+
+display:block;
+
+position:absolute;
+
+right:9px;
+
+top:7px;
+
+width:34px;
+
+height:34px;
+
+padding:0;
+
+border-radius:50%;
+
+background:var(--soft);
+
+color:#222;
+
+border:1px solid var(--line);
+
+font-size:20px;
+
+}
+
+.context{
+
+max-width:94%;
+
+overflow:auto;
+
+white-space:nowrap;
+
+}
+
+.guestPanel{
+
+top:56px;
+
+left:54px;
+
+right:0;
+
+bottom:0;
+
+width:auto;
+
+border-left:0;
+
+box-shadow:none;
+
+}
+
+.grid4{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.voicePreviewRow{
+
+grid-template-columns:1fr 1fr;
+
+background:#fff;
+
+padding:8px;
+
+margin-bottom:6px;
+
+border:1px solid #eee;
+
+border-radius:9px;
+
+}
+
+.directoryRow{
+
+grid-template-columns:1fr auto;
+
+}
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <header class="topbar">
 
-  <div class="logo">
-    seat<span>ly</span>
-  </div>
+<div class="logo">
+seat<span>ly</span>
+</div>
 
-  <div class="topActions">
 
-    <span
-    class="saved"
-    id="savedIndicator">
-      Saved ✓
-    </span>
+<div class="topActions">
 
-    <button
-    class="secondary"
-    id="undoBtn"
-    onclick="undo()">
-      ↶
-    </button>
+<span
+class="saved"
+id="savedIndicator">
 
-    <button
-    class="secondary"
-    id="redoBtn"
-    onclick="redo()">
-      ↷
-    </button>
+Saved ✓
 
-    <button onclick="toast('Export will be added next')">
-      Finish
-    </button>
+</span>
 
-  </div>
+
+<button
+class="secondary"
+id="undoBtn"
+onclick="undo()">
+
+↶
+
+</button>
+
+
+<button
+class="secondary"
+id="redoBtn"
+onclick="redo()">
+
+↷
+
+</button>
+
+
+<button
+onclick="toast('Export / PDF / PNG is next')">
+
+Finish
+
+</button>
+
+</div>
 
 </header>
 
 
+
 <div class="app">
+
 
 <nav class="rail">
 
-  <button
-  id="navSetup"
-  onclick="togglePanel('setup')">
-    <b>⚡</b>
-    Setup
-  </button>
+<button
+id="navSetup"
+onclick="togglePanel('setup')">
 
-  <button
-  id="navTables"
-  onclick="togglePanel('tables')">
-    <b>◉</b>
-    Tables
-  </button>
+<b>⚡</b>
+Setup
 
-  <button
-  id="navGuests"
-  onclick="togglePanel('guests')">
-    <b>♙</b>
-    Guests
-  </button>
+</button>
 
-  <button
-  id="navLists"
-  onclick="togglePanel('lists')">
-    <b>☷</b>
-    Lists
-  </button>
 
-  <button
-  id="navVenue"
-  onclick="togglePanel('venue')">
-    <b>▧</b>
-    Venue
-  </button>
+<button
+id="navTables"
+onclick="togglePanel('tables')">
 
-  <button
-  id="navMore"
-  onclick="togglePanel('more')">
-    <b>•••</b>
-    More
-  </button>
+<b>◉</b>
+Tables
+
+</button>
+
+
+<button
+id="navGuests"
+onclick="togglePanel('guests')">
+
+<b>♙</b>
+Guests
+
+</button>
+
+
+<button
+id="navLists"
+onclick="togglePanel('lists')">
+
+<b>☷</b>
+Lists
+
+</button>
+
+
+<button
+id="navVenue"
+onclick="togglePanel('venue')">
+
+<b>▧</b>
+Venue
+
+</button>
+
+
+<button
+id="navMore"
+onclick="togglePanel('more')">
+
+<b>•••</b>
+More
+
+</button>
 
 </nav>
+
 
 
 <aside
 class="panel"
 id="panel">
 
-  <button
-  class="panelClose"
-  onclick="closePanel()">
-    ×
-  </button>
+<button
+class="panelClose"
+onclick="closePanel()">
 
-  <div id="panelContent"></div>
+×
+
+</button>
+
+
+<div id="panelContent"></div>
 
 </aside>
+
 
 
 <main class="work">
@@ -809,187 +1424,277 @@ id="panel">
 class="canvas"
 id="canvas">
 
-  <div
-  class="venueBg"
-  id="venueBg">
-  </div>
 
-  <div
-  class="empty"
-  id="empty">
-
-    <div>
-
-      <div style="font-size:34px">
-        ♡
-      </div>
-
-      <b>
-        Your wedding plan
-      </b>
-
-      <div style="font-size:12px;margin-top:5px">
-        Start with Quick Setup
-      </div>
-
-    </div>
-
-  </div>
-
-  <div
-  class="layer"
-  id="layer">
-  </div>
-
-  <div
-  class="context"
-  id="context">
-  </div>
-
-  <div
-  class="trash"
-  id="trash">
-    🗑 Drop to delete
-  </div>
-
-  <div
-  class="status"
-  id="status">
-  </div>
-
-</div>
-
-</main>
-
+<div
+class="venueBg"
+id="venueBg">
 </div>
 
 
-<!-- TABLE GUESTS -->
+<div
+class="empty"
+id="empty">
 
-<aside
-class="guestPanel"
-id="guestPanel">
+<div>
 
-<div class="guestHeader">
-
-  <div>
-
-    <div
-    class="guestTitle"
-    id="guestTitle">
-      Table
-    </div>
-
-    <div
-    class="guestCount"
-    id="guestCount">
-    </div>
-
-  </div>
-
-  <button
-  class="secondary"
-  onclick="closeGuestPanel()">
-    ×
-  </button>
-
+<div style="font-size:34px">
+♡
 </div>
 
 
-<div class="guestBox">
-
-  <div class="formLabel">
-    Επώνυμο / Surname
-  </div>
-
-  <input
-  id="gSurname"
-  class="field"
-  placeholder="Γεωργίου">
+<b>
+Your wedding plan
+</b>
 
 
-  <div class="formLabel">
-    Όνομα / First name
-  </div>
+<div
+style="font-size:12px;margin-top:5px">
 
-  <input
-  id="gFirst"
-  class="field"
-  placeholder="Γιώργος">
+Start with Quick Setup
 
+</div>
 
-  <div class="formLabel">
-    Αριθμός ατόμων
-  </div>
-
-  <input
-  id="gParty"
-  class="field"
-  type="number"
-  min="1"
-  max="20"
-  value="1">
-
-
-  <button
-  style="width:100%;margin-top:7px"
-  onclick="addGuestToTable()">
-
-    + Add guest
-
-  </button>
+</div>
 
 </div>
 
 
 <div
-style="font-size:13px;font-weight:800;margin-top:14px">
+class="layer"
+id="layer">
+</div>
+
+
+<div
+class="context"
+id="context">
+</div>
+
+
+<div
+class="trash"
+id="trash">
+
+🗑 Drop to delete
+
+</div>
+
+
+<div
+class="status"
+id="status">
+</div>
+
+
+</div>
+
+</main>
+
+
+</div>
+
+
+
+<!-- TABLE GUEST PANEL -->
+
+<aside
+class="guestPanel"
+id="guestPanel">
+
+
+<div class="guestHeader">
+
+<div>
+
+<div
+class="guestTitle"
+id="guestTitle">
+
+Table
+
+</div>
+
+
+<div
+class="guestCount"
+id="guestCount">
+</div>
+
+</div>
+
+
+<button
+class="secondary"
+onclick="closeGuestPanel()">
+
+×
+
+</button>
+
+</div>
+
+
+
+<div class="guestBox">
+
+
+<div class="formLabel">
+
+Επώνυμο / Surname
+
+</div>
+
+
+<input
+id="gSurname"
+class="field"
+placeholder="Γεωργίου">
+
+
+<div class="formLabel">
+
+Όνομα / First name
+
+</div>
+
+
+<input
+id="gFirst"
+class="field"
+placeholder="Γιώργος">
+
+
+<div class="formLabel">
+
+Αριθμός ατόμων / Party size
+
+</div>
+
+
+<input
+id="gParty"
+class="field"
+type="number"
+min="1"
+max="20"
+value="1">
+
+
+<button
+style="width:100%;margin-top:7px"
+onclick="addGuestToTable()">
+
++ Add Guest
+
+</button>
+
+
+</div>
+
+
+
+<div
+style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:7px;
+margin-top:14px">
+
+<strong style="font-size:13px">
 
 Guests at this table
+
+</strong>
+
+
+<button
+class="dangerSoft"
+style="font-size:10px;padding:6px 8px"
+onclick="clearCurrentTableGuests()">
+
+Clear table guests
+
+</button>
 
 </div>
 
 
 <div id="tableGuestList"></div>
 
+
 </aside>
 
 
-<!-- ALPHABETICAL PREVIEW -->
+
+<!-- ALPHABETICAL DIRECTORY -->
 
 <div
 class="overlay"
 id="directoryOverlay">
 
+
 <div class="modal">
 
-  <div class="modalTop">
 
-    <div>
+<div class="modalTop">
 
-      <h2 style="margin:0">
-        Alphabetical Guest Directory
-      </h2>
+<div>
 
-      <div class="hint" style="margin:3px 0 0">
-        Surname · Name · People · Table
-      </div>
+<h2 style="margin:0">
 
-    </div>
+Alphabetical Guest Directory
 
-    <button
-    class="secondary"
-    onclick="closeDirectory()">
-      ×
-    </button>
+</h2>
 
-  </div>
 
-  <div id="directoryContent"></div>
+<div
+class="hint"
+style="margin:3px 0 0">
+
+Surname · Name · People · Table
 
 </div>
 
 </div>
+
+
+<button
+class="secondary"
+onclick="closeDirectory()">
+
+×
+
+</button>
+
+</div>
+
+
+
+<div
+style="
+display:flex;
+justify-content:flex-end;
+margin:10px 0">
+
+<button
+class="danger"
+onclick="clearGuestList()">
+
+Delete Entire Guest List
+
+</button>
+
+</div>
+
+
+<div id="directoryContent"></div>
+
+
+</div>
+
+</div>
+
 
 
 <div
@@ -1008,21 +1713,23 @@ z-index:300">
 </div>
 
 
+
 <script>
 
-/* ==================================================
+
+/* =========================
 DATA
-================================================== */
+========================= */
 
 let S={
 
-  venue:null,
+venue:null,
 
-  tables:[],
+tables:[],
 
-  guests:[],
+guests:[],
 
-  objects:[]
+objects:[]
 
 };
 
@@ -1074,291 +1781,346 @@ const mobile=
 
 const uid=()=>{
 
-  if(
-    window.crypto &&
-    crypto.randomUUID
-  ){
+if(
+window.crypto &&
+crypto.randomUUID
+){
 
-    return crypto.randomUUID();
+return crypto.randomUUID();
 
-  }
+}
 
-  return String(
-    Date.now()+Math.random()
-  );
+return String(
+Date.now()+Math.random()
+);
 
 };
 
 
-/* ==================================================
-SAVE / LOAD
-================================================== */
+
+/* =========================
+HISTORY
+========================= */
 
 function state(){
 
-  return JSON.stringify(S);
+return JSON.stringify(S);
 
 }
 
 
 function pushHistory(){
 
-  undoStack.push(
-    state()
-  );
+undoStack.push(
+state()
+);
 
 
-  if(
-    undoStack.length>60
-  ){
+if(
+undoStack.length>60
+){
 
-    undoStack.shift();
+undoStack.shift();
 
-  }
-
-
-  redoStack=[];
+}
 
 
-  updateHistory();
+redoStack=[];
+
+
+updateHistory();
 
 }
 
 
 function undo(){
 
-  if(
-    !undoStack.length
-  )return;
+if(
+!undoStack.length
+)return;
 
 
-  redoStack.push(
-    state()
-  );
+redoStack.push(
+state()
+);
 
 
-  S=
-  JSON.parse(
-    undoStack.pop()
-  );
+S=
+JSON.parse(
+undoStack.pop()
+);
 
 
-  selected=null;
+selected=null;
 
 
-  closeGuestPanel();
+closeGuestPanel();
 
 
-  applyVenue();
+applyVenue();
 
-  render();
+render();
 
-  saveOnly();
+saveOnly();
 
-  updateHistory();
+updateHistory();
+
+
+if(
+activePanel==='lists'
+){
+
+renderLists();
+
+}
 
 }
 
 
 function redo(){
 
-  if(
-    !redoStack.length
-  )return;
+if(
+!redoStack.length
+)return;
 
 
-  undoStack.push(
-    state()
-  );
+undoStack.push(
+state()
+);
 
 
-  S=
-  JSON.parse(
-    redoStack.pop()
-  );
+S=
+JSON.parse(
+redoStack.pop()
+);
 
 
-  selected=null;
+selected=null;
 
 
-  closeGuestPanel();
+closeGuestPanel();
 
 
-  applyVenue();
+applyVenue();
 
-  render();
+render();
 
-  saveOnly();
+saveOnly();
 
-  updateHistory();
+updateHistory();
+
+
+if(
+activePanel==='lists'
+){
+
+renderLists();
+
+}
 
 }
 
 
 function updateHistory(){
 
-  $('undoBtn').disabled=
-  !undoStack.length;
+$('undoBtn').disabled=
+!undoStack.length;
 
 
-  $('redoBtn').disabled=
-  !redoStack.length;
+$('redoBtn').disabled=
+!redoStack.length;
 
 }
 
+
+/* =========================
+SAVE
+========================= */
 
 function saveOnly(){
 
-  try{
+try{
 
-    localStorage.setItem(
-      'seatly42',
-      JSON.stringify(S)
-    );
+localStorage.setItem(
+'seatly43',
+JSON.stringify(S)
+);
 
-  }catch(e){}
-
-
-  updateStatus();
+}catch(e){}
 
 
-  $('savedIndicator')
-  .textContent=
-  'Saved ✓';
+updateStatus();
+
+
+$('savedIndicator')
+.textContent=
+'Saved ✓';
 
 }
 
+
+/* =========================
+LOAD
+========================= */
 
 function load(){
 
-  try{
+try{
 
-    const old=
+const old=
 
-    localStorage.getItem('seatly42')
+localStorage.getItem('seatly43')
 
-    ||
+||
 
-    localStorage.getItem('seatly41')
+localStorage.getItem('seatly42')
 
-    ||
+||
 
-    localStorage.getItem('seatly40');
+localStorage.getItem('seatly41')
 
+||
 
-    if(old){
-
-      const data=
-      JSON.parse(old);
+localStorage.getItem('seatly40');
 
 
-      S.venue=
-      data.venue||null;
+if(old){
+
+const data=
+JSON.parse(old);
 
 
-      S.tables=
-      data.tables||[];
+S.venue=
+data.venue||null;
 
 
-      S.objects=
-      data.objects||
-      data.objs||
-      data.venueObjects||
-      [];
+S.tables=
+data.tables||[];
 
 
-      S.guests=
-
-      (data.guests||[])
-      .map(guest=>{
-
-        if(
-          guest.surname!==undefined
-        ){
-
-          return guest;
-
-        }
+S.objects=
+data.objects||
+data.objs||
+data.venueObjects||
+[];
 
 
-        const oldName=
-        guest.name||'';
+S.guests=
 
+(data.guests||[])
 
-        const parts=
-        oldName
-        .trim()
-        .split(/\s+/);
+.map(guest=>{
 
+if(
+guest.surname!==undefined
+){
 
-        return{
+return{
 
-          id:
-          guest.id||uid(),
+id:
+guest.id||uid(),
 
-          surname:
-          parts.length>1
-          ?parts[parts.length-1]
-          :parts[0]||'',
+surname:
+guest.surname||'',
 
-          firstName:
-          parts.length>1
-          ?parts.slice(0,-1).join(' ')
-          :'',
+firstName:
+guest.firstName||'',
 
-          partySize:
-          Number(
-            guest.partySize||1
-          ),
+partySize:
+Math.max(
+1,
+Number(
+guest.partySize||1
+)
+),
 
-          tableId:
-          guest.tableId||null
+tableId:
+guest.tableId||null
 
-        };
-
-      });
-
-    }
-
-  }catch(e){}
-
-
-  applyVenue();
-
-  render();
-
-  updateHistory();
+};
 
 }
 
 
-/* ==================================================
+const oldName=
+
+guest.name||'';
+
+
+const parts=
+
+oldName
+.trim()
+.split(/\s+/);
+
+
+return{
+
+id:
+guest.id||uid(),
+
+surname:
+parts.length>1
+?parts[parts.length-1]
+:parts[0]||'',
+
+firstName:
+parts.length>1
+?parts.slice(0,-1).join(' ')
+:'',
+
+partySize:1,
+
+tableId:
+guest.tableId||null
+
+};
+
+});
+
+}
+
+}catch(e){}
+
+
+applyVenue();
+
+render();
+
+updateHistory();
+
+}
+
+
+
+/* =========================
 TABLE HELPERS
-================================================== */
+========================= */
 
 function nextTableNumber(){
 
-  const used=
+const used=
 
-  S.tables
-  .map(
-    table=>Number(table.number)
-  );
-
-
-  let n=1;
+S.tables
+.map(
+table=>
+Number(table.number)
+);
 
 
-  while(
-    used.includes(n)
-  ){
-
-    n++;
-
-  }
+let n=1;
 
 
-  return n;
+while(
+used.includes(n)
+){
+
+n++;
+
+}
+
+
+return n;
 
 }
 
@@ -1368,274 +2130,297 @@ tableId,
 exclude=null
 ){
 
-  return S.guests
+return S.guests
 
-  .filter(
-    guest=>
+.filter(
+guest=>
 
-    guest.tableId===tableId
+guest.tableId===tableId
 
-    &&
+&&
 
-    guest.id!==exclude
-  )
+guest.id!==exclude
+)
 
-  .reduce(
-    (
-      total,
-      guest
-    )=>
+.reduce(
 
-    total+
+(
+total,
+guest
+)=>
 
-    Number(
-      guest.partySize||1
-    ),
+total+
+Number(
+guest.partySize||1
+),
 
-    0
-  );
+0
+
+);
 
 }
 
 
-/* ==================================================
-NAV
-================================================== */
+
+/* =========================
+NAVIGATION
+========================= */
 
 function setActive(type){
 
-  [
-    'Setup',
-    'Tables',
-    'Guests',
-    'Lists',
-    'Venue',
-    'More'
-  ]
+[
+'Setup',
+'Tables',
+'Guests',
+'Lists',
+'Venue',
+'More'
+]
 
-  .forEach(name=>{
+.forEach(name=>{
 
-    $('nav'+name)
-    .classList
-    .toggle(
+$('nav'+name)
+.classList
+.toggle(
 
-      'active',
+'active',
 
-      name.toLowerCase()===type
+name.toLowerCase()===type
 
-    );
+);
 
-  });
+});
 
 }
 
 
 function closePanel(){
 
-  $('panel')
-  .classList
-  .remove('open');
+$('panel')
+.classList
+.remove('open');
 
 
-  activePanel=null;
+activePanel=null;
 
 
-  setActive('');
+setActive('');
 
 }
 
 
 function togglePanel(type){
 
-  if(
+if(
 
-    mobile()
+mobile()
 
-    &&
+&&
 
-    activePanel===type
+activePanel===type
 
-    &&
+&&
 
-    $('panel')
-    .classList
-    .contains('open')
+$('panel')
+.classList
+.contains('open')
 
-  ){
+){
 
-    closePanel();
+closePanel();
 
-    return;
+return;
 
-  }
-
-
-  activePanel=
-  type;
+}
 
 
-  setActive(type);
+activePanel=
+type;
 
 
-  $('panel')
-  .classList
-  .add('open');
+setActive(type);
 
 
-  if(type==='setup'){
-
-    renderSetup();
-
-  }
+$('panel')
+.classList
+.add('open');
 
 
-  if(type==='tables'){
+if(
+type==='setup'
+){
 
-    renderTables();
+renderSetup();
 
-  }
-
-
-  if(type==='guests'){
-
-    renderGuestsManager();
-
-  }
+}
 
 
-  if(type==='lists'){
+if(
+type==='tables'
+){
 
-    renderLists();
+renderTables();
 
-  }
-
-
-  if(type==='venue'){
-
-    renderVenue();
-
-  }
+}
 
 
-  if(type==='more'){
+if(
+type==='guests'
+){
 
-    renderMore();
+renderGuestsManager();
 
-  }
+}
+
+
+if(
+type==='lists'
+){
+
+renderLists();
+
+}
+
+
+if(
+type==='venue'
+){
+
+renderVenue();
+
+}
+
+
+if(
+type==='more'
+){
+
+renderMore();
+
+}
 
 }
 
 
 function afterAction(){
 
-  if(
-    mobile()
-  ){
+if(
+mobile()
+){
 
-    closePanel();
+closePanel();
 
-  }
+}
 
 }
 
 
-/* ==================================================
+
+/* =========================
 QUICK SETUP
-================================================== */
+========================= */
 
 function renderSetup(){
 
-  $('panelContent')
-  .innerHTML=`
+$('panelContent')
+.innerHTML=`
 
-  <h2>
-    Quick Setup
-  </h2>
-
-  <div class="hint">
-    Start from your guest count instead of manually calculating tables.
-  </div>
+<h2>
+Quick Setup
+</h2>
 
 
-  <div class="grid4">
+<div class="hint">
 
-    ${[
-      50,
-      100,
-      150,
-      200,
-      250,
-      300,
-      350,
-      400
-    ]
+Choose the approximate number of guests
+and Seatly calculates the tables.
 
-    .map(
-      guests=>
-
-      `
-
-      <button
-      class="presetBtn"
-      onclick="showSetupOptions(${guests})">
-
-        ${guests}
-
-      </button>
-
-      `
-
-    )
-
-    .join('')}
-
-  </div>
+</div>
 
 
-  <div class="section">
+<div class="grid4">
 
-    <h3>
-      Custom guests
-    </h3>
+${[
+50,
+100,
+150,
+200,
+250,
+300,
+350,
+400
+]
 
-    <input
-    id="customGuestCount"
-    class="field"
-    type="number"
-    min="1"
-    max="1000"
-    placeholder="e.g. 186">
+.map(
+guests=>
+
+`
+
+<button
+class="presetBtn"
+onclick="showSetupOptions(${guests})">
+
+${guests}
+
+</button>
+
+`
+
+)
+
+.join('')}
+
+</div>
 
 
-    <button
-    style="width:100%;margin-top:7px"
-    onclick="showCustomSetup()">
 
-      Show options
+<div class="section">
 
-    </button>
-
-  </div>
+<h3>
+Custom Guests
+</h3>
 
 
-  <div id="setupResults"></div>
+<input
+id="customGuests"
+class="field"
+type="number"
+min="1"
+max="1000"
+placeholder="e.g. 186">
 
-  `;
+
+<button
+style="width:100%;margin-top:7px"
+onclick="showCustomSetup()">
+
+Show Options
+
+</button>
+
+</div>
+
+
+<div id="setupResults"></div>
+
+`;
 
 }
 
 
 function showCustomSetup(){
 
-  const n=
+const guests=
 
-  Math.max(
-    1,
-    +$('customGuestCount').value||1
-  );
+Math.max(
+1,
++$('customGuests').value||1
+);
 
 
-  showSetupOptions(n);
+showSetupOptions(
+guests
+);
 
 }
 
@@ -1644,116 +2429,119 @@ function showSetupOptions(
 guestCount
 ){
 
-  const seatOptions=
-  [
-    8,
-    10,
-    12,
-    16
-  ];
+const options=
+
+[
+8,
+10,
+12,
+16
+]
+
+.map(seats=>{
+
+const tables=
+
+Math.ceil(
+guestCount/
+seats
+);
 
 
-  const rows=
+const capacity=
 
-  seatOptions
-  .map(seats=>{
-
-    const tables=
-
-    Math.ceil(
-      guestCount/
-      seats
-    );
+tables*
+seats;
 
 
-    const capacity=
+return{
 
-    tables*
-    seats;
+seats,
 
+tables,
 
-    const spare=
+capacity,
 
-    capacity-
-    guestCount;
+spare:
+capacity-
+guestCount
 
+};
 
-    return{
-
-      seats,
-      tables,
-      capacity,
-      spare
-
-    };
-
-  });
+});
 
 
-  $('setupResults')
-  .innerHTML=`
+$('setupResults')
+.innerHTML=`
 
-  <div class="setupCard">
+<div class="setupCard">
 
-    <strong>
-      ${guestCount} guests
-    </strong>
-
-    <div class="hint"
-    style="margin:3px 0 7px">
-
-      Choose the layout you prefer.
-
-    </div>
+<strong>
+${guestCount} guests
+</strong>
 
 
-    ${rows
+<div
+class="hint"
+style="margin:3px 0 6px">
 
-    .map(option=>`
+Choose the table style you prefer.
 
-      <div class="setupOption">
-
-        <div>
-
-          <strong>
-
-            ${option.tables}
-            tables ×
-            ${option.seats}
-
-          </strong>
-
-          <div
-          style="font-size:11px;color:#777">
-
-            ${option.capacity}
-            seats
-
-            ${option.spare
-            ?`· ${option.spare} spare`
-            :'· exact'}
-
-          </div>
-
-        </div>
+</div>
 
 
-        <button
-        onclick="createQuickLayout(${option.tables},${option.seats})">
+${options
 
-          Create
+.map(option=>`
 
-        </button>
+<div class="setupOption">
 
-      </div>
+<div>
 
-    `)
+<strong>
 
-    .join('')}
+${option.tables}
+tables ×
+${option.seats}
 
-  </div>
+</strong>
 
-  `;
+
+<div
+style="
+font-size:11px;
+color:#777">
+
+${option.capacity}
+seats
+
+${option.spare
+?`· ${option.spare} spare`
+:'· exact'}
+
+</div>
+
+</div>
+
+
+<button
+onclick="createQuickLayout(${option.tables},${option.seats})">
+
+Create
+
+</button>
+
+
+</div>
+
+`)
+
+.join('')}
+
+
+</div>
+
+`;
 
 }
 
@@ -1763,366 +2551,380 @@ tableCount,
 seats
 ){
 
-  const replace=
+const replace=
 
-  S.tables.length
+S.tables.length
 
-  ?
+?
 
-  confirm(
-    'Replace the current tables with this Quick Setup?'
-  )
+confirm(
+'Replace current tables with this new Quick Setup?'
+)
 
-  :
+:
 
-  true;
-
-
-  if(
-    !replace
-  )return;
+true;
 
 
-  pushHistory();
+if(!replace)return;
 
 
-  /*
-  Existing guests become
-  unassigned instead of deleted.
-  */
-
-  S.guests
-  .forEach(
-    guest=>{
-
-      guest.tableId=null;
-
-    }
-  );
+pushHistory();
 
 
-  S.tables=[];
+S.guests
+.forEach(
+guest=>{
+
+guest.tableId=null;
+
+}
+);
 
 
-  createTableGrid(
-    tableCount,
-    seats
-  );
+S.tables=[];
 
 
-  render();
+createTableGrid(
+tableCount,
+seats
+);
 
-  saveOnly();
 
-  afterAction();
+render();
+
+saveOnly();
+
+afterAction();
 
 }
 
 
-/* ==================================================
-RESPONSIVE GRID
-================================================== */
+
+/* =========================
+TABLE GRID
+========================= */
 
 function createTableGrid(
 qty,
 seats
 ){
 
-  const rect=
-  canvas.getBoundingClientRect();
+const rect=
+canvas.getBoundingClientRect();
 
 
-  let scale=1;
+let scale=1;
 
 
-  if(qty>=10){
+if(
+qty>=10
+){
 
-    scale=.82;
-
-  }
-
-
-  if(qty>=18){
-
-    scale=.68;
-
-  }
-
-
-  if(qty>=28){
-
-    scale=.56;
-
-  }
-
-
-  if(qty>=38){
-
-    scale=.48;
-
-  }
-
-
-  const spacingX=
-  105*
-  scale;
-
-
-  const spacingY=
-  105*
-  scale;
-
-
-  const usableWidth=
-  rect.width-
-  25;
-
-
-  const usableHeight=
-  rect.height-
-  70;
-
-
-  let columns=
-
-  Math.max(
-    1,
-    Math.floor(
-      usableWidth/
-      spacingX
-    )
-  );
-
-
-  columns=
-
-  Math.min(
-    columns,
-    qty
-  );
-
-
-  let rows=
-
-  Math.ceil(
-    qty/
-    columns
-  );
-
-
-  while(
-
-    rows*
-    spacingY
-    >
-    usableHeight
-
-    &&
-
-    columns<qty
-
-  ){
-
-    columns++;
-
-
-    rows=
-
-    Math.ceil(
-      qty/
-      columns
-    );
-
-  }
-
-
-  const gridWidth=
-
-  (
-    columns-1
-  )
-
-  *
-  spacingX;
-
-
-  const gridHeight=
-
-  (
-    rows-1
-  )
-
-  *
-  spacingY;
-
-
-  const startX=
-
-  Math.max(
-
-    5,
-
-    rect.width/2
-    -
-    gridWidth/2
-    -
-    51*
-    scale
-
-  );
-
-
-  const startY=
-
-  Math.max(
-
-    45,
-
-    rect.height/2
-    -
-    gridHeight/2
-    -
-    51*
-    scale
-
-  );
-
-
-  for(
-    let i=0;
-    i<qty;
-    i++
-  ){
-
-    const col=
-    i%
-    columns;
-
-
-    const row=
-    Math.floor(
-      i/
-      columns
-    );
-
-
-    S.tables.push({
-
-      id:uid(),
-
-      number:
-      nextTableNumber(),
-
-      seats:
-      seats,
-
-      x:
-      startX+
-      col*
-      spacingX,
-
-      y:
-      startY+
-      row*
-      spacingY,
-
-      scale:
-      scale
-
-    });
-
-  }
+scale=.82;
 
 }
 
 
-/* ==================================================
-TABLE PANEL
-================================================== */
+if(
+qty>=18
+){
+
+scale=.68;
+
+}
+
+
+if(
+qty>=28
+){
+
+scale=.56;
+
+}
+
+
+if(
+qty>=38
+){
+
+scale=.48;
+
+}
+
+
+const spacingX=
+105*
+scale;
+
+
+const spacingY=
+105*
+scale;
+
+
+const usableWidth=
+rect.width-
+20;
+
+
+const usableHeight=
+rect.height-
+65;
+
+
+let columns=
+
+Math.max(
+
+1,
+
+Math.floor(
+usableWidth/
+spacingX
+)
+
+);
+
+
+columns=
+
+Math.min(
+columns,
+qty
+);
+
+
+let rows=
+
+Math.ceil(
+qty/
+columns
+);
+
+
+while(
+
+rows*
+spacingY
+>
+usableHeight
+
+&&
+
+columns<
+qty
+
+){
+
+columns++;
+
+
+rows=
+
+Math.ceil(
+qty/
+columns
+);
+
+}
+
+
+const width=
+
+(columns-1)
+*
+spacingX;
+
+
+const height=
+
+(rows-1)
+*
+spacingY;
+
+
+const startX=
+
+Math.max(
+
+5,
+
+rect.width/2
+-
+width/2
+-
+51*
+scale
+
+);
+
+
+const startY=
+
+Math.max(
+
+40,
+
+rect.height/2
+-
+height/2
+-
+51*
+scale
+
+);
+
+
+for(
+let i=0;
+i<qty;
+i++
+){
+
+const col=
+i%
+columns;
+
+
+const row=
+Math.floor(
+i/
+columns
+);
+
+
+S.tables.push({
+
+id:uid(),
+
+number:
+nextTableNumber(),
+
+seats:
+seats,
+
+x:
+startX+
+col*
+spacingX,
+
+y:
+startY+
+row*
+spacingY,
+
+scale:
+scale
+
+});
+
+}
+
+}
+
+
+
+/* =========================
+TABLES
+========================= */
 
 function renderTables(){
 
-  $('panelContent')
-  .innerHTML=`
+$('panelContent')
+.innerHTML=`
 
-  <h2>
-    Tables
-  </h2>
-
-  <div class="hint">
-    Add individual tables or a custom number.
-  </div>
+<h2>
+Tables
+</h2>
 
 
-  <div class="grid2">
+<div class="hint">
 
-    <button
-    class="soft"
-    onclick="addSingleTable(8)">
-      8 seats
-    </button>
+Add one table or a custom group.
 
-    <button
-    class="soft"
-    onclick="addSingleTable(10)">
-      10 seats
-    </button>
-
-    <button
-    class="soft"
-    onclick="addSingleTable(12)">
-      12 seats
-    </button>
-
-    <button
-    class="soft"
-    onclick="addSingleTable(16)">
-      16 seats
-    </button>
-
-  </div>
+</div>
 
 
-  <div class="section">
+<div class="grid2">
 
-    <input
-    id="manualQty"
-    class="field"
-    type="number"
-    min="1"
-    max="60"
-    value="5">
+<button
+class="soft"
+onclick="addSingleTable(8)">
+8 seats
+</button>
 
 
-    <select
-    id="manualSeats"
-    class="field"
-    style="margin-top:7px">
-
-      <option>8</option>
-
-      <option selected>
-        10
-      </option>
-
-      <option>12</option>
-
-      <option>16</option>
-
-    </select>
+<button
+class="soft"
+onclick="addSingleTable(10)">
+10 seats
+</button>
 
 
-    <button
-    style="width:100%;margin-top:7px"
-    onclick="addManualMultiple()">
+<button
+class="soft"
+onclick="addSingleTable(12)">
+12 seats
+</button>
 
-      Add multiple
 
-    </button>
+<button
+class="soft"
+onclick="addSingleTable(16)">
+16 seats
+</button>
 
-  </div>
+</div>
 
-  `;
+
+
+<div class="section">
+
+<input
+id="manualQty"
+class="field"
+type="number"
+min="1"
+max="60"
+value="5">
+
+
+<select
+id="manualSeats"
+class="field"
+style="margin-top:7px">
+
+<option>
+8
+</option>
+
+<option selected>
+10
+</option>
+
+<option>
+12
+</option>
+
+<option>
+16
+</option>
+
+</select>
+
+
+<button
+style="width:100%;margin-top:7px"
+onclick="addManualMultiple()">
+
+Add Multiple
+
+</button>
+
+</div>
+
+`;
 
 }
 
@@ -2131,1025 +2933,1048 @@ function addSingleTable(
 seats
 ){
 
-  pushHistory();
+pushHistory();
 
 
-  const rect=
-  canvas.getBoundingClientRect();
+const rect=
+canvas.getBoundingClientRect();
 
 
-  const offset=
+const offset=
 
-  (
-    S.tables.length%
-    6
-  )
-
-  *
-  16;
-
-
-  S.tables.push({
-
-    id:uid(),
-
-    number:
-    nextTableNumber(),
-
-    seats:
-    seats,
-
-    x:
-    Math.max(
-      5,
-      rect.width/2-
-      51+
-      offset
-    ),
-
-    y:
-    Math.max(
-      45,
-      rect.height/2-
-      51+
-      offset
-    ),
-
-    scale:1
-
-  });
+(
+S.tables.length%
+6
+)
+*
+14;
 
 
-  render();
+S.tables.push({
 
-  saveOnly();
+id:uid(),
 
-  afterAction();
+number:
+nextTableNumber(),
+
+seats:
+seats,
+
+x:
+Math.max(
+5,
+rect.width/2-
+51+
+offset
+),
+
+y:
+Math.max(
+40,
+rect.height/2-
+51+
+offset
+),
+
+scale:1
+
+});
+
+
+render();
+
+saveOnly();
+
+afterAction();
 
 }
 
 
 function addManualMultiple(){
 
-  const qty=
+const qty=
 
-  Math.max(
-    1,
-    Math.min(
-      60,
-      +$('manualQty').value||1
-    )
-  );
+Math.max(
 
+1,
 
-  const seats=
-  +$('manualSeats').value;
+Math.min(
 
+60,
 
-  pushHistory();
++$('manualQty').value||1
 
+)
 
-  createTableGrid(
-    qty,
-    seats
-  );
+);
 
 
-  render();
+const seats=
++$('manualSeats').value;
 
-  saveOnly();
 
-  afterAction();
+pushHistory();
+
+
+createTableGrid(
+qty,
+seats
+);
+
+
+render();
+
+saveOnly();
+
+afterAction();
 
 }
 
 
-/* ==================================================
+
+/* =========================
 VENUE
-================================================== */
+========================= */
 
 function renderVenue(){
 
-  $('panelContent')
-  .innerHTML=`
+$('panelContent')
+.innerHTML=`
 
-  <h2>
-    Venue
-  </h2>
-
-  <div class="hint">
-    Landscape background. It never moves.
-  </div>
+<h2>
+Venue
+</h2>
 
 
-  <label class="upload">
+<div class="hint">
 
-    📷
+Landscape background.
 
-    <br>
+The background remains fixed.
 
-    <b>
-
-      ${S.venue
-      ?'Replace venue'
-      :'Upload venue'}
-
-    </b>
+</div>
 
 
-    <input
-    id="venueFile"
-    type="file"
-    accept="image/*">
+<label class="upload">
 
-  </label>
+📷
 
+<br>
 
-  ${S.venue
+<b>
 
-  ?`
+${S.venue
+?'Replace Venue'
+:'Upload Venue'}
 
-  <button
-  class="secondary"
-  style="width:100%;margin-top:7px"
-  onclick="removeVenue()">
-
-    Remove venue
-
-  </button>
-
-  `
-
-  :''}
-
-  `;
+</b>
 
 
-  $('venueFile')
-  .onchange=e=>{
+<input
+id="venueFile"
+type="file"
+accept="image/*">
 
-    const file=
-    e.target.files[0];
-
-
-    if(!file)return;
+</label>
 
 
-    const reader=
-    new FileReader();
+${S.venue
+
+?`
+
+<button
+class="secondary"
+style="width:100%;margin-top:7px"
+onclick="removeVenue()">
+
+Remove Venue
+
+</button>
+
+`
+
+:''}
+
+`;
 
 
-    reader.onload=x=>{
+$('venueFile')
+.onchange=e=>{
 
-      pushHistory();
-
-
-      S.venue=
-      x.target.result;
+const file=
+e.target.files[0];
 
 
-      applyVenue();
-
-      render();
-
-      saveOnly();
-
-      afterAction();
-
-    };
+if(!file)return;
 
 
-    reader.readAsDataURL(
-      file
-    );
+const reader=
+new FileReader();
 
-  };
+
+reader.onload=x=>{
+
+pushHistory();
+
+
+S.venue=
+x.target.result;
+
+
+applyVenue();
+
+render();
+
+saveOnly();
+
+afterAction();
+
+};
+
+
+reader.readAsDataURL(
+file
+);
+
+};
 
 }
 
 
 function applyVenue(){
 
-  venueBg
-  .style
-  .backgroundImage=
+venueBg
+.style
+.backgroundImage=
 
-  S.venue
+S.venue
 
-  ?`url("${S.venue}")`
+?`url("${S.venue}")`
 
-  :'none';
+:'none';
 
 }
 
 
 function removeVenue(){
 
-  pushHistory();
+pushHistory();
 
 
-  S.venue=null;
+S.venue=null;
 
 
-  applyVenue();
+applyVenue();
 
-  render();
+render();
 
-  saveOnly();
+saveOnly();
 
-  renderVenue();
+renderVenue();
 
 }
 
 
-/* ==================================================
+
+/* =========================
 CHAIRS
-================================================== */
+========================= */
 
 function createChairs(
 el,
 count
 ){
 
-  const n=
+const n=
 
-  Math.min(
-    count,
-    16
-  );
-
-
-  const radius=42;
+Math.min(
+count,
+16
+);
 
 
-  for(
-    let i=0;
-    i<n;
-    i++
-  ){
-
-    const angle=
-
-    2*
-    Math.PI*
-    i/n
-
-    -
-
-    Math.PI/2;
+const radius=42;
 
 
-    const chair=
-    document.createElement(
-      'div'
-    );
+for(
+let i=0;
+i<n;
+i++
+){
+
+const angle=
+
+2*
+Math.PI*
+i/n
+
+-
+
+Math.PI/2;
 
 
-    chair.className=
-    'chair';
+const chair=
+document.createElement(
+'div'
+);
 
 
-    chair.style.left=
-
-    (
-      51+
-      Math.cos(angle)*
-      radius
-      -
-      6
-    )
-
-    +'px';
+chair.className=
+'chair';
 
 
-    chair.style.top=
+chair.style.left=
 
-    (
-      51+
-      Math.sin(angle)*
-      radius
-      -
-      6
-    )
+(
+51+
+Math.cos(angle)*
+radius
+-
+6
+)
 
-    +'px';
++'px';
 
 
-    el.appendChild(
-      chair
-    );
+chair.style.top=
 
-  }
+(
+51+
+Math.sin(angle)*
+radius
+-
+6
+)
+
++'px';
+
+
+el.appendChild(
+chair
+);
+
+}
 
 }
 
 
-/* ==================================================
+
+/* =========================
 RENDER
-================================================== */
+========================= */
 
 function render(){
 
-  layer.innerHTML='';
+layer.innerHTML='';
 
 
-  S.tables
-  .forEach(table=>{
+S.tables
+.forEach(table=>{
 
-    const used=
+const used=
 
-    tableUsedSeats(
-      table.id
-    );
-
-
-    const el=
-    document.createElement(
-      'div'
-    );
+tableUsedSeats(
+table.id
+);
 
 
-    el.className=
-
-    'obj table'
-
-    +
-
-    (
-      used===table.seats
-      ?' complete'
-      :''
-    )
-
-    +
-
-    (
-      selected?.id===table.id
-      ?' selected'
-      :''
-    );
+const el=
+document.createElement(
+'div'
+);
 
 
-    el.style.left=
-    table.x+'px';
+el.className=
+
+'obj table'
+
++
+
+(
+used===table.seats
+?' complete'
+:''
+)
+
++
+
+(
+selected?.id===table.id
+?' selected'
+:''
+);
 
 
-    el.style.top=
-    table.y+'px';
+el.style.left=
+table.x+'px';
 
 
-    el.style.transform=
-
-    `scale(${table.scale||1})`;
-
-
-    createChairs(
-      el,
-      table.seats
-    );
+el.style.top=
+table.y+'px';
 
 
-    const core=
-    document.createElement(
-      'div'
-    );
+el.style.transform=
+
+`scale(${table.scale||1})`;
 
 
-    core.className=
-    'core';
+createChairs(
+el,
+table.seats
+);
 
 
-    core.innerHTML=
-
-    `
-
-    <b>
-      TABLE ${table.number}
-    </b>
-
-    <span>
-      ${used}/${table.seats}
-    </span>
-
-    `;
+const core=
+document.createElement(
+'div'
+);
 
 
-    el.appendChild(
-      core
-    );
+core.className=
+'core';
 
 
-    attachDrag(
-      el,
-      table
-    );
+core.innerHTML=
+
+`
+
+<b>
+TABLE ${table.number}
+</b>
+
+<span>
+${used}/${table.seats}
+</span>
+
+`;
 
 
-    layer.appendChild(
-      el
-    );
-
-  });
+el.appendChild(
+core
+);
 
 
-  $('empty')
-  .style
-  .display=
-
-  (
-    S.venue
-
-    ||
-
-    S.tables.length
-  )
-
-  ?'none'
-
-  :'grid';
+attachDrag(
+el,
+table
+);
 
 
-  renderContext();
+layer.appendChild(
+el
+);
 
-  updateStatus();
+});
+
+
+$('empty')
+.style
+.display=
+
+(
+S.venue
+||
+S.tables.length
+)
+
+?'none'
+
+:'grid';
+
+
+renderContext();
+
+updateStatus();
 
 }
 
 
-/* ==================================================
+
+/* =========================
 DRAG
-================================================== */
+========================= */
 
 function attachDrag(
 el,
 table
 ){
 
-  let sx;
-  let sy;
+let sx;
 
-  let ox;
-  let oy;
+let sy;
 
-  let active=false;
+let ox;
 
-  let before=null;
+let oy;
 
+let active=false;
 
-  el.onpointerdown=e=>{
+let before=null;
 
-    e.stopPropagation();
 
+el.onpointerdown=e=>{
 
-    selected={
+e.stopPropagation();
 
-      id:table.id,
 
-      kind:'table'
+selected={
 
-    };
+id:table.id,
 
+kind:'table'
 
-    document
-    .querySelectorAll('.table')
-    .forEach(
-      item=>
-      item
-      .classList
-      .remove('selected')
-    );
+};
 
 
-    el
-    .classList
-    .add('selected');
+document
+.querySelectorAll('.table')
+.forEach(
+item=>
+item
+.classList
+.remove('selected')
+);
 
 
-    renderContext();
+el
+.classList
+.add('selected');
 
 
-    sx=
-    e.clientX;
+renderContext();
 
 
-    sy=
-    e.clientY;
+sx=
+e.clientX;
 
 
-    ox=
-    table.x;
+sy=
+e.clientY;
 
 
-    oy=
-    table.y;
+ox=
+table.x;
 
 
-    active=true;
+oy=
+table.y;
 
 
-    before=
-    state();
+active=true;
 
 
-    trash.style.display=
-    'block';
+before=
+state();
 
 
-    try{
+trash.style.display=
+'block';
 
-      el.setPointerCapture(
-        e.pointerId
-      );
 
-    }catch(_){}
+try{
 
-  };
+el.setPointerCapture(
+e.pointerId
+);
 
+}catch(_){}
 
-  el.onpointermove=e=>{
+};
 
-    if(
-      !active
-    )return;
 
+el.onpointermove=e=>{
 
-    table.x=
+if(
+!active
+)return;
 
-    ox+
-    e.clientX-
-    sx;
 
+table.x=
 
-    table.y=
+ox+
+e.clientX-
+sx;
 
-    oy+
-    e.clientY-
-    sy;
 
+table.y=
 
-    const rect=
-    canvas
-    .getBoundingClientRect();
+oy+
+e.clientY-
+sy;
 
 
-    table.x=
+const rect=
+canvas
+.getBoundingClientRect();
 
-    Math.max(
 
-      -10,
+table.x=
 
-      Math.min(
-        rect.width-40,
-        table.x
-      )
+Math.max(
 
-    );
+-10,
 
+Math.min(
+rect.width-
+40,
+table.x
+)
 
-    table.y=
+);
 
-    Math.max(
 
-      35,
+table.y=
 
-      Math.min(
-        rect.height-40,
-        table.y
-      )
+Math.max(
 
-    );
+35,
 
+Math.min(
+rect.height-
+40,
+table.y
+)
 
-    el.style.left=
-    table.x+'px';
+);
 
 
-    el.style.top=
-    table.y+'px';
+el.style.left=
+table.x+'px';
 
 
-    const bin=
-    trash
-    .getBoundingClientRect();
+el.style.top=
+table.y+'px';
 
 
-    const over=
+const bin=
+trash
+.getBoundingClientRect();
 
-    e.clientX>=bin.left
 
-    &&
+const over=
 
-    e.clientX<=bin.right
+e.clientX>=bin.left
 
-    &&
+&&
 
-    e.clientY>=bin.top
+e.clientX<=bin.right
 
-    &&
+&&
 
-    e.clientY<=bin.bottom;
+e.clientY>=bin.top
 
+&&
 
-    trash
-    .classList
-    .toggle(
-      'hot',
-      over
-    );
+e.clientY<=bin.bottom;
 
-  };
 
+trash
+.classList
+.toggle(
+'hot',
+over
+);
 
-  el.onpointerup=()=>{
+};
 
-    if(
-      !active
-    )return;
 
+el.onpointerup=()=>{
 
-    active=false;
+if(
+!active
+)return;
 
 
-    const remove=
+active=false;
 
-    trash
-    .classList
-    .contains('hot');
 
+const remove=
 
-    trash.style.display=
-    'none';
+trash
+.classList
+.contains(
+'hot'
+);
 
 
-    trash
-    .classList
-    .remove('hot');
+trash.style.display=
+'none';
 
 
-    if(remove){
+trash
+.classList
+.remove('hot');
 
-      undoStack.push(
-        before
-      );
 
+if(remove){
 
-      redoStack=[];
+undoStack.push(
+before
+);
 
 
-      deleteTable(
-        table.id,
-        false
-      );
+redoStack=[];
 
 
-      updateHistory();
+deleteTable(
+table.id,
+false
+);
 
-      return;
 
-    }
+updateHistory();
 
 
-    if(
-      before!==
-      state()
-    ){
-
-      undoStack.push(
-        before
-      );
-
-
-      redoStack=[];
-
-
-      saveOnly();
-
-      updateHistory();
-
-    }
-
-  };
+return;
 
 }
 
 
-/* ==================================================
-CONTEXT TOOLBAR
-================================================== */
+if(
+before!==state()
+){
+
+undoStack.push(
+before
+);
+
+
+redoStack=[];
+
+
+saveOnly();
+
+updateHistory();
+
+}
+
+};
+
+}
+
+
+
+/* =========================
+TABLE CONTEXT
+========================= */
 
 function renderContext(){
 
-  if(
-    !selected
-  ){
+if(
+!selected
+){
 
-    context.style.display=
-    'none';
+context.style.display=
+'none';
 
-    return;
+return;
 
-  }
-
-
-  const table=
-
-  S.tables.find(
-    table=>
-    table.id===selected.id
-  );
+}
 
 
-  if(!table){
+const table=
 
-    context.style.display=
-    'none';
-
-    return;
-
-  }
+S.tables.find(
+table=>
+table.id===selected.id
+);
 
 
-  const used=
+if(!table){
 
-  tableUsedSeats(
-    table.id
-  );
+context.style.display=
+'none';
 
+return;
 
-  context.innerHTML=`
-
-  <b>
-    T
-  </b>
+}
 
 
-  <input
-  id="ctxNumber"
-  type="number"
-  min="1"
-  value="${table.number}">
+const used=
+
+tableUsedSeats(
+table.id
+);
 
 
-  <select id="ctxSeats">
+context.innerHTML=`
 
-    ${[8,10,12,16]
-
-    .map(
-      seats=>
-
-      `<option
-      ${seats===table.seats
-      ?'selected'
-      :''}>
-
-      ${seats}
-
-      </option>`
-
-    )
-
-    .join('')}
-
-  </select>
+<b>
+T
+</b>
 
 
-  <span>
-    ${used}/${table.seats}
-  </span>
+<input
+id="ctxNumber"
+type="number"
+min="1"
+value="${table.number}">
 
 
-  <button
-  class="secondary"
-  onclick="saveTableSettings()">
-    ✓
-  </button>
+<select id="ctxSeats">
+
+${[8,10,12,16]
+
+.map(
+seats=>
+
+`<option
+${seats===table.seats
+?'selected'
+:''}>
+
+${seats}
+
+</option>`
+
+)
+
+.join('')}
+
+</select>
 
 
-  <button
-  onclick="openTableGuests('${table.id}')">
+<span>
 
-    Guests
+${used}/${table.seats}
 
-  </button>
-
-
-  <button
-  class="secondary"
-  onclick="duplicateTable()">
-
-    Copy
-
-  </button>
+</span>
 
 
-  <button
-  class="secondary"
-  onclick="resizeTable(.9)">
+<button
+class="secondary"
+onclick="saveTableSettings()">
 
-    −
+✓
 
-  </button>
-
-
-  <button
-  class="secondary"
-  onclick="resizeTable(1.1)">
-
-    ＋
-
-  </button>
-
-  `;
+</button>
 
 
-  context.style.display=
-  'flex';
+<button
+onclick="openTableGuests('${table.id}')">
+
+Guests
+
+</button>
+
+
+<button
+class="secondary"
+onclick="duplicateTable()">
+
+Copy
+
+</button>
+
+
+<button
+class="secondary"
+onclick="resizeTable(.9)">
+
+−
+
+</button>
+
+
+<button
+class="secondary"
+onclick="resizeTable(1.1)">
+
+＋
+
+</button>
+
+`;
+
+
+context.style.display=
+'flex';
 
 }
 
 
 function saveTableSettings(){
 
-  const table=
+const table=
 
-  S.tables.find(
-    table=>
-    table.id===selected.id
-  );
-
-
-  if(!table)return;
+S.tables.find(
+table=>
+table.id===selected.id
+);
 
 
-  const number=
-
-  Math.max(
-    1,
-    +$('ctxNumber').value||1
-  );
+if(!table)return;
 
 
-  const exists=
+const number=
 
-  S.tables.find(
-    other=>
-
-    other.id!==table.id
-
-    &&
-
-    Number(other.number)===
-    number
-  );
+Math.max(
+1,
++$('ctxNumber').value||1
+);
 
 
-  if(exists){
+const duplicate=
 
-    toast(
-      'Table number already exists'
-    );
+S.tables.find(
+other=>
 
-    return;
+other.id!==table.id
 
-  }
+&&
 
-
-  const seats=
-  +$('ctxSeats').value;
-
-
-  const used=
-  tableUsedSeats(
-    table.id
-  );
+Number(other.number)===
+number
+);
 
 
-  if(
-    seats<used
-  ){
+if(duplicate){
 
-    toast(
-      'Not enough seats for current guests'
-    );
+toast(
+'Table number already exists'
+);
 
-    return;
+return;
 
-  }
+}
 
 
-  pushHistory();
+const seats=
++$('ctxSeats').value;
 
 
-  table.number=
-  number;
+const used=
+tableUsedSeats(
+table.id
+);
 
 
-  table.seats=
-  seats;
+if(
+seats<used
+){
+
+toast(
+'Not enough seats for current guests'
+);
+
+return;
+
+}
 
 
-  render();
+pushHistory();
 
-  saveOnly();
+
+table.number=
+number;
+
+
+table.seats=
+seats;
+
+
+render();
+
+saveOnly();
 
 }
 
 
 function duplicateTable(){
 
-  if(
-    !selected
-  )return;
+if(
+!selected
+)return;
 
 
-  const table=
+const table=
 
-  S.tables.find(
-    table=>
-    table.id===selected.id
-  );
-
-
-  if(!table)return;
+S.tables.find(
+table=>
+table.id===selected.id
+);
 
 
-  pushHistory();
+if(!table)return;
 
 
-  S.tables.push({
-
-    id:uid(),
-
-    number:
-    nextTableNumber(),
-
-    seats:
-    table.seats,
-
-    x:
-    table.x+25,
-
-    y:
-    table.y+25,
-
-    scale:
-    table.scale||1
-
-  });
+pushHistory();
 
 
-  render();
+S.tables.push({
 
-  saveOnly();
+id:uid(),
+
+number:
+nextTableNumber(),
+
+seats:
+table.seats,
+
+x:
+table.x+25,
+
+y:
+table.y+25,
+
+scale:
+table.scale||1
+
+});
+
+
+render();
+
+saveOnly();
 
 }
 
 
 function resizeTable(
-m
+multiplier
 ){
 
-  if(
-    !selected
-  )return;
+if(
+!selected
+)return;
 
 
-  const table=
+const table=
 
-  S.tables.find(
-    table=>
-    table.id===selected.id
-  );
-
-
-  if(!table)return;
+S.tables.find(
+table=>
+table.id===selected.id
+);
 
 
-  pushHistory();
+if(!table)return;
 
 
-  table.scale=
-
-  Math.max(
-
-    .45,
-
-    Math.min(
-
-      1.8,
-
-      (table.scale||1)
-      *
-      m
-
-    )
-
-  );
+pushHistory();
 
 
-  render();
+table.scale=
 
-  saveOnly();
+Math.max(
+
+.45,
+
+Math.min(
+
+1.8,
+
+(table.scale||1)
+*
+multiplier
+
+)
+
+);
+
+
+render();
+
+saveOnly();
 
 }
 
@@ -3159,919 +3984,1063 @@ id,
 history=true
 ){
 
-  if(history){
+if(history){
 
-    pushHistory();
-
-  }
-
-
-  S.guests
-  .forEach(
-    guest=>{
-
-      if(
-        guest.tableId===id
-      ){
-
-        guest.tableId=null;
-
-      }
-
-    }
-  );
-
-
-  S.tables=
-
-  S.tables.filter(
-    table=>
-    table.id!==id
-  );
-
-
-  selected=null;
-
-
-  closeGuestPanel();
-
-
-  render();
-
-  saveOnly();
+pushHistory();
 
 }
 
 
-/* ==================================================
-GUESTS PANEL
-================================================== */
+S.guests
+.forEach(
+guest=>{
+
+if(
+guest.tableId===id
+){
+
+guest.tableId=null;
+
+}
+
+}
+);
+
+
+S.tables=
+
+S.tables.filter(
+table=>
+table.id!==id
+);
+
+
+selected=null;
+
+
+closeGuestPanel();
+
+
+render();
+
+saveOnly();
+
+}
+
+
+
+/* =========================
+TABLE GUEST PANEL
+========================= */
 
 function openTableGuests(
 tableId
 ){
 
-  const table=
+const table=
 
-  S.tables.find(
-    table=>
-    table.id===tableId
-  );
-
-
-  if(!table)return;
+S.tables.find(
+table=>
+table.id===tableId
+);
 
 
-  activeGuestTable=
-  tableId;
+if(!table)return;
 
 
-  closePanel();
+activeGuestTable=
+tableId;
 
 
-  $('guestPanel')
-  .classList
-  .add('open');
+closePanel();
 
 
-  refreshTableGuests();
+$('guestPanel')
+.classList
+.add(
+'open'
+);
+
+
+refreshTableGuests();
 
 }
 
 
 function closeGuestPanel(){
 
-  $('guestPanel')
-  .classList
-  .remove('open');
+$('guestPanel')
+.classList
+.remove('open');
 
 
-  activeGuestTable=null;
+activeGuestTable=null;
 
 }
 
 
 function refreshTableGuests(){
 
-  const table=
+const table=
 
-  S.tables.find(
-    table=>
-    table.id===activeGuestTable
-  );
-
-
-  if(!table){
-
-    closeGuestPanel();
-
-    return;
-
-  }
+S.tables.find(
+table=>
+table.id===activeGuestTable
+);
 
 
-  const guests=
+if(!table){
 
-  S.guests
+closeGuestPanel();
 
-  .filter(
-    guest=>
-    guest.tableId===table.id
-  )
-
-  .sort(
-    compareGuests
-  );
-
-
-  $('guestTitle')
-  .textContent=
-
-  `Table ${table.number}`;
-
-
-  $('guestCount')
-  .textContent=
-
-  `${tableUsedSeats(table.id)} of ${table.seats} seats filled`;
-
-
-  $('tableGuestList')
-  .innerHTML=
-
-  guests.length
-
-  ?
-
-  guests
-
-  .map(
-    guest=>
-
-    `
-
-    <div class="guestRow">
-
-      <div>
-
-        <div class="guestName">
-
-          ${safe(
-            guestFullName(
-              guest
-            )
-          )}
-
-        </div>
-
-        <div class="guestMeta">
-
-          ${guest.partySize}
-          ${guest.partySize===1
-          ?'person'
-          :'people'}
-
-        </div>
-
-      </div>
-
-
-      <div class="actions">
-
-        <button
-        class="secondary"
-        onclick="editGuest('${guest.id}')">
-
-          Edit
-
-        </button>
-
-        <button
-        class="danger"
-        onclick="unassignGuest('${guest.id}')">
-
-          ×
-
-        </button>
-
-      </div>
-
-    </div>
-
-    `
-
-  )
-
-  .join('')
-
-  :
-
-  `
-
-  <div class="hint"
-  style="margin-top:10px">
-
-    No guests yet.
-
-  </div>
-
-  `;
+return;
 
 }
 
+
+const guests=
+
+S.guests
+
+.filter(
+guest=>
+guest.tableId===table.id
+)
+
+.sort(
+compareGuests
+);
+
+
+$('guestTitle')
+.textContent=
+
+`Table ${table.number}`;
+
+
+$('guestCount')
+.textContent=
+
+`${tableUsedSeats(table.id)} of ${table.seats} seats filled`;
+
+
+$('tableGuestList')
+.innerHTML=
+
+guests.length
+
+?
+
+guests
+
+.map(
+guest=>
+
+`
+
+<div class="guestRow">
+
+<div>
+
+<div
+class="guestName"
+onclick="confirmDeleteGuest('${guest.id}')">
+
+${safe(
+guestFullName(
+guest
+)
+)}
+
+</div>
+
+
+<div class="guestMeta">
+
+${guest.partySize}
+${guest.partySize===1
+?'person'
+:'people'}
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="secondary"
+onclick="editGuest('${guest.id}')">
+
+Edit
+
+</button>
+
+
+<button
+class="danger"
+onclick="confirmDeleteGuest('${guest.id}')">
+
+Delete
+
+</button>
+
+</div>
+
+
+</div>
+
+`
+
+)
+
+.join('')
+
+:
+
+`
+
+<div class="hint"
+style="margin-top:10px">
+
+No guests yet.
+
+</div>
+
+`;
+
+}
+
+
+
+/* =========================
+ADD TABLE GUEST
+========================= */
 
 function addGuestToTable(){
 
-  const table=
+const table=
 
-  S.tables.find(
-    table=>
-    table.id===activeGuestTable
-  );
-
-
-  if(!table)return;
+S.tables.find(
+table=>
+table.id===activeGuestTable
+);
 
 
-  const surname=
-
-  $('gSurname')
-  .value
-  .trim();
+if(!table)return;
 
 
-  const firstName=
+const surname=
 
-  $('gFirst')
-  .value
-  .trim();
-
-
-  const partySize=
-
-  Math.max(
-
-    1,
-
-    Math.min(
-
-      20,
-
-      +$('gParty').value||1
-
-    )
-
-  );
+$('gSurname')
+.value
+.trim();
 
 
-  if(
-    !surname
-  ){
+const firstName=
 
-    toast(
-      'Add surname'
-    );
-
-    return;
-
-  }
+$('gFirst')
+.value
+.trim();
 
 
-  const free=
+const partySize=
 
-  table.seats-
-  tableUsedSeats(
-    table.id
-  );
+Math.max(
 
+1,
 
-  if(
-    partySize>
-    free
-  ){
+Math.min(
 
-    toast(
-      `Only ${free} seats available`
-    );
+20,
 
-    return;
++$('gParty').value||1
 
-  }
+)
+
+);
 
 
-  pushHistory();
+if(
+!surname
+){
 
+toast(
+'Add surname'
+);
 
-  S.guests.push({
-
-    id:uid(),
-
-    surname,
-
-    firstName,
-
-    partySize,
-
-    tableId:
-    table.id
-
-  });
-
-
-  $('gSurname').value='';
-
-  $('gFirst').value='';
-
-  $('gParty').value=1;
-
-
-  refreshTableGuests();
-
-  render();
-
-  saveOnly();
+return;
 
 }
 
 
-/* ==================================================
-GUEST MANAGER + VOICE
-================================================== */
+const free=
+
+table.seats-
+tableUsedSeats(
+table.id
+);
+
+
+if(
+partySize>
+free
+){
+
+toast(
+`Only ${free} seats available`
+);
+
+return;
+
+}
+
+
+pushHistory();
+
+
+S.guests.push({
+
+id:uid(),
+
+surname,
+
+firstName,
+
+partySize,
+
+tableId:
+table.id
+
+});
+
+
+$('gSurname').value='';
+
+$('gFirst').value='';
+
+$('gParty').value=1;
+
+
+refreshTableGuests();
+
+render();
+
+saveOnly();
+
+}
+
+
+
+/* =========================
+CLEAR CURRENT TABLE GUESTS
+========================= */
+
+function clearCurrentTableGuests(){
+
+const table=
+
+S.tables.find(
+table=>
+table.id===activeGuestTable
+);
+
+
+if(!table)return;
+
+
+const guests=
+
+S.guests.filter(
+guest=>
+guest.tableId===table.id
+);
+
+
+if(
+!guests.length
+){
+
+toast(
+'This table has no guests'
+);
+
+return;
+
+}
+
+
+const yes=
+
+confirm(
+
+`Delete all guests from Table ${table.number}?`
+
+);
+
+
+if(!yes)return;
+
+
+pushHistory();
+
+
+const ids=
+
+new Set(
+guests.map(
+guest=>guest.id
+)
+);
+
+
+S.guests=
+
+S.guests.filter(
+guest=>
+!ids.has(
+guest.id
+)
+);
+
+
+refreshTableGuests();
+
+render();
+
+saveOnly();
+
+}
+
+
+
+/* =========================
+GUEST MANAGER
+========================= */
 
 function renderGuestsManager(){
 
-  $('panelContent')
-  .innerHTML=`
+$('panelContent')
+.innerHTML=`
 
-  <h2>
-    Guests
-  </h2>
-
-  <div class="hint">
-
-    Add manually or speak:
-    “Γεωργίου Γιώργος, 2 άτομα, τραπέζι 1”.
-
-  </div>
+<h2>
+Guests
+</h2>
 
 
-  <button
-  id="voiceStartBtn"
-  style="width:100%"
-  onclick="toggleVoice()">
+<div class="hint">
 
-    🎙 Voice Import
+Add manually or use Voice Import.
 
-  </button>
+Example:
 
+“Γεωργίου Γιώργος 2 άτομα τραπέζι 1”
 
-  <div
-  id="voiceStatus"
-  class="hint"
-  style="margin-top:6px">
-
-    Voice is optional and depends on browser support.
-
-  </div>
+</div>
 
 
-  <div
-  class="section">
+<button
+id="voiceStartBtn"
+style="width:100%"
+onclick="toggleVoice()">
 
-    <h3>
-      Manual guest
-    </h3>
+🎙 Voice Import
 
-
-    <input
-    id="manualSurname"
-    class="field"
-    placeholder="Surname">
+</button>
 
 
-    <input
-    id="manualFirst"
-    class="field"
-    style="margin-top:6px"
-    placeholder="First name">
+<div
+id="voiceStatus"
+class="hint"
+style="margin-top:6px">
+
+Voice depends on browser support.
+
+</div>
 
 
-    <input
-    id="manualParty"
-    class="field"
-    style="margin-top:6px"
-    type="number"
-    min="1"
-    value="1"
-    placeholder="People">
+
+<div class="section">
+
+<h3>
+Manual Guest
+</h3>
 
 
-    <input
-    id="manualTable"
-    class="field"
-    style="margin-top:6px"
-    type="number"
-    min="1"
-    placeholder="Table number">
+<input
+id="manualSurname"
+class="field"
+placeholder="Surname">
 
 
-    <button
-    style="width:100%;margin-top:7px"
-    onclick="addManualGuest()">
-
-      Add guest
-
-    </button>
-
-  </div>
+<input
+id="manualFirst"
+class="field"
+style="margin-top:6px"
+placeholder="First name">
 
 
-  <div
-  id="voiceDraftArea">
-  </div>
+<input
+id="manualParty"
+class="field"
+style="margin-top:6px"
+type="number"
+min="1"
+value="1"
+placeholder="People">
 
-  `;
+
+<input
+id="manualTable"
+class="field"
+style="margin-top:6px"
+type="number"
+min="1"
+placeholder="Table number">
+
+
+<button
+style="width:100%;margin-top:7px"
+onclick="addManualGuest()">
+
+Add Guest
+
+</button>
+
+</div>
+
+
+
+<div class="section">
+
+<button
+class="danger"
+style="width:100%"
+onclick="clearGuestList()">
+
+Delete Entire Guest List
+
+</button>
+
+
+<div
+class="hint"
+style="margin-top:6px">
+
+Deletes every guest from every table.
+
+You can Undo immediately afterwards.
+
+</div>
+
+</div>
+
+
+<div
+id="voiceDraftArea">
+</div>
+
+`;
 
 }
 
+
+
+/* =========================
+MANUAL GUEST
+========================= */
 
 function addManualGuest(){
 
-  const surname=
+const surname=
 
-  $('manualSurname')
-  .value
-  .trim();
-
-
-  const firstName=
-
-  $('manualFirst')
-  .value
-  .trim();
+$('manualSurname')
+.value
+.trim();
 
 
-  const partySize=
+const firstName=
 
-  Math.max(
-    1,
-    +$('manualParty').value||1
-  );
-
-
-  const tableNumber=
-  +$('manualTable').value;
+$('manualFirst')
+.value
+.trim();
 
 
-  const table=
+const partySize=
 
-  S.tables.find(
-    table=>
-    Number(table.number)===
-    tableNumber
-  );
+Math.max(
 
+1,
 
-  if(
-    !surname
-  ){
++$('manualParty').value||1
 
-    toast(
-      'Add surname'
-    );
-
-    return;
-
-  }
+);
 
 
-  if(
-    !table
-  ){
+const tableNumber=
 
-    toast(
-      'Table not found'
-    );
-
-    return;
-
-  }
++$('manualTable').value;
 
 
-  const free=
+const table=
 
-  table.seats-
-  tableUsedSeats(
-    table.id
-  );
+S.tables.find(
+table=>
 
-
-  if(
-    partySize>
-    free
-  ){
-
-    toast(
-      `Only ${free} seats available`
-    );
-
-    return;
-
-  }
+Number(table.number)===
+tableNumber
+);
 
 
-  pushHistory();
+if(
+!surname
+){
 
+toast(
+'Add surname'
+);
 
-  S.guests.push({
-
-    id:uid(),
-
-    surname,
-
-    firstName,
-
-    partySize,
-
-    tableId:
-    table.id
-
-  });
-
-
-  render();
-
-  saveOnly();
-
-
-  renderGuestsManager();
-
-
-  toast(
-    'Guest added'
-  );
+return;
 
 }
 
 
-/* ==================================================
+if(
+!table
+){
+
+toast(
+'Table not found'
+);
+
+return;
+
+}
+
+
+const free=
+
+table.seats-
+tableUsedSeats(
+table.id
+);
+
+
+if(
+partySize>
+free
+){
+
+toast(
+`Only ${free} seats available`
+);
+
+return;
+
+}
+
+
+pushHistory();
+
+
+S.guests.push({
+
+id:uid(),
+
+surname,
+
+firstName,
+
+partySize,
+
+tableId:
+table.id
+
+});
+
+
+render();
+
+saveOnly();
+
+renderGuestsManager();
+
+
+toast(
+'Guest added'
+);
+
+}
+
+
+
+/* =========================
 VOICE
-================================================== */
+========================= */
 
 function toggleVoice(){
 
-  if(recognition){
+if(recognition){
 
-    recognition.stop();
+recognition.stop();
 
-    return;
-
-  }
-
-
-  const SR=
-
-  window.SpeechRecognition
-
-  ||
-
-  window.webkitSpeechRecognition;
-
-
-  if(!SR){
-
-    toast(
-      'Voice recognition is not available in this browser'
-    );
-
-    return;
-
-  }
-
-
-  recognition=
-  new SR();
-
-
-  recognition.lang=
-  'el-GR';
-
-
-  recognition.continuous=
-  true;
-
-
-  recognition.interimResults=
-  false;
-
-
-  $('voiceStartBtn')
-  .textContent=
-
-  '■ Stop listening';
-
-
-  $('voiceStatus')
-  .textContent=
-
-  'Listening…';
-
-
-  recognition.onresult=e=>{
-
-    for(
-      let i=e.resultIndex;
-      i<e.results.length;
-      i++
-    ){
-
-      parseVoiceText(
-        e.results[i][0].transcript
-      );
-
-    }
-
-
-    renderVoiceDraft();
-
-  };
-
-
-  recognition.onerror=()=>{
-
-    toast(
-      'Voice could not understand clearly'
-    );
-
-  };
-
-
-  recognition.onend=()=>{
-
-    recognition=null;
-
-
-    if(
-      $('voiceStartBtn')
-    ){
-
-      $('voiceStartBtn')
-      .textContent=
-
-      '🎙 Voice Import';
-
-    }
-
-
-    if(
-      $('voiceStatus')
-    ){
-
-      $('voiceStatus')
-      .textContent=
-
-      'Review the preview before adding guests.';
-
-    }
-
-  };
-
-
-  recognition.start();
+return;
 
 }
 
 
-/*
-Expected examples:
+const SR=
 
-Γεωργίου Γιώργος 2 άτομα τραπέζι 1
+window.SpeechRecognition
 
-Αντωνίου Μαρία 3 άτομα τραπέζι 5
-*/
+||
+
+window.webkitSpeechRecognition;
+
+
+if(!SR){
+
+toast(
+'Voice recognition is not available in this browser'
+);
+
+return;
+
+}
+
+
+recognition=
+new SR();
+
+
+recognition.lang=
+'el-GR';
+
+
+recognition.continuous=
+true;
+
+
+recognition.interimResults=
+false;
+
+
+$('voiceStartBtn')
+.textContent=
+
+'■ Stop listening';
+
+
+$('voiceStatus')
+.textContent=
+
+'Listening…';
+
+
+recognition.onresult=e=>{
+
+for(
+let i=e.resultIndex;
+i<e.results.length;
+i++
+){
+
+parseVoiceText(
+e.results[i][0].transcript
+);
+
+}
+
+
+renderVoiceDraft();
+
+};
+
+
+recognition.onerror=()=>{
+
+toast(
+'Voice could not understand clearly'
+);
+
+};
+
+
+recognition.onend=()=>{
+
+recognition=null;
+
+
+if(
+$('voiceStartBtn')
+){
+
+$('voiceStartBtn')
+.textContent=
+
+'🎙 Voice Import';
+
+}
+
+
+if(
+$('voiceStatus')
+){
+
+$('voiceStatus')
+.textContent=
+
+'Review the preview before adding guests.';
+
+}
+
+};
+
+
+recognition.start();
+
+}
+
+
+
+/* =========================
+PARSE VOICE
+========================= */
 
 function parseVoiceText(
 text
 ){
 
-  const chunks=
+const chunks=
 
-  text
+text
 
-  .split(
-    /[.;,]+/
-  )
+.split(
+/[.;,]+/
+)
 
-  .map(
-    item=>item.trim()
-  )
+.map(
+item=>
+item.trim()
+)
 
-  .filter(Boolean);
-
-
-  chunks
-  .forEach(chunk=>{
-
-    const tableMatch=
-
-    chunk.match(
-      /(?:τραπέζι|τραπεζι|table)\s*(\d+)/i
-    );
+.filter(Boolean);
 
 
-    const peopleMatch=
+chunks
+.forEach(chunk=>{
 
-    chunk.match(
-      /(\d+)\s*(?:άτομα|ατομα|people|persons?)/i
-    );
+const tableMatch=
 
-
-    const tableNumber=
-
-    tableMatch
-    ?Number(tableMatch[1])
-    :1;
+chunk.match(
+/(?:τραπέζι|τραπεζι|table)\s*(\d+)/i
+);
 
 
-    const partySize=
+const peopleMatch=
 
-    peopleMatch
-    ?Number(peopleMatch[1])
-    :1;
-
-
-    let cleaned=
-
-    chunk
-
-    .replace(
-      /(?:τραπέζι|τραπεζι|table)\s*\d+/ig,
-      ''
-    )
-
-    .replace(
-      /\d+\s*(?:άτομα|ατομα|people|persons?)/ig,
-      ''
-    )
-
-    .trim();
+chunk.match(
+/(\d+)\s*(?:άτομα|ατομα|people|persons?)/i
+);
 
 
-    const names=
+const tableNumber=
 
-    cleaned
-    .split(/\s+/)
-    .filter(Boolean);
-
-
-    /*
-    Default speech format:
-    Surname FirstName
-    */
-
-    const surname=
-
-    names[0]||'';
+tableMatch
+?Number(tableMatch[1])
+:1;
 
 
-    const firstName=
+const partySize=
 
-    names
-    .slice(1)
-    .join(' ');
+peopleMatch
+?Number(peopleMatch[1])
+:1;
 
 
-    if(
-      surname
-    ){
+let cleaned=
 
-      voiceDraft.push({
+chunk
 
-        id:uid(),
+.replace(
+/(?:τραπέζι|τραπεζι|table)\s*\d+/ig,
+''
+)
 
-        surname,
+.replace(
+/\d+\s*(?:άτομα|ατομα|people|persons?)/ig,
+''
+)
 
-        firstName,
+.trim();
 
-        partySize,
 
-        tableNumber
+const names=
 
-      });
+cleaned
+.split(/\s+/)
+.filter(Boolean);
 
-    }
 
-  });
+const surname=
+
+names[0]||'';
+
+
+const firstName=
+
+names
+.slice(1)
+.join(' ');
+
+
+if(
+surname
+){
+
+voiceDraft.push({
+
+id:uid(),
+
+surname,
+
+firstName,
+
+partySize,
+
+tableNumber
+
+});
+
+}
+
+});
 
 }
 
 
-/* ==================================================
+
+/* =========================
 VOICE PREVIEW
-================================================== */
+========================= */
 
 function renderVoiceDraft(){
 
-  if(
-    !voiceDraft.length
-  ){
+if(
+!voiceDraft.length
+){
 
-    $('voiceDraftArea')
-    .innerHTML='';
+$('voiceDraftArea')
+.innerHTML='';
 
-    return;
+return;
 
-  }
-
-
-  $('voiceDraftArea')
-  .innerHTML=`
-
-  <div class="voiceBox">
-
-    <h3>
-      Voice Preview
-    </h3>
-
-    <div class="hint">
-      Correct anything before Add All.
-    </div>
+}
 
 
-    ${voiceDraft
+$('voiceDraftArea')
+.innerHTML=`
 
-    .map(
-      (
-        guest,
-        index
-      )=>
+<div class="voiceBox">
 
-      `
-
-      <div class="voicePreviewRow">
-
-        <input
-        value="${safeAttr(guest.surname)}"
-        onchange="voiceDraft[${index}].surname=this.value">
+<h3>
+Voice Preview
+</h3>
 
 
-        <input
-        value="${safeAttr(guest.firstName)}"
-        onchange="voiceDraft[${index}].firstName=this.value">
+<div class="hint">
+
+Correct mistakes before Add All.
+
+</div>
 
 
-        <input
-        type="number"
-        min="1"
-        value="${guest.partySize}"
-        onchange="voiceDraft[${index}].partySize=Math.max(1,+this.value||1)">
+${voiceDraft
+
+.map(
+(
+guest,
+index
+)=>
+
+`
+
+<div class="voicePreviewRow">
 
 
-        <input
-        type="number"
-        min="1"
-        value="${guest.tableNumber}"
-        onchange="voiceDraft[${index}].tableNumber=Math.max(1,+this.value||1)">
+<input
+value="${safeAttr(guest.surname)}"
+onchange="
+voiceDraft[${index}].surname=this.value
+">
 
 
-        <button
-        class="danger"
-        onclick="removeVoiceDraft(${index})">
-
-          ×
-
-        </button>
-
-      </div>
-
-      `
-
-    )
-
-    .join('')}
+<input
+value="${safeAttr(guest.firstName)}"
+onchange="
+voiceDraft[${index}].firstName=this.value
+">
 
 
-    <button
-    style="width:100%;margin-top:8px"
-    onclick="confirmVoiceGuests()">
+<input
+type="number"
+min="1"
+value="${guest.partySize}"
+onchange="
+voiceDraft[${index}].partySize=Math.max(1,+this.value||1)
+">
 
-      Add All Guests
 
-    </button>
+<input
+type="number"
+min="1"
+value="${guest.tableNumber}"
+onchange="
+voiceDraft[${index}].tableNumber=Math.max(1,+this.value||1)
+">
 
 
-    <button
-    class="secondary"
-    style="width:100%;margin-top:6px"
-    onclick="clearVoiceDraft()">
+<button
+class="danger"
+onclick="removeVoiceDraft(${index})">
 
-      Clear Preview
+×
 
-    </button>
+</button>
 
-  </div>
 
-  `;
+</div>
+
+`
+
+)
+
+.join('')}
+
+
+<button
+style="width:100%;margin-top:8px"
+onclick="confirmVoiceGuests()">
+
+Add All Guests
+
+</button>
+
+
+<button
+class="secondary"
+style="width:100%;margin-top:6px"
+onclick="clearVoiceDraft()">
+
+Clear Preview
+
+</button>
+
+
+</div>
+
+`;
 
 }
 
@@ -4080,1086 +5049,1468 @@ function removeVoiceDraft(
 index
 ){
 
-  voiceDraft.splice(
-    index,
-    1
-  );
+voiceDraft.splice(
+index,
+1
+);
 
 
-  renderVoiceDraft();
+renderVoiceDraft();
 
 }
 
 
 function clearVoiceDraft(){
 
-  voiceDraft=[];
+voiceDraft=[];
 
 
-  renderVoiceDraft();
+renderVoiceDraft();
 
 }
 
+
+
+/* =========================
+CONFIRM VOICE
+========================= */
 
 function confirmVoiceGuests(){
 
-  if(
-    !voiceDraft.length
-  )return;
+if(
+!voiceDraft.length
+)return;
 
 
-  /*
-  Validate all guests first.
-  */
-
-  const temporaryUsage={};
+const usage={};
 
 
-  S.tables
-  .forEach(table=>{
+S.tables
+.forEach(
+table=>{
 
-    temporaryUsage[
-      table.id
-    ]=
+usage[
+table.id
+]=
+tableUsedSeats(
+table.id
+);
 
-    tableUsedSeats(
-      table.id
-    );
-
-  });
-
-
-  for(
-    const guest
-    of voiceDraft
-  ){
-
-    const table=
-
-    S.tables.find(
-      table=>
-
-      Number(table.number)===
-      Number(guest.tableNumber)
-    );
+}
+);
 
 
-    if(!table){
+for(
+const guest
+of voiceDraft
+){
 
-      toast(
-        `Table ${guest.tableNumber} not found`
-      );
+const table=
 
-      return;
+S.tables.find(
+table=>
 
-    }
-
-
-    const used=
-
-    temporaryUsage[
-      table.id
-    ]||0;
+Number(table.number)===
+Number(guest.tableNumber)
+);
 
 
-    if(
-      used+
-      Number(guest.partySize||1)
-      >
-      table.seats
-    ){
+if(!table){
 
-      toast(
-        `Not enough seats at Table ${table.number}`
-      );
+toast(
+`Table ${guest.tableNumber} not found`
+);
 
-      return;
-
-    }
-
-
-    temporaryUsage[
-      table.id
-    ]=
-
-    used+
-    Number(
-      guest.partySize||1
-    );
-
-  }
-
-
-  pushHistory();
-
-
-  voiceDraft
-  .forEach(guest=>{
-
-    const table=
-
-    S.tables.find(
-      table=>
-
-      Number(table.number)===
-      Number(guest.tableNumber)
-    );
-
-
-    S.guests.push({
-
-      id:uid(),
-
-      surname:
-      guest.surname.trim(),
-
-      firstName:
-      guest.firstName.trim(),
-
-      partySize:
-      Number(
-        guest.partySize||1
-      ),
-
-      tableId:
-      table.id
-
-    });
-
-  });
-
-
-  const count=
-  voiceDraft.length;
-
-
-  voiceDraft=[];
-
-
-  render();
-
-  saveOnly();
-
-  renderGuestsManager();
-
-
-  toast(
-    `${count} guests added`
-  );
+return;
 
 }
 
 
-/* ==================================================
-EDIT / MOVE / DELETE GUEST
-================================================== */
+const used=
+
+usage[
+table.id
+]||0;
+
+
+if(
+used+
+Number(
+guest.partySize||1
+)
+>
+table.seats
+){
+
+toast(
+`Not enough seats at Table ${table.number}`
+);
+
+return;
+
+}
+
+
+usage[
+table.id
+]=
+
+used+
+Number(
+guest.partySize||1
+);
+
+}
+
+
+pushHistory();
+
+
+voiceDraft
+.forEach(
+guest=>{
+
+const table=
+
+S.tables.find(
+table=>
+
+Number(table.number)===
+Number(guest.tableNumber)
+);
+
+
+S.guests.push({
+
+id:uid(),
+
+surname:
+guest.surname.trim(),
+
+firstName:
+guest.firstName.trim(),
+
+partySize:
+Number(
+guest.partySize||1
+),
+
+tableId:
+table.id
+
+});
+
+}
+);
+
+
+const count=
+voiceDraft.length;
+
+
+voiceDraft=[];
+
+
+render();
+
+saveOnly();
+
+renderGuestsManager();
+
+
+toast(
+`${count} guests added`
+);
+
+}
+
+
+
+/* =========================
+EDIT GUEST
+========================= */
 
 function editGuest(id){
 
-  const guest=
+const guest=
 
-  S.guests.find(
-    guest=>
-    guest.id===id
-  );
-
-
-  if(!guest)return;
+S.guests.find(
+guest=>
+guest.id===id
+);
 
 
-  const surname=
-
-  prompt(
-    'Surname',
-    guest.surname||''
-  );
+if(!guest)return;
 
 
-  if(
-    surname===null
-    ||
-    !surname.trim()
-  )return;
+const surname=
+
+prompt(
+'Surname',
+guest.surname||''
+);
 
 
-  const firstName=
+if(
+surname===null
+||
+!surname.trim()
+){
 
-  prompt(
-    'First name',
-    guest.firstName||''
-  );
-
-
-  if(
-    firstName===null
-  )return;
-
-
-  const party=
-
-  prompt(
-    'People',
-    guest.partySize||1
-  );
-
-
-  if(
-    party===null
-  )return;
-
-
-  const table=
-
-  S.tables.find(
-    table=>
-    table.id===guest.tableId
-  );
-
-
-  const size=
-
-  Math.max(
-    1,
-    +party||1
-  );
-
-
-  if(table){
-
-    const free=
-
-    table.seats-
-
-    tableUsedSeats(
-      table.id,
-      guest.id
-    );
-
-
-    if(
-      size>
-      free
-    ){
-
-      toast(
-        'Not enough seats'
-      );
-
-      return;
-
-    }
-
-  }
-
-
-  pushHistory();
-
-
-  guest.surname=
-  surname.trim();
-
-
-  guest.firstName=
-  firstName.trim();
-
-
-  guest.partySize=
-  size;
-
-
-  render();
-
-  saveOnly();
-
-
-  if(
-    activeGuestTable
-  ){
-
-    refreshTableGuests();
-
-  }
-
-
-  if(
-    activePanel==='lists'
-  ){
-
-    renderLists();
-
-  }
+return;
 
 }
 
 
-function moveGuest(id){
+const firstName=
 
-  const guest=
-
-  S.guests.find(
-    guest=>
-    guest.id===id
-  );
+prompt(
+'First name',
+guest.firstName||''
+);
 
 
-  if(!guest)return;
+if(
+firstName===null
+){
 
-
-  const current=
-
-  S.tables.find(
-    table=>
-    table.id===guest.tableId
-  );
-
-
-  const answer=
-
-  prompt(
-
-    'Move to table number',
-
-    current
-    ?current.number
-    :''
-
-  );
-
-
-  if(
-    answer===null
-  )return;
-
-
-  const table=
-
-  S.tables.find(
-    table=>
-
-    Number(table.number)===
-    Number(answer)
-  );
-
-
-  if(!table){
-
-    toast(
-      'Table not found'
-    );
-
-    return;
-
-  }
-
-
-  const free=
-
-  table.seats-
-
-  tableUsedSeats(
-    table.id,
-    guest.id
-  );
-
-
-  if(
-    guest.partySize>
-    free
-  ){
-
-    toast(
-      'Not enough seats'
-    );
-
-    return;
-
-  }
-
-
-  pushHistory();
-
-
-  guest.tableId=
-  table.id;
-
-
-  render();
-
-  saveOnly();
-
-  renderLists();
+return;
 
 }
 
 
-function unassignGuest(id){
+const people=
 
-  const guest=
-
-  S.guests.find(
-    guest=>
-    guest.id===id
-  );
+prompt(
+'Number of people',
+guest.partySize||1
+);
 
 
-  if(!guest)return;
+if(
+people===null
+){
+
+return;
+
+}
 
 
-  pushHistory();
+const partySize=
+
+Math.max(
+1,
++people||1
+);
 
 
-  guest.tableId=null;
+const currentTable=
+
+S.tables.find(
+table=>
+table.id===guest.tableId
+);
 
 
-  render();
+const tableAnswer=
 
-  saveOnly();
+prompt(
+
+'Table number',
+
+currentTable
+?currentTable.number
+:''
+
+);
 
 
-  if(
-    activeGuestTable
-  ){
+if(
+tableAnswer===null
+){
 
-    refreshTableGuests();
+return;
 
-  }
+}
+
+
+let tableId=null;
+
+
+if(
+tableAnswer.trim()
+){
+
+const table=
+
+S.tables.find(
+table=>
+
+Number(table.number)===
+Number(tableAnswer)
+);
+
+
+if(!table){
+
+toast(
+'Table not found'
+);
+
+return;
+
+}
+
+
+const free=
+
+table.seats-
+
+tableUsedSeats(
+table.id,
+guest.id
+);
+
+
+if(
+partySize>
+free
+){
+
+toast(
+'Not enough seats at that table'
+);
+
+return;
+
+}
+
+
+tableId=
+table.id;
+
+}
+
+
+pushHistory();
+
+
+guest.surname=
+surname.trim();
+
+
+guest.firstName=
+firstName.trim();
+
+
+guest.partySize=
+partySize;
+
+
+guest.tableId=
+tableId;
+
+
+render();
+
+saveOnly();
+
+
+if(
+activeGuestTable
+){
+
+refreshTableGuests();
+
+}
+
+
+if(
+activePanel==='lists'
+){
+
+renderLists();
+
+}
+
+
+if(
+$('directoryOverlay')
+.classList
+.contains('open')
+){
+
+openDirectory();
+
+}
+
+}
+
+
+
+/* =========================
+DELETE ONE GUEST
+========================= */
+
+function confirmDeleteGuest(id){
+
+const guest=
+
+S.guests.find(
+guest=>
+guest.id===id
+);
+
+
+if(!guest)return;
+
+
+const yes=
+
+confirm(
+
+`Delete ${guestFullName(guest)} from the guest list?`
+
+);
+
+
+if(!yes)return;
+
+
+deleteGuest(
+id
+);
 
 }
 
 
 function deleteGuest(id){
 
-  pushHistory();
+pushHistory();
 
 
-  S.guests=
+S.guests=
 
-  S.guests.filter(
-    guest=>
-    guest.id!==id
-  );
-
-
-  render();
-
-  saveOnly();
+S.guests.filter(
+guest=>
+guest.id!==id
+);
 
 
-  if(
-    activePanel==='lists'
-  ){
+render();
 
-    renderLists();
+saveOnly();
 
-  }
+
+if(
+activeGuestTable
+){
+
+refreshTableGuests();
 
 }
 
 
-/* ==================================================
+if(
+activePanel==='lists'
+){
+
+renderLists();
+
+}
+
+
+if(
+$('directoryOverlay')
+.classList
+.contains('open')
+){
+
+openDirectory();
+
+}
+
+}
+
+
+
+/* =========================
+DELETE ALL GUESTS
+========================= */
+
+function clearGuestList(){
+
+if(
+!S.guests.length
+){
+
+toast(
+'Guest list is already empty'
+);
+
+return;
+
+}
+
+
+const yes=
+
+confirm(
+
+`Delete all ${S.guests.length} guest entries?`
+
+);
+
+
+if(!yes)return;
+
+
+pushHistory();
+
+
+S.guests=[];
+
+
+voiceDraft=[];
+
+
+render();
+
+saveOnly();
+
+
+if(
+activeGuestTable
+){
+
+refreshTableGuests();
+
+}
+
+
+if(
+activePanel==='guests'
+){
+
+renderGuestsManager();
+
+}
+
+
+if(
+activePanel==='lists'
+){
+
+renderLists();
+
+}
+
+
+if(
+$('directoryOverlay')
+.classList
+.contains('open')
+){
+
+openDirectory();
+
+}
+
+
+toast(
+'Guest list deleted — Undo is available'
+);
+
+}
+
+
+
+/* =========================
 LISTS
-================================================== */
+========================= */
 
 function renderLists(){
 
-  const cards=
+const cards=
 
-  S.tables
+S.tables
 
-  .slice()
+.slice()
 
-  .sort(
-    (a,b)=>
-    a.number-b.number
-  )
+.sort(
+(a,b)=>
+a.number-b.number
+)
 
-  .map(table=>{
+.map(table=>{
 
-    const guests=
+const guests=
 
-    S.guests
+S.guests
 
-    .filter(
-      guest=>
-      guest.tableId===table.id
-    )
+.filter(
+guest=>
+guest.tableId===table.id
+)
 
-    .sort(
-      compareGuests
-    );
+.sort(
+compareGuests
+);
 
 
-    return`
+return`
 
-    <div class="setupCard">
+<div class="setupCard">
 
-      <div
-      style="display:flex;justify-content:space-between;align-items:center">
+<div
+style="
+display:flex;
+justify-content:space-between;
+align-items:center">
 
-        <strong>
-          Table ${table.number}
-        </strong>
+<div>
 
-        <span
-        style="font-size:11px;color:#777">
+<strong>
+Table ${table.number}
+</strong>
 
-          ${tableUsedSeats(table.id)}/${table.seats}
 
-        </span>
+<div
+style="
+font-size:11px;
+color:#777">
 
-      </div>
+${tableUsedSeats(table.id)}/${table.seats}
+people
 
+</div>
 
-      ${guests.length
+</div>
 
-      ?
 
-      guests
+<button
+class="secondary"
+onclick="openTableGuests('${table.id}')">
 
-      .map(
-        guest=>
+Open
 
-        `
+</button>
 
-        <div class="guestRow">
+</div>
 
-          <div>
 
-            <div class="guestName">
+${guests.length
 
-              ${safe(
-                guestFullName(
-                  guest
-                )
-              )}
+?
 
-            </div>
+guests
 
-            <div class="guestMeta">
+.map(
+guest=>
 
-              ${guest.partySize}
-              people
+`
 
-            </div>
+<div class="guestRow">
 
-          </div>
+<div>
 
+<div
+class="guestName"
+onclick="confirmDeleteGuest('${guest.id}')">
 
-          <div class="actions">
+${safe(
+guestFullName(
+guest
+)
+)}
 
-            <button
-            class="secondary"
-            onclick="editGuest('${guest.id}')">
+</div>
 
-              Edit
 
-            </button>
+<div class="guestMeta">
 
-            <button
-            class="secondary"
-            onclick="moveGuest('${guest.id}')">
+${guest.partySize}
+${guest.partySize===1
+?'person'
+:'people'}
 
-              Move
+</div>
 
-            </button>
+</div>
 
-          </div>
 
-        </div>
+<div class="actions">
 
-        `
+<button
+class="secondary"
+onclick="editGuest('${guest.id}')">
 
-      )
+Edit
 
-      .join('')
+</button>
 
-      :
 
-      `
+<button
+class="danger"
+onclick="confirmDeleteGuest('${guest.id}')">
 
-      <div class="hint"
-      style="margin-top:7px">
+Delete
 
-        No guests
+</button>
 
-      </div>
+</div>
 
-      `}
 
-    </div>
+</div>
 
-    `;
+`
 
-  })
+)
 
-  .join('');
+.join('')
 
+:
 
-  $('panelContent')
-  .innerHTML=`
+`
 
-  <h2>
-    Seating Lists
-  </h2>
+<div
+class="hint"
+style="margin-top:7px">
 
-  <div class="hint">
-    Every table and every guest.
-  </div>
+No guests
 
+</div>
 
-  <button
-  style="width:100%"
-  onclick="openDirectory()">
+`}
 
-    Alphabetical Directory
 
-  </button>
+</div>
 
+`;
 
-  <div class="section">
+})
 
-    ${cards||
-    '<div class="hint">No tables yet.</div>'}
+.join('');
 
-  </div>
 
-  `;
+const unassigned=
+
+S.guests
+
+.filter(
+guest=>
+!guest.tableId
+)
+
+.sort(
+compareGuests
+);
+
+
+$('panelContent')
+.innerHTML=`
+
+<h2>
+Seating Lists
+</h2>
+
+
+<div class="hint">
+
+Every table and every guest.
+
+Tap a guest name or Delete to remove them.
+
+</div>
+
+
+<button
+style="width:100%"
+onclick="openDirectory()">
+
+Alphabetical Directory
+
+</button>
+
+
+<button
+class="dangerSoft"
+style="width:100%;margin-top:7px"
+onclick="clearGuestList()">
+
+Delete Entire Guest List
+
+</button>
+
+
+
+<div class="section">
+
+${cards||
+
+'<div class="hint">No tables yet.</div>'}
+
+</div>
+
+
+
+${unassigned.length
+
+?`
+
+<div class="section">
+
+<h3>
+Unassigned Guests
+</h3>
+
+
+${unassigned
+
+.map(
+guest=>
+
+`
+
+<div class="guestRow">
+
+<div>
+
+<div
+class="guestName"
+onclick="confirmDeleteGuest('${guest.id}')">
+
+${safe(
+guestFullName(
+guest
+)
+)}
+
+</div>
+
+
+<div class="guestMeta">
+
+${guest.partySize}
+people
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="secondary"
+onclick="editGuest('${guest.id}')">
+
+Edit
+
+</button>
+
+
+<button
+class="danger"
+onclick="confirmDeleteGuest('${guest.id}')">
+
+Delete
+
+</button>
+
+</div>
+
+
+</div>
+
+`
+
+)
+
+.join('')}
+
+
+</div>
+
+`
+
+:''}
+
+`;
 
 }
 
 
-/* ==================================================
+
+/* =========================
 DIRECTORY
-================================================== */
+========================= */
 
 function openDirectory(){
 
-  const guests=
+const guests=
 
-  S.guests
+S.guests
 
-  .slice()
+.slice()
 
-  .sort(
-    compareGuests
-  );
+.sort(
+compareGuests
+);
 
 
-  const groups={};
+const groups={};
 
 
-  guests
-  .forEach(guest=>{
+guests
+.forEach(
+guest=>{
 
-    const letter=
+const letter=
 
-    (
-      guest.surname||
-      '#'
-    )
+(
+guest.surname||
+'#'
+)
 
-    .trim()
+.trim()
 
-    .charAt(0)
+.charAt(0)
 
-    .toLocaleUpperCase(
-      'el-GR'
-    )
+.toLocaleUpperCase(
+'el-GR'
+)
 
-    ||
+||
 
-    '#';
+'#';
 
 
-    if(
-      !groups[letter]
-    ){
+if(
+!groups[
+letter
+]
+){
 
-      groups[letter]=[];
+groups[
+letter
+]=[];
 
-    }
+}
 
 
-    groups[letter]
-    .push(
-      guest
-    );
+groups[
+letter
+]
+.push(
+guest
+);
 
-  });
+}
+);
 
 
-  const letters=
+const letters=
 
-  Object.keys(groups)
+Object
+.keys(
+groups
+)
 
-  .sort(
-    (a,b)=>
+.sort(
+(a,b)=>
 
-    a.localeCompare(
-      b,
-      'el'
-    )
-  );
+a.localeCompare(
+b,
+'el'
+)
+);
 
 
-  $('directoryContent')
-  .innerHTML=
+$('directoryContent')
+.innerHTML=
 
-  letters.length
+letters.length
 
-  ?
+?
 
-  letters
+letters
 
-  .map(letter=>{
+.map(
+letter=>{
 
-    return`
+return`
 
-    <div class="letter">
+<div class="letter">
 
-      ${safe(letter)}
+${safe(
+letter
+)}
 
-    </div>
+</div>
 
 
-    ${groups[letter]
+${groups[
+letter
+]
 
-    .map(guest=>{
+.map(
+guest=>{
 
-      const table=
+const table=
 
-      S.tables.find(
-        table=>
-        table.id===guest.tableId
-      );
+S.tables.find(
+table=>
+table.id===guest.tableId
+);
 
 
-      return`
+return`
 
-      <div class="directoryRow">
+<div class="directoryRow">
 
-        <strong>
 
-          ${safe(
-            guestFullName(
-              guest
-            )
-          )}
+<div
+class="directoryName"
+onclick="confirmDeleteGuest('${guest.id}')">
 
-        </strong>
+${safe(
+guestFullName(
+guest
+)
+)}
 
+</div>
 
-        <span>
 
-          ${guest.partySize}
-          people
+<span>
 
-        </span>
+${guest.partySize}
+${guest.partySize===1
+?'person'
+:'people'}
 
+</span>
 
-        <span>
 
-          Table
-          ${table
-          ?table.number
-          :'—'}
+<span>
 
-        </span>
+Table
+${table
+?table.number
+:'—'}
 
-      </div>
+</span>
 
-      `;
 
-    })
+<button
+class="danger"
+style="
+font-size:10px;
+padding:5px 7px"
+onclick="confirmDeleteGuest('${guest.id}')">
 
-    .join('')}
+Delete
 
-    `;
+</button>
 
-  })
 
-  .join('')
+</div>
 
-  :
+`;
 
-  '<div class="hint">No guests yet.</div>';
+}
+)
 
+.join('')}
 
-  $('directoryOverlay')
-  .classList
-  .add('open');
+`;
+
+}
+)
+
+.join('')
+
+:
+
+`
+
+<div class="hint">
+
+No guests yet.
+
+</div>
+
+`;
+
+
+$('directoryOverlay')
+.classList
+.add('open');
 
 }
 
 
 function closeDirectory(){
 
-  $('directoryOverlay')
-  .classList
-  .remove('open');
+$('directoryOverlay')
+.classList
+.remove('open');
 
 }
 
 
-/* ==================================================
+
+/* =========================
 MORE
-================================================== */
+========================= */
 
 function renderMore(){
 
-  $('panelContent')
-  .innerHTML=`
+$('panelContent')
+.innerHTML=`
 
-  <h2>
-    More
-  </h2>
-
-
-  <button
-  class="secondary"
-  style="width:100%"
-  onclick="undo()">
-
-    ↶ Undo
-
-  </button>
+<h2>
+More
+</h2>
 
 
-  <button
-  class="secondary"
-  style="width:100%;margin-top:7px"
-  onclick="redo()">
+<button
+class="secondary"
+style="width:100%"
+onclick="undo()">
 
-    ↷ Redo
+↶ Undo
 
-  </button>
-
-
-  <div class="section">
-
-    <button
-    class="danger"
-    style="width:100%"
-    onclick="clearTables()">
-
-      Clear Tables
-
-    </button>
-
-  </div>
+</button>
 
 
-  <div class="section">
+<button
+class="secondary"
+style="width:100%;margin-top:7px"
+onclick="redo()">
 
-    <button
-    class="danger"
-    style="width:100%"
-    onclick="resetEverything()">
+↷ Redo
 
-      Reset Everything
+</button>
 
-    </button>
 
-  </div>
 
-  `;
+<div class="section">
+
+<button
+class="dangerSoft"
+style="width:100%"
+onclick="clearGuestList()">
+
+Delete Guest List
+
+</button>
+
+</div>
+
+
+
+<div class="section">
+
+<button
+class="danger"
+style="width:100%"
+onclick="clearTables()">
+
+Clear Tables
+
+</button>
+
+</div>
+
+
+
+<div class="section">
+
+<button
+class="danger"
+style="width:100%"
+onclick="resetEverything()">
+
+Reset Everything
+
+</button>
+
+</div>
+
+`;
 
 }
 
+
+
+/* =========================
+CLEAR TABLES
+========================= */
 
 function clearTables(){
 
-  if(
-    !confirm(
-      'Delete all tables? Guests will become unassigned.'
-    )
-  )return;
+if(
+!S.tables.length
+){
 
+toast(
+'No tables to delete'
+);
 
-  pushHistory();
-
-
-  S.tables=[];
-
-
-  S.guests
-  .forEach(
-    guest=>{
-
-      guest.tableId=null;
-
-    }
-  );
-
-
-  selected=null;
-
-
-  render();
-
-  saveOnly();
+return;
 
 }
 
 
-function resetEverything(){
+const yes=
 
-  if(
-    !confirm(
-      'Delete the entire project?'
-    )
-  )return;
+confirm(
 
+'Delete all tables? Guests will remain saved but become unassigned.'
 
-  pushHistory();
+);
 
 
-  S={
-
-    venue:null,
-
-    tables:[],
-
-    guests:[],
-
-    objects:[]
-
-  };
+if(!yes)return;
 
 
-  selected=null;
+pushHistory();
 
 
-  applyVenue();
-
-  render();
-
-  saveOnly();
-
-}
+S.tables=[];
 
 
-/* ==================================================
-CANVAS TAP
-================================================== */
+S.guests
+.forEach(
+guest=>{
 
-canvas.addEventListener(
-'pointerdown',
-e=>{
-
-  if(
-    mobile()
-  ){
-
-    closePanel();
-
-  }
-
-
-  if(
-    e.target===canvas
-    ||
-    e.target===layer
-  ){
-
-    selected=null;
-
-
-    context.style.display=
-    'none';
-
-
-    document
-    .querySelectorAll('.table')
-    .forEach(
-      el=>
-      el
-      .classList
-      .remove('selected')
-    );
-
-  }
+guest.tableId=null;
 
 }
 );
 
 
-/* ==================================================
-STATUS
-================================================== */
-
-function updateStatus(){
-
-  const people=
-
-  S.guests
-
-  .reduce(
-    (
-      total,
-      guest
-    )=>
-
-    total+
-    Number(
-      guest.partySize||1
-    ),
-
-    0
-  );
+selected=null;
 
 
-  const seated=
-
-  S.guests
-
-  .filter(
-    guest=>
-    guest.tableId
-  )
-
-  .reduce(
-    (
-      total,
-      guest
-    )=>
-
-    total+
-    Number(
-      guest.partySize||1
-    ),
-
-    0
-  );
+closeGuestPanel();
 
 
-  $('status')
-  .textContent=
+render();
 
-  `${S.tables.length} tables · ${seated}/${people} people seated`;
+saveOnly();
+
+
+if(
+activePanel==='lists'
+){
+
+renderLists();
+
+}
 
 }
 
 
-/* ==================================================
+
+/* =========================
+RESET EVERYTHING
+========================= */
+
+function resetEverything(){
+
+const yes=
+
+confirm(
+
+'Delete venue, tables and the entire guest list?'
+
+);
+
+
+if(!yes)return;
+
+
+pushHistory();
+
+
+S={
+
+venue:null,
+
+tables:[],
+
+guests:[],
+
+objects:[]
+
+};
+
+
+voiceDraft=[];
+
+
+selected=null;
+
+
+closeGuestPanel();
+
+
+applyVenue();
+
+render();
+
+saveOnly();
+
+
+if(
+activePanel==='more'
+){
+
+renderMore();
+
+}
+
+}
+
+
+
+/* =========================
+EMPTY CANVAS TAP
+========================= */
+
+canvas.addEventListener(
+
+'pointerdown',
+
+e=>{
+
+if(
+mobile()
+){
+
+closePanel();
+
+}
+
+
+if(
+
+e.target===canvas
+
+||
+
+e.target===layer
+
+){
+
+selected=null;
+
+
+context.style.display=
+'none';
+
+
+document
+.querySelectorAll('.table')
+.forEach(
+el=>
+el
+.classList
+.remove('selected')
+);
+
+}
+
+}
+
+);
+
+
+
+/* =========================
+STATUS
+========================= */
+
+function updateStatus(){
+
+const totalPeople=
+
+S.guests
+
+.reduce(
+
+(
+total,
+guest
+)=>
+
+total+
+Number(
+guest.partySize||1
+),
+
+0
+
+);
+
+
+const seatedPeople=
+
+S.guests
+
+.filter(
+guest=>
+guest.tableId
+)
+
+.reduce(
+
+(
+total,
+guest
+)=>
+
+total+
+Number(
+guest.partySize||1
+),
+
+0
+
+);
+
+
+$('status')
+.textContent=
+
+`${S.tables.length} tables · ${S.guests.length} guest entries · ${seatedPeople}/${totalPeople} people seated`;
+
+}
+
+
+
+/* =========================
 HELPERS
-================================================== */
+========================= */
 
 function guestFullName(
 guest
 ){
 
-  return[
+return[
 
-    guest.surname||'',
+guest.surname||'',
 
-    guest.firstName||''
+guest.firstName||''
 
-  ]
+]
 
-  .filter(Boolean)
+.filter(Boolean)
 
-  .join(' ');
+.join(' ');
 
 }
 
@@ -5169,142 +6520,147 @@ a,
 b
 ){
 
-  const surname=
+const surname=
 
-  (
-    a.surname||''
-  )
+(
+a.surname||''
+)
 
-  .localeCompare(
+.localeCompare(
 
-    b.surname||'',
+b.surname||'',
 
-    'el',
+'el',
 
-    {
-      sensitivity:'base'
-    }
+{
+sensitivity:'base'
+}
 
-  );
-
-
-  if(
-    surname!==0
-  ){
-
-    return surname;
-
-  }
+);
 
 
-  return(
+if(
+surname!==0
+){
 
-    a.firstName||''
+return surname;
 
-  )
+}
 
-  .localeCompare(
 
-    b.firstName||'',
+return(
 
-    'el',
+a.firstName||''
 
-    {
-      sensitivity:'base'
-    }
+)
 
-  );
+.localeCompare(
+
+b.firstName||'',
+
+'el',
+
+{
+sensitivity:'base'
+}
+
+);
 
 }
 
 
 function safe(text){
 
-  const div=
-  document.createElement(
-    'div'
-  );
+const div=
+document.createElement(
+'div'
+);
 
 
-  div.textContent=
-  text||'';
+div.textContent=
+text||'';
 
 
-  return div.innerHTML;
+return div.innerHTML;
 
 }
 
 
 function safeAttr(text){
 
-  return String(
-    text||''
-  )
+return String(
+text||''
+)
 
-  .replace(
-    /&/g,
-    '&amp;'
-  )
+.replace(
+/&/g,
+'&amp;'
+)
 
-  .replace(
-    /"/g,
-    '&quot;'
-  )
+.replace(
+/"/g,
+'&quot;'
+)
 
-  .replace(
-    /</g,
-    '&lt;'
-  )
+.replace(
+/</g,
+'&lt;'
+)
 
-  .replace(
-    />/g,
-    '&gt;'
-  );
+.replace(
+/>/g,
+'&gt;'
+);
 
 }
 
 
 function toast(message){
 
-  const el=
-  $('toast');
+const el=
+$('toast');
 
 
-  el.textContent=
-  message;
+el.textContent=
+message;
 
 
-  el.style.display=
-  'block';
+el.style.display=
+'block';
 
 
-  clearTimeout(
-    window.toastTimer
-  );
+clearTimeout(
+window.toastTimer
+);
 
 
-  window.toastTimer=
+window.toastTimer=
 
-  setTimeout(
-    ()=>{
+setTimeout(
 
-      el.style.display=
-      'none';
+()=>{
 
-    },
-    1700
-  );
+el.style.display=
+'none';
+
+},
+
+1800
+
+);
 
 }
 
 
-/* ==================================================
+
+/* =========================
 START
-================================================== */
+========================= */
 
 load();
 
 </script>
 
 </body>
+
 </html>
