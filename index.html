@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="el">
 
 <head>
@@ -9,7 +10,7 @@
 name="viewport"
 content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
-<title>Seatly 4.3</title>
+<title>Seatly 4.4</title>
 
 <style>
 
@@ -20,14 +21,14 @@ box-sizing:border-box
 :root{
 
 --bg:#f3f1ed;
---paper:#fff;
+--paper:#ffffff;
 --ink:#202020;
 --muted:#777;
---line:#e5dfd7;
---soft:#f1ede8;
+--line:#e4ded6;
+--soft:#f2eee9;
 
 --green:#dff3e4;
---greenB:#34784a;
+--greenBorder:#34784a;
 
 --danger:#a43a32;
 --dangerSoft:#fff0ee;
@@ -39,6 +40,7 @@ body{
 
 margin:0;
 
+width:100%;
 height:100%;
 
 font-family:
@@ -80,7 +82,7 @@ color:#fff;
 
 font-weight:700;
 
-cursor:pointer;
+cursor:pointer
 
 }
 
@@ -90,7 +92,7 @@ background:#fff;
 
 color:var(--ink);
 
-border:1px solid var(--line);
+border:1px solid var(--line)
 
 }
 
@@ -98,7 +100,7 @@ button.soft{
 
 background:var(--soft);
 
-color:var(--ink);
+color:var(--ink)
 
 }
 
@@ -106,7 +108,7 @@ button.danger{
 
 background:var(--danger);
 
-color:white;
+color:#fff
 
 }
 
@@ -116,18 +118,15 @@ background:var(--dangerSoft);
 
 color:var(--danger);
 
-border:1px solid #efc7c2;
+border:1px solid #efc8c3
 
 }
 
 button:disabled{
 
-opacity:.35;
-
-cursor:default;
+opacity:.35
 
 }
-
 
 /* =========================
 TOP
@@ -151,7 +150,7 @@ padding:0 12px;
 
 position:relative;
 
-z-index:120;
+z-index:120
 
 }
 
@@ -161,13 +160,13 @@ font-size:25px;
 
 font-weight:900;
 
-letter-spacing:-1px;
+letter-spacing:-1px
 
 }
 
 .logo span{
 
-font-weight:400;
+font-weight:400
 
 }
 
@@ -175,9 +174,9 @@ font-weight:400;
 
 display:flex;
 
-gap:5px;
-
 align-items:center;
+
+gap:5px
 
 }
 
@@ -185,10 +184,9 @@ align-items:center;
 
 font-size:11px;
 
-color:#777;
+color:#777
 
 }
-
 
 /* =========================
 APP
@@ -202,14 +200,13 @@ display:grid;
 
 grid-template-columns:
 64px
-285px
-1fr;
+280px
+1fr
 
 }
 
-
 /* =========================
-LEFT MENU
+LEFT TOOLBAR
 ========================= */
 
 .rail{
@@ -224,7 +221,7 @@ flex-direction:column;
 
 gap:5px;
 
-z-index:90;
+z-index:90
 
 }
 
@@ -246,13 +243,13 @@ align-items:center;
 
 justify-content:center;
 
-gap:3px;
+gap:3px
 
 }
 
 .rail button b{
 
-font-size:17px;
+font-size:17px
 
 }
 
@@ -260,13 +257,12 @@ font-size:17px;
 
 background:#fff;
 
-color:#202020;
+color:#202020
 
 }
 
-
 /* =========================
-PANEL
+SIDE PANEL
 ========================= */
 
 .panel{
@@ -281,23 +277,23 @@ overflow:auto;
 
 position:relative;
 
-z-index:80;
+z-index:80
 
 }
 
 .panel h2{
 
-margin:0 0 5px;
-
 font-size:18px;
+
+margin:0 0 5px
 
 }
 
 .panel h3{
 
-margin:0 0 8px;
-
 font-size:14px;
+
+margin:0 0 8px
 
 }
 
@@ -309,7 +305,7 @@ color:var(--muted);
 
 line-height:1.45;
 
-margin-bottom:12px;
+margin-bottom:12px
 
 }
 
@@ -319,27 +315,7 @@ border-top:1px solid #eee8e1;
 
 padding-top:11px;
 
-margin-top:11px;
-
-}
-
-.grid2{
-
-display:grid;
-
-grid-template-columns:1fr 1fr;
-
-gap:7px;
-
-}
-
-.grid4{
-
-display:grid;
-
-grid-template-columns:repeat(4,1fr);
-
-gap:6px;
+margin-top:11px
 
 }
 
@@ -353,50 +329,55 @@ border:1px solid #d8d1c9;
 
 border-radius:9px;
 
-background:#fff;
+background:#fff
 
 }
 
-.upload{
+.grid2{
 
-display:block;
+display:grid;
 
-text-align:center;
+grid-template-columns:1fr 1fr;
 
-padding:18px;
-
-border:1.5px dashed #bbb;
-
-border-radius:13px;
-
-background:#faf9f7;
+gap:7px
 
 }
 
-.upload input{
+.grid4{
 
-display:none
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:6px
 
 }
 
 .panelClose{
 
-display:none;
+display:none
 
 }
-
 
 /* =========================
 QUICK SETUP
 ========================= */
 
-.presetBtn{
+.quickButton{
 
-background:#f4f1ec;
+background:#f5f2ed;
 
 color:#222;
 
 border:1px solid #e1dbd3;
+
+padding:12px 4px
+
+}
+
+.quickButton:hover{
+
+background:#ece7e0
 
 }
 
@@ -404,38 +385,61 @@ border:1px solid #e1dbd3;
 
 border:1px solid var(--line);
 
-border-radius:12px;
-
-padding:10px;
-
-margin-top:8px;
+border-radius:14px;
 
 background:#faf9f7;
+
+padding:11px;
+
+margin-top:10px
+
+}
+
+.setupTitle{
+
+font-size:17px;
+
+font-weight:850
 
 }
 
 .setupOption{
 
-display:flex;
+display:grid;
 
-justify-content:space-between;
-
-align-items:center;
+grid-template-columns:1fr auto;
 
 gap:8px;
 
-padding:8px 0;
+align-items:center;
 
-border-top:1px solid #eee;
+padding:10px 0;
 
-}
-
-.setupOption:first-child{
-
-border-top:0;
+border-top:1px solid #ece7e1
 
 }
 
+.setupOption:first-of-type{
+
+margin-top:8px
+
+}
+
+.setupOption strong{
+
+font-size:13px
+
+}
+
+.setupMeta{
+
+font-size:11px;
+
+color:#777;
+
+margin-top:2px
+
+}
 
 /* =========================
 WORKSPACE
@@ -443,11 +447,29 @@ WORKSPACE
 
 .work{
 
-padding:8px;
+background:#eae7e2;
 
-background:#ebe8e3;
+padding:10px;
 
 min-width:0;
+
+min-height:0;
+
+overflow:hidden;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center
+
+}
+
+.canvasWrap{
+
+width:100%;
+
+height:100%;
 
 display:flex;
 
@@ -455,11 +477,18 @@ align-items:center;
 
 justify-content:center;
 
-overflow:hidden;
+overflow:hidden
 
 }
 
+/*
+DESKTOP:
+wide workspace.
+*/
+
 .canvas{
+
+position:relative;
 
 width:min(100%,1200px);
 
@@ -473,16 +502,18 @@ border:1px solid var(--line);
 
 border-radius:16px;
 
-position:relative;
-
 overflow:hidden;
 
 touch-action:none;
 
 box-shadow:
-0 12px 30px rgba(0,0,0,.08);
+0 12px 30px rgba(0,0,0,.08)
 
 }
+
+/*
+Background never moves.
+*/
 
 .venueBg{
 
@@ -497,7 +528,7 @@ center
 contain
 no-repeat;
 
-pointer-events:none;
+pointer-events:none
 
 }
 
@@ -505,7 +536,7 @@ pointer-events:none;
 
 position:absolute;
 
-inset:0;
+inset:0
 
 }
 
@@ -523,10 +554,9 @@ text-align:center;
 
 color:#999;
 
-pointer-events:none;
+pointer-events:none
 
 }
-
 
 /* =========================
 TABLE
@@ -538,15 +568,15 @@ position:absolute;
 
 touch-action:none;
 
-user-select:none;
+user-select:none
 
 }
 
 .table{
 
-width:102px;
+width:100px;
 
-height:102px;
+height:100px;
 
 display:flex;
 
@@ -554,21 +584,23 @@ align-items:center;
 
 justify-content:center;
 
+cursor:grab
+
 }
 
 .table.selected{
 
-outline:3px solid rgba(32,32,32,.18);
+outline:3px solid rgba(32,32,32,.17);
 
-outline-offset:4px;
+outline-offset:3px
 
 }
 
 .core{
 
-width:62px;
+width:60px;
 
-height:62px;
+height:60px;
 
 border:2px solid #222;
 
@@ -585,15 +617,15 @@ align-items:center;
 justify-content:center;
 
 box-shadow:
-0 4px 12px rgba(0,0,0,.14);
+0 4px 12px rgba(0,0,0,.13);
 
-z-index:2;
+z-index:2
 
 }
 
 .core b{
 
-font-size:10px;
+font-size:9px
 
 }
 
@@ -603,13 +635,15 @@ font-size:9px;
 
 color:#666;
 
+margin-top:2px
+
 }
 
-.complete .core{
+.table.complete .core{
 
 background:var(--green);
 
-border-color:var(--greenB);
+border-color:var(--greenBorder)
 
 }
 
@@ -617,21 +651,20 @@ border-color:var(--greenB);
 
 position:absolute;
 
-width:12px;
+width:11px;
 
-height:12px;
+height:11px;
 
-border:1.3px solid #555;
+border:1.2px solid #555;
 
 background:#fff;
 
-border-radius:3px;
+border-radius:3px
 
 }
 
-
 /* =========================
-CONTEXT
+CONTEXT BAR
 ========================= */
 
 .context{
@@ -640,7 +673,7 @@ position:absolute;
 
 left:50%;
 
-top:10px;
+top:8px;
 
 transform:translateX(-50%);
 
@@ -656,34 +689,35 @@ border:1px solid var(--line);
 
 border-radius:12px;
 
-padding:6px;
+padding:5px;
 
-z-index:35;
+z-index:40;
 
 box-shadow:
-0 8px 24px rgba(0,0,0,.14);
+0 8px 22px rgba(0,0,0,.14)
 
 }
 
 .context input,
 .context select{
 
-width:66px;
+width:64px;
 
 padding:6px;
 
 border:1px solid var(--line);
 
-border-radius:8px;
+border-radius:8px
 
 }
 
 .context button{
 
-padding:6px 8px;
+padding:6px 7px;
+
+font-size:11px
 
 }
-
 
 /* =========================
 TRASH
@@ -695,7 +729,7 @@ position:absolute;
 
 left:50%;
 
-bottom:14px;
+bottom:12px;
 
 transform:translateX(-50%);
 
@@ -707,13 +741,13 @@ border:2px solid var(--line);
 
 border-radius:999px;
 
-padding:9px 15px;
+padding:8px 15px;
 
-z-index:40;
-
-font-size:12px;
+font-size:11px;
 
 font-weight:800;
+
+z-index:45
 
 }
 
@@ -721,10 +755,9 @@ font-weight:800;
 
 background:#ffe7e3;
 
-border-color:#b23b30;
+border-color:#b23b30
 
 }
-
 
 /* =========================
 STATUS
@@ -734,9 +767,9 @@ STATUS
 
 position:absolute;
 
-left:10px;
+left:8px;
 
-bottom:10px;
+bottom:8px;
 
 background:#fff;
 
@@ -750,13 +783,12 @@ font-size:10px;
 
 color:#666;
 
-z-index:25;
+z-index:30
 
 }
 
-
 /* =========================
-TABLE GUEST PANEL
+GUEST PANEL
 ========================= */
 
 .guestPanel{
@@ -769,7 +801,7 @@ right:0;
 
 bottom:0;
 
-width:375px;
+width:370px;
 
 background:#fff;
 
@@ -784,13 +816,13 @@ display:none;
 
 padding:15px;
 
-overflow:auto;
+overflow:auto
 
 }
 
 .guestPanel.open{
 
-display:block;
+display:block
 
 }
 
@@ -798,13 +830,13 @@ display:block;
 
 display:flex;
 
-justify-content:space-between;
-
 align-items:flex-start;
+
+justify-content:space-between;
 
 gap:8px;
 
-margin-bottom:12px;
+margin-bottom:12px
 
 }
 
@@ -812,7 +844,7 @@ margin-bottom:12px;
 
 font-size:21px;
 
-font-weight:850;
+font-weight:850
 
 }
 
@@ -820,7 +852,7 @@ font-weight:850;
 
 font-size:12px;
 
-color:#777;
+color:#777
 
 }
 
@@ -832,7 +864,7 @@ border:1px solid var(--line);
 
 border-radius:13px;
 
-padding:11px;
+padding:11px
 
 }
 
@@ -844,7 +876,7 @@ font-weight:750;
 
 color:#666;
 
-margin:8px 0 4px;
+margin:8px 0 4px
 
 }
 
@@ -854,13 +886,13 @@ display:grid;
 
 grid-template-columns:1fr auto;
 
-gap:7px;
+gap:6px;
 
 align-items:center;
 
-padding:9px 0;
+padding:8px 0;
 
-border-bottom:1px solid #eee;
+border-bottom:1px solid #eee
 
 }
 
@@ -868,15 +900,7 @@ border-bottom:1px solid #eee;
 
 font-size:13px;
 
-font-weight:700;
-
-cursor:pointer;
-
-}
-
-.guestName:hover{
-
-text-decoration:underline;
+font-weight:700
 
 }
 
@@ -884,7 +908,7 @@ text-decoration:underline;
 
 font-size:11px;
 
-color:#777;
+color:#777
 
 }
 
@@ -892,74 +916,33 @@ color:#777;
 
 display:flex;
 
-gap:4px;
+gap:4px
 
 }
 
 .actions button{
 
-padding:5px 6px;
-
 font-size:10px;
 
-}
-
-
-/* =========================
-VOICE PREVIEW
-========================= */
-
-.voiceBox{
-
-border:1px solid var(--line);
-
-border-radius:13px;
-
-background:#faf9f7;
-
-padding:10px;
-
-margin-top:9px;
+padding:5px 6px
 
 }
-
-.voicePreviewRow{
-
-display:grid;
-
-grid-template-columns:
-1fr
-1fr
-55px
-65px
-auto;
-
-gap:5px;
-
-align-items:center;
-
-padding:6px 0;
-
-border-bottom:1px solid #eee;
-
-}
-
-.voicePreviewRow input{
-
-width:100%;
-
-padding:6px;
-
-border:1px solid #ddd;
-
-border-radius:7px;
-
-}
-
 
 /* =========================
 DIRECTORY
 ========================= */
+
+.directoryLetter{
+
+font-size:20px;
+
+font-weight:900;
+
+border-bottom:2px solid #222;
+
+margin:15px 0 5px
+
+}
 
 .directoryRow{
 
@@ -969,40 +952,21 @@ grid-template-columns:1fr auto auto auto;
 
 gap:8px;
 
+align-items:center;
+
 padding:8px 0;
 
 border-bottom:1px solid #eee;
 
-align-items:center;
+font-size:12px
 
 }
 
-.directoryName{
+.directoryRow strong{
 
-font-weight:700;
-
-cursor:pointer;
+font-size:13px
 
 }
-
-.directoryName:hover{
-
-text-decoration:underline;
-
-}
-
-.letter{
-
-font-size:20px;
-
-font-weight:900;
-
-margin:14px 0 4px;
-
-border-bottom:2px solid #222;
-
-}
-
 
 /* =========================
 OVERLAY
@@ -1016,8 +980,6 @@ inset:0;
 
 background:rgba(0,0,0,.45);
 
-z-index:220;
-
 display:none;
 
 align-items:center;
@@ -1026,17 +988,19 @@ justify-content:center;
 
 padding:18px;
 
+z-index:220
+
 }
 
 .overlay.open{
 
-display:flex;
+display:flex
 
 }
 
 .modal{
 
-width:min(880px,100%);
+width:min(850px,100%);
 
 max-height:90vh;
 
@@ -1046,7 +1010,7 @@ background:#fff;
 
 border-radius:18px;
 
-padding:20px;
+padding:20px
 
 }
 
@@ -1054,14 +1018,13 @@ padding:20px;
 
 display:flex;
 
-justify-content:space-between;
-
-gap:8px;
-
 align-items:center;
 
-}
+justify-content:space-between;
 
+gap:8px
+
+}
 
 /* =========================
 MOBILE
@@ -1073,33 +1036,33 @@ MOBILE
 
 height:56px;
 
-padding:0 7px;
+padding:0 7px
 
 }
 
 .logo{
 
-font-size:21px;
+font-size:21px
 
 }
 
 .saved{
 
-display:none;
+display:none
 
 }
 
 .topActions{
 
-gap:3px;
+gap:3px
 
 }
 
 .topActions button{
 
-padding:7px 8px;
-
 font-size:11px;
+
+padding:7px 8px
 
 }
 
@@ -1109,13 +1072,13 @@ height:calc(100vh - 56px);
 
 grid-template-columns:
 54px
-1fr;
+1fr
 
 }
 
 .rail{
 
-padding:4px 2px;
+padding:4px 2px
 
 }
 
@@ -1123,7 +1086,7 @@ padding:4px 2px;
 
 height:48px;
 
-font-size:8px;
+font-size:8px
 
 }
 
@@ -1133,17 +1096,33 @@ grid-column:2;
 
 padding:5px;
 
+align-items:flex-start
+
 }
+
+.canvasWrap{
+
+align-items:flex-start
+
+}
+
+/*
+IMPORTANT:
+Mobile is now 4:3,
+not short landscape.
+*/
 
 .canvas{
 
 width:100%;
 
-aspect-ratio:16/10;
+height:auto;
 
-max-height:100%;
+aspect-ratio:4/3;
 
-border-radius:12px;
+max-height:calc(100vh - 68px);
+
+border-radius:12px
 
 }
 
@@ -1161,7 +1140,7 @@ top:auto;
 
 width:auto;
 
-max-height:54vh;
+max-height:55vh;
 
 display:none;
 
@@ -1176,13 +1155,13 @@ padding:46px 12px 12px;
 box-shadow:
 0 -10px 30px rgba(0,0,0,.18);
 
-z-index:100;
+z-index:100
 
 }
 
 .panel.open{
 
-display:block;
+display:block
 
 }
 
@@ -1210,17 +1189,7 @@ color:#222;
 
 border:1px solid var(--line);
 
-font-size:20px;
-
-}
-
-.context{
-
-max-width:94%;
-
-overflow:auto;
-
-white-space:nowrap;
+font-size:20px
 
 }
 
@@ -1238,35 +1207,29 @@ width:auto;
 
 border-left:0;
 
-box-shadow:none;
+box-shadow:none
 
 }
 
 .grid4{
 
-grid-template-columns:repeat(2,1fr);
+grid-template-columns:repeat(2,1fr)
 
 }
 
-.voicePreviewRow{
+.context{
 
-grid-template-columns:1fr 1fr;
+max-width:95%;
 
-background:#fff;
+overflow:auto;
 
-padding:8px;
-
-margin-bottom:6px;
-
-border:1px solid #eee;
-
-border-radius:9px;
+white-space:nowrap
 
 }
 
 .directoryRow{
 
-grid-template-columns:1fr auto;
+grid-template-columns:1fr auto
 
 }
 
@@ -1276,9 +1239,7 @@ grid-template-columns:1fr auto;
 
 </head>
 
-
 <body>
-
 
 <header class="topbar">
 
@@ -1286,43 +1247,31 @@ grid-template-columns:1fr auto;
 seat<span>ly</span>
 </div>
 
-
 <div class="topActions">
 
 <span
 class="saved"
 id="savedIndicator">
-
 Saved ✓
-
 </span>
-
 
 <button
 class="secondary"
 id="undoBtn"
 onclick="undo()">
-
 ↶
-
 </button>
-
 
 <button
 class="secondary"
 id="redoBtn"
 onclick="redo()">
-
 ↷
-
 </button>
 
-
 <button
-onclick="toast('Export / PDF / PNG is next')">
-
+onclick="toast('PDF / PNG export will be added next')">
 Finish
-
 </button>
 
 </div>
@@ -1330,73 +1279,53 @@ Finish
 </header>
 
 
-
 <div class="app">
-
 
 <nav class="rail">
 
 <button
 id="navSetup"
 onclick="togglePanel('setup')">
-
 <b>⚡</b>
 Setup
-
 </button>
-
 
 <button
 id="navTables"
 onclick="togglePanel('tables')">
-
 <b>◉</b>
 Tables
-
 </button>
-
 
 <button
 id="navGuests"
 onclick="togglePanel('guests')">
-
 <b>♙</b>
 Guests
-
 </button>
-
 
 <button
 id="navLists"
 onclick="togglePanel('lists')">
-
 <b>☷</b>
 Lists
-
 </button>
-
 
 <button
 id="navVenue"
 onclick="togglePanel('venue')">
-
 <b>▧</b>
 Venue
-
 </button>
-
 
 <button
 id="navMore"
 onclick="togglePanel('more')">
-
 <b>•••</b>
 More
-
 </button>
 
 </nav>
-
 
 
 <aside
@@ -1406,30 +1335,26 @@ id="panel">
 <button
 class="panelClose"
 onclick="closePanel()">
-
 ×
-
 </button>
-
 
 <div id="panelContent"></div>
 
 </aside>
 
 
-
 <main class="work">
+
+<div class="canvasWrap">
 
 <div
 class="canvas"
 id="canvas">
 
-
 <div
 class="venueBg"
 id="venueBg">
 </div>
-
 
 <div
 class="empty"
@@ -1441,66 +1366,53 @@ id="empty">
 ♡
 </div>
 
-
 <b>
 Your wedding plan
 </b>
 
-
-<div
-style="font-size:12px;margin-top:5px">
-
+<div style="font-size:12px;margin-top:5px">
 Start with Quick Setup
-
 </div>
 
 </div>
 
 </div>
-
 
 <div
 class="layer"
 id="layer">
 </div>
 
-
 <div
 class="context"
 id="context">
 </div>
 
-
 <div
 class="trash"
 id="trash">
-
 🗑 Drop to delete
-
 </div>
-
 
 <div
 class="status"
 id="status">
 </div>
 
+</div>
 
 </div>
 
 </main>
 
-
 </div>
 
 
-
-<!-- TABLE GUEST PANEL -->
+<!-- TABLE GUESTS -->
 
 <aside
 class="guestPanel"
 id="guestPanel">
-
 
 <div class="guestHeader">
 
@@ -1509,11 +1421,8 @@ id="guestPanel">
 <div
 class="guestTitle"
 id="guestTitle">
-
 Table
-
 </div>
-
 
 <div
 class="guestCount"
@@ -1522,54 +1431,38 @@ id="guestCount">
 
 </div>
 
-
 <button
 class="secondary"
 onclick="closeGuestPanel()">
-
 ×
-
 </button>
 
 </div>
 
 
-
 <div class="guestBox">
 
-
 <div class="formLabel">
-
 Επώνυμο / Surname
-
 </div>
-
 
 <input
 id="gSurname"
 class="field"
 placeholder="Γεωργίου">
 
-
 <div class="formLabel">
-
 Όνομα / First name
-
 </div>
-
 
 <input
 id="gFirst"
 class="field"
 placeholder="Γιώργος">
 
-
 <div class="formLabel">
-
 Αριθμός ατόμων / Party size
-
 </div>
-
 
 <input
 id="gParty"
@@ -1579,18 +1472,13 @@ min="1"
 max="20"
 value="1">
 
-
 <button
-style="width:100%;margin-top:7px"
+style="width:100%;margin-top:8px"
 onclick="addGuestToTable()">
-
 + Add Guest
-
 </button>
 
-
 </div>
-
 
 
 <div
@@ -1602,74 +1490,54 @@ gap:7px;
 margin-top:14px">
 
 <strong style="font-size:13px">
-
 Guests at this table
-
 </strong>
-
 
 <button
 class="dangerSoft"
-style="font-size:10px;padding:6px 8px"
+style="font-size:10px;padding:6px"
 onclick="clearCurrentTableGuests()">
-
-Clear table guests
-
+Clear
 </button>
 
 </div>
 
-
 <div id="tableGuestList"></div>
-
 
 </aside>
 
 
-
-<!-- ALPHABETICAL DIRECTORY -->
+<!-- DIRECTORY -->
 
 <div
 class="overlay"
 id="directoryOverlay">
 
-
 <div class="modal">
-
 
 <div class="modalTop">
 
 <div>
 
 <h2 style="margin:0">
-
 Alphabetical Guest Directory
-
 </h2>
-
 
 <div
 class="hint"
 style="margin:3px 0 0">
-
 Surname · Name · People · Table
-
 </div>
 
 </div>
-
 
 <button
 class="secondary"
 onclick="closeDirectory()">
-
 ×
-
 </button>
 
 </div>
-
-
 
 <div
 style="
@@ -1680,21 +1548,16 @@ margin:10px 0">
 <button
 class="danger"
 onclick="clearGuestList()">
-
 Delete Entire Guest List
-
 </button>
 
 </div>
 
-
 <div id="directoryContent"></div>
 
-
 </div>
 
 </div>
-
 
 
 <div
@@ -1705,7 +1568,7 @@ left:50%;
 bottom:18px;
 transform:translateX(-50%);
 background:#222;
-color:#fff;
+color:white;
 padding:9px 13px;
 border-radius:10px;
 display:none;
@@ -1713,12 +1576,10 @@ z-index:300">
 </div>
 
 
-
 <script>
 
-
 /* =========================
-DATA
+STATE
 ========================= */
 
 let S={
@@ -1727,9 +1588,7 @@ venue:null,
 
 tables:[],
 
-guests:[],
-
-objects:[]
+guests:[]
 
 };
 
@@ -1744,11 +1603,6 @@ let activeGuestTable=null;
 let undoStack=[];
 
 let redoStack=[];
-
-
-let recognition=null;
-
-let voiceDraft=[];
 
 
 const $=
@@ -1779,7 +1633,7 @@ const mobile=
 ()=>window.innerWidth<=800;
 
 
-const uid=()=>{
+function uid(){
 
 if(
 window.crypto &&
@@ -1794,12 +1648,11 @@ return String(
 Date.now()+Math.random()
 );
 
-};
-
+}
 
 
 /* =========================
-HISTORY
+SAVE / HISTORY
 ========================= */
 
 function state(){
@@ -1829,6 +1682,40 @@ redoStack=[];
 
 
 updateHistory();
+
+}
+
+
+function updateHistory(){
+
+$('undoBtn').disabled=
+!undoStack.length;
+
+
+$('redoBtn').disabled=
+!redoStack.length;
+
+}
+
+
+function saveOnly(){
+
+try{
+
+localStorage.setItem(
+'seatly44',
+JSON.stringify(S)
+);
+
+}catch(e){}
+
+
+$('savedIndicator')
+.textContent=
+'Saved ✓';
+
+
+updateStatus();
 
 }
 
@@ -1865,15 +1752,6 @@ saveOnly();
 
 updateHistory();
 
-
-if(
-activePanel==='lists'
-){
-
-renderLists();
-
-}
-
 }
 
 
@@ -1909,53 +1787,6 @@ saveOnly();
 
 updateHistory();
 
-
-if(
-activePanel==='lists'
-){
-
-renderLists();
-
-}
-
-}
-
-
-function updateHistory(){
-
-$('undoBtn').disabled=
-!undoStack.length;
-
-
-$('redoBtn').disabled=
-!redoStack.length;
-
-}
-
-
-/* =========================
-SAVE
-========================= */
-
-function saveOnly(){
-
-try{
-
-localStorage.setItem(
-'seatly43',
-JSON.stringify(S)
-);
-
-}catch(e){}
-
-
-updateStatus();
-
-
-$('savedIndicator')
-.textContent=
-'Saved ✓';
-
 }
 
 
@@ -1969,6 +1800,10 @@ try{
 
 const old=
 
+localStorage.getItem('seatly44')
+
+||
+
 localStorage.getItem('seatly43')
 
 ||
@@ -1977,11 +1812,7 @@ localStorage.getItem('seatly42')
 
 ||
 
-localStorage.getItem('seatly41')
-
-||
-
-localStorage.getItem('seatly40');
+localStorage.getItem('seatly41');
 
 
 if(old){
@@ -1996,13 +1827,6 @@ data.venue||null;
 
 S.tables=
 data.tables||[];
-
-
-S.objects=
-data.objects||
-data.objs||
-data.venueObjects||
-[];
 
 
 S.guests=
@@ -2043,7 +1867,6 @@ guest.tableId||null
 
 
 const oldName=
-
 guest.name||'';
 
 
@@ -2090,76 +1913,6 @@ render();
 updateHistory();
 
 }
-
-
-
-/* =========================
-TABLE HELPERS
-========================= */
-
-function nextTableNumber(){
-
-const used=
-
-S.tables
-.map(
-table=>
-Number(table.number)
-);
-
-
-let n=1;
-
-
-while(
-used.includes(n)
-){
-
-n++;
-
-}
-
-
-return n;
-
-}
-
-
-function tableUsedSeats(
-tableId,
-exclude=null
-){
-
-return S.guests
-
-.filter(
-guest=>
-
-guest.tableId===tableId
-
-&&
-
-guest.id!==exclude
-)
-
-.reduce(
-
-(
-total,
-guest
-)=>
-
-total+
-Number(
-guest.partySize||1
-),
-
-0
-
-);
-
-}
-
 
 
 /* =========================
@@ -2246,54 +1999,42 @@ $('panel')
 .add('open');
 
 
-if(
-type==='setup'
-){
+if(type==='setup'){
 
 renderSetup();
 
 }
 
 
-if(
-type==='tables'
-){
+if(type==='tables'){
 
-renderTables();
+renderTablesPanel();
 
 }
 
 
-if(
-type==='guests'
-){
+if(type==='guests'){
 
-renderGuestsManager();
+renderGuestManager();
 
 }
 
 
-if(
-type==='lists'
-){
+if(type==='lists'){
 
 renderLists();
 
 }
 
 
-if(
-type==='venue'
-){
+if(type==='venue'){
 
-renderVenue();
+renderVenuePanel();
 
 }
 
 
-if(
-type==='more'
-){
+if(type==='more'){
 
 renderMore();
 
@@ -2302,7 +2043,7 @@ renderMore();
 }
 
 
-function afterAction(){
+function closeAfterAction(){
 
 if(
 mobile()
@@ -2314,6 +2055,73 @@ closePanel();
 
 }
 
+
+/* =========================
+TABLE HELPERS
+========================= */
+
+function nextTableNumber(){
+
+const numbers=
+
+S.tables
+.map(
+table=>
+Number(table.number)
+);
+
+
+let number=1;
+
+
+while(
+numbers.includes(number)
+){
+
+number++;
+
+}
+
+
+return number;
+
+}
+
+
+function tableUsedSeats(
+tableId,
+excludeGuestId=null
+){
+
+return S.guests
+
+.filter(
+guest=>
+
+guest.tableId===tableId
+
+&&
+
+guest.id!==excludeGuestId
+)
+
+.reduce(
+
+(
+total,
+guest
+)=>
+
+total+
+Number(
+guest.partySize||1
+),
+
+0
+
+);
+
+}
 
 
 /* =========================
@@ -2329,11 +2137,11 @@ $('panelContent')
 Quick Setup
 </h2>
 
-
 <div class="hint">
 
-Choose the approximate number of guests
-and Seatly calculates the tables.
+Choose the number of guests.
+
+Seatly will calculate the number of tables for you.
 
 </div>
 
@@ -2352,15 +2160,21 @@ ${[
 ]
 
 .map(
-guests=>
+guestCount=>
 
 `
 
 <button
-class="presetBtn"
-onclick="showSetupOptions(${guests})">
+class="quickButton"
+onclick="showQuickOptions(${guestCount})">
 
-${guests}
+${guestCount}
+
+<br>
+
+<span style="font-size:9px">
+Guests
+</span>
 
 </button>
 
@@ -2373,63 +2187,64 @@ ${guests}
 </div>
 
 
-
 <div class="section">
 
 <h3>
-Custom Guests
+Custom guest count
 </h3>
 
-
 <input
-id="customGuests"
+id="customGuestCount"
 class="field"
 type="number"
 min="1"
 max="1000"
 placeholder="e.g. 186">
 
-
 <button
 style="width:100%;margin-top:7px"
-onclick="showCustomSetup()">
+onclick="customQuickSetup()">
 
-Show Options
+Calculate Tables
 
 </button>
 
 </div>
 
 
-<div id="setupResults"></div>
+<div id="quickResults"></div>
 
 `;
 
 }
 
 
-function showCustomSetup(){
+function customQuickSetup(){
 
-const guests=
+const number=
 
 Math.max(
 1,
-+$('customGuests').value||1
++$('customGuestCount').value||1
 );
 
 
-showSetupOptions(
-guests
+showQuickOptions(
+number
 );
 
 }
 
 
-function showSetupOptions(
+/*
+THIS IS THE NEW QUICK SETUP.
+*/
+
+function showQuickOptions(
 guestCount
 ){
 
-const options=
+const choices=
 
 [
 8,
@@ -2440,7 +2255,7 @@ const options=
 
 .map(seats=>{
 
-const tables=
+const tableCount=
 
 Math.ceil(
 guestCount/
@@ -2450,17 +2265,17 @@ seats
 
 const capacity=
 
-tables*
+tableCount*
 seats;
 
 
 return{
 
-seats,
+seats:seats,
 
-tables,
+tableCount:tableCount,
 
-capacity,
+capacity:capacity,
 
 spare:
 capacity-
@@ -2471,28 +2286,29 @@ guestCount
 });
 
 
-$('setupResults')
+$('quickResults')
 .innerHTML=`
 
 <div class="setupCard">
 
-<strong>
-${guestCount} guests
-</strong>
+<div class="setupTitle">
 
+${guestCount} Guests
+
+</div>
 
 <div
 class="hint"
 style="margin:3px 0 6px">
 
-Choose the table style you prefer.
+Choose how many seats you want per table.
 
 </div>
 
 
-${options
+${choices
 
-.map(option=>`
+.map(choice=>`
 
 <div class="setupOption">
 
@@ -2500,24 +2316,25 @@ ${options
 
 <strong>
 
-${option.tables}
-tables ×
-${option.seats}
+${choice.tableCount}
+Tables ×
+${choice.seats}
+Seats
 
 </strong>
 
+<div class="setupMeta">
 
-<div
-style="
-font-size:11px;
-color:#777">
+${choice.capacity}
+total seats
 
-${option.capacity}
-seats
+${choice.spare===0
 
-${option.spare
-?`· ${option.spare} spare`
-:'· exact'}
+?'· Exact'
+
+:`· ${choice.spare} spare`
+
+}
 
 </div>
 
@@ -2525,12 +2342,11 @@ ${option.spare
 
 
 <button
-onclick="createQuickLayout(${option.tables},${option.seats})">
+onclick="createQuickSetup(${choice.tableCount},${choice.seats},${guestCount})">
 
-Create
+Create Layout
 
 </button>
-
 
 </div>
 
@@ -2546,31 +2362,44 @@ Create
 }
 
 
-function createQuickLayout(
+/*
+Actually creates the layout.
+*/
+
+function createQuickSetup(
 tableCount,
-seats
+seats,
+guestCount
 ){
 
-const replace=
+let proceed=true;
 
+
+if(
 S.tables.length
+){
 
-?
-
+proceed=
 confirm(
-'Replace current tables with this new Quick Setup?'
-)
 
-:
+`Replace the current layout with ${tableCount} tables?`
 
-true;
+);
+
+}
 
 
-if(!replace)return;
+if(
+!proceed
+)return;
 
 
 pushHistory();
 
+
+/*
+Keep guests, but unassign them.
+*/
 
 S.guests
 .forEach(
@@ -2585,7 +2414,11 @@ guest.tableId=null;
 S.tables=[];
 
 
-createTableGrid(
+/*
+Create responsive centered grid.
+*/
+
+createGrid(
 tableCount,
 seats
 );
@@ -2595,17 +2428,23 @@ render();
 
 saveOnly();
 
-afterAction();
+closeAfterAction();
+
+
+toast(
+
+`${tableCount} tables created for approximately ${guestCount} guests`
+
+);
 
 }
 
 
-
 /* =========================
-TABLE GRID
+RESPONSIVE GRID
 ========================= */
 
-function createTableGrid(
+function createGrid(
 qty,
 seats
 ){
@@ -2613,6 +2452,18 @@ seats
 const rect=
 canvas.getBoundingClientRect();
 
+
+const width=
+rect.width;
+
+
+const height=
+rect.height;
+
+
+/*
+Scale automatically.
+*/
 
 let scale=1;
 
@@ -2636,41 +2487,55 @@ scale=.68;
 
 
 if(
-qty>=28
+qty>=26
 ){
 
-scale=.56;
+scale=.58;
 
 }
 
 
 if(
-qty>=38
+qty>=36
 ){
 
-scale=.48;
+scale=.5;
 
 }
 
 
-const spacingX=
-105*
+const itemWidth=
+100*
 scale;
 
 
-const spacingY=
-105*
+const itemHeight=
+100*
 scale;
 
 
-const usableWidth=
-rect.width-
-20;
+const gapX=
+12;
 
 
-const usableHeight=
-rect.height-
-65;
+const gapY=
+12;
+
+
+const availableWidth=
+Math.max(
+100,
+width-
+20
+);
+
+
+const availableHeight=
+Math.max(
+100,
+height-
+55
+);
 
 
 let columns=
@@ -2680,8 +2545,14 @@ Math.max(
 1,
 
 Math.floor(
-usableWidth/
-spacingX
+
+availableWidth/
+
+(
+itemWidth+
+gapX
+)
+
 )
 
 );
@@ -2703,12 +2574,19 @@ columns
 );
 
 
+/*
+If too tall, increase columns.
+*/
+
 while(
 
 rows*
-spacingY
+(
+itemHeight+
+gapY
+)
 >
-usableHeight
+availableHeight
 
 &&
 
@@ -2730,18 +2608,71 @@ columns
 }
 
 
-const width=
+/*
+If still too large,
+shrink tables again.
+*/
+
+let finalScale=
+scale;
+
+
+const requiredHeight=
+
+rows*
+(
+100*
+finalScale+
+gapY
+);
+
+
+if(
+requiredHeight>
+availableHeight
+){
+
+finalScale=
+
+Math.max(
+
+.38,
+
+finalScale*
+availableHeight/
+requiredHeight
+
+);
+
+}
+
+
+const stepX=
+
+100*
+finalScale+
+gapX;
+
+
+const stepY=
+
+100*
+finalScale+
+gapY;
+
+
+const gridWidth=
 
 (columns-1)
 *
-spacingX;
+stepX;
 
 
-const height=
+const gridHeight=
 
 (rows-1)
 *
-spacingY;
+stepY;
 
 
 const startX=
@@ -2750,12 +2681,12 @@ Math.max(
 
 5,
 
-rect.width/2
--
 width/2
 -
-51*
-scale
+gridWidth/2
+-
+50*
+finalScale
 
 );
 
@@ -2764,14 +2695,14 @@ const startY=
 
 Math.max(
 
-40,
+38,
 
-rect.height/2
--
 height/2
 -
-51*
-scale
+gridHeight/2
+-
+50*
+finalScale
 
 );
 
@@ -2782,12 +2713,13 @@ i<qty;
 i++
 ){
 
-const col=
+const column=
 i%
 columns;
 
 
 const row=
+
 Math.floor(
 i/
 columns
@@ -2806,16 +2738,16 @@ seats,
 
 x:
 startX+
-col*
-spacingX,
+column*
+stepX,
 
 y:
 startY+
 row*
-spacingY,
+stepY,
 
 scale:
-scale
+finalScale
 
 });
 
@@ -2824,12 +2756,11 @@ scale
 }
 
 
-
 /* =========================
-TABLES
+TABLE PANEL
 ========================= */
 
-function renderTables(){
+function renderTablesPanel(){
 
 $('panelContent')
 .innerHTML=`
@@ -2838,10 +2769,9 @@ $('panelContent')
 Tables
 </h2>
 
-
 <div class="hint">
 
-Add one table or a custom group.
+Add individual tables or a custom number of tables.
 
 </div>
 
@@ -2854,20 +2784,17 @@ onclick="addSingleTable(8)">
 8 seats
 </button>
 
-
 <button
 class="soft"
 onclick="addSingleTable(10)">
 10 seats
 </button>
 
-
 <button
 class="soft"
 onclick="addSingleTable(12)">
 12 seats
 </button>
-
 
 <button
 class="soft"
@@ -2878,20 +2805,22 @@ onclick="addSingleTable(16)">
 </div>
 
 
-
 <div class="section">
 
+<h3>
+Add multiple
+</h3>
+
 <input
-id="manualQty"
+id="multiQty"
 class="field"
 type="number"
 min="1"
 max="60"
 value="5">
 
-
 <select
-id="manualSeats"
+id="multiSeats"
 class="field"
 style="margin-top:7px">
 
@@ -2913,12 +2842,11 @@ style="margin-top:7px">
 
 </select>
 
-
 <button
 style="width:100%;margin-top:7px"
-onclick="addManualMultiple()">
+onclick="addMultipleTables()">
 
-Add Multiple
+Add Multiple Tables
 
 </button>
 
@@ -2940,13 +2868,13 @@ const rect=
 canvas.getBoundingClientRect();
 
 
+const index=
+S.tables.length;
+
+
 const offset=
 
-(
-S.tables.length%
-6
-)
-*
+(index%6)*
 14;
 
 
@@ -2964,7 +2892,7 @@ x:
 Math.max(
 5,
 rect.width/2-
-51+
+50+
 offset
 ),
 
@@ -2972,7 +2900,7 @@ y:
 Math.max(
 40,
 rect.height/2-
-51+
+50+
 offset
 ),
 
@@ -2985,12 +2913,12 @@ render();
 
 saveOnly();
 
-afterAction();
+closeAfterAction();
 
 }
 
 
-function addManualMultiple(){
+function addMultipleTables(){
 
 const qty=
 
@@ -3002,7 +2930,7 @@ Math.min(
 
 60,
 
-+$('manualQty').value||1
++$('multiQty').value||1
 
 )
 
@@ -3010,13 +2938,13 @@ Math.min(
 
 
 const seats=
-+$('manualSeats').value;
++$('multiSeats').value;
 
 
 pushHistory();
 
 
-createTableGrid(
+createGrid(
 qty,
 seats
 );
@@ -3026,17 +2954,16 @@ render();
 
 saveOnly();
 
-afterAction();
+closeAfterAction();
 
 }
-
 
 
 /* =========================
 VENUE
 ========================= */
 
-function renderVenue(){
+function renderVenuePanel(){
 
 $('panelContent')
 .innerHTML=`
@@ -3045,35 +2972,40 @@ $('panelContent')
 Venue
 </h2>
 
-
 <div class="hint">
 
-Landscape background.
+The background stays fixed.
 
-The background remains fixed.
+Mobile uses a larger 4:3 workspace.
 
 </div>
 
 
-<label class="upload">
+<label
+class="setupCard"
+style="
+display:block;
+text-align:center;
+cursor:pointer">
 
 📷
 
 <br>
 
-<b>
+<strong>
 
 ${S.venue
 ?'Replace Venue'
 :'Upload Venue'}
 
-</b>
+</strong>
 
 
 <input
-id="venueFile"
+id="venueInput"
 type="file"
-accept="image/*">
+accept="image/*"
+style="display:none">
 
 </label>
 
@@ -3084,7 +3016,7 @@ ${S.venue
 
 <button
 class="secondary"
-style="width:100%;margin-top:7px"
+style="width:100%;margin-top:8px"
 onclick="removeVenue()">
 
 Remove Venue
@@ -3098,27 +3030,28 @@ Remove Venue
 `;
 
 
-$('venueFile')
+$('venueInput')
 .onchange=e=>{
 
 const file=
 e.target.files[0];
 
 
-if(!file)return;
+if(!file)
+return;
 
 
 const reader=
 new FileReader();
 
 
-reader.onload=x=>{
+reader.onload=result=>{
 
 pushHistory();
 
 
 S.venue=
-x.target.result;
+result.target.result;
 
 
 applyVenue();
@@ -3127,7 +3060,7 @@ render();
 
 saveOnly();
 
-afterAction();
+closeAfterAction();
 
 };
 
@@ -3170,10 +3103,9 @@ render();
 
 saveOnly();
 
-renderVenue();
+renderVenuePanel();
 
 }
-
 
 
 /* =========================
@@ -3181,24 +3113,24 @@ CHAIRS
 ========================= */
 
 function createChairs(
-el,
-count
+element,
+seats
 ){
 
-const n=
+const count=
 
 Math.min(
-count,
+seats,
 16
 );
 
 
-const radius=42;
+const radius=41;
 
 
 for(
 let i=0;
-i<n;
+i<count;
 i++
 ){
 
@@ -3206,7 +3138,7 @@ const angle=
 
 2*
 Math.PI*
-i/n
+i/count
 
 -
 
@@ -3226,11 +3158,11 @@ chair.className=
 chair.style.left=
 
 (
-51+
+50+
 Math.cos(angle)*
 radius
 -
-6
+5.5
 )
 
 +'px';
@@ -3239,17 +3171,17 @@ radius
 chair.style.top=
 
 (
-51+
+50+
 Math.sin(angle)*
 radius
 -
-6
+5.5
 )
 
 +'px';
 
 
-el.appendChild(
+element.appendChild(
 chair
 );
 
@@ -3258,9 +3190,8 @@ chair
 }
 
 
-
 /* =========================
-RENDER
+RENDER TABLES
 ========================= */
 
 function render(){
@@ -3278,13 +3209,14 @@ table.id
 );
 
 
-const el=
+const element=
+
 document.createElement(
 'div'
 );
 
 
-el.className=
+element.className=
 
 'obj table'
 
@@ -3305,26 +3237,27 @@ selected?.id===table.id
 );
 
 
-el.style.left=
+element.style.left=
 table.x+'px';
 
 
-el.style.top=
+element.style.top=
 table.y+'px';
 
 
-el.style.transform=
+element.style.transform=
 
 `scale(${table.scale||1})`;
 
 
 createChairs(
-el,
+element,
 table.seats
 );
 
 
 const core=
+
 document.createElement(
 'div'
 );
@@ -3349,19 +3282,19 @@ ${used}/${table.seats}
 `;
 
 
-el.appendChild(
+element.appendChild(
 core
 );
 
 
 attachDrag(
-el,
+element,
 table
 );
 
 
 layer.appendChild(
-el
+element
 );
 
 });
@@ -3373,7 +3306,9 @@ $('empty')
 
 (
 S.venue
+
 ||
+
 S.tables.length
 )
 
@@ -3389,30 +3324,29 @@ updateStatus();
 }
 
 
-
 /* =========================
-DRAG
+DRAG TABLE
 ========================= */
 
 function attachDrag(
-el,
+element,
 table
 ){
 
-let sx;
+let startX;
 
-let sy;
+let startY;
 
-let ox;
+let originalX;
 
-let oy;
+let originalY;
 
 let active=false;
 
-let before=null;
+let beforeState=null;
 
 
-el.onpointerdown=e=>{
+element.onpointerdown=e=>{
 
 e.stopPropagation();
 
@@ -3430,41 +3364,41 @@ document
 .querySelectorAll('.table')
 .forEach(
 item=>
-item
-.classList
-.remove('selected')
+item.classList.remove(
+'selected'
+)
 );
 
 
-el
-.classList
-.add('selected');
+element.classList.add(
+'selected'
+);
 
 
 renderContext();
 
 
-sx=
+startX=
 e.clientX;
 
 
-sy=
+startY=
 e.clientY;
 
 
-ox=
+originalX=
 table.x;
 
 
-oy=
+originalY=
 table.y;
 
 
-active=true;
-
-
-before=
+beforeState=
 state();
+
+
+active=true;
 
 
 trash.style.display=
@@ -3473,16 +3407,16 @@ trash.style.display=
 
 try{
 
-el.setPointerCapture(
+element.setPointerCapture(
 e.pointerId
 );
 
-}catch(_){}
+}catch(error){}
 
 };
 
 
-el.onpointermove=e=>{
+element.onpointermove=e=>{
 
 if(
 !active
@@ -3491,21 +3425,20 @@ if(
 
 table.x=
 
-ox+
+originalX+
 e.clientX-
-sx;
+startX;
 
 
 table.y=
 
-oy+
+originalY+
 e.clientY-
-sy;
+startY;
 
 
 const rect=
-canvas
-.getBoundingClientRect();
+canvas.getBoundingClientRect();
 
 
 table.x=
@@ -3516,7 +3449,7 @@ Math.max(
 
 Math.min(
 rect.width-
-40,
+35,
 table.x
 )
 
@@ -3527,31 +3460,30 @@ table.y=
 
 Math.max(
 
-35,
+30,
 
 Math.min(
 rect.height-
-40,
+35,
 table.y
 )
 
 );
 
 
-el.style.left=
+element.style.left=
 table.x+'px';
 
 
-el.style.top=
+element.style.top=
 table.y+'px';
 
 
 const bin=
-trash
-.getBoundingClientRect();
+trash.getBoundingClientRect();
 
 
-const over=
+const isOverTrash=
 
 e.clientX>=bin.left
 
@@ -3568,17 +3500,15 @@ e.clientY>=bin.top
 e.clientY<=bin.bottom;
 
 
-trash
-.classList
-.toggle(
+trash.classList.toggle(
 'hot',
-over
+isOverTrash
 );
 
 };
 
 
-el.onpointerup=()=>{
+element.onpointerup=()=>{
 
 if(
 !active
@@ -3588,7 +3518,7 @@ if(
 active=false;
 
 
-const remove=
+const deleteIt=
 
 trash
 .classList
@@ -3601,15 +3531,17 @@ trash.style.display=
 'none';
 
 
-trash
-.classList
-.remove('hot');
+trash.classList.remove(
+'hot'
+);
 
 
-if(remove){
+if(
+deleteIt
+){
 
 undoStack.push(
-before
+beforeState
 );
 
 
@@ -3631,11 +3563,11 @@ return;
 
 
 if(
-before!==state()
+beforeState!==state()
 ){
 
 undoStack.push(
-before
+beforeState
 );
 
 
@@ -3650,12 +3582,27 @@ updateHistory();
 
 };
 
+
+element.onpointercancel=()=>{
+
+active=false;
+
+
+trash.style.display=
+'none';
+
+
+trash.classList.remove(
+'hot'
+);
+
+};
+
 }
 
 
-
 /* =========================
-TABLE CONTEXT
+SELECTED TABLE BAR
 ========================= */
 
 function renderContext(){
@@ -3680,7 +3627,9 @@ table.id===selected.id
 );
 
 
-if(!table){
+if(
+!table
+){
 
 context.style.display=
 'none';
@@ -3705,27 +3654,36 @@ T
 
 
 <input
-id="ctxNumber"
+id="tableNumber"
 type="number"
 min="1"
 value="${table.number}">
 
 
-<select id="ctxSeats">
+<select id="tableSeats">
 
-${[8,10,12,16]
+${[
+8,
+10,
+12,
+16
+]
 
 .map(
 seats=>
 
-`<option
+`
+
+<option
 ${seats===table.seats
 ?'selected'
 :''}>
 
 ${seats}
 
-</option>`
+</option>
+
+`
 
 )
 
@@ -3769,7 +3727,7 @@ Copy
 
 <button
 class="secondary"
-onclick="resizeTable(.9)">
+onclick="resizeSelected(.9)">
 
 −
 
@@ -3778,7 +3736,7 @@ onclick="resizeTable(.9)">
 
 <button
 class="secondary"
-onclick="resizeTable(1.1)">
+onclick="resizeSelected(1.1)">
 
 ＋
 
@@ -3803,14 +3761,15 @@ table.id===selected.id
 );
 
 
-if(!table)return;
+if(!table)
+return;
 
 
 const number=
 
 Math.max(
 1,
-+$('ctxNumber').value||1
++$('tableNumber').value||1
 );
 
 
@@ -3828,10 +3787,12 @@ number
 );
 
 
-if(duplicate){
+if(
+duplicate
+){
 
 toast(
-'Table number already exists'
+'This table number already exists'
 );
 
 return;
@@ -3840,10 +3801,11 @@ return;
 
 
 const seats=
-+$('ctxSeats').value;
++$('tableSeats').value;
 
 
 const used=
+
 tableUsedSeats(
 table.id
 );
@@ -3854,7 +3816,7 @@ seats<used
 ){
 
 toast(
-'Not enough seats for current guests'
+`This table already has ${used} people`
 );
 
 return;
@@ -3895,10 +3857,15 @@ table.id===selected.id
 );
 
 
-if(!table)return;
+if(!table)
+return;
 
 
 pushHistory();
+
+
+const rect=
+canvas.getBoundingClientRect();
 
 
 S.tables.push({
@@ -3912,10 +3879,20 @@ seats:
 table.seats,
 
 x:
-table.x+25,
+Math.min(
+rect.width-
+60,
+table.x+
+30
+),
 
 y:
-table.y+25,
+Math.min(
+rect.height-
+60,
+table.y+
+30
+),
 
 scale:
 table.scale||1
@@ -3930,7 +3907,7 @@ saveOnly();
 }
 
 
-function resizeTable(
+function resizeSelected(
 multiplier
 ){
 
@@ -3947,7 +3924,8 @@ table.id===selected.id
 );
 
 
-if(!table)return;
+if(!table)
+return;
 
 
 pushHistory();
@@ -3957,7 +3935,7 @@ table.scale=
 
 Math.max(
 
-.45,
+.4,
 
 Math.min(
 
@@ -3984,7 +3962,9 @@ id,
 history=true
 ){
 
-if(history){
+if(
+history
+){
 
 pushHistory();
 
@@ -4028,9 +4008,8 @@ saveOnly();
 }
 
 
-
 /* =========================
-TABLE GUEST PANEL
+GUEST PANEL
 ========================= */
 
 function openTableGuests(
@@ -4045,7 +4024,8 @@ table.id===tableId
 );
 
 
-if(!table)return;
+if(!table)
+return;
 
 
 activeGuestTable=
@@ -4057,9 +4037,7 @@ closePanel();
 
 $('guestPanel')
 .classList
-.add(
-'open'
-);
+.add('open');
 
 
 refreshTableGuests();
@@ -4142,9 +4120,7 @@ guest=>
 
 <div>
 
-<div
-class="guestName"
-onclick="confirmDeleteGuest('${guest.id}')">
+<div class="guestName">
 
 ${safe(
 guestFullName(
@@ -4153,7 +4129,6 @@ guest
 )}
 
 </div>
-
 
 <div class="guestMeta">
 
@@ -4177,17 +4152,15 @@ Edit
 
 </button>
 
-
 <button
 class="danger"
-onclick="confirmDeleteGuest('${guest.id}')">
+onclick="deleteGuestConfirm('${guest.id}')">
 
 Delete
 
 </button>
 
 </div>
-
 
 </div>
 
@@ -4201,7 +4174,8 @@ Delete
 
 `
 
-<div class="hint"
+<div
+class="hint"
 style="margin-top:10px">
 
 No guests yet.
@@ -4213,9 +4187,8 @@ No guests yet.
 }
 
 
-
 /* =========================
-ADD TABLE GUEST
+ADD GUEST TO TABLE
 ========================= */
 
 function addGuestToTable(){
@@ -4228,7 +4201,8 @@ table.id===activeGuestTable
 );
 
 
-if(!table)return;
+if(!table)
+return;
 
 
 const surname=
@@ -4267,7 +4241,7 @@ if(
 ){
 
 toast(
-'Add surname'
+'Add a surname'
 );
 
 return;
@@ -4275,7 +4249,7 @@ return;
 }
 
 
-const free=
+const available=
 
 table.seats-
 tableUsedSeats(
@@ -4285,11 +4259,11 @@ table.id
 
 if(
 partySize>
-free
+available
 ){
 
 toast(
-`Only ${free} seats available`
+`Only ${available} seats available`
 );
 
 return;
@@ -4304,11 +4278,11 @@ S.guests.push({
 
 id:uid(),
 
-surname,
+surname:surname,
 
-firstName,
+firstName:firstName,
 
-partySize,
+partySize:partySize,
 
 tableId:
 table.id
@@ -4332,7 +4306,6 @@ saveOnly();
 }
 
 
-
 /* =========================
 CLEAR CURRENT TABLE GUESTS
 ========================= */
@@ -4347,23 +4320,31 @@ table.id===activeGuestTable
 );
 
 
-if(!table)return;
+if(!table)
+return;
 
 
-const guests=
+const ids=
 
-S.guests.filter(
+S.guests
+
+.filter(
 guest=>
 guest.tableId===table.id
+)
+
+.map(
+guest=>
+guest.id
 );
 
 
 if(
-!guests.length
+!ids.length
 ){
 
 toast(
-'This table has no guests'
+'No guests at this table'
 );
 
 return;
@@ -4371,35 +4352,29 @@ return;
 }
 
 
-const yes=
+if(
 
-confirm(
+!confirm(
 
 `Delete all guests from Table ${table.number}?`
 
-);
+)
 
+){
 
-if(!yes)return;
+return;
+
+}
 
 
 pushHistory();
-
-
-const ids=
-
-new Set(
-guests.map(
-guest=>guest.id
-)
-);
 
 
 S.guests=
 
 S.guests.filter(
 guest=>
-!ids.has(
+!ids.includes(
 guest.id
 )
 );
@@ -4414,12 +4389,11 @@ saveOnly();
 }
 
 
-
 /* =========================
 GUEST MANAGER
 ========================= */
 
-function renderGuestsManager(){
+function renderGuestManager(){
 
 $('panelContent')
 .innerHTML=`
@@ -4428,44 +4402,11 @@ $('panelContent')
 Guests
 </h2>
 
-
 <div class="hint">
 
-Add manually or use Voice Import.
-
-Example:
-
-“Γεωργίου Γιώργος 2 άτομα τραπέζι 1”
+Add guests directly here or from each table.
 
 </div>
-
-
-<button
-id="voiceStartBtn"
-style="width:100%"
-onclick="toggleVoice()">
-
-🎙 Voice Import
-
-</button>
-
-
-<div
-id="voiceStatus"
-class="hint"
-style="margin-top:6px">
-
-Voice depends on browser support.
-
-</div>
-
-
-
-<div class="section">
-
-<h3>
-Manual Guest
-</h3>
 
 
 <input
@@ -4508,14 +4449,11 @@ Add Guest
 
 </button>
 
-</div>
-
-
 
 <div class="section">
 
 <button
-class="danger"
+class="dangerSoft"
 style="width:100%"
 onclick="clearGuestList()">
 
@@ -4523,33 +4461,12 @@ Delete Entire Guest List
 
 </button>
 
-
-<div
-class="hint"
-style="margin-top:6px">
-
-Deletes every guest from every table.
-
-You can Undo immediately afterwards.
-
-</div>
-
-</div>
-
-
-<div
-id="voiceDraftArea">
 </div>
 
 `;
 
 }
 
-
-
-/* =========================
-MANUAL GUEST
-========================= */
 
 function addManualGuest(){
 
@@ -4570,11 +4487,8 @@ $('manualFirst')
 const partySize=
 
 Math.max(
-
 1,
-
 +$('manualParty').value||1
-
 );
 
 
@@ -4619,7 +4533,7 @@ return;
 }
 
 
-const free=
+const available=
 
 table.seats-
 tableUsedSeats(
@@ -4629,11 +4543,11 @@ table.id
 
 if(
 partySize>
-free
+available
 ){
 
 toast(
-`Only ${free} seats available`
+`Only ${available} seats available`
 );
 
 return;
@@ -4648,11 +4562,11 @@ S.guests.push({
 
 id:uid(),
 
-surname,
+surname:surname,
 
-firstName,
+firstName:firstName,
 
-partySize,
+partySize:partySize,
 
 tableId:
 table.id
@@ -4664,7 +4578,7 @@ render();
 
 saveOnly();
 
-renderGuestsManager();
+renderGuestManager();
 
 
 toast(
@@ -4672,558 +4586,6 @@ toast(
 );
 
 }
-
-
-
-/* =========================
-VOICE
-========================= */
-
-function toggleVoice(){
-
-if(recognition){
-
-recognition.stop();
-
-return;
-
-}
-
-
-const SR=
-
-window.SpeechRecognition
-
-||
-
-window.webkitSpeechRecognition;
-
-
-if(!SR){
-
-toast(
-'Voice recognition is not available in this browser'
-);
-
-return;
-
-}
-
-
-recognition=
-new SR();
-
-
-recognition.lang=
-'el-GR';
-
-
-recognition.continuous=
-true;
-
-
-recognition.interimResults=
-false;
-
-
-$('voiceStartBtn')
-.textContent=
-
-'■ Stop listening';
-
-
-$('voiceStatus')
-.textContent=
-
-'Listening…';
-
-
-recognition.onresult=e=>{
-
-for(
-let i=e.resultIndex;
-i<e.results.length;
-i++
-){
-
-parseVoiceText(
-e.results[i][0].transcript
-);
-
-}
-
-
-renderVoiceDraft();
-
-};
-
-
-recognition.onerror=()=>{
-
-toast(
-'Voice could not understand clearly'
-);
-
-};
-
-
-recognition.onend=()=>{
-
-recognition=null;
-
-
-if(
-$('voiceStartBtn')
-){
-
-$('voiceStartBtn')
-.textContent=
-
-'🎙 Voice Import';
-
-}
-
-
-if(
-$('voiceStatus')
-){
-
-$('voiceStatus')
-.textContent=
-
-'Review the preview before adding guests.';
-
-}
-
-};
-
-
-recognition.start();
-
-}
-
-
-
-/* =========================
-PARSE VOICE
-========================= */
-
-function parseVoiceText(
-text
-){
-
-const chunks=
-
-text
-
-.split(
-/[.;,]+/
-)
-
-.map(
-item=>
-item.trim()
-)
-
-.filter(Boolean);
-
-
-chunks
-.forEach(chunk=>{
-
-const tableMatch=
-
-chunk.match(
-/(?:τραπέζι|τραπεζι|table)\s*(\d+)/i
-);
-
-
-const peopleMatch=
-
-chunk.match(
-/(\d+)\s*(?:άτομα|ατομα|people|persons?)/i
-);
-
-
-const tableNumber=
-
-tableMatch
-?Number(tableMatch[1])
-:1;
-
-
-const partySize=
-
-peopleMatch
-?Number(peopleMatch[1])
-:1;
-
-
-let cleaned=
-
-chunk
-
-.replace(
-/(?:τραπέζι|τραπεζι|table)\s*\d+/ig,
-''
-)
-
-.replace(
-/\d+\s*(?:άτομα|ατομα|people|persons?)/ig,
-''
-)
-
-.trim();
-
-
-const names=
-
-cleaned
-.split(/\s+/)
-.filter(Boolean);
-
-
-const surname=
-
-names[0]||'';
-
-
-const firstName=
-
-names
-.slice(1)
-.join(' ');
-
-
-if(
-surname
-){
-
-voiceDraft.push({
-
-id:uid(),
-
-surname,
-
-firstName,
-
-partySize,
-
-tableNumber
-
-});
-
-}
-
-});
-
-}
-
-
-
-/* =========================
-VOICE PREVIEW
-========================= */
-
-function renderVoiceDraft(){
-
-if(
-!voiceDraft.length
-){
-
-$('voiceDraftArea')
-.innerHTML='';
-
-return;
-
-}
-
-
-$('voiceDraftArea')
-.innerHTML=`
-
-<div class="voiceBox">
-
-<h3>
-Voice Preview
-</h3>
-
-
-<div class="hint">
-
-Correct mistakes before Add All.
-
-</div>
-
-
-${voiceDraft
-
-.map(
-(
-guest,
-index
-)=>
-
-`
-
-<div class="voicePreviewRow">
-
-
-<input
-value="${safeAttr(guest.surname)}"
-onchange="
-voiceDraft[${index}].surname=this.value
-">
-
-
-<input
-value="${safeAttr(guest.firstName)}"
-onchange="
-voiceDraft[${index}].firstName=this.value
-">
-
-
-<input
-type="number"
-min="1"
-value="${guest.partySize}"
-onchange="
-voiceDraft[${index}].partySize=Math.max(1,+this.value||1)
-">
-
-
-<input
-type="number"
-min="1"
-value="${guest.tableNumber}"
-onchange="
-voiceDraft[${index}].tableNumber=Math.max(1,+this.value||1)
-">
-
-
-<button
-class="danger"
-onclick="removeVoiceDraft(${index})">
-
-×
-
-</button>
-
-
-</div>
-
-`
-
-)
-
-.join('')}
-
-
-<button
-style="width:100%;margin-top:8px"
-onclick="confirmVoiceGuests()">
-
-Add All Guests
-
-</button>
-
-
-<button
-class="secondary"
-style="width:100%;margin-top:6px"
-onclick="clearVoiceDraft()">
-
-Clear Preview
-
-</button>
-
-
-</div>
-
-`;
-
-}
-
-
-function removeVoiceDraft(
-index
-){
-
-voiceDraft.splice(
-index,
-1
-);
-
-
-renderVoiceDraft();
-
-}
-
-
-function clearVoiceDraft(){
-
-voiceDraft=[];
-
-
-renderVoiceDraft();
-
-}
-
-
-
-/* =========================
-CONFIRM VOICE
-========================= */
-
-function confirmVoiceGuests(){
-
-if(
-!voiceDraft.length
-)return;
-
-
-const usage={};
-
-
-S.tables
-.forEach(
-table=>{
-
-usage[
-table.id
-]=
-tableUsedSeats(
-table.id
-);
-
-}
-);
-
-
-for(
-const guest
-of voiceDraft
-){
-
-const table=
-
-S.tables.find(
-table=>
-
-Number(table.number)===
-Number(guest.tableNumber)
-);
-
-
-if(!table){
-
-toast(
-`Table ${guest.tableNumber} not found`
-);
-
-return;
-
-}
-
-
-const used=
-
-usage[
-table.id
-]||0;
-
-
-if(
-used+
-Number(
-guest.partySize||1
-)
->
-table.seats
-){
-
-toast(
-`Not enough seats at Table ${table.number}`
-);
-
-return;
-
-}
-
-
-usage[
-table.id
-]=
-
-used+
-Number(
-guest.partySize||1
-);
-
-}
-
-
-pushHistory();
-
-
-voiceDraft
-.forEach(
-guest=>{
-
-const table=
-
-S.tables.find(
-table=>
-
-Number(table.number)===
-Number(guest.tableNumber)
-);
-
-
-S.guests.push({
-
-id:uid(),
-
-surname:
-guest.surname.trim(),
-
-firstName:
-guest.firstName.trim(),
-
-partySize:
-Number(
-guest.partySize||1
-),
-
-tableId:
-table.id
-
-});
-
-}
-);
-
-
-const count=
-voiceDraft.length;
-
-
-voiceDraft=[];
-
-
-render();
-
-saveOnly();
-
-renderGuestsManager();
-
-
-toast(
-`${count} guests added`
-);
-
-}
-
 
 
 /* =========================
@@ -5240,7 +4602,8 @@ guest.id===id
 );
 
 
-if(!guest)return;
+if(!guest)
+return;
 
 
 const surname=
@@ -5312,7 +4675,7 @@ table.id===guest.tableId
 );
 
 
-const tableAnswer=
+const tableNumber=
 
 prompt(
 
@@ -5326,7 +4689,7 @@ currentTable
 
 
 if(
-tableAnswer===null
+tableNumber===null
 ){
 
 return;
@@ -5334,24 +4697,26 @@ return;
 }
 
 
-let tableId=null;
+let targetTable=null;
 
 
 if(
-tableAnswer.trim()
+tableNumber.trim()
 ){
 
-const table=
+targetTable=
 
 S.tables.find(
 table=>
 
 Number(table.number)===
-Number(tableAnswer)
+Number(tableNumber)
 );
 
 
-if(!table){
+if(
+!targetTable
+){
 
 toast(
 'Table not found'
@@ -5362,19 +4727,19 @@ return;
 }
 
 
-const free=
+const available=
 
-table.seats-
+targetTable.seats-
 
 tableUsedSeats(
-table.id,
+targetTable.id,
 guest.id
 );
 
 
 if(
 partySize>
-free
+available
 ){
 
 toast(
@@ -5384,10 +4749,6 @@ toast(
 return;
 
 }
-
-
-tableId=
-table.id;
 
 }
 
@@ -5408,7 +4769,10 @@ partySize;
 
 
 guest.tableId=
-tableId;
+
+targetTable
+?targetTable.id
+:null;
 
 
 render();
@@ -5433,26 +4797,14 @@ renderLists();
 
 }
 
-
-if(
-$('directoryOverlay')
-.classList
-.contains('open')
-){
-
-openDirectory();
-
 }
-
-}
-
 
 
 /* =========================
 DELETE ONE GUEST
 ========================= */
 
-function confirmDeleteGuest(id){
+function deleteGuestConfirm(id){
 
 const guest=
 
@@ -5462,29 +4814,24 @@ guest.id===id
 );
 
 
-if(!guest)return;
+if(!guest)
+return;
 
 
-const yes=
+if(
 
-confirm(
+!confirm(
 
-`Delete ${guestFullName(guest)} from the guest list?`
+`Delete ${guestFullName(guest)}?`
 
-);
+)
 
+){
 
-if(!yes)return;
-
-
-deleteGuest(
-id
-);
+return;
 
 }
 
-
-function deleteGuest(id){
 
 pushHistory();
 
@@ -5533,7 +4880,6 @@ openDirectory();
 }
 
 
-
 /* =========================
 DELETE ALL GUESTS
 ========================= */
@@ -5545,7 +4891,7 @@ if(
 ){
 
 toast(
-'Guest list is already empty'
+'Guest list is empty'
 );
 
 return;
@@ -5553,25 +4899,25 @@ return;
 }
 
 
-const yes=
+if(
 
-confirm(
+!confirm(
 
 `Delete all ${S.guests.length} guest entries?`
 
-);
+)
 
+){
 
-if(!yes)return;
+return;
+
+}
 
 
 pushHistory();
 
 
 S.guests=[];
-
-
-voiceDraft=[];
 
 
 render();
@@ -5592,7 +4938,7 @@ if(
 activePanel==='guests'
 ){
 
-renderGuestsManager();
+renderGuestManager();
 
 }
 
@@ -5618,11 +4964,10 @@ openDirectory();
 
 
 toast(
-'Guest list deleted — Undo is available'
+'Guest list deleted — Undo available'
 );
 
 }
-
 
 
 /* =========================
@@ -5658,48 +5003,9 @@ compareGuests
 );
 
 
-return`
+const guestHtml=
 
-<div class="setupCard">
-
-<div
-style="
-display:flex;
-justify-content:space-between;
-align-items:center">
-
-<div>
-
-<strong>
-Table ${table.number}
-</strong>
-
-
-<div
-style="
-font-size:11px;
-color:#777">
-
-${tableUsedSeats(table.id)}/${table.seats}
-people
-
-</div>
-
-</div>
-
-
-<button
-class="secondary"
-onclick="openTableGuests('${table.id}')">
-
-Open
-
-</button>
-
-</div>
-
-
-${guests.length
+guests.length
 
 ?
 
@@ -5714,9 +5020,7 @@ guest=>
 
 <div>
 
-<div
-class="guestName"
-onclick="confirmDeleteGuest('${guest.id}')">
+<div class="guestName">
 
 ${safe(
 guestFullName(
@@ -5726,18 +5030,14 @@ guest
 
 </div>
 
-
 <div class="guestMeta">
 
 ${guest.partySize}
-${guest.partySize===1
-?'person'
-:'people'}
+people
 
 </div>
 
 </div>
-
 
 <div class="actions">
 
@@ -5749,17 +5049,15 @@ Edit
 
 </button>
 
-
 <button
 class="danger"
-onclick="confirmDeleteGuest('${guest.id}')">
+onclick="deleteGuestConfirm('${guest.id}')">
 
 Delete
 
 </button>
 
 </div>
-
 
 </div>
 
@@ -5781,8 +5079,45 @@ No guests
 
 </div>
 
-`}
+`;
 
+
+return`
+
+<div class="setupCard">
+
+<div
+style="
+display:flex;
+justify-content:space-between;
+align-items:center">
+
+<div>
+
+<strong>
+Table ${table.number}
+</strong>
+
+<div class="setupMeta">
+
+${tableUsedSeats(table.id)}/${table.seats}
+people
+
+</div>
+
+</div>
+
+<button
+class="secondary"
+onclick="openTableGuests('${table.id}')">
+
+Open
+
+</button>
+
+</div>
+
+${guestHtml}
 
 </div>
 
@@ -5793,20 +5128,6 @@ No guests
 .join('');
 
 
-const unassigned=
-
-S.guests
-
-.filter(
-guest=>
-!guest.tableId
-)
-
-.sort(
-compareGuests
-);
-
-
 $('panelContent')
 .innerHTML=`
 
@@ -5814,15 +5135,11 @@ $('panelContent')
 Seating Lists
 </h2>
 
-
 <div class="hint">
 
-Every table and every guest.
-
-Tap a guest name or Delete to remove them.
+Every table with its guests.
 
 </div>
-
 
 <button
 style="width:100%"
@@ -5831,7 +5148,6 @@ onclick="openDirectory()">
 Alphabetical Directory
 
 </button>
-
 
 <button
 class="dangerSoft"
@@ -5842,8 +5158,6 @@ Delete Entire Guest List
 
 </button>
 
-
-
 <div class="section">
 
 ${cards||
@@ -5852,94 +5166,9 @@ ${cards||
 
 </div>
 
-
-
-${unassigned.length
-
-?`
-
-<div class="section">
-
-<h3>
-Unassigned Guests
-</h3>
-
-
-${unassigned
-
-.map(
-guest=>
-
-`
-
-<div class="guestRow">
-
-<div>
-
-<div
-class="guestName"
-onclick="confirmDeleteGuest('${guest.id}')">
-
-${safe(
-guestFullName(
-guest
-)
-)}
-
-</div>
-
-
-<div class="guestMeta">
-
-${guest.partySize}
-people
-
-</div>
-
-</div>
-
-
-<div class="actions">
-
-<button
-class="secondary"
-onclick="editGuest('${guest.id}')">
-
-Edit
-
-</button>
-
-
-<button
-class="danger"
-onclick="confirmDeleteGuest('${guest.id}')">
-
-Delete
-
-</button>
-
-</div>
-
-
-</div>
-
-`
-
-)
-
-.join('')}
-
-
-</div>
-
-`
-
-:''}
-
 `;
 
 }
-
 
 
 /* =========================
@@ -5966,42 +5195,35 @@ guests
 .forEach(
 guest=>{
 
+const surname=
+
+(guest.surname||'')
+.trim();
+
+
 const letter=
 
-(
-guest.surname||
-'#'
-)
+surname
 
-.trim()
-
+?surname
 .charAt(0)
-
 .toLocaleUpperCase(
 'el-GR'
 )
 
-||
-
-'#';
+:'#';
 
 
 if(
-!groups[
-letter
-]
+!groups[letter]
 ){
 
-groups[
-letter
-]=[];
+groups[letter]=[];
 
 }
 
 
-groups[
-letter
-]
+groups[letter]
 .push(
 guest
 );
@@ -6024,6 +5246,7 @@ a.localeCompare(
 b,
 'el'
 )
+
 );
 
 
@@ -6041,7 +5264,7 @@ letter=>{
 
 return`
 
-<div class="letter">
+<div class="directoryLetter">
 
 ${safe(
 letter
@@ -6049,10 +5272,7 @@ letter
 
 </div>
 
-
-${groups[
-letter
-]
+${groups[letter]
 
 .map(
 guest=>{
@@ -6069,10 +5289,7 @@ return`
 
 <div class="directoryRow">
 
-
-<div
-class="directoryName"
-onclick="confirmDeleteGuest('${guest.id}')">
+<strong>
 
 ${safe(
 guestFullName(
@@ -6080,18 +5297,14 @@ guest
 )
 )}
 
-</div>
-
+</strong>
 
 <span>
 
 ${guest.partySize}
-${guest.partySize===1
-?'person'
-:'people'}
+people
 
 </span>
-
 
 <span>
 
@@ -6102,18 +5315,14 @@ ${table
 
 </span>
 
-
 <button
 class="danger"
-style="
-font-size:10px;
-padding:5px 7px"
-onclick="confirmDeleteGuest('${guest.id}')">
+style="font-size:10px;padding:5px"
+onclick="deleteGuestConfirm('${guest.id}')">
 
 Delete
 
 </button>
-
 
 </div>
 
@@ -6160,7 +5369,6 @@ $('directoryOverlay')
 }
 
 
-
 /* =========================
 MORE
 ========================= */
@@ -6174,7 +5382,6 @@ $('panelContent')
 More
 </h2>
 
-
 <button
 class="secondary"
 style="width:100%"
@@ -6184,7 +5391,6 @@ onclick="undo()">
 
 </button>
 
-
 <button
 class="secondary"
 style="width:100%;margin-top:7px"
@@ -6193,8 +5399,6 @@ onclick="redo()">
 ↷ Redo
 
 </button>
-
-
 
 <div class="section">
 
@@ -6209,8 +5413,6 @@ Delete Guest List
 
 </div>
 
-
-
 <div class="section">
 
 <button
@@ -6223,8 +5425,6 @@ Clear Tables
 </button>
 
 </div>
-
-
 
 <div class="section">
 
@@ -6244,11 +5444,6 @@ Reset Everything
 }
 
 
-
-/* =========================
-CLEAR TABLES
-========================= */
-
 function clearTables(){
 
 if(
@@ -6264,16 +5459,17 @@ return;
 }
 
 
-const yes=
+if(
 
-confirm(
+!confirm(
+'Delete all tables? Guests will stay saved but become unassigned.'
+)
 
-'Delete all tables? Guests will remain saved but become unassigned.'
+){
 
-);
+return;
 
-
-if(!yes)return;
+}
 
 
 pushHistory();
@@ -6302,35 +5498,22 @@ render();
 
 saveOnly();
 
-
-if(
-activePanel==='lists'
-){
-
-renderLists();
-
 }
 
-}
-
-
-
-/* =========================
-RESET EVERYTHING
-========================= */
 
 function resetEverything(){
 
-const yes=
+if(
 
-confirm(
+!confirm(
+'Delete the entire seating plan?'
+)
 
-'Delete venue, tables and the entire guest list?'
+){
 
-);
+return;
 
-
-if(!yes)return;
+}
 
 
 pushHistory();
@@ -6342,14 +5525,9 @@ venue:null,
 
 tables:[],
 
-guests:[],
-
-objects:[]
+guests:[]
 
 };
-
-
-voiceDraft=[];
 
 
 selected=null;
@@ -6364,21 +5542,11 @@ render();
 
 saveOnly();
 
-
-if(
-activePanel==='more'
-){
-
-renderMore();
-
 }
-
-}
-
 
 
 /* =========================
-EMPTY CANVAS TAP
+CANVAS TAP
 ========================= */
 
 canvas.addEventListener(
@@ -6416,10 +5584,10 @@ context.style.display=
 document
 .querySelectorAll('.table')
 .forEach(
-el=>
-el
-.classList
-.remove('selected')
+table=>
+table.classList.remove(
+'selected'
+)
 );
 
 }
@@ -6427,7 +5595,6 @@ el
 }
 
 );
-
 
 
 /* =========================
@@ -6486,10 +5653,9 @@ guest.partySize||1
 $('status')
 .textContent=
 
-`${S.tables.length} tables · ${S.guests.length} guest entries · ${seatedPeople}/${totalPeople} people seated`;
+`${S.tables.length} tables · ${seatedPeople}/${totalPeople} people seated`;
 
 }
-
 
 
 /* =========================
@@ -6522,9 +5688,7 @@ b
 
 const surname=
 
-(
-a.surname||''
-)
+(a.surname||'')
 
 .localeCompare(
 
@@ -6572,6 +5736,7 @@ sensitivity:'base'
 function safe(text){
 
 const div=
+
 document.createElement(
 'div'
 );
@@ -6586,46 +5751,17 @@ return div.innerHTML;
 }
 
 
-function safeAttr(text){
-
-return String(
-text||''
-)
-
-.replace(
-/&/g,
-'&amp;'
-)
-
-.replace(
-/"/g,
-'&quot;'
-)
-
-.replace(
-/</g,
-'&lt;'
-)
-
-.replace(
-/>/g,
-'&gt;'
-);
-
-}
-
-
 function toast(message){
 
-const el=
+const element=
 $('toast');
 
 
-el.textContent=
+element.textContent=
 message;
 
 
-el.style.display=
+element.style.display=
 'block';
 
 
@@ -6640,7 +5776,7 @@ setTimeout(
 
 ()=>{
 
-el.style.display=
+element.style.display=
 'none';
 
 },
@@ -6650,7 +5786,6 @@ el.style.display=
 );
 
 }
-
 
 
 /* =========================
