@@ -7,7 +7,7 @@
 name="viewport"
 content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
-<title>Seatly 5.1.2 Stable</title>
+<title>Seatly 5.1.4 Stable</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -1544,6 +1544,14 @@ text-align:right;
 }
 
 
+
+.chart{position:relative;overflow:hidden;}
+.chart.theme-floral:before,.chart.theme-floral:after{content:"❀  ❦  ❀";position:absolute;font-family:Georgia,serif;font-size:34px;opacity:.28;letter-spacing:12px;}
+.chart.theme-floral:before{top:20px;left:28px}.chart.theme-floral:after{right:28px;bottom:20px;transform:rotate(180deg)}
+.chart.theme-wine:before{content:"♢  WINE & DINE  ♢";display:block;text-align:center;font-family:Georgia,serif;font-size:13px;letter-spacing:5px;margin-bottom:18px;}
+.chart.theme-celebrate:before,.chart.theme-celebrate:after{content:"✦ · ✧ · ✦";position:absolute;font-size:28px;letter-spacing:8px;opacity:.35}.chart.theme-celebrate:before{top:20px;left:30px}.chart.theme-celebrate:after{right:30px;top:20px}
+.chart.theme-minimal{border:8px double #ddd;}
+
 /* =====================================================
 EXPORT
 ===================================================== */
@@ -1555,6 +1563,8 @@ position:relative;
 width:1600px;
 
 height:1000px;
+
+max-width:none;
 
 background:#fff;
 
@@ -1606,9 +1616,9 @@ color:#fff;
 
 position:absolute;
 
-width:75px;
+width:82px;
 
-height:75px;
+height:82px;
 
 border:2px solid #222;
 
@@ -1719,7 +1729,7 @@ seat<span>ly</span>
 <div class="topRight">
 
 <span class="buildTag">
-v5.1.2
+v5.1.4
 </span>
 
 <span
@@ -2056,6 +2066,14 @@ selected>
 
 </select>
 
+<select id="chartTheme" class="field" onchange="renderChart()">
+<option value="elegant">Elegant</option>
+<option value="floral">Floral</option>
+<option value="wine">Wine & Dine</option>
+<option value="celebrate">Celebrate</option>
+<option value="minimal">Minimal Frame</option>
+</select>
+
 </div>
 
 
@@ -2198,12 +2216,12 @@ STATE
 ===================================================== */
 
 const STORAGE_KEY=
-'seatly512stable';
+'seatly514stable';
 
 
 let S={
 
-version:512,
+version:514,
 
 venueImage:null,
 
@@ -2228,7 +2246,9 @@ welcome:'Welcome',
 find:
 'Please find your seat',
 
-columns:4
+columns:4,
+
+theme:'elegant'
 
 }
 
@@ -2551,6 +2571,12 @@ STORAGE_KEY
 ||
 
 localStorage.getItem(
+'seatly512stable'
+)
+
+||
+
+localStorage.getItem(
 'seatly511stable'
 )
 
@@ -2584,7 +2610,7 @@ if(old){
 S={
 ...S,
 ...JSON.parse(old),
-version:512
+version:514
 };
 
 }
@@ -2643,7 +2669,9 @@ welcome:'Welcome',
 find:
 'Please find your seat',
 
-columns:4
+columns:4,
+
+theme:'elegant'
 
 };
 
@@ -2685,6 +2713,15 @@ object.heightPct=8;
 
 
 
+// v5.1.4: make legacy default tables readable without requiring manual zoom.
+if(Number(S.version||0)<514){
+  S.tables.forEach(table=>{
+    if(Number(table.scale||0)<=.82) table.scale=1.05;
+  });
+  S.version=514;
+}
+
+
 S.tables.forEach(
 table=>{
 
@@ -2701,7 +2738,7 @@ if(
 table.scale===undefined
 ){
 
-table.scale=.8;
+table.scale=1.05;
 
 }
 
@@ -3314,6 +3351,18 @@ onclick="addTable(16)">
 
 }
 
+
+
+if(!S.tablesLocked && S.tables.length){
+
+html+=`
+<div class="divider"></div>
+<button class="secondary" onclick="resizeAllTables(.9)">All −</button>
+<button class="secondary" onclick="resizeAllTables(1.1)">All +</button>
+<button class="secondary" onclick="normalizeAllTables()">Same size</button>
+`;
+
+}
 
 
 if(
@@ -4158,7 +4207,7 @@ nextTableNumber(),
 
 seats,
 
-scale:.8,
+scale:1.05,
 
 xPct:
 position.x,
@@ -4323,6 +4372,25 @@ renderToolbar();
 
 }
 
+
+
+function resizeAllTables(multiplier){
+  if(!S.tables.length || S.tablesLocked) return;
+  remember();
+  S.tables.forEach(table=>{
+    table.scale=clamp(Number(table.scale||1)*multiplier,.5,1.8);
+  });
+  renderAll(); save(); renderToolbar();
+}
+
+function normalizeAllTables(){
+  if(!S.tables.length || S.tablesLocked) return;
+  remember();
+  const target=Number((getSelectedTable()?.scale)||S.tables[0].scale||1.05);
+  S.tables.forEach(table=>table.scale=clamp(target,.5,1.8));
+  renderAll(); save(); renderToolbar();
+  toast('All tables are now the same size ✓');
+}
 
 
 function rotateTable(delta){
@@ -5665,13 +5733,9 @@ id:item.id
 
 };
 
-
-renderAll();
-
+// v5.1.4: first press selects AND starts dragging immediately.
+element.classList.add('editing');
 renderToolbar();
-
-
-return;
 
 }
 
@@ -8699,7 +8763,7 @@ remember();
 S={
 ...S,
 ...data,
-version:512
+version:514
 };
 
 
@@ -9134,6 +9198,8 @@ String(
 S.chart.columns||4
 );
 
+$('chartTheme').value=S.chart.theme||'elegant';
+
 
 renderChart();
 
@@ -9174,7 +9240,9 @@ $('chartFind')?.value||
 columns:
 Number(
 $('chartColumns')?.value||4
-)
+),
+
+theme:$('chartTheme')?.value||'elegant'
 
 };
 
@@ -9315,6 +9383,8 @@ ${table
 
 
 
+$('chart').className='chart theme-'+(S.chart.theme||'elegant');
+
 $('chart')
 .innerHTML=`
 
@@ -9427,6 +9497,12 @@ box.id=
 box.className=
 'venueExport';
 
+// Match the export page to the exact on-screen venue aspect ratio.
+const canvasRatio=Math.max(.4, canvas.clientWidth/Math.max(1,canvas.clientHeight));
+const exportWidth=1600;
+const exportHeight=Math.round(exportWidth/canvasRatio);
+box.style.width=exportWidth+'px';
+box.style.height=exportHeight+'px';
 
 
 const bg=
