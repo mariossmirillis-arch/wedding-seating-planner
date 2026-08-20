@@ -9,7 +9,11 @@
 name="viewport"
 content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
-<title>Seatly 4.7</title>
+<title>Seatly 4.7.1</title>
+
+<!-- PDF EXPORT -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
 
@@ -18,27 +22,41 @@ box-sizing:border-box
 }
 
 :root{
+
 --bg:#f3f1ed;
 --paper:#fff;
 --ink:#202020;
 --muted:#777;
 --line:#e4ded6;
 --soft:#f3efe9;
---green:#dff3e4;
---greenBorder:#34784a;
+
+--green:#e2f2e6;
+--greenText:#28663c;
+
+--warning:#fff6e8;
+
 --danger:#a43a32;
 --dangerSoft:#fff0ee;
---accent:#222;
+
 }
 
 html,
 body{
+
 margin:0;
 width:100%;
 height:100%;
-font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+
+font-family:
+system-ui,
+-apple-system,
+BlinkMacSystemFont,
+"Segoe UI",
+sans-serif;
+
 background:var(--bg);
 color:var(--ink)
+
 }
 
 body{
@@ -52,406 +70,601 @@ font:inherit
 }
 
 button{
+
 border:0;
 border-radius:10px;
 padding:9px 11px;
-background:var(--ink);
-color:#fff;
+
+background:#222;
+color:white;
+
 font-weight:700;
 cursor:pointer
+
 }
 
 button.secondary{
+
 background:#fff;
-color:var(--ink);
+color:#222;
 border:1px solid var(--line)
+
 }
 
 button.soft{
+
 background:var(--soft);
-color:var(--ink)
+color:#222
+
+}
+
+button.success{
+
+background:#e3f2e7;
+color:#28663c;
+border:1px solid #bedbc6
+
 }
 
 button.danger{
+
 background:var(--danger);
-color:#fff
+color:white
+
 }
 
 button.dangerSoft{
+
 background:var(--dangerSoft);
 color:var(--danger);
 border:1px solid #efc8c3
+
 }
 
 button:disabled{
+
 opacity:.35;
 cursor:default
+
 }
 
 
-/* =========================
+/* =====================================================
 TOP
-========================= */
+===================================================== */
 
 .topbar{
+
 height:58px;
+
 background:#fff;
 border-bottom:1px solid var(--line);
+
 display:flex;
 align-items:center;
 justify-content:space-between;
+
 padding:0 12px;
+
 position:relative;
-z-index:130
+z-index:150
+
 }
 
 .logo{
+
 font-size:25px;
 font-weight:900;
 letter-spacing:-1px
+
 }
 
 .logo span{
 font-weight:400
 }
 
-.topActions{
+.topRight{
+
 display:flex;
 align-items:center;
 gap:5px
+
 }
 
-.saved{
+.saveState{
+
 font-size:11px;
-color:#777;
-min-width:55px;
-text-align:right
+color:#777
+
 }
 
-.saved.error{
+.saveState.error{
+
 color:var(--danger);
 font-weight:800
+
 }
 
 
-/* =========================
-STEP BAR
-========================= */
+/* =====================================================
+STEPS
+===================================================== */
 
-.stepBar{
+.steps{
+
 height:46px;
+
 background:#fff;
 border-bottom:1px solid var(--line);
+
 display:flex;
 align-items:center;
 justify-content:center;
 gap:6px;
+
 padding:5px 10px;
+
+overflow:auto;
+
 position:relative;
-z-index:125;
-overflow:auto
+z-index:145
+
 }
 
-.stepButton{
-background:#f5f2ed;
+.stepBtn{
+
+background:#f4f1ec;
 color:#666;
-border:1px solid #e5ded5;
-padding:7px 12px;
+
+border:1px solid #e3ddd5;
+
 border-radius:999px;
+
+padding:7px 12px;
+
 font-size:11px;
+
 white-space:nowrap
+
 }
 
-.stepButton.active{
+.stepBtn.active{
+
 background:#222;
 color:#fff;
 border-color:#222
+
 }
 
-.stepButton.done{
-background:#e7f4ea;
-color:#28663c;
-border-color:#bedbc6
+.stepBtn.done{
+
+background:var(--green);
+color:var(--greenText);
+border-color:#bfdbc7
+
 }
 
 
-/* =========================
+/* =====================================================
 APP
-========================= */
+===================================================== */
 
 .app{
+
 height:calc(100vh - 104px);
+
 display:grid;
-grid-template-columns:58px 282px 1fr
+
+grid-template-columns:
+58px
+290px
+1fr
+
 }
 
 
-/* =========================
+/* =====================================================
 RAIL
-========================= */
+===================================================== */
 
 .rail{
+
 background:#202020;
+
 padding:6px 4px;
+
 display:flex;
 flex-direction:column;
 gap:6px;
+
 z-index:100
+
 }
 
 .rail button{
-height:56px;
+
+height:57px;
+
 background:transparent;
+
 padding:4px;
+
 font-size:8px;
+
 display:flex;
 flex-direction:column;
+
 align-items:center;
 justify-content:center;
+
 gap:3px
+
 }
 
 .rail button b{
+
 font-size:17px
+
 }
 
 .rail button.active{
+
 background:#fff;
 color:#222
+
 }
 
 
-/* =========================
+/* =====================================================
 PANEL
-========================= */
+===================================================== */
 
 .panel{
+
 background:#fff;
 border-right:1px solid var(--line);
+
 padding:14px;
+
 overflow:auto;
+
 position:relative;
 z-index:90
-}
 
-.panel h2{
-font-size:19px;
-margin:0 0 4px
-}
-
-.panel h3{
-font-size:14px;
-margin:0 0 7px
-}
-
-.hint{
-font-size:12px;
-color:var(--muted);
-line-height:1.45;
-margin-bottom:12px
-}
-
-.section{
-border-top:1px solid #eee8e1;
-padding-top:12px;
-margin-top:12px
-}
-
-.field{
-width:100%;
-padding:10px;
-border:1px solid #d8d1c9;
-border-radius:10px;
-background:#fff
-}
-
-.grid2{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:7px
-}
-
-.grid4{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:7px
 }
 
 .panelClose{
 display:none
 }
 
-.stepTitle{
-display:flex;
-align-items:center;
-gap:8px;
-margin-bottom:3px
+.panel h2{
+
+font-size:19px;
+margin:0 0 4px
+
 }
 
-.stepNumber{
-width:28px;
-height:28px;
-border-radius:50%;
-background:#222;
-color:#fff;
-display:grid;
-place-items:center;
+.panel h3{
+
+font-size:14px;
+margin:0 0 7px
+
+}
+
+.hint{
+
 font-size:12px;
-font-weight:900
+line-height:1.45;
+
+color:var(--muted);
+
+margin-bottom:12px
+
+}
+
+.section{
+
+border-top:1px solid #eee8e1;
+
+padding-top:12px;
+margin-top:12px
+
+}
+
+.field{
+
+width:100%;
+
+padding:10px;
+
+border:1px solid #d8d1c9;
+
+border-radius:10px;
+
+background:#fff
+
+}
+
+.grid2{
+
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:7px
+
+}
+
+.grid4{
+
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:7px
+
 }
 
 .primaryWide{
+
 width:100%;
-margin-top:9px;
-padding:12px
+padding:12px;
+margin-top:9px
+
+}
+
+.stepHeader{
+
+display:flex;
+gap:8px;
+align-items:center;
+
+margin-bottom:5px
+
+}
+
+.stepNumber{
+
+width:28px;
+height:28px;
+
+border-radius:50%;
+
+background:#222;
+color:#fff;
+
+display:grid;
+place-items:center;
+
+font-size:12px;
+font-weight:900
+
 }
 
 
-/* =========================
+/* =====================================================
 CARDS
-========================= */
+===================================================== */
 
 .card{
+
 border:1px solid var(--line);
+
 border-radius:14px;
+
 padding:11px;
+
 background:#faf9f7;
+
 margin-top:8px
+
 }
 
 .cardTitle{
+
 font-size:14px;
 font-weight:850
+
 }
 
 .meta{
+
 font-size:11px;
 color:#777;
 margin-top:2px
+
+}
+
+.warning{
+
+background:var(--warning);
+border-color:#ecd5a7
+
 }
 
 .quickButton{
+
 background:#f5f2ed;
 color:#222;
-border:1px solid #e0dad1;
+
+border:1px solid #e1dad2;
+
 padding:12px 5px
+
 }
 
-.quickOption{
+.quickRow{
+
 display:grid;
+
 grid-template-columns:1fr auto;
+
+gap:8px;
+
 align-items:center;
-gap:7px;
+
 padding:9px 0;
-border-top:1px solid #ece7e1
+
+border-top:1px solid #eee7df
+
 }
 
 
-/* =========================
+/* =====================================================
 WORKSPACE
-========================= */
+===================================================== */
 
 .work{
+
 background:#eae7e2;
+
 padding:7px;
+
 min-width:0;
 min-height:0;
-overflow:hidden;
-display:flex;
-align-items:stretch;
-justify-content:center
-}
 
-.canvasWrap{
-width:100%;
-height:100%;
+overflow:hidden;
+
 display:flex;
 align-items:stretch;
 justify-content:center
+
 }
 
 .canvas{
+
 position:relative;
+
 width:min(100%,1400px);
 height:100%;
+
 background:#fff;
+
 border:1px solid var(--line);
+
 border-radius:16px;
+
 overflow:hidden;
+
 touch-action:none;
-box-shadow:0 12px 30px rgba(0,0,0,.08)
+
+box-shadow:
+0 12px 30px rgba(0,0,0,.08)
+
 }
 
 .venueBg{
+
 position:absolute;
 inset:0;
-background:#fff center/contain no-repeat;
+
+background:
+#fff
+center
+/
+contain
+no-repeat;
+
 pointer-events:none;
+
 z-index:1
+
 }
 
 .objectLayer{
+
 position:absolute;
 inset:0;
+
 z-index:5
+
 }
 
 .tableLayer{
+
 position:absolute;
 inset:0;
+
 z-index:10
+
 }
 
 .empty{
+
 position:absolute;
 inset:0;
+
 display:grid;
 place-items:center;
+
 text-align:center;
+
 color:#999;
+
 pointer-events:none;
+
 z-index:2
+
 }
 
 .obj{
+
 position:absolute;
+
 touch-action:none;
 user-select:none;
+
 transform-origin:top left
+
 }
 
 
-/* =========================
+/* =====================================================
 VENUE OBJECTS
-========================= */
+===================================================== */
 
 .venueObject{
+
 border:2px dashed #555;
+
 background:rgba(255,255,255,.92);
+
 border-radius:10px;
+
 display:flex;
+
 align-items:center;
 justify-content:center;
+
 text-align:center;
+
 font-size:10px;
 font-weight:850;
+
 cursor:grab;
-box-shadow:0 3px 10px rgba(0,0,0,.08)
+
+box-shadow:
+0 3px 10px rgba(0,0,0,.08)
+
 }
 
 .venueObject.locked{
-cursor:default;
+
 pointer-events:none
+
 }
 
 .venueObject.selected{
-outline:3px solid rgba(32,32,32,.18);
+
+outline:
+3px solid rgba(0,0,0,.15);
+
 outline-offset:3px
+
 }
 
 .dancefloor{
+
 border-style:solid;
+
 background:
+
 linear-gradient(
 45deg,
 #fafafa 25%,
@@ -461,603 +674,1006 @@ linear-gradient(
 #fafafa 75%,
 #ececec 75%
 );
-background-size:24px 24px
+
+background-size:
+24px 24px
+
 }
 
 .djbox{
+
 background:#292929;
 color:#fff;
+
 border-color:#111
+
 }
 
 .bar{
-background:#f3ece4;
-border-radius:7px
+
+background:#f3ece4
+
 }
 
 .entrance{
+
 background:#fff;
 border-style:double
+
 }
 
 
-/* =========================
-TABLES
-========================= */
+/* =====================================================
+TABLE
+===================================================== */
 
 .table{
+
 width:82px;
 height:82px;
+
 display:flex;
 align-items:center;
 justify-content:center;
-cursor:grab
-}
 
-.table.locked{
-cursor:pointer
+cursor:grab
+
 }
 
 .table.selected{
-outline:3px solid rgba(32,32,32,.17);
+
+outline:
+3px solid rgba(0,0,0,.15);
+
 outline-offset:3px
+
 }
 
 .core{
+
 width:48px;
 height:48px;
+
 border:2px solid #222;
+
 border-radius:50%;
+
 background:#fff;
+
 display:flex;
 flex-direction:column;
+
 align-items:center;
 justify-content:center;
-box-shadow:0 4px 12px rgba(0,0,0,.13);
+
+box-shadow:
+0 4px 12px rgba(0,0,0,.13);
+
 z-index:2
+
 }
 
 .core b{
+
 font-size:8px
+
 }
 
 .core span{
+
 font-size:8px;
 color:#666;
 margin-top:2px
+
 }
 
-.table.complete .core{
-background:var(--green);
-border-color:var(--greenBorder)
+.table.full .core{
+
+background:#e1f2e5;
+border-color:#3c7d50
+
 }
 
 .chair{
+
 position:absolute;
+
 width:9px;
 height:9px;
-border:1.1px solid #555;
+
 background:#fff;
+
+border:
+1.1px solid #555;
+
 border-radius:3px
+
 }
 
 
-/* =========================
+/* =====================================================
 CONTEXT
-========================= */
+===================================================== */
 
 .context{
+
 position:absolute;
+
 left:50%;
 top:8px;
-transform:translateX(-50%);
+
+transform:
+translateX(-50%);
+
 display:none;
+
 align-items:center;
+
 gap:5px;
+
 background:#fff;
-border:1px solid var(--line);
+
+border:
+1px solid var(--line);
+
 border-radius:12px;
+
 padding:5px;
-z-index:50;
-box-shadow:0 8px 22px rgba(0,0,0,.14);
+
+z-index:60;
+
+box-shadow:
+0 8px 22px rgba(0,0,0,.14);
+
 max-width:96%;
+
 overflow:auto
+
 }
 
 .context input,
 .context select{
+
 width:62px;
+
 padding:6px;
-border:1px solid var(--line);
+
+border:
+1px solid var(--line);
+
 border-radius:8px
+
 }
 
 .context button{
-padding:6px 7px;
-font-size:11px
+
+font-size:11px;
+
+padding:6px 7px
+
 }
 
 
-/* =========================
-GUIDES
-========================= */
-
-.guide{
-position:absolute;
-pointer-events:none;
-background:#333;
-opacity:.2;
-display:none;
-z-index:20
-}
-
-.guide.v{
-top:0;
-bottom:0;
-width:1px
-}
-
-.guide.h{
-left:0;
-right:0;
-height:1px
-}
-
-
-/* =========================
+/* =====================================================
 TRASH
-========================= */
+===================================================== */
 
 .trash{
+
 position:absolute;
+
 left:50%;
 bottom:12px;
-transform:translateX(-50%);
+
+transform:
+translateX(-50%);
+
 display:none;
+
 background:#fff;
-border:2px solid var(--line);
+
+border:
+2px solid var(--line);
+
 border-radius:999px;
+
 padding:8px 15px;
+
 font-size:11px;
+
 font-weight:850;
-z-index:55
+
+z-index:70
+
 }
 
 .trash.hot{
+
 background:#ffe7e3;
+
 border-color:#b23b30
+
 }
 
 
-/* =========================
+/* =====================================================
 STATUS
-========================= */
+===================================================== */
 
 .status{
+
 position:absolute;
+
 left:8px;
 bottom:8px;
+
 background:#fff;
-border:1px solid var(--line);
+
+border:
+1px solid var(--line);
+
 border-radius:999px;
+
 padding:6px 9px;
+
 font-size:10px;
+
 color:#666;
+
 z-index:30
+
 }
 
 
-/* =========================
-GUEST PANEL
-========================= */
+/* =====================================================
+GUEST DRAWER
+===================================================== */
 
-.guestPanel{
+.guestDrawer{
+
 position:fixed;
+
 top:104px;
 right:0;
 bottom:0;
-width:380px;
+
+width:390px;
+
 background:#fff;
-border-left:1px solid var(--line);
-box-shadow:-10px 0 30px rgba(0,0,0,.12);
-z-index:120;
+
+border-left:
+1px solid var(--line);
+
+box-shadow:
+-10px 0 30px rgba(0,0,0,.12);
+
+z-index:130;
+
 display:none;
+
 padding:15px;
+
 overflow:auto
+
 }
 
-.guestPanel.open{
+.guestDrawer.open{
+
 display:block
+
 }
 
-.guestHeader{
+.drawerTop{
+
 display:flex;
 align-items:flex-start;
 justify-content:space-between;
+
 gap:8px;
+
 margin-bottom:12px
+
 }
 
-.guestTitle{
+.drawerTitle{
+
 font-size:21px;
 font-weight:850
+
 }
 
-.guestCount{
+.drawerMeta{
+
 font-size:12px;
 color:#777
-}
 
-.guestBox{
-background:#faf9f7;
-border:1px solid var(--line);
-border-radius:13px;
-padding:11px
 }
 
 .formLabel{
+
 font-size:11px;
+
 font-weight:750;
+
 color:#666;
+
 margin:8px 0 4px
+
 }
 
 .guestRow{
+
 display:grid;
-grid-template-columns:1fr auto;
+
+grid-template-columns:
+1fr
+auto;
+
 gap:7px;
+
 align-items:center;
+
 padding:8px 0;
-border-bottom:1px solid #eee
+
+border-bottom:
+1px solid #eee
+
 }
 
 .guestName{
+
 font-size:13px;
 font-weight:700
+
 }
 
 .guestMeta{
+
 font-size:11px;
 color:#777
+
 }
 
 .actions{
+
 display:flex;
 gap:4px
+
 }
 
 .actions button{
+
 font-size:10px;
 padding:5px 6px
+
 }
 
 
-/* =========================
-SUMMARY
-========================= */
+/* =====================================================
+VOICE
+===================================================== */
 
-.summaryGrid{
+.voiceBox{
+
+border:
+1px solid var(--line);
+
+border-radius:14px;
+
+background:#faf9f7;
+
+padding:11px;
+
+margin-top:8px
+
+}
+
+.voiceListening{
+
+background:#fff1ef;
+border-color:#efc5bf
+
+}
+
+.voicePreview{
+
+margin-top:8px
+
+}
+
+.voiceRow{
+
 display:grid;
-grid-template-columns:1fr 1fr;
+
+grid-template-columns:
+1fr
+1fr
+55px
+65px
+auto;
+
+gap:5px;
+
+margin-bottom:6px
+
+}
+
+.voiceRow input{
+
+width:100%;
+
+padding:7px;
+
+border:
+1px solid var(--line);
+
+border-radius:8px
+
+}
+
+
+/* =====================================================
+SUMMARY
+===================================================== */
+
+.summary{
+
+display:grid;
+
+grid-template-columns:
+1fr
+1fr;
+
 gap:8px
+
 }
 
 .summaryCard{
-border:1px solid var(--line);
-border-radius:13px;
+
 background:#faf9f7;
+
+border:
+1px solid var(--line);
+
+border-radius:13px;
+
 padding:11px
+
 }
 
 .summaryNumber{
-font-size:23px;
+
+font-size:24px;
 font-weight:900
+
 }
 
 .summaryLabel{
+
 font-size:10px;
-color:#777;
-margin-top:2px
+color:#777
+
 }
 
 
-/* =========================
-PRINT
-========================= */
+/* =====================================================
+DOWNLOAD DESIGN
+===================================================== */
 
 .overlay{
+
 position:fixed;
 inset:0;
-background:rgba(0,0,0,.45);
+
 display:none;
+
 align-items:center;
 justify-content:center;
+
 padding:18px;
-z-index:250
+
+background:rgba(0,0,0,.5);
+
+z-index:300
+
 }
 
 .overlay.open{
+
 display:flex
+
 }
 
 .modal{
-width:min(920px,100%);
+
+width:min(1000px,100%);
+
 max-height:94vh;
+
 overflow:auto;
+
 background:#fff;
+
 border-radius:18px;
+
 padding:20px
+
 }
 
 .modalTop{
+
 display:flex;
+
 align-items:center;
 justify-content:space-between;
+
 gap:8px
+
 }
 
-.printSettings{
+.chartControls{
+
 display:grid;
-grid-template-columns:1fr 1fr;
+
+grid-template-columns:
+1fr
+1fr;
+
 gap:7px;
+
 margin:12px 0
+
 }
 
-.printSheet{
+.chart{
+
 background:#fff;
+
 color:#111;
+
 width:100%;
+
 min-height:900px;
+
 padding:44px;
-border:1px solid #ddd;
+
+border:
+1px solid #ddd;
+
 margin-top:15px
+
 }
 
 .chartWelcome{
+
 text-align:center;
-font-family:Georgia,serif;
-font-size:62px;
+
+font-family:
+Georgia,
+serif;
+
+font-size:64px;
+
 font-style:italic;
+
 line-height:1
+
 }
 
 .chartSmall{
+
 text-align:center;
+
 font-size:10px;
+
 letter-spacing:4px;
+
 margin-top:24px
+
 }
 
 .chartNames{
+
 text-align:center;
-font-family:Georgia,serif;
-font-size:28px;
+
+font-family:
+Georgia,
+serif;
+
+font-size:29px;
+
 letter-spacing:4px;
-margin-top:6px
+
+margin-top:7px
+
 }
 
 .chartDate{
+
 text-align:center;
+
 font-size:10px;
+
 letter-spacing:3px;
+
 margin-top:8px
+
 }
 
 .chartFind{
+
 text-align:center;
-font-family:Georgia,serif;
+
+font-family:
+Georgia,
+serif;
+
 font-size:26px;
+
 font-style:italic;
-margin:26px 0 32px
+
+margin:
+26px 0 32px
+
 }
 
 .chartColumns{
+
 columns:4;
-column-gap:32px
+
+column-gap:34px
+
 }
 
 .chartGroup{
+
 break-inside:avoid;
+
 margin-bottom:18px
+
 }
 
 .chartLetter{
-font-family:Georgia,serif;
+
+font-family:
+Georgia,
+serif;
+
 font-size:24px;
+
 margin-bottom:6px
+
 }
 
 .chartPerson{
+
 display:flex;
+
 align-items:flex-end;
+
 gap:4px;
-font-family:Georgia,serif;
+
+font-family:
+Georgia,
+serif;
+
 font-size:10px;
-line-height:1.6
+
+line-height:1.65
+
 }
 
 .chartPersonName{
+
 white-space:nowrap
+
 }
 
 .chartDots{
-border-bottom:1px dotted #777;
+
+border-bottom:
+1px dotted #777;
+
 flex:1;
+
 height:10px
+
 }
 
 .chartTable{
+
 min-width:18px;
+
 text-align:right
+
 }
 
 
-/* =========================
+/* =====================================================
 MOBILE
-========================= */
+===================================================== */
 
 @media(max-width:800px){
 
 .topbar{
+
 height:56px;
+
 padding:0 7px
+
 }
 
 .logo{
+
 font-size:21px
+
 }
 
-.saved{
+.saveState{
+
 display:none
+
 }
 
-.stepBar{
+.steps{
+
 height:42px;
+
 justify-content:flex-start;
+
 padding:4px 7px
+
 }
 
-.stepButton{
+.stepBtn{
+
 font-size:9px;
+
 padding:6px 9px
+
 }
 
 .app{
+
 height:calc(100vh - 98px);
-grid-template-columns:54px 1fr
+
+grid-template-columns:
+54px
+1fr
+
 }
 
 .rail{
+
 padding:4px 2px
+
 }
 
 .rail button{
-height:52px;
+
+height:54px;
+
 font-size:7px
+
 }
 
 .work{
+
 grid-column:2;
+
 padding:4px
+
 }
 
 .canvas{
-width:100%;
-height:100%;
+
 border-radius:12px
+
 }
 
 .panel{
+
 position:fixed;
+
 left:54px;
 right:0;
-bottom:0;
+
 top:auto;
+bottom:0;
+
 width:auto;
-max-height:58vh;
+
+max-height:61vh;
+
 display:none;
+
 border-right:0;
-border-top:1px solid var(--line);
-border-radius:18px 18px 0 0;
-padding:46px 12px 12px;
-box-shadow:0 -10px 30px rgba(0,0,0,.18);
-z-index:110
+
+border-top:
+1px solid var(--line);
+
+border-radius:
+18px 18px 0 0;
+
+padding:
+46px 12px 12px;
+
+box-shadow:
+0 -10px 30px rgba(0,0,0,.18);
+
+z-index:120
+
 }
 
 .panel.open{
+
 display:block
+
 }
 
 .panelClose{
+
 display:block;
+
 position:absolute;
+
 right:9px;
 top:7px;
+
 width:34px;
 height:34px;
+
 padding:0;
+
 border-radius:50%;
+
 background:var(--soft);
 color:#222;
-border:1px solid var(--line);
+
+border:
+1px solid var(--line);
+
 font-size:20px
+
 }
 
-.guestPanel{
+.guestDrawer{
+
 top:98px;
+
 left:54px;
 right:0;
-bottom:0;
-width:auto;
-border-left:0;
-box-shadow:none
-}
 
-.context{
-white-space:nowrap
+width:auto;
+
+border-left:0
+
 }
 
 .table{
+
 width:72px;
 height:72px
+
 }
 
 .core{
+
 width:42px;
 height:42px
+
 }
 
 .core b,
 .core span{
+
 font-size:7px
+
 }
 
-.printSettings{
+.voiceRow{
+
+grid-template-columns:
+1fr
+1fr
+
+}
+
+.chartControls{
+
 grid-template-columns:1fr
+
 }
 
-.printSheet{
+.chart{
+
 padding:22px;
 min-height:700px
+
 }
 
 .chartWelcome{
+
 font-size:44px
+
 }
 
 .chartColumns{
-columns:2;
-column-gap:20px
+
+columns:2
+
+}
+
+}
+
+
+/* =====================================================
+DESKTOP ENHANCEMENT
+===================================================== */
+
+@media(min-width:1100px){
+
+.app{
+
+grid-template-columns:
+64px
+310px
+1fr
+
+}
+
+.panel{
+
+padding:18px
+
 }
 
 }
 
 
-/* =========================
-PRINT
-========================= */
+/* =====================================================
+EXPORT MODE
+===================================================== */
 
-@media print{
+.exportMode{
 
-body *{
-visibility:hidden!important
+width:1400px!important;
+
+min-height:1980px!important;
+
+padding:90px!important;
+
+border:0!important
+
 }
 
-#printSheet,
-#printSheet *{
-visibility:visible!important
+.exportMode .chartWelcome{
+
+font-size:92px
+
 }
 
-#printSheet{
-position:absolute;
-left:0;
-top:0;
-width:100%;
-min-height:auto;
-margin:0;
-padding:15mm;
-border:0
+.exportMode .chartNames{
+
+font-size:40px
+
 }
+
+.exportMode .chartFind{
+
+font-size:35px
+
+}
+
+.exportMode .chartLetter{
+
+font-size:32px
+
+}
+
+.exportMode .chartPerson{
+
+font-size:15px
 
 }
 
@@ -1076,31 +1692,42 @@ seat<span>ly</span>
 </div>
 
 
-<div class="topActions">
+<div class="topRight">
 
 <span
-id="savedIndicator"
-class="saved">
+class="saveState"
+id="saveState">
+
 Saved ✓
+
 </span>
+
 
 <button
 class="secondary"
 id="undoBtn"
 onclick="undo()">
+
 ↶
+
 </button>
+
 
 <button
 class="secondary"
 id="redoBtn"
 onclick="redo()">
+
 ↷
+
 </button>
+
 
 <button
 onclick="goStep(4)">
+
 Review
+
 </button>
 
 </div>
@@ -1108,37 +1735,50 @@ Review
 </header>
 
 
-<div class="stepBar">
+
+<div class="steps">
 
 <button
-id="stepBtn1"
-class="stepButton"
+id="step1"
+class="stepBtn"
 onclick="goStep(1)">
+
 1 Venue
+
 </button>
 
+
 <button
-id="stepBtn2"
-class="stepButton"
+id="step2"
+class="stepBtn"
 onclick="goStep(2)">
+
 2 Tables
+
 </button>
 
+
 <button
-id="stepBtn3"
-class="stepButton"
+id="step3"
+class="stepBtn"
 onclick="goStep(3)">
+
 3 Guests
+
 </button>
 
+
 <button
-id="stepBtn4"
-class="stepButton"
+id="step4"
+class="stepBtn"
 onclick="goStep(4)">
-4 Review & Print
+
+4 Review & Download
+
 </button>
 
 </div>
+
 
 
 <div class="app">
@@ -1149,32 +1789,48 @@ onclick="goStep(4)">
 <button
 id="rail1"
 onclick="goStep(1)">
+
 <b>▧</b>
+
 Venue
+
 </button>
+
 
 <button
 id="rail2"
 onclick="goStep(2)">
+
 <b>◉</b>
+
 Tables
+
 </button>
+
 
 <button
 id="rail3"
 onclick="goStep(3)">
+
 <b>♙</b>
+
 Guests
+
 </button>
+
 
 <button
 id="rail4"
 onclick="goStep(4)">
-<b>✓</b>
-Review
+
+<b>↓</b>
+
+Download
+
 </button>
 
 </nav>
+
 
 
 <aside
@@ -1184,7 +1840,9 @@ id="panel">
 <button
 class="panelClose"
 onclick="closePanel()">
+
 ×
+
 </button>
 
 <div id="panelContent"></div>
@@ -1192,18 +1850,19 @@ onclick="closePanel()">
 </aside>
 
 
-<main class="work">
 
-<div class="canvasWrap">
+<main class="work">
 
 <div
 class="canvas"
 id="canvas">
 
+
 <div
 class="venueBg"
 id="venueBg">
 </div>
+
 
 <div
 class="empty"
@@ -1216,54 +1875,55 @@ id="empty">
 </div>
 
 <b>
-Your wedding plan
+Create your seating plan
 </b>
 
-<div style="font-size:12px;margin-top:5px">
-Start with Step 1 — Venue
-</div>
+<div
+style="
+font-size:12px;
+margin-top:5px">
+
+Start with Step 1
 
 </div>
 
 </div>
+
+</div>
+
 
 <div
 class="objectLayer"
 id="objectLayer">
 </div>
 
+
 <div
 class="tableLayer"
 id="tableLayer">
 </div>
 
-<div
-class="guide v"
-id="guideV">
-</div>
-
-<div
-class="guide h"
-id="guideH">
-</div>
 
 <div
 class="context"
 id="context">
 </div>
 
+
 <div
 class="trash"
 id="trash">
+
 🗑 Drop to delete
+
 </div>
+
 
 <div
 class="status"
 id="status">
 </div>
 
-</div>
 
 </div>
 
@@ -1272,185 +1932,207 @@ id="status">
 </div>
 
 
-<!-- TABLE GUEST PANEL -->
+
+<!-- ==================================================
+TABLE GUEST DRAWER
+================================================== -->
 
 <aside
-class="guestPanel"
-id="guestPanel">
+class="guestDrawer"
+id="guestDrawer">
 
-<div class="guestHeader">
+
+<div class="drawerTop">
 
 <div>
 
 <div
-class="guestTitle"
-id="guestTitle">
+class="drawerTitle"
+id="drawerTitle">
+
 Table
+
 </div>
 
 <div
-class="guestCount"
-id="guestCount">
+class="drawerMeta"
+id="drawerMeta">
 </div>
 
 </div>
+
 
 <button
 class="secondary"
-onclick="closeGuestPanel()">
+onclick="closeGuestDrawer()">
+
 ×
+
 </button>
 
 </div>
 
 
-<div class="guestBox">
+
+<div class="card">
+
 
 <div class="formLabel">
-Επώνυμο / Surname
+Surname
 </div>
 
 <input
-id="gSurname"
+id="tableSurname"
 class="field"
 placeholder="Γεωργίου">
 
+
 <div class="formLabel">
-Όνομα / First name
+First name
 </div>
 
 <input
-id="gFirst"
+id="tableFirst"
 class="field"
 placeholder="Γιώργος">
 
+
 <div class="formLabel">
-Αριθμός ατόμων
+People
 </div>
 
 <input
-id="gParty"
+id="tableParty"
 class="field"
 type="number"
 min="1"
 max="20"
 value="1">
 
+
 <button
 class="primaryWide"
-onclick="addGuestToTable()">
+onclick="addGuestToCurrentTable()">
+
 + Add Guest
+
 </button>
 
+
 </div>
+
 
 <div
 style="
 display:flex;
-align-items:center;
 justify-content:space-between;
+align-items:center;
 margin-top:14px">
 
-<strong style="font-size:13px">
-Guests at this table
+<strong
+style="font-size:13px">
+
+Guests
+
 </strong>
+
 
 <button
 class="dangerSoft"
-style="padding:5px 7px;font-size:10px"
+style="
+font-size:10px;
+padding:5px 7px"
 onclick="clearCurrentTableGuests()">
+
 Clear
+
 </button>
 
 </div>
 
-<div id="tableGuestList"></div>
+
+<div id="currentTableGuests"></div>
 
 </aside>
 
 
-<!-- PRINT -->
+
+<!-- ==================================================
+DOWNLOAD OVERLAY
+================================================== -->
 
 <div
 class="overlay"
-id="printOverlay">
+id="chartOverlay">
 
 <div class="modal">
+
 
 <div class="modalTop">
 
 <div>
 
 <h2 style="margin:0">
-Printable Seating Chart
+Seating Chart
 </h2>
 
 <div
 class="hint"
 style="margin:2px 0 0">
-Alphabetical A–Ω
+
+Ready-to-download alphabetical guest chart
+
 </div>
 
 </div>
+
 
 <button
 class="secondary"
-onclick="closePrintableChart()">
+onclick="closeChart()">
+
 ×
+
 </button>
 
 </div>
 
 
-<div class="printSettings">
+<div class="chartControls">
+
 
 <input
 id="chartCouple"
 class="field"
 placeholder="MARIOS & MARIA"
-oninput="renderPrintableChart()">
+oninput="renderChart()">
+
 
 <input
 id="chartDate"
 class="field"
 placeholder="19.09.2026"
-oninput="renderPrintableChart()">
+oninput="renderChart()">
+
 
 <input
 id="chartWelcome"
 class="field"
 value="Welcome"
-oninput="renderPrintableChart()">
+oninput="renderChart()">
+
 
 <input
 id="chartFind"
 class="field"
 value="Please find your seat"
-oninput="renderPrintableChart()">
+oninput="renderChart()">
+
 
 <select
-id="printSize"
+id="chartColumns"
 class="field"
-onchange="updatePrintPageSize()">
-
-<option value="A3">
-A3
-</option>
-
-<option value="A2" selected>
-A2
-</option>
-
-<option value="A1">
-A1
-</option>
-
-</select>
-
-<select
-id="printColumns"
-class="field"
-onchange="renderPrintableChart()">
+onchange="renderChart()">
 
 <option value="2">
 2 columns
@@ -1464,7 +2146,28 @@ onchange="renderPrintableChart()">
 4 columns
 </option>
 
+<option value="5">
+5 columns
+</option>
+
 </select>
+
+
+<select
+id="chartStyle"
+class="field"
+onchange="renderChart()">
+
+<option value="elegant">
+Elegant
+</option>
+
+<option value="minimal">
+Minimal
+</option>
+
+</select>
+
 
 </div>
 
@@ -1472,38 +2175,48 @@ onchange="renderPrintableChart()">
 <div
 style="
 display:flex;
-justify-content:flex-end;
-gap:7px">
+flex-wrap:wrap;
+gap:7px;
+justify-content:flex-end">
 
 <button
 class="secondary"
-onclick="closePrintableChart()">
-Back
+onclick="downloadSVG()">
+
+Download SVG
+
 </button>
+
 
 <button
-onclick="window.print()">
-🖨 Print / Save PDF
+class="secondary"
+onclick="downloadPNG()">
+
+Download HD PNG
+
+</button>
+
+
+<button
+onclick="downloadPDF()">
+
+Download PDF
+
 </button>
 
 </div>
 
+
 <div
-class="printSheet"
-id="printSheet">
+class="chart"
+id="chart">
+</div>
+
+
 </div>
 
 </div>
 
-</div>
-
-
-<style id="dynamicPrintStyle">
-@page{
-size:A2 portrait;
-margin:12mm;
-}
-</style>
 
 
 <div
@@ -1514,36 +2227,43 @@ left:50%;
 bottom:18px;
 transform:translateX(-50%);
 background:#222;
-color:white;
+color:#fff;
 padding:9px 13px;
 border-radius:10px;
 display:none;
-z-index:400">
+z-index:500">
 </div>
+
 
 
 <script>
 
-/* ==================================================
+/* =====================================================
 STATE
-================================================== */
+===================================================== */
 
-const STORAGE_KEY='seatly47';
+const STORAGE_KEY=
+'seatly471';
+
 
 let currentStep=1;
 
 let selected=null;
 
-let activeGuestTable=null;
+let currentTableId=null;
 
 let undoStack=[];
 
 let redoStack=[];
 
+let voiceRecognition=null;
+
+let voiceDraft=[];
+
 
 let S={
 
-version:47,
+version:471,
 
 venueImage:null,
 
@@ -1551,19 +2271,27 @@ venueLocked:false,
 
 tablesLocked:false,
 
-tables:[],
-
 objects:[],
+
+tables:[],
 
 guests:[],
 
-print:{
+chart:{
+
 couple:'',
+
 date:'',
+
 welcome:'Welcome',
-find:'Please find your seat',
-size:'A2',
-columns:4
+
+find:
+'Please find your seat',
+
+columns:4,
+
+style:'elegant'
+
 }
 
 };
@@ -1593,23 +2321,15 @@ const trash=
 $('trash');
 
 
-const guideV=
-$('guideV');
-
-
-const guideH=
-$('guideH');
-
-
 const mobile=
 ()=>window.innerWidth<=800;
+
 
 
 function uid(){
 
 if(
-window.crypto
-&&
+crypto &&
 crypto.randomUUID
 ){
 
@@ -1617,18 +2337,19 @@ return crypto.randomUUID();
 
 }
 
+
 return String(
-Date.now()
-+
+Date.now()+
 Math.random()
 );
 
 }
 
 
-/* ==================================================
-UTIL
-================================================== */
+
+/* =====================================================
+HELPERS
+===================================================== */
 
 function clamp(
 value,
@@ -1647,13 +2368,13 @@ value
 }
 
 
-function pctX(px){
+function xToPercent(px){
 
 return(
 px/
 Math.max(
-1,
-canvas.clientWidth
+canvas.clientWidth,
+1
 )
 )
 *100;
@@ -1661,13 +2382,13 @@ canvas.clientWidth
 }
 
 
-function pctY(px){
+function yToPercent(px){
 
 return(
 px/
 Math.max(
-1,
-canvas.clientHeight
+canvas.clientHeight,
+1
 )
 )
 *100;
@@ -1675,10 +2396,10 @@ canvas.clientHeight
 }
 
 
-function pxX(pct){
+function percentToX(percent){
 
 return(
-Number(pct||0)
+Number(percent||0)
 /
 100
 )
@@ -1688,10 +2409,10 @@ canvas.clientWidth;
 }
 
 
-function pxY(pct){
+function percentToY(percent){
 
 return(
-Number(pct||0)
+Number(percent||0)
 /
 100
 )
@@ -1701,21 +2422,72 @@ canvas.clientHeight;
 }
 
 
-/* ==================================================
-HISTORY
-================================================== */
 
-function stateString(){
+/* =====================================================
+SAVE
+===================================================== */
+
+function save(){
+
+const el=
+$('saveState');
+
+
+try{
+
+localStorage.setItem(
+STORAGE_KEY,
+JSON.stringify(S)
+);
+
+
+el.textContent=
+'Saved ✓';
+
+
+el.classList.remove(
+'error'
+);
+
+
+return true;
+
+}
+
+catch(error){
+
+el.textContent=
+'Save failed';
+
+
+el.classList.add(
+'error'
+);
+
+
+return false;
+
+}
+
+}
+
+
+
+/* =====================================================
+HISTORY
+===================================================== */
+
+function snapshot(){
 
 return JSON.stringify(S);
 
 }
 
 
-function pushHistory(){
+function remember(){
 
 undoStack.push(
-stateString()
+snapshot()
 );
 
 
@@ -1731,7 +2503,7 @@ undoStack.shift();
 redoStack=[];
 
 
-updateHistory();
+updateUndoButtons();
 
 }
 
@@ -1744,7 +2516,7 @@ if(
 
 
 redoStack.push(
-stateString()
+snapshot()
 );
 
 
@@ -1757,18 +2529,15 @@ undoStack.pop()
 selected=null;
 
 
-closeGuestPanel();
-
-
 applyVenue();
 
 render();
 
-saveOnly();
+save();
 
-renderStepPanel();
+renderPanel();
 
-updateHistory();
+updateUndoButtons();
 
 }
 
@@ -1781,7 +2550,7 @@ if(
 
 
 undoStack.push(
-stateString()
+snapshot()
 );
 
 
@@ -1794,23 +2563,20 @@ redoStack.pop()
 selected=null;
 
 
-closeGuestPanel();
-
-
 applyVenue();
 
 render();
 
-saveOnly();
+save();
 
-renderStepPanel();
+renderPanel();
 
-updateHistory();
+updateUndoButtons();
 
 }
 
 
-function updateHistory(){
+function updateUndoButtons(){
 
 $('undoBtn').disabled=
 !undoStack.length;
@@ -1822,58 +2588,10 @@ $('redoBtn').disabled=
 }
 
 
-/* ==================================================
-SAVE
-================================================== */
 
-function saveOnly(){
-
-const indicator=
-$('savedIndicator');
-
-
-try{
-
-localStorage.setItem(
-STORAGE_KEY,
-JSON.stringify(S)
-);
-
-
-indicator.textContent=
-'Saved ✓';
-
-
-indicator.classList.remove(
-'error'
-);
-
-
-return true;
-
-}
-
-catch(error){
-
-indicator.textContent=
-'Save failed';
-
-
-indicator.classList.add(
-'error'
-);
-
-
-return false;
-
-}
-
-}
-
-
-/* ==================================================
-LOAD / MIGRATION
-================================================== */
+/* =====================================================
+LOAD
+===================================================== */
 
 function load(){
 
@@ -1881,15 +2599,21 @@ try{
 
 const old=
 
-localStorage.getItem(STORAGE_KEY)
+localStorage.getItem(
+STORAGE_KEY
+)
 
 ||
 
-localStorage.getItem('seatly46')
+localStorage.getItem(
+'seatly47'
+)
 
 ||
 
-localStorage.getItem('seatly45');
+localStorage.getItem(
+'seatly46'
+);
 
 
 if(old){
@@ -1898,129 +2622,68 @@ const data=
 JSON.parse(old);
 
 
-S.version=47;
+S={
+...S,
+...data,
+version:471
+};
 
-
-S.venueImage=
-
-data.venueImage
-
-||
-
-data.venue
-
-||
-
-null;
-
-
-S.venueLocked=
-
-Boolean(
-data.venueLocked
-);
-
-
-S.tablesLocked=
-
-Boolean(
-data.tablesLocked
-);
-
-
-S.tables=
-
-data.tables||[];
-
-
-S.objects=
-
-data.objects||[];
-
-
-S.guests=
-
-(data.guests||[])
-
-.map(guest=>{
 
 if(
-guest.surname!==undefined
+!Array.isArray(
+S.objects
+)
 ){
 
-return{
-
-id:
-guest.id||uid(),
-
-surname:
-guest.surname||'',
-
-firstName:
-guest.firstName||'',
-
-partySize:
-Math.max(
-1,
-Number(
-guest.partySize||1
-)
-),
-
-tableId:
-guest.tableId||null
-
-};
+S.objects=[];
 
 }
 
 
-const parts=
-
-String(
-guest.name||''
+if(
+!Array.isArray(
+S.tables
 )
+){
 
-.trim()
+S.tables=[];
 
-.split(/\s+/);
+}
 
 
-return{
+if(
+!Array.isArray(
+S.guests
+)
+){
 
-id:
-guest.id||uid(),
+S.guests=[];
 
-surname:
-parts.length>1
-?parts[parts.length-1]
-:parts[0]||'',
+}
 
-firstName:
-parts.length>1
-?parts.slice(0,-1).join(' ')
-:'',
 
-partySize:
-Number(
-guest.partySize||1
-),
+if(
+!S.chart
+){
 
-tableId:
-guest.tableId||null
+S.chart={
+
+couple:'',
+
+date:'',
+
+welcome:'Welcome',
+
+find:
+'Please find your seat',
+
+columns:4,
+
+style:'elegant'
 
 };
 
-});
-
-
-S.print=
-
-data.print
-
-||
-
-S.print;
+}
 
 }
 
@@ -2031,7 +2694,7 @@ catch(error){}
 requestAnimationFrame(
 ()=>{
 
-migrateLegacyCoordinates();
+migrateCoordinates();
 
 applyVenue();
 
@@ -2050,9 +2713,10 @@ S.tablesLocked
 false
 );
 
-saveOnly();
 
-updateHistory();
+save();
+
+updateUndoButtons();
 
 }
 );
@@ -2060,18 +2724,24 @@ updateHistory();
 }
 
 
-function migrateLegacyCoordinates(){
 
-const w=
+/* =====================================================
+MIGRATION
+===================================================== */
+
+function migrateCoordinates(){
+
+const width=
 canvas.clientWidth||1;
 
 
-const h=
+const height=
 canvas.clientHeight||1;
 
 
 S.tables
-.forEach(table=>{
+.forEach(
+table=>{
 
 if(
 table.xPct===undefined
@@ -2079,8 +2749,12 @@ table.xPct===undefined
 
 table.xPct=
 clamp(
-Number(table.x||0)/
-w*
+Number(
+table.x||0
+)
+/
+width
+*
 100,
 0,
 95
@@ -2095,8 +2769,12 @@ table.yPct===undefined
 
 table.yPct=
 clamp(
-Number(table.y||0)/
-h*
+Number(
+table.y||0
+)
+/
+height
+*
 100,
 0,
 95
@@ -2104,16 +2782,13 @@ h*
 
 }
 
-
-delete table.x;
-
-delete table.y;
-
-});
+}
+);
 
 
 S.objects
-.forEach(object=>{
+.forEach(
+object=>{
 
 if(
 object.xPct===undefined
@@ -2121,8 +2796,12 @@ object.xPct===undefined
 
 object.xPct=
 clamp(
-Number(object.x||0)/
-w*
+Number(
+object.x||0
+)
+/
+width
+*
 100,
 0,
 95
@@ -2137,8 +2816,12 @@ object.yPct===undefined
 
 object.yPct=
 clamp(
-Number(object.y||0)/
-h*
+Number(
+object.y||0
+)
+/
+height
+*
 100,
 0,
 95
@@ -2153,10 +2836,14 @@ object.widthPct===undefined
 
 object.widthPct=
 clamp(
-Number(object.width||120)/
-w*
+Number(
+object.width||120
+)
+/
+width
+*
 100,
-4,
+5,
 60
 );
 
@@ -2169,36 +2856,33 @@ object.heightPct===undefined
 
 object.heightPct=
 clamp(
-Number(object.height||60)/
-h*
+Number(
+object.height||60
+)
+/
+height
+*
 100,
-3,
+4,
 60
 );
 
 }
 
-
-delete object.x;
-
-delete object.y;
-
-delete object.width;
-
-delete object.height;
-
-});
+}
+);
 
 }
 
 
-/* ==================================================
-STEPS
-================================================== */
+
+/* =====================================================
+STEP FLOW
+===================================================== */
 
 function goStep(
 step,
-openPanel=true
+open=true
 ){
 
 currentStep=
@@ -2216,34 +2900,33 @@ context.style.display=
 'none';
 
 
-closeGuestPanel();
+closeGuestDrawer();
 
 
-updateStepUI();
-
+updateStepButtons();
 
 render();
 
-
-renderStepPanel();
+renderPanel();
 
 
 if(
 mobile()
 &&
-openPanel
+open
 ){
 
 $('panel')
-.classList
-.add('open');
+.classList.add(
+'open'
+);
 
 }
 
 }
 
 
-function updateStepUI(){
+function updateStepButtons(){
 
 for(
 let i=1;
@@ -2251,7 +2934,7 @@ i<=4;
 i++
 ){
 
-$('stepBtn'+i)
+$('step'+i)
 .classList
 .toggle(
 'active',
@@ -2269,7 +2952,7 @@ i===currentStep
 }
 
 
-$('stepBtn1')
+$('step1')
 .classList
 .toggle(
 'done',
@@ -2277,7 +2960,7 @@ S.venueLocked
 );
 
 
-$('stepBtn2')
+$('step2')
 .classList
 .toggle(
 'done',
@@ -2285,7 +2968,7 @@ S.tablesLocked
 );
 
 
-$('stepBtn3')
+$('step3')
 .classList
 .toggle(
 'done',
@@ -2298,19 +2981,20 @@ S.guests.length>0
 function closePanel(){
 
 $('panel')
-.classList
-.remove('open');
+.classList.remove(
+'open'
+);
 
 }
 
 
-function renderStepPanel(){
+function renderPanel(){
 
 if(
 currentStep===1
 ){
 
-renderVenueStep();
+renderVenuePanel();
 
 }
 
@@ -2319,7 +3003,7 @@ if(
 currentStep===2
 ){
 
-renderTablesStep();
+renderTablesPanel();
 
 }
 
@@ -2328,7 +3012,7 @@ if(
 currentStep===3
 ){
 
-renderGuestsStep();
+renderGuestsPanel();
 
 }
 
@@ -2337,33 +3021,28 @@ if(
 currentStep===4
 ){
 
-renderReviewStep();
+renderReviewPanel();
 
 }
 
 }
 
 
-/* ==================================================
+
+/* =====================================================
 STEP 1 VENUE
-================================================== */
+===================================================== */
 
-function renderVenueStep(){
-
-const locked=
-S.venueLocked;
-
+function renderVenuePanel(){
 
 $('panelContent')
 .innerHTML=`
 
-<div class="stepTitle">
+<div class="stepHeader">
 
 <div class="stepNumber">
 1
 </div>
-
-<div>
 
 <h2>
 Venue
@@ -2371,20 +3050,17 @@ Venue
 
 </div>
 
-</div>
-
 
 <div class="hint">
 
-Create the fixed venue first.
+Set the fixed venue first.
 
-Add the important parts of the room,
-then save it before adding tables.
+When finished, save it and continue to tables.
 
 </div>
 
 
-${locked
+${S.venueLocked
 
 ?`
 
@@ -2396,9 +3072,10 @@ ${locked
 
 <div class="meta">
 
-Your venue is locked so it cannot move accidentally.
+Dance floor, DJ box, bar and entrance are locked.
 
 </div>
+
 
 <button
 class="secondary primaryWide"
@@ -2409,14 +3086,6 @@ Edit Venue
 </button>
 
 </div>
-
-<button
-class="primaryWide"
-onclick="goStep(2)">
-
-Continue to Tables →
-
-</button>
 
 `
 
@@ -2436,13 +3105,14 @@ cursor:pointer">
 <strong>
 
 ${S.venueImage
-?'Replace Venue Background'
-:'Upload Venue Background'}
+?'Replace background'
+:'Upload venue background'}
 
 </strong>
 
+
 <input
-id="venueInput"
+id="venueUpload"
 type="file"
 accept="image/*"
 style="display:none">
@@ -2456,10 +3126,12 @@ ${S.venueImage
 
 <button
 class="secondary"
-style="width:100%;margin-top:7px"
-onclick="removeVenueImage()">
+style="
+width:100%;
+margin-top:7px"
+onclick="removeVenueBackground()">
 
-Remove Background
+Delete Background Image
 
 </button>
 
@@ -2535,65 +3207,82 @@ onclick="addVenueObject(
 </div>
 
 
-<div style="margin-top:9px">
-
 <input
-id="customObjectName"
+id="customObject"
 class="field"
+style="margin-top:8px"
 placeholder="Custom object">
+
 
 <button
 class="secondary"
-style="width:100%;margin-top:6px"
+style="
+width:100%;
+margin-top:6px"
 onclick="addCustomObject()">
 
-+ Custom Object
++ Custom
 
 </button>
-
-</div>
 
 </div>
 
 
 <button
 class="primaryWide"
-onclick="saveVenueStep()">
+onclick="saveVenue()">
 
 Save Venue & Continue →
 
 </button>
 
-`
+`}
 
-}
+
+<div class="section">
+
+<button
+class="dangerSoft"
+style="width:100%"
+onclick="clearVenue()">
+
+Clear Entire Venue
+
+</button>
+
+<div
+class="hint"
+style="margin-top:5px">
+
+Deletes background and all venue objects.
+
+Tables and guests stay safe.
+
+</div>
+
+</div>
 
 `;
 
 
-if(
-!locked
-){
-
-const input=
-$('venueInput');
+const file=
+$('venueUpload');
 
 
-if(input){
+if(file){
 
-input.onchange=
-handleVenueUpload;
-
-}
+file.onchange=
+uploadVenueImage;
 
 }
 
 }
 
 
-function saveVenueStep(){
 
-pushHistory();
+function saveVenue(){
+
+remember();
 
 
 S.venueLocked=true;
@@ -2602,17 +3291,13 @@ S.venueLocked=true;
 selected=null;
 
 
-saveOnly();
-
-
-updateStepUI();
-
+save();
 
 render();
 
 
 toast(
-'Venue saved and locked'
+'Venue saved'
 );
 
 
@@ -2621,9 +3306,10 @@ goStep(2);
 }
 
 
+
 function editVenue(){
 
-pushHistory();
+remember();
 
 
 S.venueLocked=false;
@@ -2632,28 +3318,103 @@ S.venueLocked=false;
 S.tablesLocked=false;
 
 
-currentStep=1;
+save();
 
 
-saveOnly();
-
-
-updateStepUI();
-
-render();
-
-renderStepPanel();
+goStep(1);
 
 }
 
 
-function handleVenueUpload(event){
+
+function clearVenue(){
+
+if(
+!S.venueImage
+&&
+!S.objects.length
+){
+
+toast(
+'Venue is already empty'
+);
+
+return;
+
+}
+
+
+if(
+!confirm(
+'Delete venue background and all venue objects?'
+)
+){
+
+return;
+
+}
+
+
+remember();
+
+
+S.venueImage=null;
+
+
+S.objects=[];
+
+
+S.venueLocked=false;
+
+
+applyVenue();
+
+render();
+
+save();
+
+renderVenuePanel();
+
+
+toast(
+'Venue cleared'
+);
+
+}
+
+
+
+function removeVenueBackground(){
+
+remember();
+
+
+S.venueImage=null;
+
+
+applyVenue();
+
+render();
+
+save();
+
+renderVenuePanel();
+
+}
+
+
+
+function uploadVenueImage(
+event
+){
 
 const file=
 event.target.files[0];
 
 
-if(!file)
+if(
+!file
+)
 return;
 
 
@@ -2663,24 +3424,25 @@ file,
 .82
 )
 
-.then(dataUrl=>{
+.then(
+image=>{
 
 const previous=
 S.venueImage;
 
 
-pushHistory();
+remember();
 
 
 S.venueImage=
-dataUrl;
+image;
 
 
 applyVenue();
 
 
 if(
-!saveOnly()
+!save()
 ){
 
 S.venueImage=
@@ -2691,7 +3453,7 @@ applyVenue();
 
 
 toast(
-'Image is too large to save'
+'Image is too large'
 );
 
 
@@ -2707,24 +3469,26 @@ toast(
 'Venue image added'
 );
 
-})
+}
+)
 
 .catch(
 ()=>{
 
 toast(
-'Could not open this image'
+'Could not open image'
 );
 
 }
 );
 
 }
+
 
 
 function compressImage(
 file,
-maxDimension,
+maxSize,
 quality
 ){
 
@@ -2738,22 +3502,22 @@ new FileReader();
 reader.onload=
 event=>{
 
-const img=
+const image=
 new Image();
 
 
-img.onload=
+image.onload=
 ()=>{
 
 let width=
-img.width;
+image.width;
 
 
 let height=
-img.height;
+image.height;
 
 
-const maxSide=
+const max=
 Math.max(
 width,
 height
@@ -2761,13 +3525,13 @@ height
 
 
 if(
-maxSide>
-maxDimension
+max>
+maxSize
 ){
 
 const ratio=
-maxDimension/
-maxSide;
+maxSize/
+max;
 
 
 width=
@@ -2800,12 +3564,9 @@ c.height=
 height;
 
 
-const ctx=
-c.getContext('2d');
-
-
-ctx.drawImage(
-img,
+c.getContext('2d')
+.drawImage(
+image,
 0,
 0,
 width,
@@ -2823,11 +3584,11 @@ quality
 };
 
 
-img.onerror=
+image.onerror=
 reject;
 
 
-img.src=
+image.src=
 event.target.result;
 
 };
@@ -2847,9 +3608,12 @@ file
 }
 
 
+
 function applyVenue(){
 
-venueBg.style.backgroundImage=
+$('venueBg')
+.style
+.backgroundImage=
 
 S.venueImage
 
@@ -2859,24 +3623,6 @@ S.venueImage
 
 }
 
-
-function removeVenueImage(){
-
-pushHistory();
-
-
-S.venueImage=null;
-
-
-applyVenue();
-
-render();
-
-saveOnly();
-
-renderVenueStep();
-
-}
 
 
 function addVenueObject(
@@ -2899,7 +3645,7 @@ return;
 }
 
 
-pushHistory();
+remember();
 
 
 S.objects.push({
@@ -2929,19 +3675,19 @@ scale:1
 
 render();
 
-saveOnly();
+save();
 
 }
 
 
+
 function addCustomObject(){
 
-const input=
-$('customObjectName');
-
-
 const name=
-input.value.trim();
+
+$('customObject')
+.value
+.trim();
 
 
 if(
@@ -2949,7 +3695,7 @@ if(
 ){
 
 toast(
-'Write an object name'
+'Write a name'
 );
 
 return;
@@ -2967,11 +3713,12 @@ name,
 }
 
 
-/* ==================================================
-STEP 2 TABLES
-================================================== */
 
-function renderTablesStep(){
+/* =====================================================
+STEP 2 TABLES
+===================================================== */
+
+function renderTablesPanel(){
 
 if(
 !S.venueLocked
@@ -2980,7 +3727,7 @@ if(
 $('panelContent')
 .innerHTML=`
 
-<div class="stepTitle">
+<div class="stepHeader">
 
 <div class="stepNumber">
 2
@@ -2992,24 +3739,33 @@ Tables
 
 </div>
 
-<div class="card">
+
+<div class="card warning">
 
 <strong>
-Finish Venue first
+Save Venue first
 </strong>
 
-<div class="hint"
-style="margin-top:5px">
 
-Save Step 1 before adding tables.
+<button
+class="primaryWide"
+onclick="goStep(1)">
+
+Go to Venue
+
+</button>
 
 </div>
 
-<button
-onclick="goStep(1)"
-style="width:100%">
 
-Go to Venue
+<div class="section">
+
+<button
+class="dangerSoft"
+style="width:100%"
+onclick="clearAllTables()">
+
+Clear All Tables
 
 </button>
 
@@ -3023,14 +3779,10 @@ return;
 }
 
 
-if(
-S.tablesLocked
-){
-
 $('panelContent')
 .innerHTML=`
 
-<div class="stepTitle">
+<div class="stepHeader">
 
 <div class="stepNumber">
 2
@@ -3042,6 +3794,11 @@ Tables
 
 </div>
 
+
+${S.tablesLocked
+
+?`
+
 <div class="card">
 
 <div class="cardTitle">
@@ -3050,7 +3807,7 @@ Tables
 
 <div class="meta">
 
-Tables are locked to prevent accidental movement.
+They are locked so they cannot move accidentally.
 
 </div>
 
@@ -3064,41 +3821,13 @@ Edit Tables
 
 </div>
 
-<button
-class="primaryWide"
-onclick="goStep(3)">
+`
 
-Continue to Guests →
-
-</button>
-
-`;
-
-
-return;
-
-}
-
-
-$('panelContent')
-.innerHTML=`
-
-<div class="stepTitle">
-
-<div class="stepNumber">
-2
-</div>
-
-<h2>
-Tables
-</h2>
-
-</div>
-
+:`
 
 <div class="hint">
 
-Choose a Quick Setup or add tables manually.
+Choose estimated guest count or add individual tables.
 
 </div>
 
@@ -3117,9 +3846,7 @@ ${[
 ]
 
 .map(
-number=>
-
-`
+number=>`
 
 <button
 class="quickButton"
@@ -3138,7 +3865,6 @@ Guests
 </button>
 
 `
-
 )
 
 .join('')}
@@ -3147,66 +3873,30 @@ Guests
 
 
 <div
-id="quickResults">
+id="quickOptions">
 </div>
 
 
 <div class="section">
 
 <h3>
-Add one table
-</h3>
-
-
-<div class="grid2">
-
-<button
-class="soft"
-onclick="addSingleTable(8)">
-8 seats
-</button>
-
-<button
-class="soft"
-onclick="addSingleTable(10)">
-10 seats
-</button>
-
-<button
-class="soft"
-onclick="addSingleTable(12)">
-12 seats
-</button>
-
-<button
-class="soft"
-onclick="addSingleTable(16)">
-16 seats
-</button>
-
-</div>
-
-</div>
-
-
-<div class="section">
-
-<h3>
-Custom Guest Count
+Custom guests
 </h3>
 
 <input
-id="customGuestCount"
+id="customGuestQty"
 class="field"
 type="number"
 min="1"
-max="1000"
 placeholder="e.g. 186">
+
 
 <button
 class="secondary"
-style="width:100%;margin-top:6px"
-onclick="showCustomQuickOptions()">
+style="
+width:100%;
+margin-top:6px"
+onclick="customQuick()">
 
 Calculate
 
@@ -3215,48 +3905,120 @@ Calculate
 </div>
 
 
+<div class="section">
+
+<h3>
+Add single table
+</h3>
+
+
+<div class="grid2">
+
+<button
+class="soft"
+onclick="addTable(8)">
+
+8 seats
+
+</button>
+
+<button
+class="soft"
+onclick="addTable(10)">
+
+10 seats
+
+</button>
+
+<button
+class="soft"
+onclick="addTable(12)">
+
+12 seats
+
+</button>
+
+<button
+class="soft"
+onclick="addTable(16)">
+
+16 seats
+
+</button>
+
+</div>
+
+</div>
+
+
 <button
 class="primaryWide"
-onclick="saveTablesStep()">
+onclick="lockTables()">
 
 Save Tables & Continue →
 
 </button>
+
+`}
+
+
+<div class="section">
+
+<button
+class="dangerSoft"
+style="width:100%"
+onclick="clearAllTables()">
+
+Clear All Tables
+
+</button>
+
+<div
+class="hint"
+style="margin-top:5px">
+
+Guest names remain saved as Unassigned Guests.
+
+</div>
+
+</div>
 
 `;
 
 }
 
 
-function showCustomQuickOptions(){
 
-const value=
+function customQuick(){
+
+const qty=
 
 Math.max(
 1,
 Number(
-$('customGuestCount').value||1
+$('customGuestQty').value||1
 )
 );
 
 
 showQuickOptions(
-value
+qty
 );
 
 }
+
 
 
 function showQuickOptions(
 guestCount
 ){
 
-const container=
-$('quickResults');
+const holder=
+$('quickOptions');
 
 
 if(
-!container
+!holder
 )
 return;
 
@@ -3270,9 +4032,10 @@ const choices=
 16
 ]
 
-.map(seats=>{
+.map(
+seats=>{
 
-const tableCount=
+const tables=
 
 Math.ceil(
 guestCount/
@@ -3282,20 +4045,21 @@ seats
 
 return{
 
+tables,
+
 seats,
 
-tableCount,
-
 capacity:
-tableCount*
+tables*
 seats
 
 };
 
-});
+}
+);
 
 
-container.innerHTML=`
+holder.innerHTML=`
 
 <div class="card">
 
@@ -3308,7 +4072,8 @@ ${guestCount} guests
 
 ${choices
 
-.map(choice=>{
+.map(
+choice=>{
 
 const spare=
 
@@ -3318,17 +4083,18 @@ guestCount;
 
 return`
 
-<div class="quickOption">
+<div class="quickRow">
 
 <div>
 
 <strong>
 
-${choice.tableCount}
-×
+${choice.tables}
+tables ×
 ${choice.seats}
 
 </strong>
+
 
 <div class="meta">
 
@@ -3345,8 +4111,8 @@ ${spare===0
 
 
 <button
-onclick="createQuickSetup(
-${choice.tableCount},
+onclick="quickCreate(
+${choice.tables},
 ${choice.seats}
 )">
 
@@ -3358,7 +4124,8 @@ Create
 
 `;
 
-})
+}
+)
 
 .join('')}
 
@@ -3369,7 +4136,8 @@ Create
 }
 
 
-function createQuickSetup(
+
+function quickCreate(
 qty,
 seats
 ){
@@ -3378,22 +4146,20 @@ if(
 S.tables.length
 ){
 
-const yes=
-
-confirm(
-'Replace the current tables with this layout?'
-);
-
-
 if(
-!yes
+!confirm(
+'Replace all current tables with this layout?'
 )
+){
+
 return;
 
 }
 
+}
 
-pushHistory();
+
+remember();
 
 
 S.tables=[];
@@ -3415,9 +4181,12 @@ seats
 );
 
 
+S.tablesLocked=false;
+
+
 render();
 
-saveOnly();
+save();
 
 
 toast(
@@ -3425,6 +4194,7 @@ toast(
 );
 
 }
+
 
 
 function createGrid(
@@ -3436,43 +4206,41 @@ const rect=
 canvas.getBoundingClientRect();
 
 
-let scale=.75;
+let scale=.74;
 
 
 if(
 qty>=10
 )
-scale=.65;
+scale=.64;
 
 
 if(
 qty>=18
 )
-scale=.56;
+scale=.55;
 
 
 if(
 qty>=28
 )
-scale=.48;
+scale=.47;
 
 
 if(
 qty>=38
 )
-scale=.42;
+scale=.40;
 
 
-const baseSize=
+const size=
 
+(
 mobile()
 ?72
-:82;
-
-
-const item=
-
-baseSize*
+:82
+)
+*
 scale;
 
 
@@ -3484,8 +4252,8 @@ let columns=
 Math.max(
 1,
 Math.floor(
-(rect.width-20)/
-(item+gap)
+(rect.width-25)/
+(size+gap)
 )
 );
 
@@ -3509,7 +4277,7 @@ columns
 while(
 
 rows*
-(item+gap)
+(size+gap)
 >
 rect.height-70
 
@@ -3536,25 +4304,25 @@ const gridWidth=
 
 (columns-1)
 *
-(item+gap);
+(size+gap);
 
 
 const gridHeight=
 
 (rows-1)
 *
-(item+gap);
+(size+gap);
 
 
 const startX=
 
 Math.max(
-6,
+8,
 rect.width/2
 -
 gridWidth/2
 -
-item/2
+size/2
 );
 
 
@@ -3566,7 +4334,7 @@ rect.height/2
 -
 gridHeight/2
 -
-item/2
+size/2
 );
 
 
@@ -3576,7 +4344,7 @@ i<qty;
 i++
 ){
 
-const col=
+const column=
 i%
 columns;
 
@@ -3598,27 +4366,28 @@ nextTableNumber(),
 
 seats,
 
+scale,
+
 xPct:
-pctX(
+xToPercent(
 startX+
-col*
-(item+gap)
+column*
+(size+gap)
 ),
 
 yPct:
-pctY(
+yToPercent(
 startY+
 row*
-(item+gap)
-),
-
-scale
+(size+gap)
+)
 
 });
 
 }
 
 }
+
 
 
 function nextTableNumber(){
@@ -3628,7 +4397,9 @@ const numbers=
 S.tables
 .map(
 table=>
-Number(table.number)
+Number(
+table.number
+)
 );
 
 
@@ -3636,7 +4407,9 @@ let number=1;
 
 
 while(
-numbers.includes(number)
+numbers.includes(
+number
+)
 ){
 
 number++;
@@ -3649,7 +4422,8 @@ return number;
 }
 
 
-function findFreeTablePosition(){
+
+function findFreePosition(){
 
 const rect=
 canvas.getBoundingClientRect();
@@ -3663,33 +4437,38 @@ mobile()
 
 
 const step=
-base*.8+13;
+base*.8+
+12;
 
 
 for(
-let y=45;
+let y=42;
 y<rect.height-base;
 y+=step
 ){
 
 for(
-let x=12;
+let x=10;
 x<rect.width-base;
 x+=step
 ){
 
-const collision=
+const blocked=
 
-S.tables.some(table=>{
+S.tables
+.some(
+table=>{
 
 const tx=
-pxX(
+
+percentToX(
 table.xPct
 );
 
 
 const ty=
-pxY(
+
+percentToY(
 table.yPct
 );
 
@@ -3700,7 +4479,7 @@ Math.abs(
 tx-x
 )
 <
-base*.65
+base*.6
 
 &&
 
@@ -3708,24 +4487,25 @@ Math.abs(
 ty-y
 )
 <
-base*.65
+base*.6
 
 );
 
-});
+}
+);
 
 
 if(
-!collision
+!blocked
 ){
 
 return{
 
 xPct:
-pctX(x),
+xToPercent(x),
 
 yPct:
-pctY(y)
+yToPercent(y)
 
 };
 
@@ -3747,21 +4527,29 @@ yPct:45
 }
 
 
-function addSingleTable(
+
+function addTable(
 seats
 ){
 
 if(
 S.tablesLocked
-)
+){
+
+toast(
+'Tap Edit Tables first'
+);
+
 return;
 
+}
 
-pushHistory();
+
+remember();
 
 
 const position=
-findFreeTablePosition();
+findFreePosition();
 
 
 S.tables.push({
@@ -3773,32 +4561,33 @@ nextTableNumber(),
 
 seats,
 
+scale:.8,
+
 xPct:
 position.xPct,
 
 yPct:
-position.yPct,
-
-scale:.8
+position.yPct
 
 });
 
 
 render();
 
-saveOnly();
+save();
 
 }
 
 
-function saveTablesStep(){
+
+function lockTables(){
 
 if(
 !S.tables.length
 ){
 
 toast(
-'Add at least one table'
+'Add tables first'
 );
 
 return;
@@ -3806,7 +4595,7 @@ return;
 }
 
 
-pushHistory();
+remember();
 
 
 S.tablesLocked=true;
@@ -3815,15 +4604,9 @@ S.tablesLocked=true;
 selected=null;
 
 
-saveOnly();
-
-
 render();
 
-
-toast(
-'Tables saved and locked'
-);
+save();
 
 
 goStep(3);
@@ -3831,34 +4614,92 @@ goStep(3);
 }
 
 
+
 function editTables(){
 
-pushHistory();
+remember();
 
 
 S.tablesLocked=false;
 
 
-currentStep=2;
+save();
 
 
-saveOnly();
-
-
-updateStepUI();
-
-render();
-
-renderStepPanel();
+goStep(2);
 
 }
 
 
-/* ==================================================
-STEP 3 GUESTS
-================================================== */
 
-function renderGuestsStep(){
+function clearAllTables(){
+
+if(
+!S.tables.length
+){
+
+toast(
+'No tables to delete'
+);
+
+return;
+
+}
+
+
+if(
+!confirm(
+'Delete ALL tables and restart from Table 1? Guest names will remain as Unassigned Guests.'
+)
+){
+
+return;
+
+}
+
+
+remember();
+
+
+S.tables=[];
+
+
+S.tablesLocked=false;
+
+
+S.guests
+.forEach(
+guest=>{
+
+guest.tableId=null;
+
+}
+);
+
+
+selected=null;
+
+
+render();
+
+save();
+
+renderTablesPanel();
+
+
+toast(
+'Tables cleared — next table will be Table 1'
+);
+
+}
+
+
+
+/* =====================================================
+STEP 3 GUESTS
+===================================================== */
+
+function renderGuestsPanel(){
 
 if(
 !S.tables.length
@@ -3867,7 +4708,7 @@ if(
 $('panelContent')
 .innerHTML=`
 
-<div class="stepTitle">
+<div class="stepHeader">
 
 <div class="stepNumber">
 3
@@ -3879,14 +4720,16 @@ Guests
 
 </div>
 
-<div class="card">
+
+<div class="card warning">
 
 <strong>
-Add tables first
+Create tables first
 </strong>
 
+
 <button
-style="width:100%;margin-top:8px"
+class="primaryWide"
 onclick="goStep(2)">
 
 Go to Tables
@@ -3915,7 +4758,7 @@ guest=>
 $('panelContent')
 .innerHTML=`
 
-<div class="stepTitle">
+<div class="stepHeader">
 
 <div class="stepNumber">
 3
@@ -3930,19 +4773,28 @@ Guests
 
 <div class="hint">
 
-Add guests here or tap a table directly on the canvas.
+Add manually, by voice,
+or tap a table directly.
 
 </div>
 
 
+<div class="card">
+
+<div class="cardTitle">
+Manual Guest
+</div>
+
+
 <input
-id="manualSurname"
+id="guestSurname"
 class="field"
+style="margin-top:8px"
 placeholder="Surname">
 
 
 <input
-id="manualFirst"
+id="guestFirst"
 class="field"
 style="margin-top:6px"
 placeholder="First name">
@@ -3952,7 +4804,7 @@ placeholder="First name">
 style="margin-top:6px">
 
 <input
-id="manualParty"
+id="guestParty"
 class="field"
 type="number"
 min="1"
@@ -3961,7 +4813,7 @@ placeholder="People">
 
 
 <input
-id="manualTable"
+id="guestTable"
 class="field"
 type="number"
 min="1"
@@ -3972,11 +4824,16 @@ placeholder="Table">
 
 <button
 class="primaryWide"
-onclick="addManualGuest()">
+onclick="addGuestManual()">
 
 + Add Guest
 
 </button>
+
+</div>
+
+
+${voiceHTML()}
 
 
 <div class="section">
@@ -3985,11 +4842,13 @@ onclick="addManualGuest()">
 Search Guests
 </h3>
 
+
 <input
 id="guestSearch"
 class="field"
-placeholder="Surname, name or table..."
-oninput="renderGuestSearchResults(this.value)">
+placeholder="Name, surname or table"
+oninput="searchGuests(this.value)">
+
 
 <div
 id="guestSearchResults">
@@ -4007,14 +4866,11 @@ Unassigned Guests
 
 </h3>
 
-<div id="unassignedList">
 
-${renderGuestRows(
+${guestRows(
 unassigned,
 true
 )}
-
-</div>
 
 </div>
 
@@ -4037,7 +4893,571 @@ Delete Entire Guest List
 class="primaryWide"
 onclick="goStep(4)">
 
-Continue to Review →
+Review & Download →
+
+</button>
+
+`;
+
+
+
+renderVoicePreview();
+
+}
+
+
+
+function voiceHTML(){
+
+const supported=
+
+!!(
+window.SpeechRecognition
+||
+window.webkitSpeechRecognition
+);
+
+
+if(
+!supported
+){
+
+return`
+
+<div class="voiceBox">
+
+<div class="cardTitle">
+
+🎙 Voice Add Guests
+
+</div>
+
+<div class="hint"
+style="margin:5px 0 0">
+
+Voice recognition is not supported by this browser.
+
+You can still add guests manually.
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+return`
+
+<div
+class="voiceBox"
+id="voiceBox">
+
+<div class="cardTitle">
+
+🎙 Voice Add Guests
+
+</div>
+
+
+<div class="hint"
+style="margin:5px 0 8px">
+
+Say:
+
+“Γεωργίου Γιώργος,
+2 άτομα,
+τραπέζι 4”
+
+</div>
+
+
+<button
+id="voiceBtn"
+style="width:100%"
+onclick="toggleVoice()">
+
+🎙 Start Microphone
+
+</button>
+
+
+<div
+id="voiceStatus"
+class="meta"
+style="margin-top:6px">
+
+Voice creates a preview before saving.
+
+</div>
+
+
+<div
+class="voicePreview"
+id="voicePreview">
+</div>
+
+</div>
+
+`;
+
+}
+
+
+
+function toggleVoice(){
+
+if(
+voiceRecognition
+){
+
+voiceRecognition.stop();
+
+return;
+
+}
+
+
+const Speech=
+
+window.SpeechRecognition
+
+||
+
+window.webkitSpeechRecognition;
+
+
+if(
+!Speech
+){
+
+toast(
+'Voice is unavailable'
+);
+
+return;
+
+}
+
+
+voiceRecognition=
+new Speech();
+
+
+voiceRecognition.lang=
+'el-GR';
+
+
+voiceRecognition.continuous=
+true;
+
+
+voiceRecognition.interimResults=
+false;
+
+
+$('voiceBtn')
+.textContent=
+
+'■ Stop Microphone';
+
+
+$('voiceStatus')
+.textContent=
+
+'Listening…';
+
+
+$('voiceBox')
+.classList
+.add(
+'voiceListening'
+);
+
+
+voiceRecognition.onresult=
+event=>{
+
+for(
+let i=event.resultIndex;
+i<event.results.length;
+i++
+){
+
+parseVoice(
+event.results[i][0].transcript
+);
+
+}
+
+
+renderVoicePreview();
+
+};
+
+
+voiceRecognition.onerror=
+event=>{
+
+toast(
+'Voice recognition error'
+);
+
+};
+
+
+voiceRecognition.onend=
+()=>{
+
+voiceRecognition=null;
+
+
+const btn=
+$('voiceBtn');
+
+
+if(btn){
+
+btn.textContent=
+'🎙 Start Microphone';
+
+}
+
+
+const status=
+$('voiceStatus');
+
+
+if(status){
+
+status.textContent=
+'Review the names below before adding.';
+
+}
+
+
+const box=
+$('voiceBox');
+
+
+if(box){
+
+box.classList.remove(
+'voiceListening'
+);
+
+}
+
+};
+
+
+voiceRecognition.start();
+
+}
+
+
+
+function greekNumber(
+word
+){
+
+const map={
+
+'ένα':1,
+'ενα':1,
+'μια':1,
+'μία':1,
+
+'δύο':2,
+'δυο':2,
+
+'τρεις':3,
+'τρία':3,
+'τρια':3,
+
+'τέσσερα':4,
+'τεσσερα':4,
+
+'πέντε':5,
+'πεντε':5,
+
+'έξι':6,
+'εξι':6,
+
+'επτά':7,
+'εφτά':7,
+'επτα':7,
+'εφτα':7,
+
+'οκτώ':8,
+'οχτώ':8,
+'οκτω':8,
+'οχτω':8,
+
+'εννέα':9,
+'εννεα':9,
+
+'δέκα':10,
+'δεκα':10
+
+};
+
+
+return map[
+normalizeBasic(word)
+];
+
+}
+
+
+
+function replaceGreekNumbers(
+text
+){
+
+return text
+
+.replace(
+/\b(ένα|ενα|μια|μία|δύο|δυο|τρεις|τρία|τρια|τέσσερα|τεσσερα|πέντε|πεντε|έξι|εξι|επτά|εφτά|επτα|εφτα|οκτώ|οχτώ|οκτω|οχτω|εννέα|εννεα|δέκα|δεκα)\b/gi,
+match=>
+String(
+greekNumber(match)
+||
+match
+)
+);
+
+}
+
+
+
+function parseVoice(
+raw
+){
+
+const text=
+
+replaceGreekNumbers(
+raw
+);
+
+
+const chunks=
+
+text
+
+.split(
+/[.;]+/
+)
+
+.map(
+item=>
+item.trim()
+)
+
+.filter(Boolean);
+
+
+chunks
+.forEach(
+chunk=>{
+
+const tableMatch=
+
+chunk.match(
+/(?:τραπέζι|τραπεζι|table)\s*(\d+)/i
+);
+
+
+const peopleMatch=
+
+chunk.match(
+/(\d+)\s*(?:άτομα|ατομα|people|persons?)/i
+);
+
+
+const tableNumber=
+
+tableMatch
+?Number(
+tableMatch[1]
+)
+:null;
+
+
+const partySize=
+
+peopleMatch
+?Number(
+peopleMatch[1]
+)
+:1;
+
+
+let clean=
+
+chunk
+
+.replace(
+/(?:τραπέζι|τραπεζι|table)\s*\d+/ig,
+''
+)
+
+.replace(
+/\d+\s*(?:άτομα|ατομα|people|persons?)/ig,
+''
+)
+
+.replace(
+/[,]+/g,
+' '
+)
+
+.trim();
+
+
+const names=
+
+clean
+.split(/\s+/)
+.filter(Boolean);
+
+
+if(
+!names.length
+)
+return;
+
+
+voiceDraft.push({
+
+id:uid(),
+
+surname:
+names[0]||'',
+
+firstName:
+names
+.slice(1)
+.join(' '),
+
+partySize,
+
+tableNumber:
+tableNumber||1
+
+});
+
+}
+);
+
+}
+
+
+
+function renderVoicePreview(){
+
+const holder=
+$('voicePreview');
+
+
+if(
+!holder
+)
+return;
+
+
+if(
+!voiceDraft.length
+){
+
+holder.innerHTML='';
+
+return;
+
+}
+
+
+holder.innerHTML=`
+
+<div class="meta"
+style="
+margin:8px 0">
+
+Preview — correct anything before saving
+
+</div>
+
+
+${voiceDraft
+
+.map(
+(guest,index)=>`
+
+<div class="voiceRow">
+
+<input
+value="${safeAttribute(guest.surname)}"
+onchange="
+voiceDraft[${index}].surname=this.value">
+
+
+<input
+value="${safeAttribute(guest.firstName)}"
+onchange="
+voiceDraft[${index}].firstName=this.value">
+
+
+<input
+type="number"
+min="1"
+value="${guest.partySize}"
+onchange="
+voiceDraft[${index}].partySize=Math.max(1,+this.value||1)">
+
+
+<input
+type="number"
+min="1"
+value="${guest.tableNumber}"
+onchange="
+voiceDraft[${index}].tableNumber=Math.max(1,+this.value||1)">
+
+
+<button
+class="danger"
+onclick="removeVoiceDraft(${index})">
+
+×
+
+</button>
+
+</div>
+
+`
+)
+
+.join('')}
+
+
+<button
+class="primaryWide"
+onclick="saveVoiceGuests()">
+
+Add All Guests
+
+</button>
+
+
+<button
+class="secondary"
+style="
+width:100%;
+margin-top:6px"
+onclick="clearVoiceDraft()">
+
+Clear Preview
 
 </button>
 
@@ -4046,18 +5466,201 @@ Continue to Review →
 }
 
 
-function addManualGuest(){
+
+function removeVoiceDraft(
+index
+){
+
+voiceDraft.splice(
+index,
+1
+);
+
+
+renderVoicePreview();
+
+}
+
+
+
+function clearVoiceDraft(){
+
+voiceDraft=[];
+
+
+renderVoicePreview();
+
+}
+
+
+
+function saveVoiceGuests(){
+
+if(
+!voiceDraft.length
+)
+return;
+
+
+const usage={};
+
+
+S.tables
+.forEach(
+table=>{
+
+usage[table.id]=
+
+tableUsedSeats(
+table.id
+);
+
+}
+);
+
+
+for(
+const guest
+of voiceDraft
+){
+
+const table=
+
+S.tables.find(
+table=>
+Number(table.number)===
+Number(
+guest.tableNumber
+)
+);
+
+
+if(
+!table
+){
+
+toast(
+`Table ${guest.tableNumber} not found`
+);
+
+return;
+
+}
+
+
+const used=
+
+usage[
+table.id
+]||0;
+
+
+if(
+used+
+guest.partySize
+>
+table.seats
+){
+
+toast(
+`Not enough seats at Table ${table.number}`
+);
+
+return;
+
+}
+
+
+usage[
+table.id
+]=
+
+used+
+guest.partySize;
+
+}
+
+
+remember();
+
+
+voiceDraft
+.forEach(
+guest=>{
+
+const table=
+
+S.tables.find(
+table=>
+Number(table.number)===
+Number(
+guest.tableNumber
+)
+);
+
+
+S.guests.push({
+
+id:uid(),
+
+surname:
+guest.surname.trim(),
+
+firstName:
+guest.firstName.trim(),
+
+partySize:
+Number(
+guest.partySize||1
+),
+
+tableId:
+table.id
+
+});
+
+}
+);
+
+
+const count=
+voiceDraft.length;
+
+
+voiceDraft=[];
+
+
+render();
+
+save();
+
+renderGuestsPanel();
+
+
+toast(
+`${count} guests added`
+);
+
+}
+
+
+
+/* =====================================================
+MANUAL GUEST
+===================================================== */
+
+function addGuestManual(){
 
 const surname=
 
-$('manualSurname')
+$('guestSurname')
 .value
 .trim();
 
 
 const firstName=
 
-$('manualFirst')
+$('guestFirst')
 .value
 .trim();
 
@@ -4067,15 +5670,15 @@ const partySize=
 Math.max(
 1,
 Number(
-$('manualParty').value||1
+$('guestParty').value||1
 )
 );
 
 
-const tableNumber=
+const number=
 
 Number(
-$('manualTable').value
+$('guestTable').value
 );
 
 
@@ -4084,7 +5687,7 @@ const table=
 S.tables.find(
 table=>
 Number(table.number)===
-tableNumber
+number
 );
 
 
@@ -4093,7 +5696,7 @@ if(
 ){
 
 toast(
-'Add a surname'
+'Add surname'
 );
 
 return;
@@ -4121,17 +5724,15 @@ firstName
 )
 ){
 
-const yes=
-
-confirm(
-'Possible duplicate guest. Add anyway?'
-);
-
-
 if(
-!yes
+!confirm(
+'Possible duplicate guest. Add anyway?'
 )
+){
+
 return;
+
+}
 
 }
 
@@ -4139,6 +5740,7 @@ return;
 const free=
 
 table.seats-
+
 tableUsedSeats(
 table.id
 );
@@ -4158,7 +5760,7 @@ return;
 }
 
 
-pushHistory();
+remember();
 
 
 S.guests.push({
@@ -4179,9 +5781,9 @@ table.id
 
 render();
 
-saveOnly();
+save();
 
-renderGuestsStep();
+renderGuestsPanel();
 
 
 toast(
@@ -4191,13 +5793,14 @@ toast(
 }
 
 
+
 function possibleDuplicate(
 surname,
 firstName,
-excludeId=null
+exclude=null
 ){
 
-const target=
+const key=
 
 normalizeText(
 surname+
@@ -4206,10 +5809,11 @@ firstName
 );
 
 
-return S.guests.some(
+return S.guests
+.some(
 guest=>
 
-guest.id!==excludeId
+guest.id!==exclude
 
 &&
 
@@ -4219,29 +5823,33 @@ guest.surname+
 guest.firstName
 )
 ===
-target
+key
 
 );
 
 }
 
 
-function renderGuestSearchResults(
+
+/* =====================================================
+SEARCH
+===================================================== */
+
+function searchGuests(
 query
 ){
 
-const container=
+const holder=
 $('guestSearchResults');
 
 
 if(
-!container
+!holder
 )
 return;
 
 
 const q=
-
 normalizeText(
 query
 );
@@ -4251,7 +5859,7 @@ if(
 !q
 ){
 
-container.innerHTML='';
+holder.innerHTML='';
 
 return;
 
@@ -4262,7 +5870,8 @@ const results=
 
 S.guests
 
-.filter(guest=>{
+.filter(
+guest=>{
 
 const table=
 
@@ -4272,51 +5881,47 @@ table.id===guest.tableId
 );
 
 
-const searchable=
+return normalizeText(
 
-normalizeText(
-
-guest.surname
-+
-' '
-+
-guest.firstName
-+
-' table '
-+
+guest.surname+
+' '+
+guest.firstName+
+' table '+
 (
 table
 ?table.number
 :''
 )
 
-);
+)
 
-
-return searchable.includes(
+.includes(
 q
 );
 
-})
+}
+)
 
 .slice(0,30);
 
 
-container.innerHTML=
+holder.innerHTML=
 
 results.length
 
-?renderGuestRows(
+?guestRows(
 results,
 false
 )
 
 :`
 
-<div class="hint"
-style="margin-top:8px">
+<div
+class="hint"
+style="
+margin-top:8px">
 
-No guests found.
+No results.
 
 </div>
 
@@ -4325,9 +5930,14 @@ No guests found.
 }
 
 
-function renderGuestRows(
+
+/* =====================================================
+GUEST ROWS
+===================================================== */
+
+function guestRows(
 guests,
-showAssign
+allowAssign
 ){
 
 if(
@@ -4355,7 +5965,8 @@ return guests
 compareGuests
 )
 
-.map(guest=>{
+.map(
+guest=>{
 
 const table=
 
@@ -4374,7 +5985,7 @@ return`
 <div class="guestName">
 
 ${safe(
-guestFullName(
+guestName(
 guest
 )
 )}
@@ -4399,7 +6010,7 @@ ${table
 
 <div class="actions">
 
-${showAssign
+${allowAssign
 
 ?`
 
@@ -4427,7 +6038,7 @@ Edit
 
 <button
 class="danger"
-onclick="deleteGuestConfirm('${guest.id}')">
+onclick="deleteGuest('${guest.id}')">
 
 Delete
 
@@ -4439,22 +6050,28 @@ Delete
 
 `;
 
-})
+}
+)
 
 .join('');
 
 }
 
 
+
+/* =====================================================
+ASSIGN
+===================================================== */
+
 function assignGuest(
-guestId
+id
 ){
 
 const guest=
 
 S.guests.find(
 guest=>
-guest.id===guestId
+guest.id===id
 );
 
 
@@ -4502,6 +6119,7 @@ return;
 const free=
 
 table.seats-
+
 tableUsedSeats(
 table.id
 );
@@ -4521,7 +6139,7 @@ return;
 }
 
 
-pushHistory();
+remember();
 
 
 guest.tableId=
@@ -4530,28 +6148,26 @@ table.id;
 
 render();
 
-saveOnly();
+save();
 
-renderGuestsStep();
+renderGuestsPanel();
 
 }
 
 
-/* ==================================================
-TABLE GUEST PANEL
-================================================== */
+
+/* =====================================================
+TABLE GUEST DRAWER
+===================================================== */
 
 function openTableGuests(
 tableId
 ){
 
-if(
-currentStep!==3
-){
+currentStep=3;
 
-goStep(3);
 
-}
+updateStepButtons();
 
 
 const table=
@@ -4568,42 +6184,48 @@ if(
 return;
 
 
-activeGuestTable=
+currentTableId=
 tableId;
 
 
 closePanel();
 
 
-$('guestPanel')
+$('guestDrawer')
 .classList
-.add('open');
+.add(
+'open'
+);
 
 
-refreshTableGuests();
+refreshGuestDrawer();
 
 }
 
 
-function closeGuestPanel(){
 
-$('guestPanel')
+function closeGuestDrawer(){
+
+$('guestDrawer')
 .classList
-.remove('open');
+.remove(
+'open'
+);
 
 
-activeGuestTable=null;
+currentTableId=null;
 
 }
 
 
-function refreshTableGuests(){
+
+function refreshGuestDrawer(){
 
 const table=
 
 S.tables.find(
 table=>
-table.id===activeGuestTable
+table.id===currentTableId
 );
 
 
@@ -4611,11 +6233,23 @@ if(
 !table
 ){
 
-closeGuestPanel();
+closeGuestDrawer();
 
 return;
 
 }
+
+
+$('drawerTitle')
+.textContent=
+
+`Table ${table.number}`;
+
+
+$('drawerMeta')
+.textContent=
+
+`${tableUsedSeats(table.id)} / ${table.seats} seats`;
 
 
 const guests=
@@ -4632,22 +6266,10 @@ compareGuests
 );
 
 
-$('guestTitle')
-.textContent=
-
-`Table ${table.number}`;
-
-
-$('guestCount')
-.textContent=
-
-`${tableUsedSeats(table.id)} of ${table.seats} seats filled`;
-
-
-$('tableGuestList')
+$('currentTableGuests')
 .innerHTML=
 
-renderGuestRows(
+guestRows(
 guests,
 false
 );
@@ -4655,13 +6277,14 @@ false
 }
 
 
-function addGuestToTable(){
+
+function addGuestToCurrentTable(){
 
 const table=
 
 S.tables.find(
 table=>
-table.id===activeGuestTable
+table.id===currentTableId
 );
 
 
@@ -4673,14 +6296,14 @@ return;
 
 const surname=
 
-$('gSurname')
+$('tableSurname')
 .value
 .trim();
 
 
 const firstName=
 
-$('gFirst')
+$('tableFirst')
 .value
 .trim();
 
@@ -4690,7 +6313,7 @@ const partySize=
 Math.max(
 1,
 Number(
-$('gParty').value||1
+$('tableParty').value||1
 )
 );
 
@@ -4700,7 +6323,7 @@ if(
 ){
 
 toast(
-'Add a surname'
+'Add surname'
 );
 
 return;
@@ -4719,8 +6342,11 @@ if(
 !confirm(
 'Possible duplicate guest. Add anyway?'
 )
-)
+){
+
 return;
+
+}
 
 }
 
@@ -4728,6 +6354,7 @@ return;
 const free=
 
 table.seats-
+
 tableUsedSeats(
 table.id
 );
@@ -4747,7 +6374,7 @@ return;
 }
 
 
-pushHistory();
+remember();
 
 
 S.guests.push({
@@ -4766,92 +6393,86 @@ table.id
 });
 
 
-$('gSurname').value='';
+$('tableSurname').value='';
 
-$('gFirst').value='';
+$('tableFirst').value='';
 
-$('gParty').value=1;
+$('tableParty').value=1;
 
 
-refreshTableGuests();
+refreshGuestDrawer();
 
 render();
 
-saveOnly();
+save();
 
 }
 
 
+
 function clearCurrentTableGuests(){
 
-const table=
+const guests=
 
-S.tables.find(
-table=>
-table.id===activeGuestTable
+S.guests.filter(
+guest=>
+guest.tableId===currentTableId
 );
 
 
 if(
-!table
-)
-return;
-
-
-const ids=
-
-S.guests
-
-.filter(
-guest=>
-guest.tableId===table.id
-)
-
-.map(
-guest=>
-guest.id
-);
-
-
-if(
-!ids.length
+!guests.length
 )
 return;
 
 
 if(
 !confirm(
-`Delete all guests from Table ${table.number}?`
+'Delete every guest from this table?'
 )
-)
+){
+
 return;
 
+}
 
-pushHistory();
+
+remember();
+
+
+const ids=
+
+new Set(
+guests.map(
+guest=>
+guest.id
+)
+);
 
 
 S.guests=
 
 S.guests.filter(
 guest=>
-!ids.includes(
+!ids.has(
 guest.id
 )
 );
 
 
-refreshTableGuests();
+refreshGuestDrawer();
 
 render();
 
-saveOnly();
+save();
 
 }
 
 
-/* ==================================================
-GUEST EDIT / DELETE
-================================================== */
+
+/* =====================================================
+EDIT DELETE GUEST
+===================================================== */
 
 function editGuest(
 id
@@ -4901,7 +6522,7 @@ firstName===null
 return;
 
 
-const partyAnswer=
+const people=
 
 prompt(
 'People',
@@ -4910,22 +6531,22 @@ guest.partySize
 
 
 if(
-partyAnswer===null
+people===null
 )
 return;
 
 
-const partySize=
+const size=
 
 Math.max(
 1,
 Number(
-partyAnswer||1
+people||1
 )
 );
 
 
-const currentTable=
+const current=
 
 S.tables.find(
 table=>
@@ -4936,9 +6557,9 @@ table.id===guest.tableId
 const tableAnswer=
 
 prompt(
-'Table number — leave empty for Unassigned',
-currentTable
-?currentTable.number
+'Table number — empty = Unassigned',
+current
+?current.number
 :''
 );
 
@@ -4961,7 +6582,9 @@ const table=
 S.tables.find(
 table=>
 Number(table.number)===
-Number(tableAnswer)
+Number(
+tableAnswer
+)
 );
 
 
@@ -4989,7 +6612,7 @@ guest.id
 
 
 if(
-partySize>
+size>
 free
 ){
 
@@ -5020,13 +6643,16 @@ if(
 !confirm(
 'Possible duplicate guest. Save anyway?'
 )
-)
+){
+
 return;
 
 }
 
+}
 
-pushHistory();
+
+remember();
 
 
 guest.surname=
@@ -5038,7 +6664,7 @@ firstName.trim();
 
 
 guest.partySize=
-partySize;
+size;
 
 
 guest.tableId=
@@ -5047,30 +6673,25 @@ tableId;
 
 render();
 
-saveOnly();
+save();
 
 
 if(
-activeGuestTable
+currentTableId
 ){
 
-refreshTableGuests();
+refreshGuestDrawer();
 
 }
 
 
-if(
-currentStep===3
-){
-
-renderGuestsStep();
-
-}
+renderPanel();
 
 }
 
 
-function deleteGuestConfirm(
+
+function deleteGuest(
 id
 ){
 
@@ -5090,13 +6711,16 @@ return;
 
 if(
 !confirm(
-`Delete ${guestFullName(guest)}?`
+`Delete ${guestName(guest)}?`
 )
-)
+){
+
 return;
 
+}
 
-pushHistory();
+
+remember();
 
 
 S.guests=
@@ -5109,21 +6733,22 @@ guest.id!==id
 
 render();
 
-saveOnly();
+save();
 
 
 if(
-activeGuestTable
+currentTableId
 ){
 
-refreshTableGuests();
+refreshGuestDrawer();
 
 }
 
 
-renderStepPanel();
+renderPanel();
 
 }
+
 
 
 function clearGuestList(){
@@ -5143,13 +6768,16 @@ return;
 
 if(
 !confirm(
-`Delete all ${S.guests.length} guest entries?`
+'Delete the ENTIRE guest list?'
 )
-)
+){
+
 return;
 
+}
 
-pushHistory();
+
+remember();
 
 
 S.guests=[];
@@ -5157,45 +6785,58 @@ S.guests=[];
 
 render();
 
-saveOnly();
+save();
 
-renderStepPanel();
+renderGuestsPanel();
 
 
 toast(
-'Guest list deleted — Undo available'
+'Guest list deleted'
 );
 
 }
 
 
-/* ==================================================
+
+/* =====================================================
 STEP 4 REVIEW
-================================================== */
+===================================================== */
 
-function projectStats(){
+function stats(){
 
-const capacity=
+const seats=
 
-S.tables.reduce(
+S.tables
+
+.reduce(
 (sum,table)=>
+
 sum+
-Number(table.seats||0),
+Number(
+table.seats||0
+),
+
 0
 );
 
 
-const totalPeople=
+const people=
 
-S.guests.reduce(
+S.guests
+
+.reduce(
 (sum,guest)=>
+
 sum+
-Number(guest.partySize||1),
+Number(
+guest.partySize||1
+),
+
 0
 );
 
 
-const seatedPeople=
+const seated=
 
 S.guests
 
@@ -5206,27 +6847,20 @@ guest.tableId
 
 .reduce(
 (sum,guest)=>
+
 sum+
-Number(guest.partySize||1),
+Number(
+guest.partySize||1
+),
+
 0
 );
 
 
 const unassigned=
 
-S.guests
-
-.filter(
-guest=>
-!guest.tableId
-)
-
-.reduce(
-(sum,guest)=>
-sum+
-Number(guest.partySize||1),
-0
-);
+people-
+seated;
 
 
 return{
@@ -5234,19 +6868,19 @@ return{
 tables:
 S.tables.length,
 
-capacity,
+seats,
 
-totalPeople,
+people,
 
-seatedPeople,
+seated,
 
 unassigned,
 
 free:
 Math.max(
 0,
-capacity-
-seatedPeople
+seats-
+seated
 )
 
 };
@@ -5254,23 +6888,24 @@ seatedPeople
 }
 
 
-function renderReviewStep(){
 
-const stats=
-projectStats();
+function renderReviewPanel(){
+
+const s=
+stats();
 
 
 $('panelContent')
 .innerHTML=`
 
-<div class="stepTitle">
+<div class="stepHeader">
 
 <div class="stepNumber">
 4
 </div>
 
 <h2>
-Review & Print
+Review & Download
 </h2>
 
 </div>
@@ -5278,17 +6913,17 @@ Review & Print
 
 <div class="hint">
 
-Check everything before you print the final seating chart.
+Check the project and download your final seating chart.
 
 </div>
 
 
-<div class="summaryGrid">
+<div class="summary">
 
 <div class="summaryCard">
 
 <div class="summaryNumber">
-${stats.tables}
+${s.tables}
 </div>
 
 <div class="summaryLabel">
@@ -5301,11 +6936,11 @@ TABLES
 <div class="summaryCard">
 
 <div class="summaryNumber">
-${stats.capacity}
+${s.seats}
 </div>
 
 <div class="summaryLabel">
-TOTAL SEATS
+SEATS
 </div>
 
 </div>
@@ -5314,7 +6949,7 @@ TOTAL SEATS
 <div class="summaryCard">
 
 <div class="summaryNumber">
-${stats.seatedPeople}
+${s.seated}
 </div>
 
 <div class="summaryLabel">
@@ -5327,7 +6962,7 @@ PEOPLE SEATED
 <div class="summaryCard">
 
 <div class="summaryNumber">
-${stats.free}
+${s.free}
 </div>
 
 <div class="summaryLabel">
@@ -5340,11 +6975,11 @@ FREE SEATS
 <div class="summaryCard">
 
 <div class="summaryNumber">
-${stats.unassigned}
+${s.unassigned}
 </div>
 
 <div class="summaryLabel">
-UNASSIGNED PEOPLE
+UNASSIGNED
 </div>
 
 </div>
@@ -5365,29 +7000,31 @@ GUEST ENTRIES
 </div>
 
 
-${stats.unassigned>0
+${s.unassigned
 
 ?`
 
-<div class="card"
-style="
-background:#fff6e7;
-border-color:#efd8a9">
+<div class="card warning">
 
 <strong>
-⚠ ${stats.unassigned} people are unassigned
+
+⚠ ${s.unassigned}
+people are unassigned
+
 </strong>
 
 <div class="meta">
-Return to Guests before printing.
+
+Assign them before creating your final chart.
+
 </div>
 
+
 <button
-class="secondary"
-style="width:100%;margin-top:8px"
+class="secondary primaryWide"
 onclick="goStep(3)">
 
-Review Unassigned Guests
+Review Guests
 
 </button>
 
@@ -5398,20 +7035,20 @@ Review Unassigned Guests
 :''}
 
 
-<div class="section">
-
 <button
 class="primaryWide"
-onclick="openPrintableChart()">
+onclick="openChart()">
 
-🖨 Printable Seating Chart A–Ω
+↓ Create Seating Chart
 
 </button>
 
 
+<div class="section">
+
 <button
 class="secondary"
-style="width:100%;margin-top:7px"
+style="width:100%"
 onclick="downloadBackup()">
 
 Download Project Backup
@@ -5423,7 +7060,6 @@ Download Project Backup
 class="secondary"
 style="
 display:block;
-width:100%;
 text-align:center;
 padding:10px;
 margin-top:7px;
@@ -5432,10 +7068,11 @@ cursor:pointer">
 
 Restore Backup
 
+
 <input
-id="restoreInput"
+id="restoreBackup"
 type="file"
-accept=".json,application/json"
+accept=".json"
 style="display:none">
 
 </label>
@@ -5448,21 +7085,45 @@ style="display:none">
 <button
 class="secondary"
 style="width:100%"
-onclick="editTables()">
+onclick="editVenue()">
 
-Edit Tables
+Edit Venue
 
 </button>
 
 
 <button
 class="secondary"
-style="width:100%;margin-top:7px"
-onclick="editVenue()">
+style="
+width:100%;
+margin-top:7px"
+onclick="editTables()">
 
-Edit Venue
+Edit Tables
 
 </button>
+
+</div>
+
+
+<div class="section">
+
+<button
+class="danger"
+style="width:100%"
+onclick="resetProject()">
+
+Reset Entire Project
+
+</button>
+
+<div
+class="hint"
+style="margin-top:5px">
+
+Deletes venue, tables and guests and starts completely fresh.
+
+</div>
 
 </div>
 
@@ -5470,7 +7131,7 @@ Edit Venue
 
 
 const restore=
-$('restoreInput');
+$('restoreBackup');
 
 
 if(
@@ -5485,9 +7146,10 @@ restoreBackup;
 }
 
 
-/* ==================================================
+
+/* =====================================================
 BACKUP
-================================================== */
+===================================================== */
 
 function downloadBackup(){
 
@@ -5514,22 +7176,22 @@ blob
 );
 
 
-const anchor=
+const a=
 
 document.createElement(
 'a'
 );
 
 
-anchor.href=
+a.href=
 url;
 
 
-anchor.download=
-'seatly-project-backup.json';
+a.download=
+'seatly-backup.json';
 
 
-anchor.click();
+a.click();
 
 
 setTimeout(
@@ -5546,11 +7208,13 @@ url
 }
 
 
+
 function restoreBackup(
 event
 ){
 
 const file=
+
 event.target.files[0];
 
 
@@ -5561,6 +7225,7 @@ return;
 
 
 const reader=
+
 new FileReader();
 
 
@@ -5591,28 +7256,26 @@ throw new Error();
 }
 
 
-pushHistory();
+remember();
 
 
 S={
 ...S,
 ...data,
-version:47
+version:471
 };
 
 
-migrateLegacyCoordinates();
+migrateCoordinates();
 
 
 applyVenue();
 
 render();
 
-saveOnly();
+save();
 
-updateStepUI();
-
-renderStepPanel();
+renderPanel();
 
 
 toast(
@@ -5639,122 +7302,185 @@ file
 }
 
 
-/* ==================================================
-PRINT
-================================================== */
 
-function openPrintableChart(){
+/* =====================================================
+RESET
+===================================================== */
 
-$('printOverlay')
+function resetProject(){
+
+if(
+!confirm(
+'Delete EVERYTHING and start a completely new project?'
+)
+){
+
+return;
+
+}
+
+
+remember();
+
+
+S={
+
+version:471,
+
+venueImage:null,
+
+venueLocked:false,
+
+tablesLocked:false,
+
+objects:[],
+
+tables:[],
+
+guests:[],
+
+chart:{
+
+couple:'',
+
+date:'',
+
+welcome:'Welcome',
+
+find:
+'Please find your seat',
+
+columns:4,
+
+style:'elegant'
+
+}
+
+};
+
+
+voiceDraft=[];
+
+
+selected=null;
+
+
+currentTableId=null;
+
+
+applyVenue();
+
+render();
+
+save();
+
+
+goStep(1);
+
+
+toast(
+'New project started'
+);
+
+}
+
+
+
+/* =====================================================
+CHART
+===================================================== */
+
+function openChart(){
+
+$('chartOverlay')
 .classList
-.add('open');
+.add(
+'open'
+);
 
 
 $('chartCouple').value=
-S.print?.couple||'';
+S.chart.couple||'';
 
 
 $('chartDate').value=
-S.print?.date||'';
+S.chart.date||'';
 
 
 $('chartWelcome').value=
-S.print?.welcome||
+S.chart.welcome||
 'Welcome';
 
 
 $('chartFind').value=
-S.print?.find||
+S.chart.find||
 'Please find your seat';
 
 
-$('printSize').value=
-S.print?.size||
-'A2';
-
-
-$('printColumns').value=
+$('chartColumns').value=
 String(
-S.print?.columns||4
+S.chart.columns||4
 );
 
 
-updatePrintPageSize();
+$('chartStyle').value=
+S.chart.style||
+'elegant';
 
-renderPrintableChart();
+
+renderChart();
 
 }
 
 
-function closePrintableChart(){
 
-$('printOverlay')
+function closeChart(){
+
+$('chartOverlay')
 .classList
-.remove('open');
-
-}
-
-
-function updatePrintPageSize(){
-
-const size=
-$('printSize').value;
-
-
-$('dynamicPrintStyle')
-.textContent=
-
-`
-@page{
-size:${size} portrait;
-margin:12mm;
-}
-`;
-
-
-S.print.size=
-size;
-
-
-saveOnly();
-
-}
-
-
-function renderPrintableChart(){
-
-if(
-!$('printSheet')
-)
-return;
-
-
-S.print.couple=
-$('chartCouple')?.value||'';
-
-
-S.print.date=
-$('chartDate')?.value||'';
-
-
-S.print.welcome=
-$('chartWelcome')?.value||
-'Welcome';
-
-
-S.print.find=
-$('chartFind')?.value||
-'Please find your seat';
-
-
-S.print.columns=
-
-Number(
-$('printColumns')?.value||4
+.remove(
+'open'
 );
 
+}
 
-saveOnly();
+
+
+function renderChart(){
+
+const chart=
+$('chart');
+
+
+S.chart={
+
+couple:
+$('chartCouple')?.value||'',
+
+date:
+$('chartDate')?.value||'',
+
+welcome:
+$('chartWelcome')?.value||
+'Welcome',
+
+find:
+$('chartFind')?.value||
+'Please find your seat',
+
+columns:
+Number(
+$('chartColumns')?.value||4
+),
+
+style:
+$('chartStyle')?.value||
+'elegant'
+
+};
+
+
+save();
 
 
 const guests=
@@ -5777,11 +7503,12 @@ const groups={};
 
 
 guests
-.forEach(guest=>{
+.forEach(
+guest=>{
 
 const letter=
 
-firstGreekLetter(
+alphabetLetter(
 guest.surname
 );
 
@@ -5800,7 +7527,8 @@ groups[letter]
 guest
 );
 
-});
+}
+);
 
 
 const letters=
@@ -5811,11 +7539,11 @@ groups
 )
 
 .sort(
-compareGreekLetters
+compareLetters
 );
 
 
-const html=
+const list=
 
 letters.length
 
@@ -5823,22 +7551,24 @@ letters.length
 
 letters
 
-.map(letter=>{
-
-return`
+.map(
+letter=>`
 
 <div class="chartGroup">
 
 <div class="chartLetter">
 
-${safe(letter)}
+${safe(
+letter
+)}
 
 </div>
 
 
 ${groups[letter]
 
-.map(guest=>{
+.map(
+guest=>{
 
 const table=
 
@@ -5855,7 +7585,7 @@ return`
 <span class="chartPersonName">
 
 ${safe(
-guestFullName(
+guestName(
 guest
 )
 )}
@@ -5866,7 +7596,10 @@ ${guest.partySize>1
 
 </span>
 
-<span class="chartDots"></span>
+
+<span class="chartDots">
+</span>
+
 
 <span class="chartTable">
 
@@ -5880,15 +7613,15 @@ ${table
 
 `;
 
-})
+}
+)
 
 .join('')}
 
 </div>
 
-`;
-
-})
+`
+)
 
 .join('')
 
@@ -5901,20 +7634,30 @@ style="
 text-align:center;
 margin-top:80px">
 
-No assigned guests yet.
+No guests assigned yet.
 
 </div>
 
 `;
 
 
-$('printSheet')
-.innerHTML=`
+const minimal=
 
-<div class="chartWelcome">
+S.chart.style===
+'minimal';
+
+
+chart.innerHTML=`
+
+<div
+class="chartWelcome"
+style="
+${minimal
+?'font-style:normal;font-family:system-ui;font-size:52px'
+:''}">
 
 ${safe(
-S.print.welcome
+S.chart.welcome
 )}
 
 </div>
@@ -5927,10 +7670,15 @@ TO THE WEDDING OF
 </div>
 
 
-<div class="chartNames">
+<div
+class="chartNames"
+style="
+${minimal
+?'font-family:system-ui'
+:''}">
 
 ${safe(
-S.print.couple||
+S.chart.couple||
 'YOUR NAMES'
 )}
 
@@ -5940,16 +7688,21 @@ S.print.couple||
 <div class="chartDate">
 
 ${safe(
-S.print.date
+S.chart.date
 )}
 
 </div>
 
 
-<div class="chartFind">
+<div
+class="chartFind"
+style="
+${minimal
+?'font-style:normal;font-family:system-ui'
+:''}">
 
 ${safe(
-S.print.find
+S.chart.find
 )}
 
 </div>
@@ -5958,9 +7711,9 @@ S.print.find
 <div
 class="chartColumns"
 style="
-columns:${S.print.columns}">
+columns:${S.chart.columns}">
 
-${html}
+${list}
 
 </div>
 
@@ -5969,33 +7722,686 @@ ${html}
 }
 
 
-/* ==================================================
-RENDER CANVAS
-================================================== */
+
+/* =====================================================
+DOWNLOAD SVG
+===================================================== */
+
+function makeSVG(){
+
+renderChart();
+
+
+const width=1400;
+
+const height=1980;
+
+
+const guests=
+
+S.guests
+
+.filter(
+guest=>
+guest.tableId
+)
+
+.slice()
+
+.sort(
+compareGuests
+);
+
+
+const groups={};
+
+
+guests
+.forEach(
+guest=>{
+
+const letter=
+
+alphabetLetter(
+guest.surname
+);
+
+
+if(
+!groups[letter]
+){
+
+groups[letter]=[];
+
+}
+
+
+groups[letter]
+.push(
+guest
+);
+
+}
+);
+
+
+const letters=
+
+Object
+.keys(
+groups
+)
+
+.sort(
+compareLetters
+);
+
+
+const columns=
+
+Number(
+S.chart.columns||4
+);
+
+
+const columnWidth=
+
+(
+width-
+160
+)
+/
+columns;
+
+
+let positions=
+
+new Array(
+columns
+)
+.fill(
+430
+);
+
+
+let currentColumn=0;
+
+
+let body='';
+
+
+letters
+.forEach(
+letter=>{
+
+const items=
+groups[letter];
+
+
+const blockHeight=
+
+55+
+items.length*
+28;
+
+
+if(
+positions[
+currentColumn
+]
++
+blockHeight
+>
+height-
+100
+){
+
+currentColumn++;
+
+
+if(
+currentColumn>=columns
+){
+
+currentColumn=
+columns-1;
+
+}
+
+}
+
+
+const x=
+
+80+
+currentColumn*
+columnWidth;
+
+
+let y=
+
+positions[
+currentColumn
+];
+
+
+body+=`
+
+<text
+x="${x}"
+y="${y}"
+font-family="Georgia"
+font-size="34"
+fill="#111">
+
+${escapeXML(letter)}
+
+</text>
+
+`;
+
+
+y+=38;
+
+
+items
+.forEach(
+guest=>{
+
+const table=
+
+S.tables.find(
+table=>
+table.id===guest.tableId
+);
+
+
+const display=
+
+guestName(
+guest
+)
+
++
+
+(
+guest.partySize>1
+?` (${guest.partySize})`
+:''
+);
+
+
+body+=`
+
+<text
+x="${x}"
+y="${y}"
+font-family="Georgia"
+font-size="18"
+fill="#111">
+
+${escapeXML(display)}
+
+</text>
+
+
+<text
+x="${x+columnWidth-35}"
+y="${y}"
+text-anchor="end"
+font-family="Georgia"
+font-size="18"
+fill="#111">
+
+${table
+?table.number
+:'-'}
+
+</text>
+
+
+<line
+x1="${x+10}"
+y1="${y+5}"
+x2="${x+columnWidth-55}"
+y2="${y+5}"
+stroke="#999"
+stroke-width="1"
+stroke-dasharray="2 5"/>
+
+`;
+
+
+y+=28;
+
+}
+);
+
+
+positions[
+currentColumn
+]=
+
+y+32;
+
+
+currentColumn=
+
+(
+currentColumn+1
+)
+%
+columns;
+
+}
+);
+
+
+return`
+
+<svg
+xmlns="http://www.w3.org/2000/svg"
+width="${width}"
+height="${height}"
+viewBox="0 0 ${width} ${height}">
+
+
+<rect
+width="100%"
+height="100%"
+fill="white"/>
+
+
+<text
+x="${width/2}"
+y="130"
+text-anchor="middle"
+font-family="Georgia"
+font-size="90"
+font-style="italic"
+fill="#111">
+
+${escapeXML(
+S.chart.welcome
+)}
+
+</text>
+
+
+<text
+x="${width/2}"
+y="205"
+text-anchor="middle"
+font-family="Arial"
+font-size="17"
+letter-spacing="7"
+fill="#111">
+
+TO THE WEDDING OF
+
+</text>
+
+
+<text
+x="${width/2}"
+y="260"
+text-anchor="middle"
+font-family="Georgia"
+font-size="46"
+letter-spacing="5"
+fill="#111">
+
+${escapeXML(
+S.chart.couple||
+'YOUR NAMES'
+)}
+
+</text>
+
+
+<text
+x="${width/2}"
+y="303"
+text-anchor="middle"
+font-family="Arial"
+font-size="17"
+letter-spacing="4"
+fill="#111">
+
+${escapeXML(
+S.chart.date
+)}
+
+</text>
+
+
+<text
+x="${width/2}"
+y="370"
+text-anchor="middle"
+font-family="Georgia"
+font-style="italic"
+font-size="38"
+fill="#111">
+
+${escapeXML(
+S.chart.find
+)}
+
+</text>
+
+
+${body}
+
+
+</svg>
+
+`;
+
+}
+
+
+
+function downloadSVG(){
+
+const svg=
+makeSVG();
+
+
+const blob=
+
+new Blob(
+[
+svg
+],
+{
+type:'image/svg+xml'
+}
+);
+
+
+downloadBlob(
+blob,
+'seatly-seating-chart.svg'
+);
+
+}
+
+
+
+/* =====================================================
+HD PNG
+===================================================== */
+
+async function downloadPNG(){
+
+renderChart();
+
+
+const element=
+$('chart');
+
+
+element.classList.add(
+'exportMode'
+);
+
+
+try{
+
+const canvasExport=
+
+await html2canvas(
+element,
+{
+
+scale:2,
+
+backgroundColor:'#ffffff',
+
+useCORS:true
+
+}
+);
+
+
+const link=
+
+document.createElement(
+'a'
+);
+
+
+link.download=
+'seatly-seating-chart-HD.png';
+
+
+link.href=
+
+canvasExport.toDataURL(
+'image/png',
+1
+);
+
+
+link.click();
+
+}
+
+catch(error){
+
+toast(
+'PNG export failed'
+);
+
+}
+
+
+element.classList.remove(
+'exportMode'
+);
+
+}
+
+
+
+/* =====================================================
+PDF
+===================================================== */
+
+async function downloadPDF(){
+
+renderChart();
+
+
+if(
+!window.html2canvas
+||
+!window.jspdf
+){
+
+toast(
+'PDF library unavailable'
+);
+
+return;
+
+}
+
+
+const element=
+$('chart');
+
+
+element.classList.add(
+'exportMode'
+);
+
+
+try{
+
+const exportCanvas=
+
+await html2canvas(
+element,
+{
+
+scale:2,
+
+backgroundColor:'#ffffff',
+
+useCORS:true
+
+}
+);
+
+
+const image=
+
+exportCanvas.toDataURL(
+'image/jpeg',
+.96
+);
+
+
+const{
+jsPDF
+}=
+
+window.jspdf;
+
+
+const pdf=
+
+new jsPDF(
+{
+
+orientation:'portrait',
+
+unit:'mm',
+
+format:'a2'
+
+}
+);
+
+
+const pageWidth=
+
+pdf.internal
+.pageSize
+.getWidth();
+
+
+const pageHeight=
+
+pdf.internal
+.pageSize
+.getHeight();
+
+
+const imageRatio=
+
+exportCanvas.width/
+exportCanvas.height;
+
+
+let width=
+pageWidth;
+
+
+let height=
+
+width/
+imageRatio;
+
+
+if(
+height>
+pageHeight
+){
+
+height=
+pageHeight;
+
+
+width=
+
+height*
+imageRatio;
+
+}
+
+
+const x=
+
+(
+pageWidth-
+width
+)
+/
+2;
+
+
+pdf.addImage(
+image,
+'JPEG',
+x,
+0,
+width,
+height,
+undefined,
+'FAST'
+);
+
+
+pdf.save(
+'seatly-seating-chart.pdf'
+);
+
+}
+
+catch(error){
+
+toast(
+'PDF export failed'
+);
+
+}
+
+
+element.classList.remove(
+'exportMode'
+);
+
+}
+
+
+
+/* =====================================================
+CANVAS RENDERING
+===================================================== */
 
 function render(){
 
 objectLayer.innerHTML='';
 
+
 tableLayer.innerHTML='';
 
 
-/*
-OBJECTS ARE RENDERED FIRST.
-TABLES ARE ALWAYS ABOVE THEM.
-*/
-
 S.objects
-.forEach(object=>{
+.forEach(
+object=>{
 
-const element=
+const el=
 
 document.createElement(
 'div'
 );
 
 
-element.className=
+el.className=
 
 `obj venueObject ${object.type||'custom'}`
 
@@ -6016,32 +8422,28 @@ S.venueLocked
 );
 
 
-element.style.left=
-
+el.style.left=
 object.xPct+'%';
 
 
-element.style.top=
-
+el.style.top=
 object.yPct+'%';
 
 
-element.style.width=
-
+el.style.width=
 object.widthPct+'%';
 
 
-element.style.height=
-
+el.style.height=
 object.heightPct+'%';
 
 
-element.style.transform=
+el.style.transform=
 
 `scale(${object.scale||1})`;
 
 
-element.textContent=
+el.textContent=
 object.label;
 
 
@@ -6052,7 +8454,7 @@ currentStep===1
 ){
 
 attachDrag(
-element,
+el,
 object,
 'object'
 );
@@ -6060,15 +8462,18 @@ object,
 }
 
 
-objectLayer.appendChild(
-element
+objectLayer
+.appendChild(
+el
 );
 
-});
+}
+);
 
 
 S.tables
-.forEach(table=>{
+.forEach(
+table=>{
 
 const used=
 
@@ -6077,14 +8482,14 @@ table.id
 );
 
 
-const element=
+const el=
 
 document.createElement(
 'div'
 );
 
 
-element.className=
+el.className=
 
 'obj table'
 
@@ -6092,7 +8497,7 @@ element.className=
 
 (
 used===table.seats
-?' complete'
+?' full'
 :''
 )
 
@@ -6102,34 +8507,26 @@ used===table.seats
 selected?.id===table.id
 ?' selected'
 :''
-)
-
-+
-
-(
-S.tablesLocked
-?' locked'
-:''
 );
 
 
-element.style.left=
+el.style.left=
 
 table.xPct+'%';
 
 
-element.style.top=
+el.style.top=
 
 table.yPct+'%';
 
 
-element.style.transform=
+el.style.transform=
 
 `scale(${table.scale||1})`;
 
 
 createChairs(
-element,
+el,
 table.seats
 );
 
@@ -6145,24 +8542,22 @@ core.className=
 'core';
 
 
-core.innerHTML=`
+core.innerHTML=
+
+`
 
 <b>
-
 TABLE ${table.number}
-
 </b>
 
 <span>
-
 ${used}/${table.seats}
-
 </span>
 
 `;
 
 
-element.appendChild(
+el.appendChild(
 core
 );
 
@@ -6174,18 +8569,19 @@ currentStep===2
 ){
 
 attachDrag(
-element,
+el,
 table,
 'table'
 );
 
 }
 
-else if(
+
+if(
 currentStep===3
 ){
 
-element.onclick=
+el.onclick=
 ()=>{
 
 openTableGuests(
@@ -6197,11 +8593,13 @@ table.id
 }
 
 
-tableLayer.appendChild(
-element
+tableLayer
+.appendChild(
+el
 );
 
-});
+}
+);
 
 
 $('empty')
@@ -6211,9 +8609,9 @@ $('empty')
 (
 S.venueImage
 ||
-S.tables.length
-||
 S.objects.length
+||
+S.tables.length
 )
 
 ?'none'
@@ -6222,16 +8620,19 @@ S.objects.length
 
 renderContext();
 
+
 updateStatus();
 
-updateStepUI();
+
+updateStepButtons();
 
 }
 
 
-/* ==================================================
+
+/* =====================================================
 CHAIRS
-================================================== */
+===================================================== */
 
 function createChairs(
 element,
@@ -6246,7 +8647,7 @@ Number(seats)
 );
 
 
-const base=
+const center=
 
 mobile()
 ?36
@@ -6291,9 +8692,10 @@ chair.className=
 chair.style.left=
 
 (
-base
+center
 +
-Math.cos(angle)*
+Math.cos(angle)
+*
 radius
 -
 4.5
@@ -6305,9 +8707,10 @@ radius
 chair.style.top=
 
 (
-base
+center
 +
-Math.sin(angle)*
+Math.sin(angle)
+*
 radius
 -
 4.5
@@ -6325,9 +8728,10 @@ chair
 }
 
 
-/* ==================================================
-DRAG + BOUNDARY + SNAP
-================================================== */
+
+/* =====================================================
+DRAG
+===================================================== */
 
 function attachDrag(
 element,
@@ -6339,13 +8743,13 @@ let startX;
 
 let startY;
 
-let originalLeft;
+let originalX;
 
-let originalTop;
+let originalY;
 
 let active=false;
 
-let beforeState=null;
+let before;
 
 
 element.onpointerdown=
@@ -6367,8 +8771,8 @@ document
 .querySelectorAll('.obj')
 
 .forEach(
-object=>
-object.classList.remove(
+element=>
+element.classList.remove(
 'selected'
 )
 );
@@ -6382,10 +8786,6 @@ element.classList.add(
 renderContext();
 
 
-const rect=
-canvas.getBoundingClientRect();
-
-
 startX=
 event.clientX;
 
@@ -6394,20 +8794,22 @@ startY=
 event.clientY;
 
 
-originalLeft=
-pxX(
+originalX=
+
+percentToX(
 item.xPct
 );
 
 
-originalTop=
-pxY(
+originalY=
+
+percentToY(
 item.yPct
 );
 
 
-beforeState=
-stateString();
+before=
+snapshot();
 
 
 active=true;
@@ -6419,7 +8821,8 @@ trash.style.display=
 
 try{
 
-element.setPointerCapture(
+element
+.setPointerCapture(
 event.pointerId
 );
 
@@ -6427,6 +8830,7 @@ event.pointerId
 catch(error){}
 
 };
+
 
 
 element.onpointermove=
@@ -6438,101 +8842,75 @@ if(
 return;
 
 
-const canvasRect=
-canvas.getBoundingClientRect();
+const rect=
+
+canvas
+.getBoundingClientRect();
 
 
 const scale=
+
 Number(
 item.scale||1
 );
 
 
-const visualWidth=
+const width=
 
 element.offsetWidth*
 scale;
 
 
-const visualHeight=
+const height=
 
 element.offsetHeight*
 scale;
 
 
-let left=
+let x=
 
-originalLeft
-+
-event.clientX
--
+originalX+
+event.clientX-
 startX;
 
 
-let top=
+let y=
 
-originalTop
-+
-event.clientY
--
+originalY+
+event.clientY-
 startY;
 
 
-left=
+x=
 
 clamp(
-left,
+x,
 0,
 Math.max(
 0,
-canvasRect.width-
-visualWidth
+rect.width-width
 )
 );
 
 
-top=
+y=
 
 clamp(
-top,
+y,
 0,
 Math.max(
 0,
-canvasRect.height-
-visualHeight
+rect.height-height
 )
 );
-
-
-if(
-kind==='table'
-){
-
-const snapped=
-
-snapTable(
-item,
-left,
-top
-);
-
-
-left=
-snapped.left;
-
-
-top=
-snapped.top;
-
-}
 
 
 item.xPct=
-pctX(left);
+xToPercent(x);
 
 
 item.yPct=
-pctY(top);
+yToPercent(y);
 
 
 element.style.left=
@@ -6544,7 +8922,9 @@ item.yPct+'%';
 
 
 const bin=
-trash.getBoundingClientRect();
+
+trash
+.getBoundingClientRect();
 
 
 const over=
@@ -6574,6 +8954,7 @@ over
 };
 
 
+
 element.onpointerup=
 ()=>{
 
@@ -6586,14 +8967,13 @@ return;
 active=false;
 
 
-hideGuides();
-
-
-const shouldDelete=
+const remove=
 
 trash
 .classList
-.contains('hot');
+.contains(
+'hot'
+);
 
 
 trash.style.display=
@@ -6602,15 +8982,17 @@ trash.style.display=
 
 trash
 .classList
-.remove('hot');
+.remove(
+'hot'
+);
 
 
 if(
-shouldDelete
+remove
 ){
 
 undoStack.push(
-beforeState
+before
 );
 
 
@@ -6624,7 +9006,7 @@ false
 );
 
 
-updateHistory();
+updateUndoButtons();
 
 
 return;
@@ -6633,199 +9015,33 @@ return;
 
 
 if(
-beforeState!==stateString()
+before!==snapshot()
 ){
 
 undoStack.push(
-beforeState
+before
 );
 
 
 redoStack=[];
 
 
-saveOnly();
+save();
 
-updateHistory();
+
+updateUndoButtons();
 
 }
-
-};
-
-
-element.onpointercancel=
-()=>{
-
-active=false;
-
-
-hideGuides();
-
-
-trash.style.display=
-'none';
 
 };
 
 }
 
 
-function snapTable(
-moving,
-left,
-top
-){
 
-const threshold=8;
-
-
-let snapLeft=
-left;
-
-
-let snapTop=
-top;
-
-
-let vertical=
-null;
-
-
-let horizontal=
-null;
-
-
-S.tables
-
-.filter(
-table=>
-table.id!==moving.id
-)
-
-.forEach(table=>{
-
-const otherLeft=
-
-pxX(
-table.xPct
-);
-
-
-const otherTop=
-
-pxY(
-table.yPct
-);
-
-
-if(
-Math.abs(
-otherLeft-left
-)
-<=
-threshold
-){
-
-snapLeft=
-otherLeft;
-
-
-vertical=
-otherLeft;
-
-}
-
-
-if(
-Math.abs(
-otherTop-top
-)
-<=
-threshold
-){
-
-snapTop=
-otherTop;
-
-
-horizontal=
-otherTop;
-
-}
-
-});
-
-
-if(
-vertical!==null
-){
-
-guideV.style.left=
-
-vertical+'px';
-
-
-guideV.style.display=
-'block';
-
-}
-
-else{
-
-guideV.style.display=
-'none';
-
-}
-
-
-if(
-horizontal!==null
-){
-
-guideH.style.top=
-
-horizontal+'px';
-
-
-guideH.style.display=
-'block';
-
-}
-
-else{
-
-guideH.style.display=
-'none';
-
-}
-
-
-return{
-
-left:snapLeft,
-
-top:snapTop
-
-};
-
-}
-
-
-function hideGuides(){
-
-guideV.style.display=
-'none';
-
-
-guideH.style.display=
-'none';
-
-}
-
-
-/* ==================================================
-CONTEXT
-================================================== */
+/* =====================================================
+CONTEXT BAR
+===================================================== */
 
 function renderContext(){
 
@@ -6859,8 +9075,14 @@ table.id===selected.id
 
 if(
 !table
-)
+){
+
+context.style.display=
+'none';
+
 return;
+
+}
 
 
 const used=
@@ -6878,13 +9100,14 @@ T
 
 
 <input
-id="ctxTableNumber"
+id="contextNumber"
 type="number"
 min="1"
 value="${table.number}">
 
 
-<select id="ctxSeats">
+<select
+id="contextSeats">
 
 ${[
 8,
@@ -6893,7 +9116,10 @@ ${[
 16
 ]
 
-.map(seats=>`
+.map(
+seats=>
+
+`
 
 <option
 ${seats===table.seats
@@ -6904,7 +9130,8 @@ ${seats}
 
 </option>
 
-`)
+`
+)
 
 .join('')}
 
@@ -6912,35 +9139,45 @@ ${seats}
 
 
 <span>
+
 ${used}/${table.seats}
+
 </span>
 
 
 <button
 class="secondary"
 onclick="saveTableSettings()">
+
 ✓
+
 </button>
 
 
 <button
 class="secondary"
-onclick="duplicateSelectedTable()">
+onclick="duplicateTable()">
+
 Copy
+
 </button>
 
 
 <button
 class="secondary"
 onclick="resizeSelected(.9)">
+
 −
+
 </button>
 
 
 <button
 class="secondary"
 onclick="resizeSelected(1.1)">
+
 ＋
+
 </button>
 
 
@@ -6950,7 +9187,9 @@ onclick="deleteCanvasItem(
 '${table.id}',
 'table'
 )">
+
 Delete
+
 </button>
 
 `;
@@ -7001,14 +9240,18 @@ object.label
 <button
 class="secondary"
 onclick="resizeSelected(.9)">
+
 −
+
 </button>
 
 
 <button
 class="secondary"
 onclick="resizeSelected(1.1)">
+
 ＋
+
 </button>
 
 
@@ -7018,7 +9261,9 @@ onclick="deleteCanvasItem(
 '${object.id}',
 'object'
 )">
+
 Delete
+
 </button>
 
 `;
@@ -7037,6 +9282,7 @@ context.style.display=
 'none';
 
 }
+
 
 
 function saveTableSettings(){
@@ -7060,7 +9306,7 @@ const number=
 Math.max(
 1,
 Number(
-$('ctxTableNumber').value||1
+$('contextNumber').value||1
 )
 );
 
@@ -7095,7 +9341,7 @@ return;
 const seats=
 
 Number(
-$('ctxSeats').value
+$('contextSeats').value
 );
 
 
@@ -7107,7 +9353,8 @@ table.id
 
 
 if(
-seats<used
+seats<
+used
 ){
 
 toast(
@@ -7119,7 +9366,7 @@ return;
 }
 
 
-pushHistory();
+remember();
 
 
 table.number=
@@ -7132,14 +9379,15 @@ seats;
 
 render();
 
-saveOnly();
+save();
 
 }
 
 
-function duplicateSelectedTable(){
 
-const original=
+function duplicateTable(){
+
+const table=
 
 S.tables.find(
 table=>
@@ -7148,16 +9396,16 @@ table.id===selected?.id
 
 
 if(
-!original
+!table
 )
 return;
 
 
-pushHistory();
+remember();
 
 
 const position=
-findFreeTablePosition();
+findFreePosition();
 
 
 S.tables.push({
@@ -7168,25 +9416,26 @@ number:
 nextTableNumber(),
 
 seats:
-original.seats,
+table.seats,
+
+scale:
+table.scale||.8,
 
 xPct:
 position.xPct,
 
 yPct:
-position.yPct,
-
-scale:
-original.scale||.8
+position.yPct
 
 });
 
 
 render();
 
-saveOnly();
+save();
 
 }
+
 
 
 function resizeSelected(
@@ -7204,12 +9453,14 @@ const item=
 selected.kind==='table'
 
 ?
+
 S.tables.find(
 table=>
 table.id===selected.id
 )
 
 :
+
 S.objects.find(
 object=>
 object.id===selected.id
@@ -7222,7 +9473,7 @@ if(
 return;
 
 
-pushHistory();
+remember();
 
 
 item.scale=
@@ -7240,9 +9491,10 @@ multiplier,
 
 render();
 
-saveOnly();
+save();
 
 }
+
 
 
 function deleteCanvasItem(
@@ -7255,7 +9507,7 @@ if(
 history
 ){
 
-pushHistory();
+remember();
 
 }
 
@@ -7263,6 +9515,14 @@ pushHistory();
 if(
 kind==='table'
 ){
+
+S.tables=
+
+S.tables.filter(
+table=>
+table.id!==id
+);
+
 
 S.guests
 .forEach(
@@ -7277,14 +9537,6 @@ guest.tableId=null;
 }
 
 }
-);
-
-
-S.tables=
-
-S.tables.filter(
-table=>
-table.id!==id
 );
 
 }
@@ -7310,16 +9562,17 @@ context.style.display=
 
 render();
 
-saveOnly();
+save();
 
-renderStepPanel();
+renderPanel();
 
 }
 
 
-/* ==================================================
-TABLE CAPACITY
-================================================== */
+
+/* =====================================================
+CAPACITY
+===================================================== */
 
 function tableUsedSeats(
 tableId,
@@ -7352,11 +9605,12 @@ guest.partySize||1
 }
 
 
-/* ==================================================
-GREEK ALPHABET
-================================================== */
 
-function normalizeText(
+/* =====================================================
+GREEK ALPHABET
+===================================================== */
+
+function normalizeBasic(
 text
 ){
 
@@ -7364,20 +9618,17 @@ return String(
 text||''
 )
 
-.normalize('NFD')
+.normalize(
+'NFD'
+)
 
 .replace(
 /[\u0300-\u036f]/g,
 ''
 )
 
-.toLocaleUpperCase(
+.toLocaleLowerCase(
 'el-GR'
-)
-
-.replace(
-/Σ$/g,
-'Σ'
 )
 
 .trim();
@@ -7385,110 +9636,83 @@ text||''
 }
 
 
-function firstGreekLetter(
+
+function normalizeText(
 text
 ){
 
-const value=
-
-normalizeText(
+return normalizeBasic(
 text
+)
+.toLocaleUpperCase(
+'el-GR'
 );
-
-
-if(
-!value
-)
-return'#';
-
-
-let letter=
-
-value.charAt(0);
-
-
-if(
-letter==='Ά'
-)
-letter='Α';
-
-
-if(
-letter==='Έ'
-)
-letter='Ε';
-
-
-if(
-letter==='Ή'
-)
-letter='Η';
-
-
-if(
-letter==='Ί'
-||
-letter==='Ϊ'
-)
-letter='Ι';
-
-
-if(
-letter==='Ό'
-)
-letter='Ο';
-
-
-if(
-letter==='Ύ'
-||
-letter==='Ϋ'
-)
-letter='Υ';
-
-
-if(
-letter==='Ώ'
-)
-letter='Ω';
-
-
-return letter;
 
 }
 
 
-const greekOrder=
+
+const greekAlphabet=
 
 [
-'Α','Β','Γ','Δ','Ε','Ζ','Η',
-'Θ','Ι','Κ','Λ','Μ','Ν','Ξ',
-'Ο','Π','Ρ','Σ','Τ','Υ','Φ',
-'Χ','Ψ','Ω'
+'Α','Β','Γ','Δ',
+'Ε','Ζ','Η','Θ',
+'Ι','Κ','Λ','Μ',
+'Ν','Ξ','Ο','Π',
+'Ρ','Σ','Τ','Υ',
+'Φ','Χ','Ψ','Ω'
 ];
 
 
-function compareGreekLetters(
+function alphabetLetter(
+surname
+){
+
+const clean=
+
+normalizeText(
+surname
+);
+
+
+if(
+!clean
+)
+return'#';
+
+
+return clean.charAt(0);
+
+}
+
+
+
+function compareLetters(
 a,
 b
 ){
 
 const ai=
 
-greekOrder.indexOf(a);
+greekAlphabet
+.indexOf(a);
 
 
 const bi=
 
-greekOrder.indexOf(b);
+greekAlphabet
+.indexOf(b);
 
 
 if(
 ai>=0
 &&
 bi>=0
-)
+){
+
 return ai-bi;
+
+}
 
 
 if(
@@ -7509,6 +9733,7 @@ b,
 );
 
 }
+
 
 
 function compareGuests(
@@ -7556,29 +9781,31 @@ b.firstName
 }
 
 
-/* ==================================================
+
+/* =====================================================
 STATUS
-================================================== */
+===================================================== */
 
 function updateStatus(){
 
-const stats=
-projectStats();
+const s=
+stats();
 
 
 $('status')
 .textContent=
 
-`${stats.tables} tables · ${stats.seatedPeople}/${stats.totalPeople} people · ${stats.free} free`;
+`${s.tables} tables · ${s.seated}/${s.people} people · ${s.free} free`;
 
 }
 
 
-/* ==================================================
-GENERAL HELPERS
-================================================== */
 
-function guestFullName(
+/* =====================================================
+SAFE TEXT
+===================================================== */
+
+function guestName(
 guest
 ){
 
@@ -7597,67 +9824,152 @@ guest.firstName||''
 }
 
 
+
 function safe(
 text
 ){
 
-const div=
+const element=
 
 document.createElement(
 'div'
 );
 
 
-div.textContent=
+element.textContent=
 text||'';
 
 
-return div.innerHTML;
+return element.innerHTML;
 
 }
 
 
-function toast(
-message
+
+function safeAttribute(
+text
 ){
 
-const element=
-$('toast');
+return String(
+text||''
+)
+
+.replace(
+/&/g,
+'&amp;'
+)
+
+.replace(
+/"/g,
+'&quot;'
+)
+
+.replace(
+/</g,
+'&lt;'
+)
+
+.replace(
+/>/g,
+'&gt;'
+);
+
+}
 
 
-element.textContent=
-message;
+
+function escapeXML(
+text
+){
+
+return String(
+text||''
+)
+
+.replace(
+/&/g,
+'&amp;'
+)
+
+.replace(
+/</g,
+'&lt;'
+)
+
+.replace(
+/>/g,
+'&gt;'
+)
+
+.replace(
+/"/g,
+'&quot;'
+)
+
+.replace(
+/'/g,
+'&apos;'
+);
+
+}
 
 
-element.style.display=
-'block';
 
+/* =====================================================
+DOWNLOAD BLOB
+===================================================== */
 
-clearTimeout(
-window.toastTimer
+function downloadBlob(
+blob,
+name
+){
+
+const url=
+
+URL.createObjectURL(
+blob
 );
 
 
-window.toastTimer=
+const a=
+
+document.createElement(
+'a'
+);
+
+
+a.href=
+url;
+
+
+a.download=
+name;
+
+
+a.click();
+
 
 setTimeout(
 ()=>{
 
-element.style.display=
-'none';
+URL.revokeObjectURL(
+url
+);
 
 },
-1900
+1000
 );
 
 }
 
 
-/* ==================================================
-EMPTY CANVAS TAP
-================================================== */
 
-canvas.addEventListener(
+/* =====================================================
+CANVAS DESELECT
+===================================================== */
+
+canvas
+.addEventListener(
 'pointerdown',
 event=>{
 
@@ -7689,8 +10001,8 @@ document
 .querySelectorAll('.obj')
 
 .forEach(
-object=>
-object.classList.remove(
+element=>
+element.classList.remove(
 'selected'
 )
 );
@@ -7701,11 +10013,13 @@ object.classList.remove(
 );
 
 
-/* ==================================================
-RESIZE
-================================================== */
 
-window.addEventListener(
+/* =====================================================
+RESIZE
+===================================================== */
+
+window
+.addEventListener(
 'resize',
 ()=>{
 
@@ -7715,9 +10029,51 @@ render();
 );
 
 
-/* ==================================================
+
+/* =====================================================
+TOAST
+===================================================== */
+
+function toast(
+message
+){
+
+const el=
+$('toast');
+
+
+el.textContent=
+message;
+
+
+el.style.display=
+'block';
+
+
+clearTimeout(
+window.toastTimer
+);
+
+
+window.toastTimer=
+
+setTimeout(
+()=>{
+
+el.style.display=
+'none';
+
+},
+1900
+);
+
+}
+
+
+
+/* =====================================================
 START
-================================================== */
+===================================================== */
 
 load();
 
