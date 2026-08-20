@@ -3250,40 +3250,6 @@ TABLE TOOLBAR
 
 function renderTableToolbar(){
 
-if(
-!S.venueLocked
-){
-
-$('toolbar')
-.innerHTML=`
-
-<div class="toolName">
-
-<b>
-Save Venue first
-</b>
-
-<small>
-Complete Step 1
-</small>
-
-</div>
-
-
-<button
-onclick="goStep(1)">
-
-Venue
-
-</button>
-
-`;
-
-
-return;
-
-}
-
 
 
 let html='';
