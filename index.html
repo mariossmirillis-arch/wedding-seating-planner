@@ -2,935 +2,1712 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Seatly 5.1.1 Stable</title>
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+<title>Seatly 5.1.2 Stable</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
-*{box-sizing:border-box}
 
-:root{
-  --bg:#ece9e4;
-  --paper:#fff;
-  --ink:#202020;
-  --muted:#777;
-  --line:#e3ddd5;
-  --soft:#f5f2ed;
-  --green:#e4f3e8;
-  --greenText:#28663c;
-  --danger:#a43b34;
-  --dangerSoft:#fff0ee;
-  --warning:#fff7e8;
+*{
+box-sizing:border-box;
 }
 
-html,body{
-  width:100%;
-  height:100%;
-  margin:0;
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:var(--bg);
-  color:var(--ink);
+:root{
+
+--bg:#ece9e4;
+--paper:#fff;
+--ink:#202020;
+--muted:#777;
+--line:#e3ddd5;
+--soft:#f5f2ed;
+
+--green:#e4f3e8;
+--greenText:#28663c;
+
+--danger:#a43b34;
+--dangerSoft:#fff0ee;
+
+--warning:#fff7e8;
+
+}
+
+html,
+body{
+
+width:100%;
+height:100%;
+
+margin:0;
+
+font-family:
+system-ui,
+-apple-system,
+BlinkMacSystemFont,
+"Segoe UI",
+sans-serif;
+
+background:var(--bg);
+
+color:var(--ink);
+
 }
 
 body{
-  overflow:hidden;
-  overscroll-behavior:none;
+
+overflow:hidden;
+
+overscroll-behavior:none;
+
 }
 
-button,input,select{
-  font:inherit;
+button,
+input,
+select{
+
+font:inherit;
+
 }
 
 button{
-  border:0;
-  border-radius:10px;
-  background:#222;
-  color:#fff;
-  padding:9px 11px;
-  font-weight:750;
-  cursor:pointer;
+
+border:0;
+
+border-radius:10px;
+
+background:#222;
+
+color:#fff;
+
+padding:9px 11px;
+
+font-weight:750;
+
+cursor:pointer;
+
 }
 
 button.secondary{
-  background:#fff;
-  color:#222;
-  border:1px solid var(--line);
+
+background:#fff;
+
+color:#222;
+
+border:1px solid var(--line);
+
 }
 
 button.soft{
-  background:var(--soft);
-  color:#222;
-  border:1px solid #e6dfd7;
+
+background:var(--soft);
+
+color:#222;
+
+border:1px solid #e6dfd7;
+
 }
 
 button.danger{
-  background:var(--danger);
+
+background:var(--danger);
+
 }
 
 button.dangerSoft{
-  background:var(--dangerSoft);
-  color:var(--danger);
-  border:1px solid #efc8c4;
+
+background:var(--dangerSoft);
+
+color:var(--danger);
+
+border:1px solid #efc8c4;
+
 }
 
 button:disabled{
-  opacity:.4;
+
+opacity:.4;
+
 }
 
-/* TOP */
+
+/* =====================================================
+TOP
+===================================================== */
 
 .topbar{
-  height:55px;
-  background:#fff;
-  border-bottom:1px solid var(--line);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 10px;
-  z-index:500;
-  position:relative;
+
+height:55px;
+
+background:#fff;
+
+border-bottom:1px solid var(--line);
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+padding:0 10px;
+
+z-index:500;
+
+position:relative;
+
 }
 
 .logo{
-  font-size:24px;
-  font-weight:900;
-  letter-spacing:-1px;
+
+font-size:24px;
+
+font-weight:900;
+
+letter-spacing:-1px;
+
 }
 
-.logo span{font-weight:400}
+.logo span{
+
+font-weight:400;
+
+}
 
 .topRight{
-  display:flex;
-  align-items:center;
-  gap:5px;
+
+display:flex;
+
+align-items:center;
+
+gap:5px;
+
 }
 
 .saveState{
-  font-size:10px;
-  color:#777;
+
+font-size:10px;
+
+color:#777;
+
 }
 
-/* PROGRESS */
+.buildTag{
+
+font-size:9px;
+
+font-weight:850;
+
+background:#f1eee9;
+
+border:1px solid #ddd5cd;
+
+color:#555;
+
+padding:5px 7px;
+
+border-radius:999px;
+
+}
+
+
+/* =====================================================
+PROGRESS
+===================================================== */
 
 .progress{
-  height:43px;
-  background:#fff;
-  border-bottom:1px solid var(--line);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:5px;
-  padding:4px 7px;
-  overflow-x:auto;
-  scrollbar-width:none;
+
+height:43px;
+
+background:#fff;
+
+border-bottom:1px solid var(--line);
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:5px;
+
+padding:4px 7px;
+
+overflow-x:auto;
+
+scrollbar-width:none;
+
 }
 
-.progress::-webkit-scrollbar{display:none}
+.progress::-webkit-scrollbar{
+
+display:none;
+
+}
 
 .progress button{
-  flex:0 0 auto;
-  background:#f5f2ed;
-  color:#666;
-  border:1px solid #e4ddd5;
-  border-radius:999px;
-  padding:6px 10px;
-  font-size:10px;
-  white-space:nowrap;
+
+flex:0 0 auto;
+
+background:#f5f2ed;
+
+color:#666;
+
+border:1px solid #e4ddd5;
+
+border-radius:999px;
+
+padding:6px 10px;
+
+font-size:10px;
+
+white-space:nowrap;
+
 }
 
 .progress button.active{
-  background:#222;
-  color:#fff;
-  border-color:#222;
+
+background:#222;
+
+color:#fff;
+
+border-color:#222;
+
 }
 
 .progress button.done{
-  background:var(--green);
-  color:var(--greenText);
-  border-color:#bfdcc8;
+
+background:var(--green);
+
+color:var(--greenText);
+
+border-color:#bfdcc8;
+
 }
 
-/* APP */
+
+/* =====================================================
+APP
+===================================================== */
 
 .app{
-  height:calc(100vh - 98px);
-  display:grid;
-  grid-template-columns:54px 1fr;
+
+height:calc(100vh - 98px);
+
+display:grid;
+
+grid-template-columns:54px 1fr;
+
 }
 
 .rail{
-  background:#202020;
-  padding:4px 2px;
-  display:flex;
-  flex-direction:column;
-  gap:3px;
-  z-index:300;
+
+background:#202020;
+
+padding:4px 2px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:3px;
+
+z-index:300;
+
 }
 
 .rail button{
-  height:49px;
-  padding:3px;
-  background:transparent;
-  font-size:7px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:2px;
+
+height:49px;
+
+padding:3px;
+
+background:transparent;
+
+font-size:7px;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+
+gap:2px;
+
 }
 
-.rail button b{font-size:16px}
+.rail button b{
+
+font-size:16px;
+
+}
 
 .rail button.active{
-  background:#fff;
-  color:#222;
+
+background:#fff;
+
+color:#222;
+
 }
 
-/* WORKSPACE */
+
+/* =====================================================
+WORKSPACE
+===================================================== */
 
 .workspace{
-  min-width:0;
-  min-height:0;
-  display:flex;
-  flex-direction:column;
-  overflow:hidden;
+
+min-width:0;
+
+min-height:0;
+
+display:flex;
+
+flex-direction:column;
+
+overflow:hidden;
+
 }
 
-/* TOOLBAR */
+
+/* =====================================================
+TOOLBAR
+===================================================== */
 
 .toolbar{
-  min-height:57px;
-  background:#fff;
-  border-bottom:1px solid var(--line);
-  display:none;
-  align-items:center;
-  overflow-x:auto;
-  overflow-y:hidden;
-  gap:5px;
-  padding:6px;
-  scrollbar-width:none;
-  z-index:250;
+
+min-height:57px;
+
+background:#fff;
+
+border-bottom:1px solid var(--line);
+
+display:none;
+
+align-items:center;
+
+overflow-x:auto;
+
+overflow-y:hidden;
+
+gap:5px;
+
+padding:6px;
+
+scrollbar-width:none;
+
+z-index:250;
+
 }
 
-.toolbar::-webkit-scrollbar{display:none}
-.toolbar.show{display:flex}
+.toolbar::-webkit-scrollbar{
+
+display:none;
+
+}
+
+.toolbar.show{
+
+display:flex;
+
+}
 
 .toolbar button{
-  flex:0 0 auto;
-  height:43px;
-  font-size:10px;
-  white-space:nowrap;
+
+flex:0 0 auto;
+
+height:43px;
+
+font-size:10px;
+
+white-space:nowrap;
+
 }
 
 .toolObject{
-  min-width:72px;
-  background:#f5f2ed!important;
-  color:#222!important;
-  border:1px solid #e4ddd5!important;
+
+min-width:72px;
+
+background:#f5f2ed!important;
+
+color:#222!important;
+
+border:1px solid #e4ddd5!important;
+
 }
 
 .toolObject span{
-  display:block;
-  font-size:14px;
+
+display:block;
+
+font-size:14px;
+
 }
 
 .toolObject small{
-  display:block;
-  font-size:8px;
-  font-weight:800;
+
+display:block;
+
+font-size:8px;
+
+font-weight:800;
+
 }
 
 .toolName{
-  flex:0 0 auto;
-  padding:7px 10px;
-  border:1px solid #ddd6ce;
-  border-radius:10px;
-  background:#fff;
-  min-width:100px;
+
+flex:0 0 auto;
+
+padding:7px 10px;
+
+border:1px solid #ddd6ce;
+
+border-radius:10px;
+
+background:#fff;
+
+min-width:100px;
+
 }
 
 .toolName b{
-  display:block;
-  font-size:10px;
+
+display:block;
+
+font-size:10px;
+
 }
 
 .toolName small{
-  font-size:8px;
-  color:#777;
+
+font-size:8px;
+
+color:#777;
+
 }
 
 .divider{
-  flex:0 0 auto;
-  width:1px;
-  height:32px;
-  background:#ddd5cd;
-  margin:0 2px;
+
+flex:0 0 auto;
+
+width:1px;
+
+height:32px;
+
+background:#ddd5cd;
+
+margin:0 2px;
+
 }
 
-/* CANVAS */
+
+/* =====================================================
+CANVAS
+===================================================== */
 
 .canvasArea{
-  flex:1;
-  min-height:0;
-  background:#e8e5e0;
-  padding:5px;
-  display:flex;
-  align-items:stretch;
-  justify-content:center;
-  overflow:hidden;
+
+flex:1;
+
+min-height:0;
+
+background:#e8e5e0;
+
+padding:5px;
+
+display:flex;
+
+align-items:stretch;
+
+justify-content:center;
+
+overflow:hidden;
+
 }
 
 .canvas{
-  position:relative;
-  width:min(100%,1500px);
-  height:100%;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:13px;
-  overflow:hidden;
-  touch-action:none;
-  box-shadow:0 7px 25px rgba(0,0,0,.07);
+
+position:relative;
+
+width:min(100%,1500px);
+
+height:100%;
+
+background:#fff;
+
+border:1px solid var(--line);
+
+border-radius:13px;
+
+overflow:hidden;
+
+touch-action:none;
+
+box-shadow:
+0 7px 25px rgba(0,0,0,.07);
+
 }
 
 .venueBg{
-  position:absolute;
-  inset:0;
-  z-index:1;
-  background:#fff center/contain no-repeat;
-  pointer-events:none;
+
+position:absolute;
+
+inset:0;
+
+z-index:1;
+
+background:#fff center/contain no-repeat;
+
+pointer-events:none;
+
 }
 
-/* Critical layer fix */
+
+/* =====================================================
+LAYER CONTROL
+===================================================== */
 
 .objectLayer,
 .tableLayer{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
+
+position:absolute;
+
+inset:0;
+
+pointer-events:none;
+
 }
 
-.objectLayer{z-index:5}
-.tableLayer{z-index:10}
+.objectLayer{
+
+z-index:5;
+
+}
+
+.tableLayer{
+
+z-index:10;
+
+}
 
 .objectLayer.active,
 .tableLayer.active{
-  pointer-events:auto;
+
+pointer-events:auto;
+
 }
 
 .objectLayer.active .canvasObject,
 .tableLayer.active .canvasObject{
-  pointer-events:auto;
+
+pointer-events:auto;
+
 }
+
+
+/* =====================================================
+EMPTY
+===================================================== */
 
 .empty{
-  position:absolute;
-  inset:0;
-  display:grid;
-  place-items:center;
-  text-align:center;
-  pointer-events:none;
-  color:#999;
-  z-index:2;
+
+position:absolute;
+
+inset:0;
+
+display:grid;
+
+place-items:center;
+
+text-align:center;
+
+pointer-events:none;
+
+color:#999;
+
+z-index:2;
+
 }
+
+
+/* =====================================================
+OBJECTS
+===================================================== */
 
 .canvasObject{
-  position:absolute;
-  touch-action:none;
-  user-select:none;
-  -webkit-user-select:none;
-  transform-origin:center center;
+
+position:absolute;
+
+touch-action:none;
+
+user-select:none;
+
+-webkit-user-select:none;
+
+transform-origin:center center;
+
 }
 
-/* VENUE */
-
 .venueObject{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  background:rgba(255,255,255,.96);
-  border:1px solid #777;
-  border-radius:9px;
-  font-size:10px;
-  font-weight:850;
-  box-shadow:0 3px 10px rgba(0,0,0,.07);
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+text-align:center;
+
+background:rgba(255,255,255,.96);
+
+border:1px solid #777;
+
+border-radius:9px;
+
+font-size:10px;
+
+font-weight:850;
+
+box-shadow:
+0 3px 10px rgba(0,0,0,.07);
+
 }
 
 .venueObject.editing{
-  border:2px dashed #222;
-  box-shadow:0 0 0 3px rgba(0,0,0,.08);
+
+border:2px dashed #222;
+
+box-shadow:
+0 0 0 3px rgba(0,0,0,.08);
+
 }
 
 .dancefloor{
-  background:
-  linear-gradient(
-    45deg,
-    #fafafa 25%,
-    #ececec 25%,
-    #ececec 50%,
-    #fafafa 50%,
-    #fafafa 75%,
-    #ececec 75%
-  );
-  background-size:24px 24px;
+
+background:
+
+linear-gradient(
+45deg,
+#fafafa 25%,
+#ececec 25%,
+#ececec 50%,
+#fafafa 50%,
+#fafafa 75%,
+#ececec 75%
+);
+
+background-size:24px 24px;
+
 }
 
 .djbox{
-  background:#262626;
-  color:#fff;
+
+background:#262626;
+
+color:#fff;
+
 }
 
-.bar{background:#f3ece4}
+.bar{
+
+background:#f3ece4;
+
+}
 
 .entrance{
-  background:#fff;
-  border-style:double;
+
+background:#fff;
+
+border-style:double;
+
 }
 
-/* FLOATING EDIT */
+
+/* =====================================================
+FLOATING EDIT
+===================================================== */
 
 .objectControls{
-  position:absolute;
-  top:-39px;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  gap:4px;
-  align-items:center;
-  z-index:150;
-  white-space:nowrap;
+
+position:absolute;
+
+top:-39px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+display:flex;
+
+gap:4px;
+
+align-items:center;
+
+z-index:150;
+
+white-space:nowrap;
+
 }
 
 .objectControls button{
-  height:auto;
-  padding:5px 7px;
-  font-size:9px;
-  border-radius:999px;
-  box-shadow:0 4px 12px rgba(0,0,0,.15);
+
+height:auto;
+
+padding:5px 7px;
+
+font-size:9px;
+
+border-radius:999px;
+
+box-shadow:
+0 4px 12px rgba(0,0,0,.15);
+
 }
 
 .resizeHandle{
-  position:absolute;
-  width:22px;
-  height:22px;
-  right:-11px;
-  bottom:-11px;
-  border-radius:50%;
-  background:#fff;
-  border:2px solid #222;
-  z-index:151;
-  box-shadow:0 3px 10px rgba(0,0,0,.2);
-  touch-action:none;
+
+position:absolute;
+
+width:22px;
+
+height:22px;
+
+right:-11px;
+
+bottom:-11px;
+
+border-radius:50%;
+
+background:#fff;
+
+border:2px solid #222;
+
+z-index:151;
+
+box-shadow:
+0 3px 10px rgba(0,0,0,.2);
+
+touch-action:none;
+
 }
 
 .resizeHandle:after{
-  content:"";
-  position:absolute;
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#222;
-  left:5.5px;
-  top:5.5px;
+
+content:"";
+
+position:absolute;
+
+width:7px;
+
+height:7px;
+
+border-radius:50%;
+
+background:#222;
+
+left:5.5px;
+
+top:5.5px;
+
 }
 
-/* TABLE */
+
+/* =====================================================
+TABLE
+===================================================== */
 
 .table{
-  width:82px;
-  height:82px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+
+width:82px;
+
+height:82px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
 }
 
 .table.editing{
-  outline:2px dashed #222;
-  outline-offset:3px;
+
+outline:2px dashed #222;
+
+outline-offset:3px;
+
 }
 
 .tableCore{
-  width:48px;
-  height:48px;
-  border:2px solid #222;
-  border-radius:50%;
-  background:#fff;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  z-index:2;
-  box-shadow:0 4px 12px rgba(0,0,0,.12);
+
+width:48px;
+
+height:48px;
+
+border:2px solid #222;
+
+border-radius:50%;
+
+background:#fff;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+
+z-index:2;
+
+box-shadow:
+0 4px 12px rgba(0,0,0,.12);
+
 }
 
-.tableCore b{font-size:8px}
+.tableCore b{
+
+font-size:8px;
+
+}
 
 .tableCore span{
-  font-size:8px;
-  color:#666;
-  margin-top:2px;
+
+font-size:8px;
+
+color:#666;
+
+margin-top:2px;
+
 }
 
 .table.full .tableCore{
-  background:#e2f3e6;
-  border-color:#39794d;
+
+background:#e2f3e6;
+
+border-color:#39794d;
+
 }
 
 .chair{
-  position:absolute;
-  width:9px;
-  height:9px;
-  background:#fff;
-  border:1px solid #555;
-  border-radius:3px;
+
+position:absolute;
+
+width:9px;
+
+height:9px;
+
+background:#fff;
+
+border:1px solid #555;
+
+border-radius:3px;
+
 }
 
-/* STATUS */
+
+/* =====================================================
+STATUS
+===================================================== */
 
 .status{
-  position:absolute;
-  left:8px;
-  bottom:8px;
-  z-index:50;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:999px;
-  padding:6px 9px;
-  font-size:9px;
-  color:#666;
-  pointer-events:none;
+
+position:absolute;
+
+left:8px;
+
+bottom:8px;
+
+z-index:50;
+
+background:#fff;
+
+border:1px solid var(--line);
+
+border-radius:999px;
+
+padding:6px 9px;
+
+font-size:9px;
+
+color:#666;
+
+pointer-events:none;
+
 }
 
-/* SHEET */
+
+/* =====================================================
+SHEET
+===================================================== */
 
 .sheet{
-  position:fixed;
-  top:98px;
-  right:0;
-  bottom:0;
-  width:390px;
-  background:#fff;
-  z-index:600;
-  border-left:1px solid var(--line);
-  box-shadow:-10px 0 30px rgba(0,0,0,.13);
-  padding:15px;
-  overflow:auto;
-  display:none;
+
+position:fixed;
+
+top:98px;
+
+right:0;
+
+bottom:0;
+
+width:390px;
+
+background:#fff;
+
+z-index:600;
+
+border-left:1px solid var(--line);
+
+box-shadow:
+-10px 0 30px rgba(0,0,0,.13);
+
+padding:15px;
+
+overflow:auto;
+
+display:none;
+
 }
 
-.sheet.open{display:block}
+.sheet.open{
+
+display:block;
+
+}
 
 .sheetTop{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:8px;
-  margin-bottom:12px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:flex-start;
+
+gap:8px;
+
+margin-bottom:12px;
+
 }
 
 .sheetTop h2{
-  margin:0;
-  font-size:20px;
+
+margin:0;
+
+font-size:20px;
+
 }
 
 .sheetClose{
-  width:34px;
-  height:34px;
-  padding:0;
-  border-radius:50%;
+
+width:34px;
+
+height:34px;
+
+padding:0;
+
+border-radius:50%;
+
 }
 
 .hint{
-  font-size:12px;
-  color:#777;
-  line-height:1.45;
-  margin:5px 0 12px;
+
+font-size:12px;
+
+color:#777;
+
+line-height:1.45;
+
+margin:5px 0 12px;
+
 }
 
 .section{
-  border-top:1px solid #eee7df;
-  margin-top:12px;
-  padding-top:12px;
+
+border-top:1px solid #eee7df;
+
+margin-top:12px;
+
+padding-top:12px;
+
 }
 
 .card{
-  border:1px solid var(--line);
-  border-radius:13px;
-  background:#faf9f7;
-  padding:11px;
-  margin-top:8px;
+
+border:1px solid var(--line);
+
+border-radius:13px;
+
+background:#faf9f7;
+
+padding:11px;
+
+margin-top:8px;
+
 }
 
 .card.warning{
-  background:var(--warning);
+
+background:var(--warning);
+
 }
 
 .cardTitle{
-  font-size:14px;
-  font-weight:850;
+
+font-size:14px;
+
+font-weight:850;
+
 }
 
 .meta{
-  font-size:10px;
-  color:#777;
-  margin-top:3px;
+
+font-size:10px;
+
+color:#777;
+
+margin-top:3px;
+
 }
 
 .field{
-  width:100%;
-  padding:10px;
-  border:1px solid #d8d1c9;
-  border-radius:10px;
-  background:#fff;
+
+width:100%;
+
+padding:10px;
+
+border:1px solid #d8d1c9;
+
+border-radius:10px;
+
+background:#fff;
+
 }
 
 .grid2{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:7px;
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:7px;
+
 }
 
 .wide{
-  width:100%;
-  margin-top:8px;
+
+width:100%;
+
+margin-top:8px;
+
 }
 
-/* GUEST */
+
+/* =====================================================
+GUESTS
+===================================================== */
 
 .guestRow{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:7px;
-  align-items:center;
-  padding:8px 0;
-  border-bottom:1px solid #eee;
+
+display:grid;
+
+grid-template-columns:1fr auto;
+
+gap:7px;
+
+align-items:center;
+
+padding:8px 0;
+
+border-bottom:1px solid #eee;
+
 }
 
 .guestName{
-  font-size:13px;
-  font-weight:750;
+
+font-size:13px;
+
+font-weight:750;
+
 }
 
 .guestMeta{
-  font-size:10px;
-  color:#777;
+
+font-size:10px;
+
+color:#777;
+
 }
 
 .rowActions{
-  display:flex;
-  gap:4px;
+
+display:flex;
+
+gap:4px;
+
 }
 
 .rowActions button{
-  font-size:9px;
-  padding:5px 6px;
+
+font-size:9px;
+
+padding:5px 6px;
+
 }
 
-/* VOICE */
+
+/* =====================================================
+VOICE
+===================================================== */
 
 .voiceBox{
-  border:1px solid var(--line);
-  border-radius:13px;
-  background:#faf9f7;
-  padding:11px;
-  margin-top:10px;
+
+border:1px solid var(--line);
+
+border-radius:13px;
+
+background:#faf9f7;
+
+padding:11px;
+
+margin-top:10px;
+
 }
 
 .voiceBox.listening{
-  background:#fff0ee;
+
+background:#fff0ee;
+
 }
 
 .voicePreviewRow{
-  display:grid;
-  grid-template-columns:1fr 1fr 50px 56px auto;
-  gap:4px;
-  margin-top:5px;
+
+display:grid;
+
+grid-template-columns:
+1fr 1fr 50px 56px auto;
+
+gap:4px;
+
+margin-top:5px;
+
 }
 
 .voicePreviewRow input{
-  width:100%;
-  padding:6px;
-  border:1px solid var(--line);
-  border-radius:7px;
-  font-size:10px;
+
+width:100%;
+
+padding:6px;
+
+border:1px solid var(--line);
+
+border-radius:7px;
+
+font-size:10px;
+
 }
 
-/* QUICK SETUP */
+
+/* =====================================================
+QUICK SETUP
+===================================================== */
 
 .popover{
-  position:fixed;
-  top:105px;
-  left:62px;
-  width:min(340px,calc(100vw - 75px));
-  max-height:70vh;
-  overflow:auto;
-  z-index:700;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:14px;
-  box-shadow:0 12px 35px rgba(0,0,0,.18);
-  padding:12px;
-  display:none;
+
+position:fixed;
+
+top:105px;
+
+left:62px;
+
+width:min(
+340px,
+calc(100vw - 75px)
+);
+
+max-height:70vh;
+
+overflow:auto;
+
+z-index:700;
+
+background:#fff;
+
+border:1px solid var(--line);
+
+border-radius:14px;
+
+box-shadow:
+0 12px 35px rgba(0,0,0,.18);
+
+padding:12px;
+
+display:none;
+
 }
 
-.popover.open{display:block}
+.popover.open{
 
-/* SUMMARY */
+display:block;
+
+}
+
+
+/* =====================================================
+SUMMARY
+===================================================== */
 
 .summary{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:8px;
+
 }
 
 .summaryCard{
-  border:1px solid var(--line);
-  border-radius:12px;
-  background:#faf9f7;
-  padding:10px;
+
+border:1px solid var(--line);
+
+border-radius:12px;
+
+background:#faf9f7;
+
+padding:10px;
+
 }
 
 .summaryNumber{
-  font-size:23px;
-  font-weight:900;
+
+font-size:23px;
+
+font-weight:900;
+
 }
 
 .summaryLabel{
-  font-size:9px;
-  color:#777;
+
+font-size:9px;
+
+color:#777;
+
 }
 
-/* DOWNLOAD */
+
+/* =====================================================
+DOWNLOAD
+===================================================== */
 
 .downloadChoice{
-  border:1px solid var(--line);
-  border-radius:15px;
-  background:#faf9f7;
-  padding:14px;
-  margin-top:10px;
+
+border:1px solid var(--line);
+
+border-radius:15px;
+
+background:#faf9f7;
+
+padding:14px;
+
+margin-top:10px;
+
 }
 
-.downloadIcon{font-size:28px}
+.downloadIcon{
 
-/* OVERLAY */
+font-size:28px;
+
+}
+
+
+/* =====================================================
+OVERLAY
+===================================================== */
 
 .overlay{
-  position:fixed;
-  inset:0;
-  z-index:900;
-  background:rgba(0,0,0,.5);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:15px;
+
+position:fixed;
+
+inset:0;
+
+z-index:900;
+
+background:rgba(0,0,0,.5);
+
+display:none;
+
+align-items:center;
+
+justify-content:center;
+
+padding:15px;
+
 }
 
-.overlay.open{display:flex}
+.overlay.open{
+
+display:flex;
+
+}
 
 .modal{
-  width:min(1000px,100%);
-  max-height:94vh;
-  overflow:auto;
-  background:#fff;
-  border-radius:18px;
-  padding:18px;
+
+width:min(1000px,100%);
+
+max-height:94vh;
+
+overflow:auto;
+
+background:#fff;
+
+border-radius:18px;
+
+padding:18px;
+
 }
 
 .modalTop{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:8px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:flex-start;
+
+gap:8px;
+
 }
 
-/* CHART */
+
+/* =====================================================
+CHART
+===================================================== */
 
 .chartControls{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:7px;
-  margin:12px 0;
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:7px;
+
+margin:12px 0;
+
 }
 
 .chart{
-  background:#fff;
-  color:#111;
-  width:100%;
-  min-height:900px;
-  padding:44px;
-  border:1px solid #ddd;
-  margin-top:14px;
+
+background:#fff;
+
+color:#111;
+
+width:100%;
+
+min-height:900px;
+
+padding:44px;
+
+border:1px solid #ddd;
+
+margin-top:14px;
+
 }
 
 .chartWelcome{
-  text-align:center;
-  font-family:Georgia,serif;
-  font-style:italic;
-  font-size:64px;
+
+text-align:center;
+
+font-family:Georgia,serif;
+
+font-style:italic;
+
+font-size:64px;
+
 }
 
 .chartSmall{
-  text-align:center;
-  font-size:10px;
-  letter-spacing:4px;
-  margin-top:24px;
+
+text-align:center;
+
+font-size:10px;
+
+letter-spacing:4px;
+
+margin-top:24px;
+
 }
 
 .chartNames{
-  text-align:center;
-  font-family:Georgia,serif;
-  font-size:29px;
-  letter-spacing:4px;
-  margin-top:7px;
+
+text-align:center;
+
+font-family:Georgia,serif;
+
+font-size:29px;
+
+letter-spacing:4px;
+
+margin-top:7px;
+
 }
 
 .chartDate{
-  text-align:center;
-  font-size:10px;
-  letter-spacing:3px;
-  margin-top:8px;
+
+text-align:center;
+
+font-size:10px;
+
+letter-spacing:3px;
+
+margin-top:8px;
+
 }
 
 .chartFind{
-  text-align:center;
-  font-family:Georgia,serif;
-  font-style:italic;
-  font-size:26px;
-  margin:26px 0 32px;
+
+text-align:center;
+
+font-family:Georgia,serif;
+
+font-style:italic;
+
+font-size:26px;
+
+margin:26px 0 32px;
+
 }
 
 .chartColumns{
-  columns:4;
-  column-gap:34px;
+
+columns:4;
+
+column-gap:34px;
+
 }
 
 .chartGroup{
-  break-inside:avoid;
-  margin-bottom:18px;
+
+break-inside:avoid;
+
+margin-bottom:18px;
+
 }
 
 .chartLetter{
-  font-family:Georgia,serif;
-  font-size:24px;
-  margin-bottom:6px;
+
+font-family:Georgia,serif;
+
+font-size:24px;
+
+margin-bottom:6px;
+
 }
 
 .chartPerson{
-  display:flex;
-  align-items:flex-end;
-  gap:4px;
-  font-family:Georgia,serif;
-  font-size:10px;
-  line-height:1.65;
+
+display:flex;
+
+align-items:flex-end;
+
+gap:4px;
+
+font-family:Georgia,serif;
+
+font-size:10px;
+
+line-height:1.65;
+
 }
 
 .chartDots{
-  flex:1;
-  height:10px;
-  border-bottom:1px dotted #777;
+
+flex:1;
+
+height:10px;
+
+border-bottom:1px dotted #777;
+
 }
 
 .chartTable{
-  min-width:18px;
-  text-align:right;
+
+min-width:18px;
+
+text-align:right;
+
 }
 
-/* EXPORT */
+
+/* =====================================================
+EXPORT
+===================================================== */
 
 .venueExport{
-  position:relative;
-  width:1600px;
-  height:1000px;
-  background:#fff;
-  overflow:hidden;
+
+position:relative;
+
+width:1600px;
+
+height:1000px;
+
+background:#fff;
+
+overflow:hidden;
+
 }
 
 .venueExportBg{
-  position:absolute;
-  inset:0;
-  background:#fff center/contain no-repeat;
+
+position:absolute;
+
+inset:0;
+
+background:#fff center/contain no-repeat;
+
 }
 
 .exportObject{
-  position:absolute;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  border:2px solid #444;
-  background:#fff;
-  font-weight:800;
-  transform-origin:center center;
+
+position:absolute;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+text-align:center;
+
+border:2px solid #444;
+
+background:#fff;
+
+font-weight:800;
+
+transform-origin:center center;
+
 }
 
 .exportObject.djbox{
-  background:#222;
-  color:#fff;
+
+background:#222;
+
+color:#fff;
+
 }
 
 .exportTable{
-  position:absolute;
-  width:75px;
-  height:75px;
-  border:2px solid #222;
-  border-radius:50%;
-  background:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:850;
-  transform-origin:center center;
+
+position:absolute;
+
+width:75px;
+
+height:75px;
+
+border:2px solid #222;
+
+border-radius:50%;
+
+background:#fff;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-weight:850;
+
+transform-origin:center center;
+
 }
 
-/* MOBILE */
+
+/* =====================================================
+MOBILE
+===================================================== */
 
 @media(max-width:800px){
 
-  .progress{
-    justify-content:flex-start;
-  }
+.saveState{
 
-  .sheet{
-    left:54px;
-    right:0;
-    width:auto;
-    border-left:0;
-  }
-
-  .table{
-    width:72px;
-    height:72px;
-  }
-
-  .tableCore{
-    width:42px;
-    height:42px;
-  }
-
-  .tableCore b,
-  .tableCore span{
-    font-size:7px;
-  }
-
-  .chartControls{
-    grid-template-columns:1fr;
-  }
-
-  .chartColumns{
-    columns:2;
-  }
-
-  .voicePreviewRow{
-    grid-template-columns:1fr 1fr;
-  }
+display:none;
 
 }
+
+.progress{
+
+justify-content:flex-start;
+
+}
+
+.sheet{
+
+left:54px;
+
+right:0;
+
+width:auto;
+
+border-left:0;
+
+}
+
+.table{
+
+width:72px;
+
+height:72px;
+
+}
+
+.tableCore{
+
+width:42px;
+
+height:42px;
+
+}
+
+.tableCore b,
+.tableCore span{
+
+font-size:7px;
+
+}
+
+.chartControls{
+
+grid-template-columns:1fr;
+
+}
+
+.chartColumns{
+
+columns:2;
+
+}
+
+.voicePreviewRow{
+
+grid-template-columns:1fr 1fr;
+
+}
+
+}
+
 </style>
 </head>
 
+
 <body>
+
 
 <header class="topbar">
 
@@ -938,7 +1715,12 @@ button:disabled{
 seat<span>ly</span>
 </div>
 
+
 <div class="topRight">
+
+<span class="buildTag">
+v5.1.2
+</span>
 
 <span
 id="saveState"
@@ -965,59 +1747,87 @@ onclick="redo()">
 </header>
 
 
+
 <div class="progress">
 
-<button id="progress1" onclick="goStep(1)">
+<button
+id="progress1"
+onclick="goStep(1)">
 1 Venue
 </button>
 
-<button id="progress2" onclick="goStep(2)">
+<button
+id="progress2"
+onclick="goStep(2)">
 2 Tables
 </button>
 
-<button id="progress3" onclick="goStep(3)">
+<button
+id="progress3"
+onclick="goStep(3)">
 3 Guests
 </button>
 
-<button id="progress4" onclick="goStep(4)">
+<button
+id="progress4"
+onclick="goStep(4)">
 4 Review
 </button>
 
-<button id="progress5" onclick="goStep(5)">
+<button
+id="progress5"
+onclick="goStep(5)">
 5 Download
 </button>
 
 </div>
 
 
+
 <div class="app">
+
 
 <nav class="rail">
 
-<button id="rail1" onclick="goStep(1)">
+<button
+id="rail1"
+onclick="goStep(1)">
 <b>▧</b>
 Venue
 </button>
 
-<button id="rail2" onclick="goStep(2)">
+
+<button
+id="rail2"
+onclick="goStep(2)">
 <b>◉</b>
 Tables
 </button>
 
-<button id="rail3" onclick="goStep(3)">
+
+<button
+id="rail3"
+onclick="goStep(3)">
 <b>♙</b>
 Guests
 </button>
 
-<button id="rail4" onclick="goStep(4)">
+
+<button
+id="rail4"
+onclick="goStep(4)">
 <b>✓</b>
 Review
 </button>
 
-<button id="rail5" onclick="goStep(5)">
+
+<button
+id="rail5"
+onclick="goStep(5)">
 <b>↓</b>
 Download
 </button>
+
 
 <button
 id="railMore"
@@ -1030,7 +1840,9 @@ More
 </nav>
 
 
+
 <section class="workspace">
+
 
 <div
 id="toolbar"
@@ -1038,11 +1850,13 @@ class="toolbar">
 </div>
 
 
+
 <div class="canvasArea">
 
 <div
 id="canvas"
 class="canvas">
+
 
 <div
 id="venueBg"
@@ -1064,8 +1878,13 @@ class="empty">
 Build your event
 </b>
 
-<div style="font-size:11px;margin-top:5px">
+<div
+style="
+font-size:11px;
+margin-top:5px">
+
 Start with Venue
+
 </div>
 
 </div>
@@ -1090,13 +1909,16 @@ id="status"
 class="status">
 </div>
 
+
 </div>
 
 </div>
 
 </section>
 
+
 </div>
+
 
 
 <aside
@@ -1108,11 +1930,16 @@ class="sheet">
 </aside>
 
 
+
 <div
 id="quickPopover"
 class="popover">
 
-<div style="display:flex;justify-content:space-between;align-items:center">
+<div
+style="
+display:flex;
+justify-content:space-between;
+align-items:center">
 
 <strong>
 Quick Setup
@@ -1126,18 +1953,24 @@ onclick="closeQuickSetup()">
 
 </div>
 
+
 <div class="hint">
+
 Choose approximately how many guests you expect.
+
 </div>
+
 
 <div
 id="quickGuestButtons"
 class="grid2">
 </div>
 
+
 <div id="quickResults"></div>
 
 </div>
+
 
 
 <div
@@ -1145,6 +1978,7 @@ id="chartOverlay"
 class="overlay">
 
 <div class="modal">
+
 
 <div class="modalTop">
 
@@ -1160,6 +1994,7 @@ Alphabetical Seating Chart
 
 </div>
 
+
 <button
 class="secondary"
 onclick="closeChart()">
@@ -1167,6 +2002,7 @@ onclick="closeChart()">
 </button>
 
 </div>
+
 
 
 <div class="chartControls">
@@ -1200,17 +2036,34 @@ id="chartColumns"
 class="field"
 onchange="renderChart()">
 
-<option value="2">2 columns</option>
-<option value="3">3 columns</option>
-<option value="4" selected>4 columns</option>
-<option value="5">5 columns</option>
+<option value="2">
+2 columns
+</option>
+
+<option value="3">
+3 columns
+</option>
+
+<option
+value="4"
+selected>
+4 columns
+</option>
+
+<option value="5">
+5 columns
+</option>
 
 </select>
 
 </div>
 
 
-<div style="display:flex;gap:7px;justify-content:flex-end">
+<div
+style="
+display:flex;
+gap:7px;
+justify-content:flex-end">
 
 <button
 class="secondary"
@@ -1231,9 +2084,11 @@ id="chart"
 class="chart">
 </div>
 
+
 </div>
 
 </div>
+
 
 
 <div
@@ -1241,6 +2096,7 @@ id="venueOverlay"
 class="overlay">
 
 <div class="modal">
+
 
 <div class="modalTop">
 
@@ -1256,6 +2112,7 @@ Venue + Objects + Tables
 
 </div>
 
+
 <button
 class="secondary"
 onclick="closeVenueExport()">
@@ -1265,7 +2122,11 @@ onclick="closeVenueExport()">
 </div>
 
 
-<div style="display:flex;gap:7px;justify-content:flex-end">
+<div
+style="
+display:flex;
+gap:7px;
+justify-content:flex-end">
 
 <button
 class="secondary"
@@ -1283,12 +2144,18 @@ PDF
 
 <div
 id="venuePreview"
-style="margin-top:14px;overflow:auto;padding:10px;background:#eee">
+style="
+margin-top:14px;
+overflow:auto;
+padding:10px;
+background:#eee">
 </div>
+
 
 </div>
 
 </div>
+
 
 
 <input
@@ -1303,6 +2170,7 @@ id="backupRestore"
 type="file"
 accept=".json,application/json"
 hidden>
+
 
 
 <div
@@ -1322,17 +2190,20 @@ font-size:11px">
 </div>
 
 
+
 <script>
 
 /* =====================================================
 STATE
 ===================================================== */
 
-const STORAGE_KEY='seatly511stable';
+const STORAGE_KEY=
+'seatly512stable';
+
 
 let S={
 
-version:511,
+version:512,
 
 venueImage:null,
 
@@ -1347,35 +2218,58 @@ tables:[],
 guests:[],
 
 chart:{
-  couple:'',
-  date:'',
-  welcome:'Welcome',
-  find:'Please find your seat',
-  columns:4
+
+couple:'',
+
+date:'',
+
+welcome:'Welcome',
+
+find:
+'Please find your seat',
+
+columns:4
+
 }
 
 };
 
+
 let currentStep=1;
+
 
 let selected=null;
 
+
 let currentGuestTable=null;
 
+
 let undoStack=[];
+
 let redoStack=[];
 
+
 let voiceRecognition=null;
+
 let voiceDraft=[];
 
 
-const $=id=>document.getElementById(id);
 
-const canvas=$('canvas');
+const $=
+id=>document.getElementById(id);
 
-const objectLayer=$('objectLayer');
 
-const tableLayer=$('tableLayer');
+const canvas=
+$('canvas');
+
+
+const objectLayer=
+$('objectLayer');
+
+
+const tableLayer=
+$('tableLayer');
+
 
 
 /* =====================================================
@@ -1385,19 +2279,31 @@ UTIL
 function uid(){
 
 if(
-window.crypto &&
+window.crypto
+&&
 crypto.randomUUID
 ){
+
 return crypto.randomUUID();
+
 }
 
+
 return String(
-Date.now()+Math.random()
+Date.now()
++
+Math.random()
 );
 
 }
 
-function clamp(value,min,max){
+
+
+function clamp(
+value,
+min,
+max
+){
 
 return Math.max(
 min,
@@ -1409,41 +2315,64 @@ value
 
 }
 
+
+
 function pctX(px){
 
 return(
 px/
-Math.max(canvas.clientWidth,1)
-)*100;
+Math.max(
+canvas.clientWidth,
+1
+)
+)
+*100;
 
 }
+
+
 
 function pctY(px){
 
 return(
 px/
-Math.max(canvas.clientHeight,1)
-)*100;
+Math.max(
+canvas.clientHeight,
+1
+)
+)
+*100;
 
 }
+
+
 
 function pxX(percent){
 
 return(
-Number(percent||0)/100
-)*
+Number(percent||0)
+/
+100
+)
+*
 canvas.clientWidth;
 
 }
 
+
+
 function pxY(percent){
 
 return(
-Number(percent||0)/100
-)*
+Number(percent||0)
+/
+100
+)
+*
 canvas.clientHeight;
 
 }
+
 
 
 /* =====================================================
@@ -1459,21 +2388,28 @@ STORAGE_KEY,
 JSON.stringify(S)
 );
 
-$('saveState').textContent=
+
+$('saveState')
+.textContent=
 'Saved ✓';
+
 
 return true;
 
-}catch(error){
+}
+catch(error){
 
-$('saveState').textContent=
+$('saveState')
+.textContent=
 'Save failed';
+
 
 return false;
 
 }
 
 }
+
 
 
 /* =====================================================
@@ -1486,38 +2422,54 @@ return JSON.stringify(S);
 
 }
 
+
+
 function remember(){
 
 undoStack.push(
 snapshot()
 );
 
+
 if(
 undoStack.length>80
 ){
+
 undoStack.shift();
+
 }
 
+
 redoStack=[];
+
 
 updateUndoButtons();
 
 }
 
+
+
 function undo(){
 
-if(!undoStack.length)return;
+if(
+!undoStack.length
+)
+return;
+
 
 redoStack.push(
 snapshot()
 );
+
 
 S=
 JSON.parse(
 undoStack.pop()
 );
 
+
 selected=null;
+
 
 applyVenue();
 
@@ -1531,20 +2483,29 @@ updateUndoButtons();
 
 }
 
+
+
 function redo(){
 
-if(!redoStack.length)return;
+if(
+!redoStack.length
+)
+return;
+
 
 undoStack.push(
 snapshot()
 );
+
 
 S=
 JSON.parse(
 redoStack.pop()
 );
 
+
 selected=null;
+
 
 applyVenue();
 
@@ -1558,10 +2519,13 @@ updateUndoButtons();
 
 }
 
+
+
 function updateUndoButtons(){
 
 $('undoBtn').disabled=
 !undoStack.length;
+
 
 $('redoBtn').disabled=
 !redoStack.length;
@@ -1569,8 +2533,9 @@ $('redoBtn').disabled=
 }
 
 
+
 /* =====================================================
-LOAD / MIGRATION
+LOAD
 ===================================================== */
 
 function load(){
@@ -1578,87 +2543,171 @@ function load(){
 try{
 
 const old=
-localStorage.getItem(STORAGE_KEY)
+
+localStorage.getItem(
+STORAGE_KEY
+)
+
 ||
-localStorage.getItem('seatly51')
+
+localStorage.getItem(
+'seatly511stable'
+)
+
 ||
-localStorage.getItem('seatly50')
+
+localStorage.getItem(
+'seatly51'
+)
+
 ||
-localStorage.getItem('seatly481')
+
+localStorage.getItem(
+'seatly50'
+)
+
 ||
-localStorage.getItem('seatly48');
+
+localStorage.getItem(
+'seatly481'
+)
+
+||
+
+localStorage.getItem(
+'seatly48'
+);
+
 
 if(old){
 
 S={
 ...S,
 ...JSON.parse(old),
-version:511
+version:512
 };
 
 }
 
-}catch(error){}
+}
+catch(error){}
 
 
-if(!Array.isArray(S.objects)){
+
+if(
+!Array.isArray(
+S.objects
+)
+){
+
 S.objects=[];
+
 }
 
-if(!Array.isArray(S.tables)){
+
+if(
+!Array.isArray(
+S.tables
+)
+){
+
 S.tables=[];
+
 }
 
-if(!Array.isArray(S.guests)){
+
+if(
+!Array.isArray(
+S.guests
+)
+){
+
 S.guests=[];
+
 }
 
 
-if(!S.chart){
+
+if(
+!S.chart
+){
 
 S.chart={
+
 couple:'',
+
 date:'',
+
 welcome:'Welcome',
-find:'Please find your seat',
+
+find:
+'Please find your seat',
+
 columns:4
+
 };
 
 }
+
 
 
 S.objects.forEach(
 object=>{
 
-if(object.rotation===undefined){
+if(
+object.rotation===undefined
+){
+
 object.rotation=0;
+
 }
 
-if(object.widthPct===undefined){
+
+if(
+object.widthPct===undefined
+){
+
 object.widthPct=16;
+
 }
 
-if(object.heightPct===undefined){
+
+if(
+object.heightPct===undefined
+){
+
 object.heightPct=8;
+
 }
 
 }
 );
+
 
 
 S.tables.forEach(
 table=>{
 
-if(table.rotation===undefined){
+if(
+table.rotation===undefined
+){
+
 table.rotation=0;
+
 }
 
-if(table.scale===undefined){
+
+if(
+table.scale===undefined
+){
+
 table.scale=.8;
+
 }
 
 }
 );
+
 
 
 requestAnimationFrame(
@@ -1666,16 +2715,30 @@ requestAnimationFrame(
 
 applyVenue();
 
+
 currentStep=
+
 S.tablesLocked
+
 ?3
+
 :S.venueLocked
+
 ?2
+
 :1;
+
+
+selected=null;
+
 
 renderAll();
 
-refreshUI();
+renderToolbar();
+
+updateNavigation();
+
+updateLayerAccess();
 
 save();
 
@@ -1685,6 +2748,7 @@ updateUndoButtons();
 );
 
 }
+
 
 
 /* =====================================================
@@ -1697,6 +2761,7 @@ closeSheet();
 
 closeQuickSetup();
 
+
 currentStep=
 clamp(
 Number(step),
@@ -1704,13 +2769,30 @@ Number(step),
 5
 );
 
+
 selected=null;
+
+currentGuestTable=null;
+
+
+/*
+IMPORTANT:
+Update state before rendering anything.
+*/
+
+updateNavigation();
+
+updateLayerAccess();
+
 
 renderAll();
 
-refreshUI();
+renderToolbar();
 
-if(currentStep>=3){
+
+if(
+currentStep>=3
+){
 
 openStepSheet();
 
@@ -1718,17 +2800,27 @@ openStepSheet();
 
 }
 
+
+
 function openMore(){
 
 closeQuickSetup();
 
+
 selected=null;
 
+currentGuestTable=null;
+
+
 currentStep=0;
+
 
 renderAll();
 
 updateNavigation();
+
+updateLayerAccess();
+
 
 renderMoreSheet();
 
@@ -1736,9 +2828,15 @@ openSheet();
 
 }
 
+
+
 function updateNavigation(){
 
-for(let i=1;i<=5;i++){
+for(
+let i=1;
+i<=5;
+i++
+){
 
 $('progress'+i)
 .classList
@@ -1746,6 +2844,7 @@ $('progress'+i)
 'active',
 currentStep===i
 );
+
 
 $('rail'+i)
 .classList
@@ -1755,6 +2854,7 @@ currentStep===i
 );
 
 }
+
 
 $('railMore')
 .classList
@@ -1771,12 +2871,14 @@ $('progress1')
 S.venueLocked
 );
 
+
 $('progress2')
 .classList
 .toggle(
 'done',
 S.tablesLocked
 );
+
 
 $('progress3')
 .classList
@@ -1786,6 +2888,8 @@ S.guests.length>0
 );
 
 }
+
+
 
 function refreshUI(){
 
@@ -1798,34 +2902,56 @@ renderToolbar();
 }
 
 
+
 /* =====================================================
-LAYERS — IMPORTANT
+LAYER ACCESS
 ===================================================== */
 
 function updateLayerAccess(){
 
-objectLayer.classList.remove('active');
+objectLayer
+.classList
+.remove(
+'active'
+);
 
-tableLayer.classList.remove('active');
+
+tableLayer
+.classList
+.remove(
+'active'
+);
 
 
-if(currentStep===1){
+if(
+currentStep===1
+){
 
-objectLayer.classList.add('active');
+objectLayer
+.classList
+.add(
+'active'
+);
 
 }
 
 
 if(
-currentStep===2 ||
+currentStep===2
+||
 currentStep===3
 ){
 
-tableLayer.classList.add('active');
+tableLayer
+.classList
+.add(
+'active'
+);
 
 }
 
 }
+
 
 
 /* =====================================================
@@ -1834,32 +2960,61 @@ TOOLBAR
 
 function renderToolbar(){
 
-const toolbar=$('toolbar');
+const toolbar=
+$('toolbar');
+
 
 if(
-currentStep!==1 &&
+currentStep!==1
+&&
 currentStep!==2
 ){
 
-toolbar.classList.remove('show');
+toolbar
+.classList
+.remove(
+'show'
+);
+
 
 toolbar.innerHTML='';
+
 
 return;
 
 }
 
-toolbar.classList.add('show');
 
-if(currentStep===1){
+toolbar
+.classList
+.add(
+'show'
+);
+
+
+if(
+currentStep===1
+){
+
 renderVenueToolbar();
+
+return;
+
 }
 
-if(currentStep===2){
+
+if(
+currentStep===2
+){
+
 renderTableToolbar();
+
+return;
+
 }
 
 }
+
 
 
 /* =====================================================
@@ -1870,7 +3025,10 @@ function renderVenueToolbar(){
 
 let html='';
 
-if(!S.venueLocked){
+
+if(
+!S.venueLocked
+){
 
 html+=`
 
@@ -1883,6 +3041,7 @@ onclick="addVenue('dancefloor')">
 
 </button>
 
+
 <button
 class="toolObject"
 onclick="addVenue('djbox')">
@@ -1891,6 +3050,7 @@ onclick="addVenue('djbox')">
 <small>DJ Box</small>
 
 </button>
+
 
 <button
 class="toolObject"
@@ -1901,6 +3061,7 @@ onclick="addVenue('bar')">
 
 </button>
 
+
 <button
 class="toolObject"
 onclick="addVenue('entrance')">
@@ -1910,9 +3071,13 @@ onclick="addVenue('entrance')">
 
 </button>
 
+
 <button
 class="toolObject"
-onclick="document.getElementById('venueUpload').click()">
+onclick="
+document
+.getElementById('venueUpload')
+.click()">
 
 <span>📷</span>
 <small>Background</small>
@@ -1924,16 +3089,21 @@ onclick="document.getElementById('venueUpload').click()">
 }
 
 
-if(selected?.kind==='object'){
+
+if(
+selected?.kind==='object'
+){
 
 const object=
 getSelectedObject();
+
 
 if(object){
 
 html+=`
 
 <div class="divider"></div>
+
 
 <div class="toolName">
 
@@ -1947,11 +3117,13 @@ ${object.rotation||0}° · Edit mode
 
 </div>
 
+
 <button
 class="secondary"
 onclick="resizeVenue(.9)">
 − Smaller
 </button>
+
 
 <button
 class="secondary"
@@ -1959,11 +3131,13 @@ onclick="resizeVenue(1.1)">
 + Larger
 </button>
 
+
 <button
 class="secondary"
 onclick="rotateVenue(-15)">
 ↺ 15°
 </button>
+
 
 <button
 class="secondary"
@@ -1971,11 +3145,13 @@ onclick="rotateVenue(15)">
 ↻ 15°
 </button>
 
+
 <button
 class="danger"
 onclick="deleteSelectedVenue()">
 🗑 Delete
 </button>
+
 
 <button
 onclick="finishEditing()">
@@ -1989,11 +3165,15 @@ onclick="finishEditing()">
 }
 
 
-if(S.venueLocked){
+
+if(
+S.venueLocked
+){
 
 html+=`
 
 <div class="divider"></div>
+
 
 <div class="toolName">
 
@@ -2007,34 +3187,47 @@ Locked
 
 </div>
 
+
 <button
 class="secondary"
 onclick="editVenue()">
+
 Edit Venue
+
 </button>
+
 
 <button
 onclick="goStep(2)">
+
 Next →
+
 </button>
 
 `;
 
-}else{
+}
+else{
 
 html+=`
 
 <div class="divider"></div>
 
+
 <button
 class="secondary"
 onclick="clearVenue()">
+
 Clear
+
 </button>
+
 
 <button
 onclick="saveVenue()">
+
 Save Venue ✓
+
 </button>
 
 `;
@@ -2042,10 +3235,13 @@ Save Venue ✓
 }
 
 
-$('toolbar').innerHTML=
+
+$('toolbar')
+.innerHTML=
 html;
 
 }
+
 
 
 /* =====================================================
@@ -2054,9 +3250,12 @@ TABLE TOOLBAR
 
 function renderTableToolbar(){
 
-if(!S.venueLocked){
+if(
+!S.venueLocked
+){
 
-$('toolbar').innerHTML=`
+$('toolbar')
+.innerHTML=`
 
 <div class="toolName">
 
@@ -2070,21 +3269,29 @@ Complete Step 1
 
 </div>
 
-<button onclick="goStep(1)">
+
+<button
+onclick="goStep(1)">
+
 Venue
+
 </button>
 
 `;
+
 
 return;
 
 }
 
 
+
 let html='';
 
 
-if(!S.tablesLocked){
+if(
+!S.tablesLocked
+){
 
 html+=`
 
@@ -2097,6 +3304,7 @@ onclick="openQuickSetup()">
 
 </button>
 
+
 <button
 class="toolObject"
 onclick="addTable(8)">
@@ -2105,6 +3313,7 @@ onclick="addTable(8)">
 <small>8 Seats</small>
 
 </button>
+
 
 <button
 class="toolObject"
@@ -2115,6 +3324,7 @@ onclick="addTable(10)">
 
 </button>
 
+
 <button
 class="toolObject"
 onclick="addTable(12)">
@@ -2123,6 +3333,7 @@ onclick="addTable(12)">
 <small>12 Seats</small>
 
 </button>
+
 
 <button
 class="toolObject"
@@ -2138,16 +3349,21 @@ onclick="addTable(16)">
 }
 
 
-if(selected?.kind==='table'){
+
+if(
+selected?.kind==='table'
+){
 
 const table=
 getSelectedTable();
+
 
 if(table){
 
 html+=`
 
 <div class="divider"></div>
+
 
 <div class="toolName">
 
@@ -2161,11 +3377,13 @@ ${table.seats} seats · ${table.rotation||0}°
 
 </div>
 
+
 <button
 class="secondary"
 onclick="changeTableNumber()">
 # Number
 </button>
+
 
 <button
 class="secondary"
@@ -2173,11 +3391,13 @@ onclick="changeTableSeats()">
 Seats
 </button>
 
+
 <button
 class="secondary"
 onclick="resizeTable(.9)">
 − Smaller
 </button>
+
 
 <button
 class="secondary"
@@ -2185,11 +3405,13 @@ onclick="resizeTable(1.1)">
 + Larger
 </button>
 
+
 <button
 class="secondary"
 onclick="rotateTable(-15)">
 ↺ 15°
 </button>
+
 
 <button
 class="secondary"
@@ -2197,17 +3419,20 @@ onclick="rotateTable(15)">
 ↻ 15°
 </button>
 
+
 <button
 class="secondary"
 onclick="duplicateTable()">
 Copy
 </button>
 
+
 <button
 class="danger"
 onclick="deleteSelectedTable()">
 🗑 Delete
 </button>
+
 
 <button
 onclick="finishEditing()">
@@ -2221,11 +3446,15 @@ onclick="finishEditing()">
 }
 
 
-if(S.tablesLocked){
+
+if(
+S.tablesLocked
+){
 
 html+=`
 
 <div class="divider"></div>
+
 
 <div class="toolName">
 
@@ -2239,34 +3468,47 @@ Locked
 
 </div>
 
+
 <button
 class="secondary"
 onclick="editTables()">
+
 Edit Tables
+
 </button>
+
 
 <button
 onclick="goStep(3)">
+
 Next →
+
 </button>
 
 `;
 
-}else{
+}
+else{
 
 html+=`
 
 <div class="divider"></div>
 
+
 <button
 class="secondary"
 onclick="clearTables()">
+
 Clear
+
 </button>
+
 
 <button
 onclick="saveTables()">
+
 Save Tables ✓
+
 </button>
 
 `;
@@ -2274,19 +3516,24 @@ Save Tables ✓
 }
 
 
-$('toolbar').innerHTML=
+
+$('toolbar')
+.innerHTML=
 html;
 
 }
 
 
+
 /* =====================================================
-VENUE ADD
+ADD VENUE
 ===================================================== */
 
 function addVenue(type){
 
-if(S.venueLocked){
+if(
+S.venueLocked
+){
 
 toast(
 'Tap Edit Venue first'
@@ -2300,27 +3547,43 @@ return;
 const configs={
 
 dancefloor:{
+
 label:'Dance Floor',
+
 widthPct:28,
+
 heightPct:20
+
 },
 
 djbox:{
+
 label:'DJ Box',
+
 widthPct:16,
+
 heightPct:8
+
 },
 
 bar:{
+
 label:'Bar',
+
 widthPct:20,
+
 heightPct:8
+
 },
 
 entrance:{
+
 label:'Entrance',
+
 widthPct:16,
+
 heightPct:8
+
 }
 
 };
@@ -2329,7 +3592,9 @@ heightPct:8
 const config=
 configs[type];
 
-if(!config)return;
+
+if(!config)
+return;
 
 
 remember();
@@ -2341,17 +3606,22 @@ id:uid(),
 
 type,
 
-label:config.label,
+label:
+config.label,
 
-widthPct:config.widthPct,
+widthPct:
+config.widthPct,
 
-heightPct:config.heightPct,
+heightPct:
+config.heightPct,
 
 xPct:
-50-config.widthPct/2,
+50-
+config.widthPct/2,
 
 yPct:
-50-config.heightPct/2,
+50-
+config.heightPct/2,
 
 rotation:0
 
@@ -2364,8 +3634,11 @@ object
 
 
 selected={
+
 kind:'object',
+
 id:object.id
+
 };
 
 
@@ -2376,6 +3649,7 @@ save();
 renderToolbar();
 
 }
+
 
 
 /* =====================================================
@@ -2397,46 +3671,58 @@ object.id===selected.id
 
 }
 
+
+
 function resizeVenue(multiplier){
 
 const object=
 getSelectedObject();
 
-if(!object)return;
+
+if(!object)
+return;
 
 
 remember();
 
 
 object.widthPct=
+
 clamp(
-object.widthPct*multiplier,
+object.widthPct*
+multiplier,
 5,
 70
 );
 
 
 object.heightPct=
+
 clamp(
-object.heightPct*multiplier,
+object.heightPct*
+multiplier,
 4,
 65
 );
 
 
 object.xPct=
+
 clamp(
 object.xPct,
 0,
-100-object.widthPct
+100-
+object.widthPct
 );
 
 
 object.yPct=
+
 clamp(
 object.yPct,
 0,
-100-object.heightPct
+100-
+object.heightPct
 );
 
 
@@ -2447,26 +3733,34 @@ save();
 renderToolbar();
 
 }
+
+
 
 function rotateVenue(delta){
 
 const object=
 getSelectedObject();
 
-if(!object)return;
+
+if(!object)
+return;
 
 
 remember();
 
 
 object.rotation=
+
 (
-Number(object.rotation||0)
+Number(
+object.rotation||0
+)
 +
 delta
 +
 360
-)%360;
+)
+%360;
 
 
 renderAll();
@@ -2477,12 +3771,16 @@ renderToolbar();
 
 }
 
+
+
 function deleteSelectedVenue(){
 
 const object=
 getSelectedObject();
 
-if(!object)return;
+
+if(!object)
+return;
 
 
 if(
@@ -2497,6 +3795,7 @@ remember();
 
 
 S.objects=
+
 S.objects.filter(
 item=>
 item.id!==object.id
@@ -2514,6 +3813,12 @@ renderToolbar();
 
 }
 
+
+
+/* =====================================================
+SAVE VENUE — FIXED
+===================================================== */
+
 function saveVenue(){
 
 remember();
@@ -2524,10 +3829,37 @@ S.venueLocked=true;
 
 selected=null;
 
+currentGuestTable=null;
 
-renderAll();
+
+/*
+Save first.
+*/
 
 save();
+
+
+/*
+IMPORTANT:
+Move directly into Step 2.
+No timeout.
+No second navigation call.
+*/
+
+currentStep=2;
+
+
+/*
+Force the complete Step 2 UI state
+before the toolbar renders.
+*/
+
+updateNavigation();
+
+updateLayerAccess();
+
+
+renderAll();
 
 renderToolbar();
 
@@ -2536,13 +3868,13 @@ toast(
 'Venue saved ✓'
 );
 
-
-setTimeout(
-()=>goStep(2),
-200
-);
-
 }
+
+
+
+/* =====================================================
+EDIT / CLEAR VENUE
+===================================================== */
 
 function editVenue(){
 
@@ -2557,19 +3889,29 @@ currentStep=1;
 
 selected=null;
 
+currentGuestTable=null;
 
-renderAll();
 
 save();
 
-refreshUI();
+
+updateNavigation();
+
+updateLayerAccess();
+
+renderAll();
+
+renderToolbar();
 
 }
+
+
 
 function clearVenue(){
 
 if(
-!S.objects.length &&
+!S.objects.length
+&&
 !S.venueImage
 ){
 
@@ -2586,7 +3928,8 @@ if(
 !confirm(
 'Clear the entire Venue?'
 )
-)return;
+)
+return;
 
 
 remember();
@@ -2597,6 +3940,7 @@ S.objects=[];
 S.venueImage=null;
 
 S.venueLocked=false;
+
 
 selected=null;
 
@@ -2612,6 +3956,7 @@ renderToolbar();
 }
 
 
+
 /* =====================================================
 BACKGROUND
 ===================================================== */
@@ -2624,7 +3969,9 @@ event=>{
 const file=
 event.target.files[0];
 
-if(!file)return;
+
+if(!file)
+return;
 
 
 compressImage(
@@ -2669,6 +4016,7 @@ event.target.value='';
 );
 
 
+
 function compressImage(
 file,
 maxDimension,
@@ -2695,6 +4043,7 @@ image.onload=
 let width=
 image.width;
 
+
 let height=
 image.height;
 
@@ -2707,22 +4056,26 @@ height
 
 
 if(
-largest>maxDimension
+largest>
+maxDimension
 ){
 
 const ratio=
-maxDimension/largest;
+maxDimension/
+largest;
 
 
 width=
 Math.round(
-width*ratio
+width*
+ratio
 );
 
 
 height=
 Math.round(
-height*ratio
+height*
+ratio
 );
 
 }
@@ -2734,9 +4087,12 @@ document.createElement(
 );
 
 
-temp.width=width;
+temp.width=
+width;
 
-temp.height=height;
+
+temp.height=
+height;
 
 
 temp
@@ -2784,6 +4140,7 @@ file
 }
 
 
+
 function applyVenue(){
 
 $('venueBg')
@@ -2791,10 +4148,13 @@ $('venueBg')
 .backgroundImage=
 
 S.venueImage
+
 ?`url("${S.venueImage}")`
+
 :'none';
 
 }
+
 
 
 /* =====================================================
@@ -2803,7 +4163,9 @@ TABLES
 
 function addTable(seats){
 
-if(S.tablesLocked){
+if(
+S.tablesLocked
+){
 
 toast(
 'Tap Edit Tables first'
@@ -2832,9 +4194,11 @@ seats,
 
 scale:.8,
 
-xPct:position.x,
+xPct:
+position.x,
 
-yPct:position.y,
+yPct:
+position.y,
 
 rotation:0
 
@@ -2847,8 +4211,11 @@ table
 
 
 selected={
+
 kind:'table',
+
 id:table.id
+
 };
 
 
@@ -2861,12 +4228,16 @@ renderToolbar();
 }
 
 
+
 function nextTableNumber(){
 
 const numbers=
+
 S.tables.map(
 table=>
-Number(table.number)
+Number(
+table.number
+)
 );
 
 
@@ -2874,7 +4245,9 @@ let number=1;
 
 
 while(
-numbers.includes(number)
+numbers.includes(
+number
+)
 ){
 
 number++;
@@ -2887,6 +4260,7 @@ return number;
 }
 
 
+
 function findFreeTablePosition(){
 
 const count=
@@ -2897,12 +4271,14 @@ const columns=5;
 
 
 const col=
-count%columns;
+count%
+columns;
 
 
 const row=
 Math.floor(
-count/columns
+count/
+columns
 );
 
 
@@ -2929,6 +4305,7 @@ row*15,
 }
 
 
+
 function getSelectedTable(){
 
 if(
@@ -2945,20 +4322,27 @@ table.id===selected.id
 }
 
 
+
 function resizeTable(multiplier){
 
 const table=
 getSelectedTable();
 
-if(!table)return;
+
+if(!table)
+return;
 
 
 remember();
 
 
 table.scale=
+
 clamp(
-Number(table.scale||1)*
+Number(
+table.scale||1
+)
+*
 multiplier,
 .35,
 1.8
@@ -2974,25 +4358,32 @@ renderToolbar();
 }
 
 
+
 function rotateTable(delta){
 
 const table=
 getSelectedTable();
 
-if(!table)return;
+
+if(!table)
+return;
 
 
 remember();
 
 
 table.rotation=
+
 (
-Number(table.rotation||0)
+Number(
+table.rotation||0
+)
 +
 delta
 +
 360
-)%360;
+)
+%360;
 
 
 renderAll();
@@ -3004,12 +4395,15 @@ renderToolbar();
 }
 
 
+
 function changeTableNumber(){
 
 const table=
 getSelectedTable();
 
-if(!table)return;
+
+if(!table)
+return;
 
 
 const answer=
@@ -3019,10 +4413,14 @@ table.number
 );
 
 
-if(answer===null)return;
+if(
+answer===null
+)
+return;
 
 
 const number=
+
 Math.max(
 1,
 Number(answer)||1
@@ -3030,11 +4428,16 @@ Number(answer)||1
 
 
 const exists=
+
 S.tables.some(
 other=>
+
 other.id!==table.id
+
 &&
-Number(other.number)===number
+
+Number(other.number)===
+number
 );
 
 
@@ -3065,12 +4468,15 @@ renderToolbar();
 }
 
 
+
 function changeTableSeats(){
 
 const table=
 getSelectedTable();
 
-if(!table)return;
+
+if(!table)
+return;
 
 
 const answer=
@@ -3080,7 +4486,10 @@ table.seats
 );
 
 
-if(answer===null)return;
+if(
+answer===null
+)
+return;
 
 
 const seats=
@@ -3108,7 +4517,8 @@ table.id
 
 
 if(
-seats<used
+seats<
+used
 ){
 
 toast(
@@ -3136,12 +4546,15 @@ renderToolbar();
 }
 
 
+
 function duplicateTable(){
 
 const table=
 getSelectedTable();
 
-if(!table)return;
+
+if(!table)
+return;
 
 
 remember();
@@ -3179,8 +4592,11 @@ copy
 
 
 selected={
+
 kind:'table',
+
 id:copy.id
+
 };
 
 
@@ -3193,12 +4609,15 @@ renderToolbar();
 }
 
 
+
 function deleteSelectedTable(){
 
 const table=
 getSelectedTable();
 
-if(!table)return;
+
+if(!table)
+return;
 
 
 if(
@@ -3213,6 +4632,7 @@ remember();
 
 
 S.tables=
+
 S.tables.filter(
 item=>
 item.id!==table.id
@@ -3246,9 +4666,12 @@ renderToolbar();
 }
 
 
+
 function saveTables(){
 
-if(!S.tables.length){
+if(
+!S.tables.length
+){
 
 toast(
 'Add at least one table'
@@ -3268,9 +4691,18 @@ S.tablesLocked=true;
 selected=null;
 
 
-renderAll();
-
 save();
+
+
+currentStep=3;
+
+
+updateNavigation();
+
+updateLayerAccess();
+
+
+renderAll();
 
 renderToolbar();
 
@@ -3280,12 +4712,10 @@ toast(
 );
 
 
-setTimeout(
-()=>goStep(3),
-200
-);
+openStepSheet();
 
 }
+
 
 
 function editTables(){
@@ -3301,19 +4731,29 @@ currentStep=2;
 
 selected=null;
 
+currentGuestTable=null;
 
-renderAll();
 
 save();
 
-refreshUI();
+
+updateNavigation();
+
+updateLayerAccess();
+
+renderAll();
+
+renderToolbar();
 
 }
 
 
+
 function clearTables(){
 
-if(!S.tables.length){
+if(
+!S.tables.length
+){
 
 toast(
 'No tables to delete'
@@ -3336,6 +4776,7 @@ remember();
 
 
 S.tables=[];
+
 
 S.tablesLocked=false;
 
@@ -3361,13 +4802,17 @@ renderToolbar();
 }
 
 
+
 /* =====================================================
 QUICK SETUP
 ===================================================== */
 
 function openQuickSetup(){
 
-if(S.tablesLocked)return;
+if(
+S.tablesLocked
+)
+return;
 
 
 $('quickGuestButtons')
@@ -3414,6 +4859,7 @@ $('quickPopover')
 }
 
 
+
 function closeQuickSetup(){
 
 $('quickPopover')
@@ -3423,6 +4869,7 @@ $('quickPopover')
 );
 
 }
+
 
 
 function showQuickOptions(
@@ -3438,7 +4885,8 @@ seats=>{
 
 const count=
 Math.ceil(
-guests/seats
+guests/
+seats
 );
 
 
@@ -3449,7 +4897,8 @@ seats,
 count,
 
 capacity:
-count*seats
+count*
+seats
 
 };
 
@@ -3495,6 +4944,7 @@ total seats
 
 </div>
 
+
 <button
 onclick="applyQuickSetup(
 ${option.count},
@@ -3517,6 +4967,7 @@ Create
 `;
 
 }
+
 
 
 function applyQuickSetup(
@@ -3557,6 +5008,7 @@ seats
 
 S.tablesLocked=false;
 
+
 selected=null;
 
 
@@ -3571,6 +5023,7 @@ renderToolbar();
 }
 
 
+
 function createGrid(
 quantity,
 seats
@@ -3582,27 +5035,46 @@ canvas.getBoundingClientRect();
 
 let scale=.74;
 
-if(quantity>=10)scale=.64;
 
-if(quantity>=18)scale=.55;
+if(
+quantity>=10
+)
+scale=.64;
 
-if(quantity>=28)scale=.46;
 
-if(quantity>=38)scale=.39;
+if(
+quantity>=18
+)
+scale=.55;
+
+
+if(
+quantity>=28
+)
+scale=.46;
+
+
+if(
+quantity>=38
+)
+scale=.39;
 
 
 const base=
-82*scale;
+82*
+scale;
 
 
 const gap=12;
 
 
 let columns=
+
 Math.max(
 1,
 Math.floor(
-(rect.width-20)/
+(rect.width-20)
+/
 (base+gap)
 )
 );
@@ -3617,16 +5089,22 @@ quantity
 
 let rows=
 Math.ceil(
-quantity/columns
+quantity/
+columns
 );
 
 
 while(
-rows*(base+gap)
+
+rows*
+(base+gap)
 >
 rect.height-60
+
 &&
+
 columns<quantity
+
 ){
 
 columns++;
@@ -3634,21 +5112,29 @@ columns++;
 
 rows=
 Math.ceil(
-quantity/columns
+quantity/
+columns
 );
 
 }
 
 
 const totalWidth=
-(columns-1)*(base+gap);
+
+(columns-1)
+*
+(base+gap);
 
 
 const totalHeight=
-(rows-1)*(base+gap);
+
+(rows-1)
+*
+(base+gap);
 
 
 const startX=
+
 Math.max(
 8,
 rect.width/2
@@ -3660,6 +5146,7 @@ base/2
 
 
 const startY=
+
 Math.max(
 30,
 rect.height/2
@@ -3677,12 +5164,14 @@ i++
 ){
 
 const col=
-i%columns;
+i%
+columns;
 
 
 const row=
 Math.floor(
-i/columns
+i/
+columns
 );
 
 
@@ -3702,13 +5191,15 @@ rotation:0,
 xPct:
 pctX(
 startX+
-col*(base+gap)
+col*
+(base+gap)
 ),
 
 yPct:
 pctY(
 startY+
-row*(base+gap)
+row*
+(base+gap)
 )
 
 });
@@ -3718,19 +5209,22 @@ row*(base+gap)
 }
 
 
+
 /* =====================================================
-EDIT DONE
+FINISH EDIT
 ===================================================== */
 
 function finishEditing(){
 
 selected=null;
 
+
 renderAll();
 
 renderToolbar();
 
 }
+
 
 
 /* =====================================================
@@ -3740,6 +5234,7 @@ RENDER
 function renderAll(){
 
 objectLayer.innerHTML='';
+
 
 tableLayer.innerHTML='';
 
@@ -3772,6 +5267,7 @@ updateNavigation();
 updateLayerAccess();
 
 }
+
 
 
 /* =====================================================
@@ -3836,6 +5332,7 @@ object.heightPct+'%';
 
 
 el.style.transform=
+
 `rotate(${object.rotation||0}deg)`;
 
 
@@ -3877,6 +5374,7 @@ el
 );
 
 }
+
 
 
 /* =====================================================
@@ -4011,7 +5509,9 @@ table,
 }
 
 
-if(currentStep===3){
+if(
+currentStep===3
+){
 
 el.addEventListener(
 'pointerup',
@@ -4038,6 +5538,7 @@ el
 );
 
 }
+
 
 
 /* =====================================================
@@ -4068,8 +5569,13 @@ i++
 ){
 
 const angle=
-2*Math.PI*i/count
+
+2*
+Math.PI*
+i/count
+
 -
+
 Math.PI/2;
 
 
@@ -4084,24 +5590,32 @@ chair.className=
 
 
 chair.style.left=
+
 (
 center
 +
-Math.cos(angle)*radius
+Math.cos(angle)
+*
+radius
 -
 4.5
 )
+
 +'px';
 
 
 chair.style.top=
+
 (
 center
 +
-Math.sin(angle)*radius
+Math.sin(angle)
+*
+radius
 -
 4.5
 )
+
 +'px';
 
 
@@ -4114,8 +5628,9 @@ chair
 }
 
 
+
 /* =====================================================
-TAP / DRAG INTERACTION
+TAP / DRAG
 ===================================================== */
 
 function attachEditInteraction(
@@ -4139,6 +5654,7 @@ let dragging=false;
 let before='';
 
 
+
 element.addEventListener(
 'pointerdown',
 event=>{
@@ -4147,7 +5663,9 @@ if(
 event.target.closest(
 '.objectControls'
 )
+
 ||
+
 event.target.closest(
 '.resizeHandle'
 )
@@ -4169,17 +5687,23 @@ selected?.kind===kind
 selected.id===item.id;
 
 
-if(!alreadySelected){
+if(
+!alreadySelected
+){
 
 selected={
+
 kind,
+
 id:item.id
+
 };
 
 
 renderAll();
 
 renderToolbar();
+
 
 return;
 
@@ -4223,10 +5747,12 @@ element.setPointerCapture(
 event.pointerId
 );
 
-}catch(error){}
+}
+catch(error){}
 
 }
 );
+
 
 
 element.addEventListener(
@@ -4240,6 +5766,7 @@ return;
 
 
 const distance=
+
 Math.hypot(
 event.clientX-startX,
 event.clientY-startY
@@ -4272,15 +5799,19 @@ let visualHeight=
 element.offsetHeight;
 
 
-if(kind==='table'){
+if(
+kind==='table'
+){
 
 visualWidth*=
+
 Number(
 item.scale||1
 );
 
 
 visualHeight*=
+
 Number(
 item.scale||1
 );
@@ -4288,42 +5819,61 @@ item.scale||1
 }
 
 
+
 let x=
+
 originalX
+
 +
+
 event.clientX
+
 -
+
 startX;
 
 
+
 let y=
+
 originalY
+
 +
+
 event.clientY
+
 -
+
 startY;
 
 
+
 x=
+
 clamp(
 x,
 0,
 Math.max(
 0,
-rect.width-visualWidth
+rect.width-
+visualWidth
 )
 );
 
 
+
 y=
+
 clamp(
 y,
 0,
 Math.max(
 0,
-rect.height-visualHeight
+rect.height-
+visualHeight
 )
 );
+
 
 
 item.xPct=
@@ -4345,6 +5895,7 @@ item.yPct+'%';
 );
 
 
+
 element.addEventListener(
 'pointerup',
 event=>{
@@ -4361,7 +5912,8 @@ element.releasePointerCapture(
 event.pointerId
 );
 
-}catch(error){}
+}
+catch(error){}
 
 
 if(
@@ -4374,7 +5926,9 @@ undoStack.push(
 before
 );
 
+
 redoStack=[];
+
 
 save();
 
@@ -4396,6 +5950,7 @@ renderToolbar();
 );
 
 
+
 element.addEventListener(
 'pointercancel',
 ()=>{
@@ -4410,6 +5965,7 @@ before='';
 );
 
 }
+
 
 
 /* =====================================================
@@ -4442,6 +5998,7 @@ data-action="rotateLeft">
 
 </button>
 
+
 <button
 class="secondary"
 data-action="rotateRight">
@@ -4450,6 +6007,7 @@ data-action="rotateRight">
 
 </button>
 
+
 <button
 class="danger"
 data-action="delete">
@@ -4457,6 +6015,7 @@ data-action="delete">
 🗑
 
 </button>
+
 
 <button
 data-action="ok">
@@ -4478,6 +6037,7 @@ event.stopPropagation();
 );
 
 
+
 controls.querySelector(
 '[data-action="rotateLeft"]'
 )
@@ -4487,17 +6047,21 @@ event=>{
 event.stopPropagation();
 
 
-if(kind==='object'){
+if(
+kind==='object'
+){
 
 rotateVenue(-15);
 
-}else{
+}
+else{
 
 rotateTable(-15);
 
 }
 
 };
+
 
 
 controls.querySelector(
@@ -4509,17 +6073,21 @@ event=>{
 event.stopPropagation();
 
 
-if(kind==='object'){
+if(
+kind==='object'
+){
 
 rotateVenue(15);
 
-}else{
+}
+else{
 
 rotateTable(15);
 
 }
 
 };
+
 
 
 controls.querySelector(
@@ -4531,17 +6099,21 @@ event=>{
 event.stopPropagation();
 
 
-if(kind==='object'){
+if(
+kind==='object'
+){
 
 deleteSelectedVenue();
 
-}else{
+}
+else{
 
 deleteSelectedTable();
 
 }
 
 };
+
 
 
 controls.querySelector(
@@ -4558,9 +6130,11 @@ finishEditing();
 };
 
 
+
 element.appendChild(
 controls
 );
+
 
 
 const handle=
@@ -4600,8 +6174,9 @@ handle
 }
 
 
+
 /* =====================================================
-STABLE RESIZE — NO RE-RENDER DURING DRAG
+RESIZE
 ===================================================== */
 
 function startResize(
@@ -4636,8 +6211,10 @@ item.heightPct;
 
 
 const objectRatio=
+
 startObjectHeight/
 startObjectWidth;
+
 
 
 const move=
@@ -4647,52 +6224,66 @@ moveEvent.preventDefault();
 
 
 const dx=
+
 moveEvent.clientX
 -
 startX;
 
 
-if(kind==='object'){
+if(
+kind==='object'
+){
 
 const ratio=
+
 Math.max(
 .35,
 (
-startWidth+dx
-)/
+startWidth+
+dx
+)
+/
 startWidth
 );
 
 
 item.widthPct=
+
 clamp(
-startObjectWidth*ratio,
+startObjectWidth*
+ratio,
 5,
 70
 );
 
 
 item.heightPct=
+
 clamp(
-item.widthPct*objectRatio,
+item.widthPct*
+objectRatio,
 4,
 65
 );
 
 
 item.xPct=
+
 clamp(
 item.xPct,
 0,
-100-item.widthPct
+100-
+item.widthPct
 );
 
 
 item.yPct=
+
 clamp(
 item.yPct,
 0,
-100-item.heightPct
+100-
+item.heightPct
 );
 
 
@@ -4706,16 +6297,22 @@ item.heightPct+'%';
 }
 
 
-if(kind==='table'){
+
+if(
+kind==='table'
+){
 
 const newVisualWidth=
+
 Math.max(
 30,
-startWidth+dx
+startWidth+
+dx
 );
 
 
 item.scale=
+
 clamp(
 newVisualWidth/
 baseWidth,
@@ -4731,6 +6328,7 @@ element.style.transform=
 }
 
 };
+
 
 
 const up=
@@ -4750,7 +6348,9 @@ undoStack.push(
 before
 );
 
+
 redoStack=[];
+
 
 save();
 
@@ -4764,6 +6364,7 @@ renderAll();
 renderToolbar();
 
 };
+
 
 
 document.addEventListener(
@@ -4786,6 +6387,7 @@ once:true
 }
 
 
+
 /* =====================================================
 DESELECT
 ===================================================== */
@@ -4796,9 +6398,13 @@ event=>{
 
 if(
 event.target===canvas
+
 ||
+
 event.target===objectLayer
+
 ||
+
 event.target===tableLayer
 ){
 
@@ -4815,28 +6421,44 @@ renderToolbar();
 );
 
 
+
 /* =====================================================
-GUESTS
+SHEETS
 ===================================================== */
 
 function openStepSheet(){
 
-if(currentStep===3){
+if(
+currentStep===3
+){
+
 renderGuestsSheet();
+
 }
 
-if(currentStep===4){
+
+if(
+currentStep===4
+){
+
 renderReviewSheet();
+
 }
 
-if(currentStep===5){
+
+if(
+currentStep===5
+){
+
 renderDownloadSheet();
+
 }
 
 
 openSheet();
 
 }
+
 
 
 function openSheet(){
@@ -4848,6 +6470,7 @@ $('sheet')
 );
 
 }
+
 
 
 function closeSheet(){
@@ -4864,9 +6487,16 @@ currentGuestTable=null;
 }
 
 
+
+/* =====================================================
+GUESTS
+===================================================== */
+
 function renderGuestsSheet(){
 
-if(!S.tables.length){
+if(
+!S.tables.length
+){
 
 $('sheetContent')
 .innerHTML=`
@@ -4885,6 +6515,7 @@ Create tables first.
 
 </div>
 
+
 <button
 class="secondary sheetClose"
 onclick="closeSheet()">
@@ -4893,10 +6524,13 @@ onclick="closeSheet()">
 
 </div>
 
+
 <button
 class="wide"
 onclick="goStep(2)">
+
 Go to Tables
+
 </button>
 
 `;
@@ -4907,12 +6541,14 @@ return;
 }
 
 
+
 const unassigned=
 
 S.guests.filter(
 guest=>
 !guest.tableId
 );
+
 
 
 $('sheetContent')
@@ -4932,6 +6568,7 @@ Step 3
 
 </div>
 
+
 <button
 class="secondary sheetClose"
 onclick="closeSheet()">
@@ -4939,6 +6576,7 @@ onclick="closeSheet()">
 </button>
 
 </div>
+
 
 
 <div class="card">
@@ -4996,7 +6634,9 @@ onclick="addManualGuest()">
 </div>
 
 
+
 ${voiceHTML()}
+
 
 
 <div class="section">
@@ -5019,6 +6659,7 @@ oninput="renderGuestSearch(this.value)">
 </div>
 
 
+
 <div class="section">
 
 <div class="cardTitle">
@@ -5037,6 +6678,7 @@ true
 </div>
 
 
+
 <div class="section">
 
 <button
@@ -5048,6 +6690,7 @@ Delete Entire Guest List
 </button>
 
 </div>
+
 
 
 <button
@@ -5066,8 +6709,9 @@ renderVoicePreview();
 }
 
 
+
 /* =====================================================
-MANUAL GUEST
+ADD MANUAL GUEST
 ===================================================== */
 
 function addManualGuest(){
@@ -5085,6 +6729,7 @@ $('guestFirst')
 
 
 const partySize=
+
 Math.max(
 1,
 Number(
@@ -5100,13 +6745,17 @@ $('guestTable').value
 
 
 const table=
+
 S.tables.find(
 table=>
-Number(table.number)===tableNumber
+Number(table.number)===
+tableNumber
 );
 
 
-if(!surname){
+if(
+!surname
+){
 
 toast(
 'Add surname'
@@ -5117,7 +6766,9 @@ return;
 }
 
 
-if(!table){
+if(
+!table
+){
 
 toast(
 'Table not found'
@@ -5128,16 +6779,21 @@ return;
 }
 
 
+
 const free=
+
 table.seats
+
 -
+
 tableUsedSeats(
 table.id
 );
 
 
 if(
-partySize>free
+partySize>
+free
 ){
 
 toast(
@@ -5162,7 +6818,8 @@ firstName,
 
 partySize,
 
-tableId:table.id
+tableId:
+table.id
 
 });
 
@@ -5174,6 +6831,7 @@ save();
 renderGuestsSheet();
 
 }
+
 
 
 /* =====================================================
@@ -5189,16 +6847,21 @@ tableId;
 
 
 const table=
+
 S.tables.find(
 table=>
 table.id===tableId
 );
 
 
-if(!table)return;
+if(
+!table
+)
+return;
 
 
 const guests=
+
 S.guests
 
 .filter(
@@ -5209,6 +6872,7 @@ guest.tableId===table.id
 .sort(
 compareGuests
 );
+
 
 
 $('sheetContent')
@@ -5241,6 +6905,7 @@ onclick="closeSheet()">
 </button>
 
 </div>
+
 
 
 <div class="card">
@@ -5278,6 +6943,7 @@ onclick="addGuestToTable()">
 </div>
 
 
+
 <div class="section">
 
 <div class="cardTitle">
@@ -5291,6 +6957,7 @@ false
 )}
 
 </div>
+
 
 
 <button
@@ -5309,16 +6976,21 @@ openSheet();
 }
 
 
+
 function addGuestToTable(){
 
 const table=
+
 S.tables.find(
 table=>
 table.id===currentGuestTable
 );
 
 
-if(!table)return;
+if(
+!table
+)
+return;
 
 
 const surname=
@@ -5334,6 +7006,7 @@ $('tableFirst')
 
 
 const partySize=
+
 Math.max(
 1,
 Number(
@@ -5342,7 +7015,9 @@ $('tableParty').value||1
 );
 
 
-if(!surname){
+if(
+!surname
+){
 
 toast(
 'Add surname'
@@ -5353,16 +7028,21 @@ return;
 }
 
 
+
 const free=
+
 table.seats
+
 -
+
 tableUsedSeats(
 table.id
 );
 
 
 if(
-partySize>free
+partySize>
+free
 ){
 
 toast(
@@ -5387,7 +7067,8 @@ firstName,
 
 partySize,
 
-tableId:table.id
+tableId:
+table.id
 
 });
 
@@ -5396,6 +7077,7 @@ renderAll();
 
 save();
 
+
 openTableGuests(
 table.id
 );
@@ -5403,8 +7085,9 @@ table.id
 }
 
 
+
 /* =====================================================
-GUEST ROWS
+GUEST LIST
 ===================================================== */
 
 function guestRows(
@@ -5412,7 +7095,9 @@ guests,
 assignable
 ){
 
-if(!guests.length){
+if(
+!guests.length
+){
 
 return`
 
@@ -5423,6 +7108,7 @@ None.
 `;
 
 }
+
 
 
 return guests
@@ -5437,6 +7123,7 @@ compareGuests
 guest=>{
 
 const table=
+
 S.tables.find(
 table=>
 table.id===guest.tableId
@@ -5459,6 +7146,7 @@ guest
 
 </div>
 
+
 <div class="guestMeta">
 
 ${guest.partySize}
@@ -5471,6 +7159,7 @@ ${table
 </div>
 
 </div>
+
 
 
 <div class="rowActions">
@@ -5523,16 +7212,21 @@ Delete
 }
 
 
+
 function assignGuest(id){
 
 const guest=
+
 S.guests.find(
 guest=>
 guest.id===id
 );
 
 
-if(!guest)return;
+if(
+!guest
+)
+return;
 
 
 const answer=
@@ -5541,17 +7235,24 @@ prompt(
 );
 
 
-if(answer===null)return;
+if(
+answer===null
+)
+return;
 
 
 const table=
+
 S.tables.find(
 table=>
-Number(table.number)===Number(answer)
+Number(table.number)===
+Number(answer)
 );
 
 
-if(!table){
+if(
+!table
+){
 
 toast(
 'Table not found'
@@ -5562,16 +7263,21 @@ return;
 }
 
 
+
 const free=
+
 table.seats
+
 -
+
 tableUsedSeats(
 table.id
 );
 
 
 if(
-guest.partySize>free
+guest.partySize>
+free
 ){
 
 toast(
@@ -5599,16 +7305,22 @@ renderGuestsSheet();
 }
 
 
+
 function editGuest(id){
 
 const guest=
+
 S.guests.find(
 guest=>
 guest.id===id
 );
 
 
-if(!guest)return;
+if(
+!guest
+)
+return;
+
 
 
 const surname=
@@ -5618,7 +7330,11 @@ guest.surname
 );
 
 
-if(surname===null)return;
+if(
+surname===null
+)
+return;
+
 
 
 const firstName=
@@ -5628,7 +7344,11 @@ guest.firstName||''
 );
 
 
-if(firstName===null)return;
+if(
+firstName===null
+)
+return;
+
 
 
 const people=
@@ -5638,14 +7358,20 @@ guest.partySize
 );
 
 
-if(people===null)return;
+if(
+people===null
+)
+return;
+
 
 
 const current=
+
 S.tables.find(
 table=>
 table.id===guest.tableId
 );
+
 
 
 const tableAnswer=
@@ -5657,22 +7383,32 @@ current
 );
 
 
-if(tableAnswer===null)return;
+if(
+tableAnswer===null
+)
+return;
+
 
 
 let tableId=null;
 
 
-if(tableAnswer.trim()){
+if(
+tableAnswer.trim()
+){
 
 const target=
+
 S.tables.find(
 table=>
-Number(table.number)===Number(tableAnswer)
+Number(table.number)===
+Number(tableAnswer)
 );
 
 
-if(!target){
+if(
+!target
+){
 
 toast(
 'Table not found'
@@ -5701,6 +7437,7 @@ firstName.trim();
 
 
 guest.partySize=
+
 Math.max(
 1,
 Number(people)||1
@@ -5716,13 +7453,16 @@ renderAll();
 save();
 
 
-if(currentGuestTable){
+if(
+currentGuestTable
+){
 
 openTableGuests(
 currentGuestTable
 );
 
-}else{
+}
+else{
 
 renderGuestsSheet();
 
@@ -5731,16 +7471,21 @@ renderGuestsSheet();
 }
 
 
+
 function deleteGuest(id){
 
 const guest=
+
 S.guests.find(
 guest=>
 guest.id===id
 );
 
 
-if(!guest)return;
+if(
+!guest
+)
+return;
 
 
 if(
@@ -5755,6 +7500,7 @@ remember();
 
 
 S.guests=
+
 S.guests.filter(
 guest=>
 guest.id!==id
@@ -5766,13 +7512,16 @@ renderAll();
 save();
 
 
-if(currentGuestTable){
+if(
+currentGuestTable
+){
 
 openTableGuests(
 currentGuestTable
 );
 
-}else{
+}
+else{
 
 renderGuestsSheet();
 
@@ -5781,9 +7530,12 @@ renderGuestsSheet();
 }
 
 
+
 function deleteGuestList(){
 
-if(!S.guests.length){
+if(
+!S.guests.length
+){
 
 toast(
 'Guest list is empty'
@@ -5817,6 +7569,7 @@ renderGuestsSheet();
 }
 
 
+
 /* =====================================================
 SEARCH
 ===================================================== */
@@ -5826,7 +7579,11 @@ function renderGuestSearch(value){
 const holder=
 $('guestSearchResults');
 
-if(!holder)return;
+
+if(
+!holder
+)
+return;
 
 
 const query=
@@ -5835,7 +7592,9 @@ value
 );
 
 
-if(!query){
+if(
+!query
+){
 
 holder.innerHTML='';
 
@@ -5844,13 +7603,16 @@ return;
 }
 
 
+
 const results=
+
 S.guests
 
 .filter(
 guest=>{
 
 const table=
+
 S.tables.find(
 table=>
 table.id===guest.tableId
@@ -5859,10 +7621,14 @@ table.id===guest.tableId
 
 return normalizeText(
 
-guest.surname+
-' '+
-guest.firstName+
-' '+
+guest.surname
++
+' '
++
+guest.firstName
++
+' '
++
 (
 table
 ?table.number
@@ -5870,6 +7636,7 @@ table
 )
 
 )
+
 .includes(
 query
 );
@@ -5884,12 +7651,14 @@ query
 
 
 holder.innerHTML=
+
 guestRows(
 results,
 false
 );
 
 }
+
 
 
 /* =====================================================
@@ -5899,6 +7668,7 @@ VOICE
 function voiceHTML(){
 
 const supported=
+
 Boolean(
 window.SpeechRecognition
 ||
@@ -5906,7 +7676,9 @@ window.webkitSpeechRecognition
 );
 
 
-if(!supported){
+if(
+!supported
+){
 
 return`
 
@@ -5929,6 +7701,7 @@ Voice recognition is unavailable in this browser.
 }
 
 
+
 return`
 
 <div
@@ -5938,6 +7711,7 @@ class="voiceBox">
 <div class="cardTitle">
 🎙 Voice Add Guests
 </div>
+
 
 <div class="hint">
 
@@ -5977,9 +7751,12 @@ Preview appears before saving.
 }
 
 
+
 function toggleVoice(){
 
-if(voiceRecognition){
+if(
+voiceRecognition
+){
 
 voiceRecognition.stop();
 
@@ -5988,13 +7765,19 @@ return;
 }
 
 
+
 const Speech=
+
 window.SpeechRecognition
+
 ||
+
 window.webkitSpeechRecognition;
 
 
-if(!Speech){
+if(
+!Speech
+){
 
 toast(
 'Voice unavailable'
@@ -6021,7 +7804,8 @@ voiceRecognition.interimResults=
 false;
 
 
-$('voiceButton').textContent=
+$('voiceButton')
+.textContent=
 '■ Stop Microphone';
 
 
@@ -6030,6 +7814,7 @@ $('voiceBox')
 .add(
 'listening'
 );
+
 
 
 voiceRecognition.onresult=
@@ -6053,6 +7838,7 @@ renderVoicePreview();
 };
 
 
+
 voiceRecognition.onend=
 ()=>{
 
@@ -6063,7 +7849,9 @@ const button=
 $('voiceButton');
 
 
-if(button){
+if(
+button
+){
 
 button.textContent=
 '🎙 Start Microphone';
@@ -6075,7 +7863,9 @@ const box=
 $('voiceBox');
 
 
-if(box){
+if(
+box
+){
 
 box.classList.remove(
 'listening'
@@ -6084,6 +7874,7 @@ box.classList.remove(
 }
 
 };
+
 
 
 voiceRecognition.onerror=
@@ -6096,38 +7887,45 @@ toast(
 };
 
 
+
 voiceRecognition.start();
 
 }
 
 
+
 function parseVoice(text){
 
 const tableMatch=
+
 text.match(
 /(?:τραπέζι|τραπεζι|table)\s*(\d+)/i
 );
 
 
 const peopleMatch=
+
 text.match(
 /(\d+)\s*(?:άτομα|ατομα|people)/i
 );
 
 
 const tableNumber=
+
 tableMatch
 ?Number(tableMatch[1])
 :1;
 
 
 const partySize=
+
 peopleMatch
 ?Number(peopleMatch[1])
 :1;
 
 
 const clean=
+
 text
 
 .replace(
@@ -6149,17 +7947,22 @@ text
 
 
 const names=
+
 clean
 .split(/\s+/)
 .filter(Boolean);
 
 
-if(!names.length)return;
+if(
+!names.length
+)
+return;
 
 
 voiceDraft.push({
 
-surname:names[0],
+surname:
+names[0],
 
 firstName:
 names
@@ -6175,21 +7978,29 @@ tableNumber
 }
 
 
+
 function renderVoicePreview(){
 
 const holder=
 $('voicePreview');
 
-if(!holder)return;
+
+if(
+!holder
+)
+return;
 
 
-if(!voiceDraft.length){
+if(
+!voiceDraft.length
+){
 
 holder.innerHTML='';
 
 return;
 
 }
+
 
 
 holder.innerHTML=
@@ -6263,9 +8074,13 @@ Add All Guests
 }
 
 
+
 function saveVoiceGuests(){
 
-if(!voiceDraft.length)return;
+if(
+!voiceDraft.length
+)
+return;
 
 
 for(
@@ -6274,13 +8089,19 @@ of voiceDraft
 ){
 
 const table=
+
 S.tables.find(
 table=>
-Number(table.number)===Number(guest.tableNumber)
+Number(table.number)===
+Number(
+guest.tableNumber
+)
 );
 
 
-if(!table){
+if(
+!table
+){
 
 toast(
 `Table ${guest.tableNumber} not found`
@@ -6300,9 +8121,13 @@ voiceDraft.forEach(
 guest=>{
 
 const table=
+
 S.tables.find(
 table=>
-Number(table.number)===Number(guest.tableNumber)
+Number(table.number)===
+Number(
+guest.tableNumber
+)
 );
 
 
@@ -6342,6 +8167,7 @@ renderGuestsSheet();
 }
 
 
+
 /* =====================================================
 REVIEW
 ===================================================== */
@@ -6352,20 +8178,24 @@ const s=
 stats();
 
 
+
 const details=
+
 S.tables
 
 .slice()
 
 .sort(
 (a,b)=>
-a.number-b.number
+a.number-
+b.number
 )
 
 .map(
 table=>{
 
 const guests=
+
 S.guests
 
 .filter(
@@ -6382,7 +8212,11 @@ return`
 
 <div class="card">
 
-<div style="display:flex;justify-content:space-between;align-items:center">
+<div
+style="
+display:flex;
+justify-content:space-between;
+align-items:center">
 
 <div>
 
@@ -6402,6 +8236,7 @@ people
 </div>
 
 </div>
+
 
 <button
 class="secondary"
@@ -6425,7 +8260,10 @@ ${guests.length
 .map(
 guest=>`
 
-<div style="font-size:11px;padding:2px 0">
+<div
+style="
+font-size:11px;
+padding:2px 0">
 
 ${safe(
 guestFullName(
@@ -6464,6 +8302,7 @@ No guests
 .join('');
 
 
+
 $('sheetContent')
 .innerHTML=`
 
@@ -6481,6 +8320,7 @@ Last check before Download.
 
 </div>
 
+
 <button
 class="secondary sheetClose"
 onclick="closeSheet()">
@@ -6488,6 +8328,7 @@ onclick="closeSheet()">
 </button>
 
 </div>
+
 
 
 <div class="summary">
@@ -6525,6 +8366,7 @@ S.guests.length,
 </div>
 
 
+
 ${s.unassigned>0
 
 ?`
@@ -6537,6 +8379,7 @@ ${s.unassigned>0
 people unassigned
 
 </div>
+
 
 <button
 class="wide"
@@ -6565,15 +8408,18 @@ Review Guests
 `}
 
 
+
 <div class="section">
 
 <div class="cardTitle">
 Tables & Guests
 </div>
 
+
 ${details}
 
 </div>
+
 
 
 <button
@@ -6590,6 +8436,7 @@ Everything looks good → Download
 openSheet();
 
 }
+
 
 
 function summaryCard(
@@ -6616,6 +8463,7 @@ ${label}
 }
 
 
+
 /* =====================================================
 DOWNLOAD
 ===================================================== */
@@ -6639,6 +8487,7 @@ Your final Seatly files.
 
 </div>
 
+
 <button
 class="secondary sheetClose"
 onclick="closeSheet()">
@@ -6646,6 +8495,7 @@ onclick="closeSheet()">
 </button>
 
 </div>
+
 
 
 <div class="downloadChoice">
@@ -6664,6 +8514,7 @@ Venue + Dance Floor + DJ Box + Bar + Entrance + Tables.
 
 </div>
 
+
 <button
 class="wide"
 onclick="openVenueExport()">
@@ -6673,6 +8524,7 @@ Create Venue Layout
 </button>
 
 </div>
+
 
 
 <div class="downloadChoice">
@@ -6691,6 +8543,7 @@ Alphabetical guest list with table numbers.
 
 </div>
 
+
 <button
 class="wide"
 onclick="openChart()">
@@ -6707,6 +8560,7 @@ Create Alphabetical Chart
 openSheet();
 
 }
+
 
 
 /* =====================================================
@@ -6732,6 +8586,7 @@ Project tools and reset.
 
 </div>
 
+
 <button
 class="secondary sheetClose"
 onclick="closeSheet()">
@@ -6741,11 +8596,13 @@ onclick="closeSheet()">
 </div>
 
 
+
 <div class="card">
 
 <div class="cardTitle">
 Project Backup
 </div>
+
 
 <button
 class="secondary wide"
@@ -6754,6 +8611,7 @@ onclick="downloadBackup()">
 Download Backup
 
 </button>
+
 
 <button
 class="secondary wide"
@@ -6767,6 +8625,7 @@ Restore Backup
 </button>
 
 </div>
+
 
 
 <div class="section">
@@ -6789,6 +8648,7 @@ openSheet();
 }
 
 
+
 /* =====================================================
 BACKUP
 ===================================================== */
@@ -6796,6 +8656,7 @@ BACKUP
 function downloadBackup(){
 
 const blob=
+
 new Blob(
 [
 JSON.stringify(
@@ -6818,6 +8679,7 @@ blob,
 }
 
 
+
 $('backupRestore')
 .addEventListener(
 'change',
@@ -6826,7 +8688,11 @@ event=>{
 const file=
 event.target.files[0];
 
-if(!file)return;
+
+if(
+!file
+)
+return;
 
 
 const reader=
@@ -6845,9 +8711,15 @@ reader.result
 
 
 if(
-!Array.isArray(data.tables)
+!Array.isArray(
+data.tables
+)
+
 ||
-!Array.isArray(data.guests)
+
+!Array.isArray(
+data.guests
+)
 ){
 
 throw new Error();
@@ -6861,7 +8733,7 @@ remember();
 S={
 ...S,
 ...data,
-version:511
+version:512
 };
 
 
@@ -6878,7 +8750,8 @@ toast(
 'Backup restored'
 );
 
-}catch(error){
+}
+catch(error){
 
 toast(
 'Invalid Seatly backup'
@@ -6900,6 +8773,7 @@ event.target.value='';
 );
 
 
+
 /* =====================================================
 RESET
 ===================================================== */
@@ -6919,7 +8793,7 @@ remember();
 
 S={
 
-version:511,
+version:512,
 
 venueImage:null,
 
@@ -6934,11 +8808,18 @@ tables:[],
 guests:[],
 
 chart:{
+
 couple:'',
+
 date:'',
+
 welcome:'Welcome',
-find:'Please find your seat',
+
+find:
+'Please find your seat',
+
 columns:4
+
 }
 
 };
@@ -6962,9 +8843,14 @@ closeSheet();
 
 closeQuickSetup();
 
+
 renderAll();
 
-refreshUI();
+renderToolbar();
+
+updateNavigation();
+
+updateLayerAccess();
 
 
 toast(
@@ -6974,6 +8860,7 @@ toast(
 }
 
 
+
 /* =====================================================
 STATS
 ===================================================== */
@@ -6981,24 +8868,31 @@ STATS
 function stats(){
 
 const seats=
+
 S.tables.reduce(
 (sum,table)=>
 sum+
-Number(table.seats||0),
+Number(
+table.seats||0
+),
 0
 );
 
 
 const people=
+
 S.guests.reduce(
 (sum,guest)=>
 sum+
-Number(guest.partySize||1),
+Number(
+guest.partySize||1
+),
 0
 );
 
 
 const seated=
+
 S.guests
 
 .filter(
@@ -7009,7 +8903,9 @@ guest.tableId
 .reduce(
 (sum,guest)=>
 sum+
-Number(guest.partySize||1),
+Number(
+guest.partySize||1
+),
 0
 );
 
@@ -7026,17 +8922,20 @@ people,
 seated,
 
 unassigned:
-people-seated,
+people-
+seated,
 
 free:
 Math.max(
 0,
-seats-seated
+seats-
+seated
 )
 
 };
 
 }
+
 
 
 function updateStatus(){
@@ -7053,6 +8952,7 @@ $('status')
 }
 
 
+
 function tableUsedSeats(
 tableId
 ){
@@ -7067,11 +8967,14 @@ guest.tableId===tableId
 .reduce(
 (sum,guest)=>
 sum+
-Number(guest.partySize||1),
+Number(
+guest.partySize||1
+),
 0
 );
 
 }
+
 
 
 /* =====================================================
@@ -7084,7 +8987,9 @@ return String(
 text||''
 )
 
-.normalize('NFD')
+.normalize(
+'NFD'
+)
 
 .replace(
 /[\u0300-\u036f]/g,
@@ -7100,11 +9005,13 @@ text||''
 }
 
 
+
 function normalizeText(text){
 
 return normalizeBasic(
 text
 )
+
 .toLocaleUpperCase(
 'el-GR'
 );
@@ -7112,14 +9019,18 @@ text
 }
 
 
+
 const greekAlphabet=[
+
 'Α','Β','Γ','Δ',
 'Ε','Ζ','Η','Θ',
 'Ι','Κ','Λ','Μ',
 'Ν','Ξ','Ο','Π',
 'Ρ','Σ','Τ','Υ',
 'Φ','Χ','Ψ','Ω'
+
 ];
+
 
 
 function alphabetLetter(
@@ -7139,26 +9050,36 @@ return value
 }
 
 
-function compareLetters(a,b){
+
+function compareLetters(
+a,
+b
+){
 
 const ai=
-greekAlphabet.indexOf(a);
+greekAlphabet
+.indexOf(a);
 
 
 const bi=
-greekAlphabet.indexOf(b);
+greekAlphabet
+.indexOf(b);
 
 
 if(
-ai>=0 &&
+ai>=0
+&&
 bi>=0
 )
 return ai-bi;
 
 
-if(ai>=0)return-1;
+if(ai>=0)
+return-1;
 
-if(bi>=0)return 1;
+
+if(bi>=0)
+return 1;
 
 
 return a.localeCompare(
@@ -7169,12 +9090,18 @@ b,
 }
 
 
-function compareGuests(a,b){
+
+function compareGuests(
+a,
+b
+){
 
 const surname=
+
 normalizeText(
 a.surname
 )
+
 .localeCompare(
 normalizeText(
 b.surname
@@ -7183,14 +9110,16 @@ b.surname
 );
 
 
-if(surname!==0){
+if(
+surname!==0
+)
 return surname;
-}
 
 
 return normalizeText(
 a.firstName
 )
+
 .localeCompare(
 normalizeText(
 b.firstName
@@ -7199,6 +9128,7 @@ b.firstName
 );
 
 }
+
 
 
 /* =====================================================
@@ -7233,6 +9163,7 @@ S.chart.find||
 
 
 $('chartColumns').value=
+
 String(
 S.chart.columns||4
 );
@@ -7241,6 +9172,7 @@ S.chart.columns||4
 renderChart();
 
 }
+
 
 
 function closeChart(){
@@ -7252,6 +9184,7 @@ $('chartOverlay')
 );
 
 }
+
 
 
 function renderChart(){
@@ -7284,6 +9217,7 @@ save();
 
 
 const guests=
+
 S.guests
 
 .filter(
@@ -7310,7 +9244,9 @@ guest.surname
 );
 
 
-if(!groups[letter]){
+if(
+!groups[letter]
+){
 
 groups[letter]=[];
 
@@ -7327,12 +9263,15 @@ guest
 
 
 const letters=
+
 Object.keys(
 groups
 )
+
 .sort(
 compareLetters
 );
+
 
 
 const content=
@@ -7348,12 +9287,14 @@ letter=>`
 ${safe(letter)}
 </div>
 
+
 ${groups[letter]
 
 .map(
 guest=>{
 
 const table=
+
 S.tables.find(
 table=>
 table.id===guest.tableId
@@ -7378,7 +9319,9 @@ ${guest.partySize>1
 
 </span>
 
+
 <span class="chartDots"></span>
+
 
 <span class="chartTable">
 
@@ -7405,6 +9348,7 @@ ${table
 .join('');
 
 
+
 $('chart')
 .innerHTML=`
 
@@ -7416,9 +9360,13 @@ S.chart.welcome
 
 </div>
 
+
 <div class="chartSmall">
+
 TO THE WEDDING OF
+
 </div>
+
 
 <div class="chartNames">
 
@@ -7429,6 +9377,7 @@ S.chart.couple||
 
 </div>
 
+
 <div class="chartDate">
 
 ${safe(
@@ -7436,6 +9385,7 @@ S.chart.date
 )}
 
 </div>
+
 
 <div class="chartFind">
 
@@ -7445,9 +9395,11 @@ S.chart.find
 
 </div>
 
+
 <div
 class="chartColumns"
-style="columns:${S.chart.columns}">
+style="
+columns:${S.chart.columns}">
 
 ${content}
 
@@ -7456,6 +9408,7 @@ ${content}
 `;
 
 }
+
 
 
 /* =====================================================
@@ -7476,6 +9429,7 @@ renderVenueExport();
 }
 
 
+
 function closeVenueExport(){
 
 $('venueOverlay')
@@ -7485,6 +9439,7 @@ $('venueOverlay')
 );
 
 }
+
 
 
 function renderVenueExport(){
@@ -7507,6 +9462,7 @@ box.className=
 'venueExport';
 
 
+
 const bg=
 document.createElement(
 'div'
@@ -7520,13 +9476,16 @@ bg.className=
 bg.style.backgroundImage=
 
 S.venueImage
+
 ?`url("${S.venueImage}")`
+
 :'none';
 
 
 box.appendChild(
 bg
 );
+
 
 
 S.objects.forEach(
@@ -7539,6 +9498,7 @@ document.createElement(
 
 
 el.className=
+
 `exportObject ${object.type}`;
 
 
@@ -7559,6 +9519,7 @@ object.heightPct+'%';
 
 
 el.style.transform=
+
 `rotate(${object.rotation||0}deg)`;
 
 
@@ -7572,6 +9533,7 @@ el
 
 }
 );
+
 
 
 S.tables.forEach(
@@ -7601,6 +9563,7 @@ el.style.transform=
 
 
 el.textContent=
+
 `T${table.number}`;
 
 
@@ -7622,6 +9585,7 @@ box
 }
 
 
+
 /* =====================================================
 DOWNLOADS
 ===================================================== */
@@ -7634,12 +9598,17 @@ renderVenueExport();
 try{
 
 const output=
+
 await html2canvas(
 $('venueExport'),
 {
+
 scale:2,
+
 backgroundColor:'#fff',
+
 useCORS:true
+
 }
 );
 
@@ -7655,6 +9624,7 @@ link.download=
 
 
 link.href=
+
 output.toDataURL(
 'image/png',
 1
@@ -7663,7 +9633,8 @@ output.toDataURL(
 
 link.click();
 
-}catch(error){
+}
+catch(error){
 
 toast(
 'Venue PNG failed'
@@ -7674,6 +9645,7 @@ toast(
 }
 
 
+
 async function downloadVenuePDF(){
 
 renderVenueExport();
@@ -7682,17 +9654,23 @@ renderVenueExport();
 try{
 
 const output=
+
 await html2canvas(
 $('venueExport'),
 {
+
 scale:2,
+
 backgroundColor:'#fff',
+
 useCORS:true
+
 }
 );
 
 
 const image=
+
 output.toDataURL(
 'image/jpeg',
 .97
@@ -7706,48 +9684,75 @@ window.jspdf;
 
 
 const pdf=
+
 new jsPDF({
+
 orientation:'landscape',
+
 unit:'mm',
+
 format:'a3'
+
 });
 
 
 const pw=
-pdf.internal.pageSize.getWidth();
+pdf.internal
+.pageSize
+.getWidth();
 
 
 const ph=
-pdf.internal.pageSize.getHeight();
+pdf.internal
+.pageSize
+.getHeight();
 
 
 const ratio=
-output.width/output.height;
+
+output.width/
+output.height;
 
 
-let width=pw;
+let width=
+pw;
+
 
 let height=
-width/ratio;
+
+width/
+ratio;
 
 
-if(height>ph){
+if(
+height>ph
+){
 
-height=ph;
+height=
+ph;
+
 
 width=
-height*ratio;
+height*
+ratio;
 
 }
 
 
 pdf.addImage(
+
 image,
+
 'JPEG',
+
 (pw-width)/2,
+
 (ph-height)/2,
+
 width,
+
 height
+
 );
 
 
@@ -7755,7 +9760,8 @@ pdf.save(
 'seatly-venue-layout.pdf'
 );
 
-}catch(error){
+}
+catch(error){
 
 toast(
 'Venue PDF failed'
@@ -7766,6 +9772,7 @@ toast(
 }
 
 
+
 async function downloadChartPNG(){
 
 renderChart();
@@ -7774,12 +9781,17 @@ renderChart();
 try{
 
 const output=
+
 await html2canvas(
 $('chart'),
 {
+
 scale:2,
+
 backgroundColor:'#fff',
+
 useCORS:true
+
 }
 );
 
@@ -7795,6 +9807,7 @@ link.download=
 
 
 link.href=
+
 output.toDataURL(
 'image/png',
 1
@@ -7803,7 +9816,8 @@ output.toDataURL(
 
 link.click();
 
-}catch(error){
+}
+catch(error){
 
 toast(
 'Chart PNG failed'
@@ -7814,6 +9828,7 @@ toast(
 }
 
 
+
 async function downloadChartPDF(){
 
 renderChart();
@@ -7822,17 +9837,23 @@ renderChart();
 try{
 
 const output=
+
 await html2canvas(
 $('chart'),
 {
+
 scale:2,
+
 backgroundColor:'#fff',
+
 useCORS:true
+
 }
 );
 
 
 const image=
+
 output.toDataURL(
 'image/jpeg',
 .97
@@ -7846,48 +9867,75 @@ window.jspdf;
 
 
 const pdf=
+
 new jsPDF({
+
 orientation:'portrait',
+
 unit:'mm',
+
 format:'a2'
+
 });
 
 
 const pw=
-pdf.internal.pageSize.getWidth();
+pdf.internal
+.pageSize
+.getWidth();
 
 
 const ph=
-pdf.internal.pageSize.getHeight();
+pdf.internal
+.pageSize
+.getHeight();
 
 
 const ratio=
-output.width/output.height;
+
+output.width/
+output.height;
 
 
-let width=pw;
+let width=
+pw;
+
 
 let height=
-width/ratio;
+
+width/
+ratio;
 
 
-if(height>ph){
+if(
+height>ph
+){
 
-height=ph;
+height=
+ph;
+
 
 width=
-height*ratio;
+height*
+ratio;
 
 }
 
 
 pdf.addImage(
+
 image,
+
 'JPEG',
+
 (pw-width)/2,
+
 0,
+
 width,
+
 height
+
 );
 
 
@@ -7895,7 +9943,8 @@ pdf.save(
 'seatly-alphabetical-chart.pdf'
 );
 
-}catch(error){
+}
+catch(error){
 
 toast(
 'Chart PDF failed'
@@ -7906,8 +9955,9 @@ toast(
 }
 
 
+
 /* =====================================================
-TEXT / DOWNLOAD
+TEXT
 ===================================================== */
 
 function guestFullName(
@@ -7915,13 +9965,19 @@ guest
 ){
 
 return[
+
 guest.surname||'',
+
 guest.firstName||''
+
 ]
+
 .filter(Boolean)
+
 .join(' ');
 
 }
+
 
 
 function safe(text){
@@ -7941,21 +9997,35 @@ return div.innerHTML;
 }
 
 
+
 function safeAttribute(text){
 
 return String(
 text||''
 )
 
-.replace(/&/g,'&amp;')
+.replace(
+/&/g,
+'&amp;'
+)
 
-.replace(/"/g,'&quot;')
+.replace(
+/"/g,
+'&quot;'
+)
 
-.replace(/</g,'&lt;')
+.replace(
+/</g,
+'&lt;'
+)
 
-.replace(/>/g,'&gt;');
+.replace(
+/>/g,
+'&gt;'
+);
 
 }
+
 
 
 function downloadBlob(
@@ -8000,6 +10070,7 @@ url
 }
 
 
+
 /* =====================================================
 TOAST
 ===================================================== */
@@ -8024,6 +10095,7 @@ window.toastTimer
 
 
 window.toastTimer=
+
 setTimeout(
 ()=>{
 
@@ -8035,6 +10107,7 @@ el.style.display=
 );
 
 }
+
 
 
 /* =====================================================
@@ -8049,6 +10122,7 @@ renderAll();
 
 }
 );
+
 
 
 /* =====================================================
