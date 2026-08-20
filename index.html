@@ -2,320 +2,313 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-
-<meta
-name="viewport"
-content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-
-<title>Seatly 5.2</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Seatly 5.1.1 Stable</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
-
 *{box-sizing:border-box}
 
 :root{
---bg:#ece9e4;
---paper:#fff;
---ink:#202020;
---muted:#777;
---line:#e3ddd5;
---soft:#f5f2ed;
---green:#e4f3e8;
---greenText:#28663c;
---danger:#a63c34;
---dangerSoft:#fff0ee;
---warning:#fff7e8;
+  --bg:#ece9e4;
+  --paper:#fff;
+  --ink:#202020;
+  --muted:#777;
+  --line:#e3ddd5;
+  --soft:#f5f2ed;
+  --green:#e4f3e8;
+  --greenText:#28663c;
+  --danger:#a43b34;
+  --dangerSoft:#fff0ee;
+  --warning:#fff7e8;
 }
 
 html,body{
-width:100%;
-height:100%;
-margin:0;
-font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-background:var(--bg);
-color:var(--ink);
+  width:100%;
+  height:100%;
+  margin:0;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--ink);
 }
 
 body{
-overflow:hidden;
-overscroll-behavior:none;
+  overflow:hidden;
+  overscroll-behavior:none;
 }
 
-button,input,select{font:inherit}
+button,input,select{
+  font:inherit;
+}
 
 button{
-border:0;
-border-radius:10px;
-padding:9px 11px;
-background:#222;
-color:#fff;
-font-weight:750;
-cursor:pointer;
+  border:0;
+  border-radius:10px;
+  background:#222;
+  color:#fff;
+  padding:9px 11px;
+  font-weight:750;
+  cursor:pointer;
 }
 
 button.secondary{
-background:#fff;
-color:#222;
-border:1px solid var(--line);
+  background:#fff;
+  color:#222;
+  border:1px solid var(--line);
 }
 
 button.soft{
-background:var(--soft);
-color:#222;
-border:1px solid #e6dfd7;
+  background:var(--soft);
+  color:#222;
+  border:1px solid #e6dfd7;
 }
 
 button.danger{
-background:var(--danger);
-color:#fff;
+  background:var(--danger);
 }
 
 button.dangerSoft{
-background:var(--dangerSoft);
-color:var(--danger);
-border:1px solid #efc8c4;
+  background:var(--dangerSoft);
+  color:var(--danger);
+  border:1px solid #efc8c4;
 }
 
-button:disabled{opacity:.4}
-
+button:disabled{
+  opacity:.4;
+}
 
 /* TOP */
 
 .topbar{
-height:55px;
-background:#fff;
-border-bottom:1px solid var(--line);
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 10px;
-z-index:500;
-position:relative;
+  height:55px;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 10px;
+  z-index:500;
+  position:relative;
 }
 
 .logo{
-font-size:24px;
-font-weight:900;
-letter-spacing:-1px;
+  font-size:24px;
+  font-weight:900;
+  letter-spacing:-1px;
 }
 
 .logo span{font-weight:400}
 
 .topRight{
-display:flex;
-align-items:center;
-gap:5px;
+  display:flex;
+  align-items:center;
+  gap:5px;
 }
 
 .saveState{
-font-size:10px;
-color:#777;
+  font-size:10px;
+  color:#777;
 }
-
 
 /* PROGRESS */
 
 .progress{
-height:43px;
-background:#fff;
-border-bottom:1px solid var(--line);
-display:flex;
-align-items:center;
-justify-content:center;
-gap:5px;
-padding:4px 7px;
-overflow-x:auto;
-scrollbar-width:none;
+  height:43px;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  padding:4px 7px;
+  overflow-x:auto;
+  scrollbar-width:none;
 }
 
 .progress::-webkit-scrollbar{display:none}
 
 .progress button{
-flex:0 0 auto;
-background:#f5f2ed;
-color:#666;
-border:1px solid #e4ddd5;
-border-radius:999px;
-padding:6px 10px;
-font-size:10px;
-white-space:nowrap;
+  flex:0 0 auto;
+  background:#f5f2ed;
+  color:#666;
+  border:1px solid #e4ddd5;
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:10px;
+  white-space:nowrap;
 }
 
 .progress button.active{
-background:#222;
-color:#fff;
-border-color:#222;
+  background:#222;
+  color:#fff;
+  border-color:#222;
 }
 
 .progress button.done{
-background:var(--green);
-color:var(--greenText);
-border-color:#bfdcc8;
+  background:var(--green);
+  color:var(--greenText);
+  border-color:#bfdcc8;
 }
-
 
 /* APP */
 
 .app{
-height:calc(100vh - 98px);
-display:grid;
-grid-template-columns:54px 1fr;
+  height:calc(100vh - 98px);
+  display:grid;
+  grid-template-columns:54px 1fr;
 }
 
 .rail{
-background:#202020;
-padding:4px 2px;
-display:flex;
-flex-direction:column;
-gap:3px;
-z-index:300;
+  background:#202020;
+  padding:4px 2px;
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+  z-index:300;
 }
 
 .rail button{
-height:49px;
-padding:3px;
-background:transparent;
-font-size:7px;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-gap:2px;
+  height:49px;
+  padding:3px;
+  background:transparent;
+  font-size:7px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:2px;
 }
 
 .rail button b{font-size:16px}
 
 .rail button.active{
-background:#fff;
-color:#222;
+  background:#fff;
+  color:#222;
 }
-
 
 /* WORKSPACE */
 
 .workspace{
-min-width:0;
-min-height:0;
-display:flex;
-flex-direction:column;
-overflow:hidden;
+  min-width:0;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
 }
-
 
 /* TOOLBAR */
 
 .toolbar{
-height:57px;
-background:#fff;
-border-bottom:1px solid var(--line);
-display:none;
-align-items:center;
-overflow-x:auto;
-overflow-y:hidden;
-gap:5px;
-padding:6px;
-scrollbar-width:none;
-z-index:250;
+  min-height:57px;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  display:none;
+  align-items:center;
+  overflow-x:auto;
+  overflow-y:hidden;
+  gap:5px;
+  padding:6px;
+  scrollbar-width:none;
+  z-index:250;
 }
 
 .toolbar::-webkit-scrollbar{display:none}
-
 .toolbar.show{display:flex}
 
 .toolbar button{
-flex:0 0 auto;
-height:43px;
-font-size:10px;
-white-space:nowrap;
+  flex:0 0 auto;
+  height:43px;
+  font-size:10px;
+  white-space:nowrap;
 }
 
 .toolObject{
-min-width:72px;
-background:#f5f2ed!important;
-color:#222!important;
-border:1px solid #e4ddd5!important;
+  min-width:72px;
+  background:#f5f2ed!important;
+  color:#222!important;
+  border:1px solid #e4ddd5!important;
 }
 
 .toolObject span{
-display:block;
-font-size:14px;
+  display:block;
+  font-size:14px;
 }
 
 .toolObject small{
-display:block;
-font-size:8px;
-font-weight:800;
+  display:block;
+  font-size:8px;
+  font-weight:800;
 }
 
 .toolName{
-flex:0 0 auto;
-padding:7px 10px;
-border:1px solid #ddd6ce;
-border-radius:10px;
-background:#fff;
-min-width:100px;
+  flex:0 0 auto;
+  padding:7px 10px;
+  border:1px solid #ddd6ce;
+  border-radius:10px;
+  background:#fff;
+  min-width:100px;
 }
 
 .toolName b{
-display:block;
-font-size:10px;
+  display:block;
+  font-size:10px;
 }
 
 .toolName small{
-font-size:8px;
-color:#777;
+  font-size:8px;
+  color:#777;
 }
 
 .divider{
-flex:0 0 auto;
-width:1px;
-height:32px;
-background:#ddd5cd;
-margin:0 2px;
+  flex:0 0 auto;
+  width:1px;
+  height:32px;
+  background:#ddd5cd;
+  margin:0 2px;
 }
-
 
 /* CANVAS */
 
 .canvasArea{
-flex:1;
-min-height:0;
-background:#e8e5e0;
-padding:5px;
-display:flex;
-align-items:stretch;
-justify-content:center;
-overflow:hidden;
+  flex:1;
+  min-height:0;
+  background:#e8e5e0;
+  padding:5px;
+  display:flex;
+  align-items:stretch;
+  justify-content:center;
+  overflow:hidden;
 }
 
 .canvas{
-position:relative;
-width:min(100%,1500px);
-height:100%;
-background:#fff;
-border:1px solid var(--line);
-border-radius:13px;
-overflow:hidden;
-touch-action:none;
-box-shadow:0 7px 25px rgba(0,0,0,.07);
+  position:relative;
+  width:min(100%,1500px);
+  height:100%;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:13px;
+  overflow:hidden;
+  touch-action:none;
+  box-shadow:0 7px 25px rgba(0,0,0,.07);
 }
 
 .venueBg{
-position:absolute;
-inset:0;
-z-index:1;
-background:#fff center/contain no-repeat;
-pointer-events:none;
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:#fff center/contain no-repeat;
+  pointer-events:none;
 }
+
+/* Critical layer fix */
 
 .objectLayer,
 .tableLayer{
-position:absolute;
-inset:0;
-pointer-events:none;
+  position:absolute;
+  inset:0;
+  pointer-events:none;
 }
 
 .objectLayer{z-index:5}
@@ -323,613 +316,619 @@ pointer-events:none;
 
 .objectLayer.active,
 .tableLayer.active{
-pointer-events:auto;
+  pointer-events:auto;
 }
 
 .objectLayer.active .canvasObject,
 .tableLayer.active .canvasObject{
-pointer-events:auto;
+  pointer-events:auto;
 }
 
 .empty{
-position:absolute;
-inset:0;
-display:grid;
-place-items:center;
-text-align:center;
-pointer-events:none;
-color:#999;
-z-index:2;
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  pointer-events:none;
+  color:#999;
+  z-index:2;
 }
 
 .canvasObject{
-position:absolute;
-touch-action:none;
-user-select:none;
--webkit-user-select:none;
-transform-origin:center center;
+  position:absolute;
+  touch-action:none;
+  user-select:none;
+  -webkit-user-select:none;
+  transform-origin:center center;
 }
 
-
-/* VENUE OBJECTS */
+/* VENUE */
 
 .venueObject{
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-background:rgba(255,255,255,.95);
-border:1px solid #777;
-border-radius:9px;
-font-size:10px;
-font-weight:850;
-box-shadow:0 3px 10px rgba(0,0,0,.07);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:rgba(255,255,255,.96);
+  border:1px solid #777;
+  border-radius:9px;
+  font-size:10px;
+  font-weight:850;
+  box-shadow:0 3px 10px rgba(0,0,0,.07);
 }
 
 .venueObject.editing{
-border:2px dashed #222;
-box-shadow:0 0 0 3px rgba(0,0,0,.08);
+  border:2px dashed #222;
+  box-shadow:0 0 0 3px rgba(0,0,0,.08);
 }
 
 .dancefloor{
-background:
-linear-gradient(
-45deg,
-#fafafa 25%,
-#ececec 25%,
-#ececec 50%,
-#fafafa 50%,
-#fafafa 75%,
-#ececec 75%
-);
-background-size:24px 24px;
-border-style:solid;
+  background:
+  linear-gradient(
+    45deg,
+    #fafafa 25%,
+    #ececec 25%,
+    #ececec 50%,
+    #fafafa 50%,
+    #fafafa 75%,
+    #ececec 75%
+  );
+  background-size:24px 24px;
 }
 
 .djbox{
-background:#262626;
-color:#fff;
+  background:#262626;
+  color:#fff;
 }
 
 .bar{background:#f3ece4}
 
 .entrance{
-background:#fff;
-border-style:double;
+  background:#fff;
+  border-style:double;
 }
 
-
-/* OBJECT FLOATING CONTROLS */
+/* FLOATING EDIT */
 
 .objectControls{
-position:absolute;
-top:-37px;
-left:50%;
-transform:translateX(-50%);
-display:flex;
-align-items:center;
-gap:4px;
-z-index:120;
-white-space:nowrap;
+  position:absolute;
+  top:-39px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:4px;
+  align-items:center;
+  z-index:150;
+  white-space:nowrap;
 }
 
 .objectControls button{
-padding:5px 7px;
-font-size:9px;
-border-radius:999px;
-box-shadow:0 5px 13px rgba(0,0,0,.13);
-}
-
-.objectControls .deleteBtn{
-background:var(--danger);
+  height:auto;
+  padding:5px 7px;
+  font-size:9px;
+  border-radius:999px;
+  box-shadow:0 4px 12px rgba(0,0,0,.15);
 }
 
 .resizeHandle{
-position:absolute;
-width:22px;
-height:22px;
-right:-11px;
-bottom:-11px;
-border-radius:50%;
-background:#fff;
-border:2px solid #222;
-z-index:121;
-box-shadow:0 3px 10px rgba(0,0,0,.2);
-touch-action:none;
+  position:absolute;
+  width:22px;
+  height:22px;
+  right:-11px;
+  bottom:-11px;
+  border-radius:50%;
+  background:#fff;
+  border:2px solid #222;
+  z-index:151;
+  box-shadow:0 3px 10px rgba(0,0,0,.2);
+  touch-action:none;
 }
 
 .resizeHandle:after{
-content:"";
-position:absolute;
-width:7px;
-height:7px;
-background:#222;
-border-radius:50%;
-left:5.5px;
-top:5.5px;
+  content:"";
+  position:absolute;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#222;
+  left:5.5px;
+  top:5.5px;
 }
-
 
 /* TABLE */
 
 .table{
-width:82px;
-height:82px;
-display:flex;
-align-items:center;
-justify-content:center;
+  width:82px;
+  height:82px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 .table.editing{
-outline:2px dashed #222;
-outline-offset:3px;
+  outline:2px dashed #222;
+  outline-offset:3px;
 }
 
 .tableCore{
-width:48px;
-height:48px;
-border:2px solid #222;
-border-radius:50%;
-background:#fff;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-z-index:2;
-box-shadow:0 4px 12px rgba(0,0,0,.12);
+  width:48px;
+  height:48px;
+  border:2px solid #222;
+  border-radius:50%;
+  background:#fff;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  z-index:2;
+  box-shadow:0 4px 12px rgba(0,0,0,.12);
 }
 
 .tableCore b{font-size:8px}
 
 .tableCore span{
-font-size:8px;
-color:#666;
-margin-top:2px;
+  font-size:8px;
+  color:#666;
+  margin-top:2px;
 }
 
 .table.full .tableCore{
-background:#e2f3e6;
-border-color:#39794d;
+  background:#e2f3e6;
+  border-color:#39794d;
 }
 
 .chair{
-position:absolute;
-width:9px;
-height:9px;
-background:#fff;
-border:1px solid #555;
-border-radius:3px;
+  position:absolute;
+  width:9px;
+  height:9px;
+  background:#fff;
+  border:1px solid #555;
+  border-radius:3px;
 }
-
 
 /* STATUS */
 
 .status{
-position:absolute;
-left:8px;
-bottom:8px;
-z-index:50;
-background:#fff;
-border:1px solid var(--line);
-border-radius:999px;
-padding:6px 9px;
-font-size:9px;
-color:#666;
-pointer-events:none;
+  position:absolute;
+  left:8px;
+  bottom:8px;
+  z-index:50;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:6px 9px;
+  font-size:9px;
+  color:#666;
+  pointer-events:none;
 }
-
 
 /* SHEET */
 
 .sheet{
-position:fixed;
-top:98px;
-right:0;
-bottom:0;
-width:390px;
-background:#fff;
-z-index:600;
-border-left:1px solid var(--line);
-box-shadow:-10px 0 30px rgba(0,0,0,.13);
-padding:15px;
-overflow:auto;
-display:none;
+  position:fixed;
+  top:98px;
+  right:0;
+  bottom:0;
+  width:390px;
+  background:#fff;
+  z-index:600;
+  border-left:1px solid var(--line);
+  box-shadow:-10px 0 30px rgba(0,0,0,.13);
+  padding:15px;
+  overflow:auto;
+  display:none;
 }
 
 .sheet.open{display:block}
 
 .sheetTop{
-display:flex;
-justify-content:space-between;
-align-items:flex-start;
-gap:8px;
-margin-bottom:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:8px;
+  margin-bottom:12px;
 }
 
 .sheetTop h2{
-margin:0;
-font-size:20px;
+  margin:0;
+  font-size:20px;
 }
 
 .sheetClose{
-width:34px;
-height:34px;
-padding:0;
-border-radius:50%;
+  width:34px;
+  height:34px;
+  padding:0;
+  border-radius:50%;
 }
 
 .hint{
-font-size:12px;
-color:#777;
-line-height:1.45;
-margin:5px 0 12px;
+  font-size:12px;
+  color:#777;
+  line-height:1.45;
+  margin:5px 0 12px;
 }
 
 .section{
-border-top:1px solid #eee7df;
-margin-top:12px;
-padding-top:12px;
+  border-top:1px solid #eee7df;
+  margin-top:12px;
+  padding-top:12px;
 }
 
 .card{
-border:1px solid var(--line);
-border-radius:13px;
-background:#faf9f7;
-padding:11px;
-margin-top:8px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:#faf9f7;
+  padding:11px;
+  margin-top:8px;
 }
 
 .card.warning{
-background:var(--warning);
+  background:var(--warning);
 }
 
 .cardTitle{
-font-size:14px;
-font-weight:850;
+  font-size:14px;
+  font-weight:850;
 }
 
 .meta{
-font-size:10px;
-color:#777;
-margin-top:3px;
+  font-size:10px;
+  color:#777;
+  margin-top:3px;
 }
 
 .field{
-width:100%;
-padding:10px;
-border:1px solid #d8d1c9;
-border-radius:10px;
-background:#fff;
+  width:100%;
+  padding:10px;
+  border:1px solid #d8d1c9;
+  border-radius:10px;
+  background:#fff;
 }
 
 .grid2{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:7px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
 }
 
 .wide{
-width:100%;
-margin-top:8px;
+  width:100%;
+  margin-top:8px;
 }
-
 
 /* GUEST */
 
 .guestRow{
-display:grid;
-grid-template-columns:1fr auto;
-gap:7px;
-align-items:center;
-padding:8px 0;
-border-bottom:1px solid #eee;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:7px;
+  align-items:center;
+  padding:8px 0;
+  border-bottom:1px solid #eee;
 }
 
 .guestName{
-font-size:13px;
-font-weight:750;
+  font-size:13px;
+  font-weight:750;
 }
 
 .guestMeta{
-font-size:10px;
-color:#777;
+  font-size:10px;
+  color:#777;
 }
 
 .rowActions{
-display:flex;
-gap:4px;
+  display:flex;
+  gap:4px;
 }
 
 .rowActions button{
-font-size:9px;
-padding:5px 6px;
+  font-size:9px;
+  padding:5px 6px;
 }
 
+/* VOICE */
+
+.voiceBox{
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:#faf9f7;
+  padding:11px;
+  margin-top:10px;
+}
+
+.voiceBox.listening{
+  background:#fff0ee;
+}
+
+.voicePreviewRow{
+  display:grid;
+  grid-template-columns:1fr 1fr 50px 56px auto;
+  gap:4px;
+  margin-top:5px;
+}
+
+.voicePreviewRow input{
+  width:100%;
+  padding:6px;
+  border:1px solid var(--line);
+  border-radius:7px;
+  font-size:10px;
+}
+
+/* QUICK SETUP */
+
+.popover{
+  position:fixed;
+  top:105px;
+  left:62px;
+  width:min(340px,calc(100vw - 75px));
+  max-height:70vh;
+  overflow:auto;
+  z-index:700;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  box-shadow:0 12px 35px rgba(0,0,0,.18);
+  padding:12px;
+  display:none;
+}
+
+.popover.open{display:block}
 
 /* SUMMARY */
 
 .summary{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:8px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
 }
 
 .summaryCard{
-border:1px solid var(--line);
-border-radius:12px;
-background:#faf9f7;
-padding:10px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#faf9f7;
+  padding:10px;
 }
 
 .summaryNumber{
-font-size:23px;
-font-weight:900;
+  font-size:23px;
+  font-weight:900;
 }
 
 .summaryLabel{
-font-size:9px;
-color:#777;
+  font-size:9px;
+  color:#777;
 }
-
 
 /* DOWNLOAD */
 
 .downloadChoice{
-border:1px solid var(--line);
-border-radius:15px;
-background:#faf9f7;
-padding:14px;
-margin-top:10px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:#faf9f7;
+  padding:14px;
+  margin-top:10px;
 }
 
 .downloadIcon{font-size:28px}
 
-
 /* OVERLAY */
 
 .overlay{
-position:fixed;
-inset:0;
-z-index:900;
-background:rgba(0,0,0,.5);
-display:none;
-align-items:center;
-justify-content:center;
-padding:15px;
+  position:fixed;
+  inset:0;
+  z-index:900;
+  background:rgba(0,0,0,.5);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
 }
 
 .overlay.open{display:flex}
 
 .modal{
-width:min(1000px,100%);
-max-height:94vh;
-overflow:auto;
-background:#fff;
-border-radius:18px;
-padding:18px;
+  width:min(1000px,100%);
+  max-height:94vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:18px;
+  padding:18px;
 }
 
 .modalTop{
-display:flex;
-justify-content:space-between;
-align-items:flex-start;
-gap:8px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:8px;
 }
-
 
 /* CHART */
 
 .chartControls{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:7px;
-margin:12px 0;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+  margin:12px 0;
 }
 
 .chart{
-background:#fff;
-color:#111;
-width:100%;
-min-height:900px;
-padding:44px;
-border:1px solid #ddd;
-margin-top:14px;
+  background:#fff;
+  color:#111;
+  width:100%;
+  min-height:900px;
+  padding:44px;
+  border:1px solid #ddd;
+  margin-top:14px;
 }
 
 .chartWelcome{
-text-align:center;
-font-family:Georgia,serif;
-font-style:italic;
-font-size:64px;
+  text-align:center;
+  font-family:Georgia,serif;
+  font-style:italic;
+  font-size:64px;
 }
 
 .chartSmall{
-text-align:center;
-font-size:10px;
-letter-spacing:4px;
-margin-top:24px;
+  text-align:center;
+  font-size:10px;
+  letter-spacing:4px;
+  margin-top:24px;
 }
 
 .chartNames{
-text-align:center;
-font-family:Georgia,serif;
-font-size:29px;
-letter-spacing:4px;
-margin-top:7px;
+  text-align:center;
+  font-family:Georgia,serif;
+  font-size:29px;
+  letter-spacing:4px;
+  margin-top:7px;
 }
 
 .chartDate{
-text-align:center;
-font-size:10px;
-letter-spacing:3px;
-margin-top:8px;
+  text-align:center;
+  font-size:10px;
+  letter-spacing:3px;
+  margin-top:8px;
 }
 
 .chartFind{
-text-align:center;
-font-family:Georgia,serif;
-font-style:italic;
-font-size:26px;
-margin:26px 0 32px;
+  text-align:center;
+  font-family:Georgia,serif;
+  font-style:italic;
+  font-size:26px;
+  margin:26px 0 32px;
 }
 
 .chartColumns{
-columns:4;
-column-gap:34px;
+  columns:4;
+  column-gap:34px;
 }
 
 .chartGroup{
-break-inside:avoid;
-margin-bottom:18px;
+  break-inside:avoid;
+  margin-bottom:18px;
 }
 
 .chartLetter{
-font-family:Georgia,serif;
-font-size:24px;
-margin-bottom:6px;
+  font-family:Georgia,serif;
+  font-size:24px;
+  margin-bottom:6px;
 }
 
 .chartPerson{
-display:flex;
-align-items:flex-end;
-gap:4px;
-font-family:Georgia,serif;
-font-size:10px;
-line-height:1.65;
+  display:flex;
+  align-items:flex-end;
+  gap:4px;
+  font-family:Georgia,serif;
+  font-size:10px;
+  line-height:1.65;
 }
 
 .chartDots{
-flex:1;
-height:10px;
-border-bottom:1px dotted #777;
+  flex:1;
+  height:10px;
+  border-bottom:1px dotted #777;
 }
 
 .chartTable{
-min-width:18px;
-text-align:right;
+  min-width:18px;
+  text-align:right;
 }
 
-
-/* VENUE EXPORT */
+/* EXPORT */
 
 .venueExport{
-position:relative;
-width:1600px;
-height:1000px;
-background:#fff;
-overflow:hidden;
+  position:relative;
+  width:1600px;
+  height:1000px;
+  background:#fff;
+  overflow:hidden;
 }
 
 .venueExportBg{
-position:absolute;
-inset:0;
-background:#fff center/contain no-repeat;
+  position:absolute;
+  inset:0;
+  background:#fff center/contain no-repeat;
 }
 
 .exportObject{
-position:absolute;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:800;
-border:2px solid #444;
-background:#fff;
-transform-origin:center center;
+  position:absolute;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  border:2px solid #444;
+  background:#fff;
+  font-weight:800;
+  transform-origin:center center;
 }
 
 .exportObject.djbox{
-background:#222;
-color:#fff;
+  background:#222;
+  color:#fff;
 }
 
 .exportTable{
-position:absolute;
-width:75px;
-height:75px;
-border:2px solid #222;
-border-radius:50%;
-background:#fff;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:850;
-transform-origin:center center;
+  position:absolute;
+  width:75px;
+  height:75px;
+  border:2px solid #222;
+  border-radius:50%;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:850;
+  transform-origin:center center;
 }
-
 
 /* MOBILE */
 
 @media(max-width:800px){
 
-.progress{
-justify-content:flex-start;
+  .progress{
+    justify-content:flex-start;
+  }
+
+  .sheet{
+    left:54px;
+    right:0;
+    width:auto;
+    border-left:0;
+  }
+
+  .table{
+    width:72px;
+    height:72px;
+  }
+
+  .tableCore{
+    width:42px;
+    height:42px;
+  }
+
+  .tableCore b,
+  .tableCore span{
+    font-size:7px;
+  }
+
+  .chartControls{
+    grid-template-columns:1fr;
+  }
+
+  .chartColumns{
+    columns:2;
+  }
+
+  .voicePreviewRow{
+    grid-template-columns:1fr 1fr;
+  }
+
 }
-
-.sheet{
-left:54px;
-right:0;
-width:auto;
-border-left:0;
-}
-
-.table{
-width:72px;
-height:72px;
-}
-
-.tableCore{
-width:42px;
-height:42px;
-}
-
-.tableCore b,
-.tableCore span{
-font-size:7px;
-}
-
-.chartControls{
-grid-template-columns:1fr;
-}
-
-.chartColumns{
-columns:2;
-}
-
-}
-
-
-/* EXPORT MODE */
-
-.chart.exportMode{
-width:1500px!important;
-min-height:2100px!important;
-padding:90px!important;
-border:0!important;
-}
-
-.chart.exportMode .chartWelcome{
-font-size:95px;
-}
-
-.chart.exportMode .chartNames{
-font-size:42px;
-}
-
-.chart.exportMode .chartFind{
-font-size:38px;
-}
-
-.chart.exportMode .chartPerson{
-font-size:15px;
-}
-
-.chart.exportMode .chartLetter{
-font-size:32px;
-}
-
 </style>
 </head>
-
 
 <body>
 
@@ -1050,6 +1049,7 @@ id="venueBg"
 class="venueBg">
 </div>
 
+
 <div
 id="empty"
 class="empty">
@@ -1078,10 +1078,12 @@ id="objectLayer"
 class="objectLayer">
 </div>
 
+
 <div
 id="tableLayer"
 class="tableLayer">
 </div>
+
 
 <div
 id="status"
@@ -1104,6 +1106,38 @@ class="sheet">
 <div id="sheetContent"></div>
 
 </aside>
+
+
+<div
+id="quickPopover"
+class="popover">
+
+<div style="display:flex;justify-content:space-between;align-items:center">
+
+<strong>
+Quick Setup
+</strong>
+
+<button
+class="secondary"
+onclick="closeQuickSetup()">
+×
+</button>
+
+</div>
+
+<div class="hint">
+Choose approximately how many guests you expect.
+</div>
+
+<div
+id="quickGuestButtons"
+class="grid2">
+</div>
+
+<div id="quickResults"></div>
+
+</div>
 
 
 <div
@@ -1166,21 +1200,10 @@ id="chartColumns"
 class="field"
 onchange="renderChart()">
 
-<option value="2">
-2 columns
-</option>
-
-<option value="3">
-3 columns
-</option>
-
-<option value="4" selected>
-4 columns
-</option>
-
-<option value="5">
-5 columns
-</option>
+<option value="2">2 columns</option>
+<option value="3">3 columns</option>
+<option value="4" selected>4 columns</option>
+<option value="5">5 columns</option>
 
 </select>
 
@@ -1260,11 +1283,7 @@ PDF
 
 <div
 id="venuePreview"
-style="
-margin-top:14px;
-overflow:auto;
-padding:10px;
-background:#eee">
+style="margin-top:14px;overflow:auto;padding:10px;background:#eee">
 </div>
 
 </div>
@@ -1277,6 +1296,7 @@ id="venueUpload"
 type="file"
 accept="image/*"
 hidden>
+
 
 <input
 id="backupRestore"
@@ -1308,11 +1328,11 @@ font-size:11px">
 STATE
 ===================================================== */
 
-const STORAGE_KEY='seatly52';
+const STORAGE_KEY='seatly511stable';
 
 let S={
 
-version:52,
+version:511,
 
 venueImage:null,
 
@@ -1327,11 +1347,11 @@ tables:[],
 guests:[],
 
 chart:{
-couple:'',
-date:'',
-welcome:'Welcome',
-find:'Please find your seat',
-columns:4
+  couple:'',
+  date:'',
+  welcome:'Welcome',
+  find:'Please find your seat',
+  columns:4
 }
 
 };
@@ -1345,6 +1365,9 @@ let currentGuestTable=null;
 let undoStack=[];
 let redoStack=[];
 
+let voiceRecognition=null;
+let voiceDraft=[];
+
 
 const $=id=>document.getElementById(id);
 
@@ -1356,7 +1379,7 @@ const tableLayer=$('tableLayer');
 
 
 /* =====================================================
-UTILS
+UTIL
 ===================================================== */
 
 function uid(){
@@ -1378,7 +1401,10 @@ function clamp(value,min,max){
 
 return Math.max(
 min,
-Math.min(max,value)
+Math.min(
+max,
+value
+)
 );
 
 }
@@ -1451,7 +1477,7 @@ return false;
 
 
 /* =====================================================
-UNDO REDO
+HISTORY
 ===================================================== */
 
 function snapshot(){
@@ -1544,7 +1570,7 @@ $('redoBtn').disabled=
 
 
 /* =====================================================
-LOAD
+LOAD / MIGRATION
 ===================================================== */
 
 function load(){
@@ -1556,14 +1582,18 @@ localStorage.getItem(STORAGE_KEY)
 ||
 localStorage.getItem('seatly51')
 ||
-localStorage.getItem('seatly50');
+localStorage.getItem('seatly50')
+||
+localStorage.getItem('seatly481')
+||
+localStorage.getItem('seatly48');
 
 if(old){
 
 S={
 ...S,
 ...JSON.parse(old),
-version:52
+version:511
 };
 
 }
@@ -1584,11 +1614,32 @@ S.guests=[];
 }
 
 
+if(!S.chart){
+
+S.chart={
+couple:'',
+date:'',
+welcome:'Welcome',
+find:'Please find your seat',
+columns:4
+};
+
+}
+
+
 S.objects.forEach(
 object=>{
 
 if(object.rotation===undefined){
 object.rotation=0;
+}
+
+if(object.widthPct===undefined){
+object.widthPct=16;
+}
+
+if(object.heightPct===undefined){
+object.heightPct=8;
 }
 
 }
@@ -1600,6 +1651,10 @@ table=>{
 
 if(table.rotation===undefined){
 table.rotation=0;
+}
+
+if(table.scale===undefined){
+table.scale=.8;
 }
 
 }
@@ -1633,12 +1688,14 @@ updateUndoButtons();
 
 
 /* =====================================================
-NAV
+NAVIGATION
 ===================================================== */
 
 function goStep(step){
 
 closeSheet();
+
+closeQuickSetup();
 
 currentStep=
 clamp(
@@ -1663,9 +1720,11 @@ openStepSheet();
 
 function openMore(){
 
-currentStep=0;
+closeQuickSetup();
 
 selected=null;
+
+currentStep=0;
 
 renderAll();
 
@@ -1740,7 +1799,7 @@ renderToolbar();
 
 
 /* =====================================================
-LAYERS
+LAYERS — IMPORTANT
 ===================================================== */
 
 function updateLayerAccess(){
@@ -1749,15 +1808,21 @@ objectLayer.classList.remove('active');
 
 tableLayer.classList.remove('active');
 
+
 if(currentStep===1){
+
 objectLayer.classList.add('active');
+
 }
+
 
 if(
 currentStep===2 ||
 currentStep===3
 ){
+
 tableLayer.classList.add('active');
+
 }
 
 }
@@ -1861,7 +1926,8 @@ onclick="document.getElementById('venueUpload').click()">
 
 if(selected?.kind==='object'){
 
-const object=getSelectedObject();
+const object=
+getSelectedObject();
 
 if(object){
 
@@ -1876,7 +1942,7 @@ ${safe(object.label)}
 </b>
 
 <small>
-${object.rotation||0}°
+${object.rotation||0}° · Edit mode
 </small>
 
 </div>
@@ -1884,13 +1950,13 @@ ${object.rotation||0}°
 <button
 class="secondary"
 onclick="resizeVenue(.9)">
-−
+− Smaller
 </button>
 
 <button
 class="secondary"
 onclick="resizeVenue(1.1)">
-+
++ Larger
 </button>
 
 <button
@@ -1908,7 +1974,7 @@ onclick="rotateVenue(15)">
 <button
 class="danger"
 onclick="deleteSelectedVenue()">
-Delete
+🗑 Delete
 </button>
 
 <button
@@ -1927,6 +1993,8 @@ if(S.venueLocked){
 
 html+=`
 
+<div class="divider"></div>
+
 <div class="toolName">
 
 <b>
@@ -1942,9 +2010,7 @@ Locked
 <button
 class="secondary"
 onclick="editVenue()">
-
 Edit Venue
-
 </button>
 
 <button
@@ -1975,6 +2041,7 @@ Save Venue ✓
 
 }
 
+
 $('toolbar').innerHTML=
 html;
 
@@ -1992,8 +2059,15 @@ if(!S.venueLocked){
 $('toolbar').innerHTML=`
 
 <div class="toolName">
-<b>Save Venue first</b>
-<small>Complete Step 1</small>
+
+<b>
+Save Venue first
+</b>
+
+<small>
+Complete Step 1
+</small>
+
 </div>
 
 <button onclick="goStep(1)">
@@ -2009,9 +2083,19 @@ return;
 
 let html='';
 
+
 if(!S.tablesLocked){
 
 html+=`
+
+<button
+class="toolObject"
+onclick="openQuickSetup()">
+
+<span>⚡</span>
+<small>Quick Setup</small>
+
+</button>
 
 <button
 class="toolObject"
@@ -2056,7 +2140,8 @@ onclick="addTable(16)">
 
 if(selected?.kind==='table'){
 
-const table=getSelectedTable();
+const table=
+getSelectedTable();
 
 if(table){
 
@@ -2078,14 +2163,26 @@ ${table.seats} seats · ${table.rotation||0}°
 
 <button
 class="secondary"
+onclick="changeTableNumber()">
+# Number
+</button>
+
+<button
+class="secondary"
+onclick="changeTableSeats()">
+Seats
+</button>
+
+<button
+class="secondary"
 onclick="resizeTable(.9)">
-−
+− Smaller
 </button>
 
 <button
 class="secondary"
 onclick="resizeTable(1.1)">
-+
++ Larger
 </button>
 
 <button
@@ -2102,12 +2199,6 @@ onclick="rotateTable(15)">
 
 <button
 class="secondary"
-onclick="changeTableSeats()">
-Seats
-</button>
-
-<button
-class="secondary"
 onclick="duplicateTable()">
 Copy
 </button>
@@ -2115,7 +2206,7 @@ Copy
 <button
 class="danger"
 onclick="deleteSelectedTable()">
-Delete
+🗑 Delete
 </button>
 
 <button
@@ -2134,6 +2225,8 @@ if(S.tablesLocked){
 
 html+=`
 
+<div class="divider"></div>
+
 <div class="toolName">
 
 <b>
@@ -2149,9 +2242,7 @@ Locked
 <button
 class="secondary"
 onclick="editTables()">
-
 Edit Tables
-
 </button>
 
 <button
@@ -2195,7 +2286,18 @@ VENUE ADD
 
 function addVenue(type){
 
-const config={
+if(S.venueLocked){
+
+toast(
+'Tap Edit Venue first'
+);
+
+return;
+
+}
+
+
+const configs={
 
 dancefloor:{
 label:'Dance Floor',
@@ -2221,8 +2323,11 @@ widthPct:16,
 heightPct:8
 }
 
-}[type];
+};
 
+
+const config=
+configs[type];
 
 if(!config)return;
 
@@ -2236,14 +2341,11 @@ id:uid(),
 
 type,
 
-label:
-config.label,
+label:config.label,
 
-widthPct:
-config.widthPct,
+widthPct:config.widthPct,
 
-heightPct:
-config.heightPct,
+heightPct:config.heightPct,
 
 xPct:
 50-config.widthPct/2,
@@ -2256,7 +2358,9 @@ rotation:0
 };
 
 
-S.objects.push(object);
+S.objects.push(
+object
+);
 
 
 selected={
@@ -2275,14 +2379,16 @@ renderToolbar();
 
 
 /* =====================================================
-OBJECT HELPERS
+VENUE HELPERS
 ===================================================== */
 
 function getSelectedObject(){
 
 if(
 selected?.kind!=='object'
-)return null;
+)
+return null;
+
 
 return S.objects.find(
 object=>
@@ -2298,7 +2404,9 @@ getSelectedObject();
 
 if(!object)return;
 
+
 remember();
+
 
 object.widthPct=
 clamp(
@@ -2307,12 +2415,30 @@ object.widthPct*multiplier,
 70
 );
 
+
 object.heightPct=
 clamp(
 object.heightPct*multiplier,
 4,
 65
 );
+
+
+object.xPct=
+clamp(
+object.xPct,
+0,
+100-object.widthPct
+);
+
+
+object.yPct=
+clamp(
+object.yPct,
+0,
+100-object.heightPct
+);
+
 
 renderAll();
 
@@ -2329,7 +2455,9 @@ getSelectedObject();
 
 if(!object)return;
 
+
 remember();
+
 
 object.rotation=
 (
@@ -2338,8 +2466,8 @@ Number(object.rotation||0)
 delta
 +
 360
-)
-%360;
+)%360;
+
 
 renderAll();
 
@@ -2356,7 +2484,17 @@ getSelectedObject();
 
 if(!object)return;
 
+
+if(
+!confirm(
+`Delete ${object.label}?`
+)
+)
+return;
+
+
 remember();
+
 
 S.objects=
 S.objects.filter(
@@ -2364,7 +2502,9 @@ item=>
 item.id!==object.id
 );
 
+
 selected=null;
+
 
 renderAll();
 
@@ -2378,9 +2518,12 @@ function saveVenue(){
 
 remember();
 
+
 S.venueLocked=true;
 
+
 selected=null;
+
 
 renderAll();
 
@@ -2388,13 +2531,15 @@ save();
 
 renderToolbar();
 
+
 toast(
 'Venue saved ✓'
 );
 
+
 setTimeout(
 ()=>goStep(2),
-250
+200
 );
 
 }
@@ -2403,11 +2548,15 @@ function editVenue(){
 
 remember();
 
+
 S.venueLocked=false;
+
 
 currentStep=1;
 
+
 selected=null;
+
 
 renderAll();
 
@@ -2422,15 +2571,26 @@ function clearVenue(){
 if(
 !S.objects.length &&
 !S.venueImage
-)return;
+){
+
+toast(
+'Venue is already empty'
+);
+
+return;
+
+}
+
 
 if(
 !confirm(
-'Clear venue background and all venue objects?'
+'Clear the entire Venue?'
 )
 )return;
 
+
 remember();
+
 
 S.objects=[];
 
@@ -2439,6 +2599,7 @@ S.venueImage=null;
 S.venueLocked=false;
 
 selected=null;
+
 
 applyVenue();
 
@@ -2452,12 +2613,213 @@ renderToolbar();
 
 
 /* =====================================================
+BACKGROUND
+===================================================== */
+
+$('venueUpload')
+.addEventListener(
+'change',
+event=>{
+
+const file=
+event.target.files[0];
+
+if(!file)return;
+
+
+compressImage(
+file,
+1800,
+.82
+)
+
+.then(
+image=>{
+
+remember();
+
+
+S.venueImage=
+image;
+
+
+applyVenue();
+
+renderAll();
+
+save();
+
+}
+)
+
+.catch(
+()=>{
+
+toast(
+'Could not open image'
+);
+
+}
+);
+
+
+event.target.value='';
+
+}
+);
+
+
+function compressImage(
+file,
+maxDimension,
+quality
+){
+
+return new Promise(
+(resolve,reject)=>{
+
+const reader=
+new FileReader();
+
+
+reader.onload=
+event=>{
+
+const image=
+new Image();
+
+
+image.onload=
+()=>{
+
+let width=
+image.width;
+
+let height=
+image.height;
+
+
+const largest=
+Math.max(
+width,
+height
+);
+
+
+if(
+largest>maxDimension
+){
+
+const ratio=
+maxDimension/largest;
+
+
+width=
+Math.round(
+width*ratio
+);
+
+
+height=
+Math.round(
+height*ratio
+);
+
+}
+
+
+const temp=
+document.createElement(
+'canvas'
+);
+
+
+temp.width=width;
+
+temp.height=height;
+
+
+temp
+.getContext('2d')
+.drawImage(
+image,
+0,
+0,
+width,
+height
+);
+
+
+resolve(
+temp.toDataURL(
+'image/jpeg',
+quality
+)
+);
+
+};
+
+
+image.onerror=
+reject;
+
+
+image.src=
+event.target.result;
+
+};
+
+
+reader.onerror=
+reject;
+
+
+reader.readAsDataURL(
+file
+);
+
+}
+);
+
+}
+
+
+function applyVenue(){
+
+$('venueBg')
+.style
+.backgroundImage=
+
+S.venueImage
+?`url("${S.venueImage}")`
+:'none';
+
+}
+
+
+/* =====================================================
 TABLES
 ===================================================== */
 
 function addTable(seats){
 
+if(S.tablesLocked){
+
+toast(
+'Tap Edit Tables first'
+);
+
+return;
+
+}
+
+
 remember();
+
+
+const position=
+findFreeTablePosition();
+
 
 const table={
 
@@ -2470,20 +2832,25 @@ seats,
 
 scale:.8,
 
-xPct:46,
+xPct:position.x,
 
-yPct:45,
+yPct:position.y,
 
 rotation:0
 
 };
 
-S.tables.push(table);
+
+S.tables.push(
+table
+);
+
 
 selected={
 kind:'table',
 id:table.id
 };
+
 
 renderAll();
 
@@ -2493,29 +2860,82 @@ renderToolbar();
 
 }
 
+
 function nextTableNumber(){
 
-const nums=
+const numbers=
 S.tables.map(
 table=>
 Number(table.number)
 );
 
+
 let number=1;
 
-while(nums.includes(number)){
+
+while(
+numbers.includes(number)
+){
+
 number++;
+
 }
+
 
 return number;
 
 }
 
+
+function findFreeTablePosition(){
+
+const count=
+S.tables.length;
+
+
+const columns=5;
+
+
+const col=
+count%columns;
+
+
+const row=
+Math.floor(
+count/columns
+);
+
+
+return{
+
+x:
+clamp(
+8+
+col*17,
+2,
+90
+),
+
+y:
+clamp(
+15+
+row*15,
+4,
+88
+)
+
+};
+
+}
+
+
 function getSelectedTable(){
 
 if(
 selected?.kind!=='table'
-)return null;
+)
+return null;
+
 
 return S.tables.find(
 table=>
@@ -2524,6 +2944,7 @@ table.id===selected.id
 
 }
 
+
 function resizeTable(multiplier){
 
 const table=
@@ -2531,7 +2952,9 @@ getSelectedTable();
 
 if(!table)return;
 
+
 remember();
+
 
 table.scale=
 clamp(
@@ -2541,6 +2964,7 @@ multiplier,
 1.8
 );
 
+
 renderAll();
 
 save();
@@ -2548,6 +2972,7 @@ save();
 renderToolbar();
 
 }
+
 
 function rotateTable(delta){
 
@@ -2556,7 +2981,9 @@ getSelectedTable();
 
 if(!table)return;
 
+
 remember();
+
 
 table.rotation=
 (
@@ -2565,8 +2992,8 @@ Number(table.rotation||0)
 delta
 +
 360
-)
-%360;
+)%360;
+
 
 renderAll();
 
@@ -2576,6 +3003,68 @@ renderToolbar();
 
 }
 
+
+function changeTableNumber(){
+
+const table=
+getSelectedTable();
+
+if(!table)return;
+
+
+const answer=
+prompt(
+'Table number',
+table.number
+);
+
+
+if(answer===null)return;
+
+
+const number=
+Math.max(
+1,
+Number(answer)||1
+);
+
+
+const exists=
+S.tables.some(
+other=>
+other.id!==table.id
+&&
+Number(other.number)===number
+);
+
+
+if(exists){
+
+toast(
+'Table number already exists'
+);
+
+return;
+
+}
+
+
+remember();
+
+
+table.number=
+number;
+
+
+renderAll();
+
+save();
+
+renderToolbar();
+
+}
+
+
 function changeTableSeats(){
 
 const table=
@@ -2583,16 +3072,20 @@ getSelectedTable();
 
 if(!table)return;
 
+
 const answer=
 prompt(
 'Seats: 8, 10, 12 or 16',
 table.seats
 );
 
+
 if(answer===null)return;
+
 
 const seats=
 Number(answer);
+
 
 if(
 ![8,10,12,16]
@@ -2607,10 +3100,32 @@ return;
 
 }
 
+
+const used=
+tableUsedSeats(
+table.id
+);
+
+
+if(
+seats<used
+){
+
+toast(
+`Table already has ${used} people`
+);
+
+return;
+
+}
+
+
 remember();
+
 
 table.seats=
 seats;
+
 
 renderAll();
 
@@ -2620,6 +3135,7 @@ renderToolbar();
 
 }
 
+
 function duplicateTable(){
 
 const table=
@@ -2627,7 +3143,9 @@ getSelectedTable();
 
 if(!table)return;
 
+
 remember();
+
 
 const copy={
 
@@ -2654,12 +3172,17 @@ table.yPct+5,
 
 };
 
-S.tables.push(copy);
+
+S.tables.push(
+copy
+);
+
 
 selected={
 kind:'table',
 id:copy.id
 };
+
 
 renderAll();
 
@@ -2668,6 +3191,7 @@ save();
 renderToolbar();
 
 }
+
 
 function deleteSelectedTable(){
 
@@ -2676,7 +3200,17 @@ getSelectedTable();
 
 if(!table)return;
 
+
+if(
+!confirm(
+`Delete Table ${table.number}?`
+)
+)
+return;
+
+
 remember();
+
 
 S.tables=
 S.tables.filter(
@@ -2684,19 +3218,24 @@ item=>
 item.id!==table.id
 );
 
+
 S.guests.forEach(
 guest=>{
 
 if(
 guest.tableId===table.id
 ){
+
 guest.tableId=null;
+
 }
 
 }
 );
 
+
 selected=null;
+
 
 renderAll();
 
@@ -2705,6 +3244,7 @@ save();
 renderToolbar();
 
 }
+
 
 function saveTables(){
 
@@ -2718,11 +3258,15 @@ return;
 
 }
 
+
 remember();
+
 
 S.tablesLocked=true;
 
+
 selected=null;
+
 
 renderAll();
 
@@ -2730,26 +3274,33 @@ save();
 
 renderToolbar();
 
+
 toast(
 'Tables saved ✓'
 );
 
+
 setTimeout(
 ()=>goStep(3),
-250
+200
 );
 
 }
+
 
 function editTables(){
 
 remember();
 
+
 S.tablesLocked=false;
+
 
 currentStep=2;
 
+
 selected=null;
+
 
 renderAll();
 
@@ -2759,29 +3310,47 @@ refreshUI();
 
 }
 
+
 function clearTables(){
 
-if(!S.tables.length)return;
+if(!S.tables.length){
+
+toast(
+'No tables to delete'
+);
+
+return;
+
+}
+
 
 if(
 !confirm(
-'Delete all tables? Guests remain Unassigned.'
+'Delete all tables? Guests remain saved as Unassigned.'
 )
-)return;
+)
+return;
+
 
 remember();
+
 
 S.tables=[];
 
 S.tablesLocked=false;
 
+
 S.guests.forEach(
 guest=>{
+
 guest.tableId=null;
+
 }
 );
 
+
 selected=null;
+
 
 renderAll();
 
@@ -2793,7 +3362,364 @@ renderToolbar();
 
 
 /* =====================================================
-FINISH EDIT
+QUICK SETUP
+===================================================== */
+
+function openQuickSetup(){
+
+if(S.tablesLocked)return;
+
+
+$('quickGuestButtons')
+.innerHTML=
+
+[
+50,
+100,
+150,
+200,
+250,
+300,
+350,
+400
+]
+
+.map(
+guests=>`
+
+<button
+class="soft"
+onclick="showQuickOptions(${guests})">
+
+${guests} Guests
+
+</button>
+
+`
+)
+
+.join('');
+
+
+$('quickResults')
+.innerHTML='';
+
+
+$('quickPopover')
+.classList
+.add(
+'open'
+);
+
+}
+
+
+function closeQuickSetup(){
+
+$('quickPopover')
+.classList
+.remove(
+'open'
+);
+
+}
+
+
+function showQuickOptions(
+guests
+){
+
+const options=
+
+[8,10,12,16]
+
+.map(
+seats=>{
+
+const count=
+Math.ceil(
+guests/seats
+);
+
+
+return{
+
+seats,
+
+count,
+
+capacity:
+count*seats
+
+};
+
+}
+);
+
+
+$('quickResults')
+.innerHTML=`
+
+<div class="section">
+
+${options
+
+.map(
+option=>`
+
+<div
+style="
+display:grid;
+grid-template-columns:1fr auto;
+gap:7px;
+align-items:center;
+padding:8px 0;
+border-bottom:1px solid #eee">
+
+<div>
+
+<strong>
+
+${option.count}
+tables ×
+${option.seats}
+
+</strong>
+
+<div class="meta">
+
+${option.capacity}
+total seats
+
+</div>
+
+</div>
+
+<button
+onclick="applyQuickSetup(
+${option.count},
+${option.seats}
+)">
+
+Create
+
+</button>
+
+</div>
+
+`
+)
+
+.join('')}
+
+</div>
+
+`;
+
+}
+
+
+function applyQuickSetup(
+quantity,
+seats
+){
+
+if(
+S.tables.length
+&&
+!confirm(
+'Replace current tables with this layout?'
+)
+)
+return;
+
+
+remember();
+
+
+S.tables=[];
+
+
+S.guests.forEach(
+guest=>{
+
+guest.tableId=null;
+
+}
+);
+
+
+createGrid(
+quantity,
+seats
+);
+
+
+S.tablesLocked=false;
+
+selected=null;
+
+
+closeQuickSetup();
+
+renderAll();
+
+save();
+
+renderToolbar();
+
+}
+
+
+function createGrid(
+quantity,
+seats
+){
+
+const rect=
+canvas.getBoundingClientRect();
+
+
+let scale=.74;
+
+if(quantity>=10)scale=.64;
+
+if(quantity>=18)scale=.55;
+
+if(quantity>=28)scale=.46;
+
+if(quantity>=38)scale=.39;
+
+
+const base=
+82*scale;
+
+
+const gap=12;
+
+
+let columns=
+Math.max(
+1,
+Math.floor(
+(rect.width-20)/
+(base+gap)
+)
+);
+
+
+columns=
+Math.min(
+columns,
+quantity
+);
+
+
+let rows=
+Math.ceil(
+quantity/columns
+);
+
+
+while(
+rows*(base+gap)
+>
+rect.height-60
+&&
+columns<quantity
+){
+
+columns++;
+
+
+rows=
+Math.ceil(
+quantity/columns
+);
+
+}
+
+
+const totalWidth=
+(columns-1)*(base+gap);
+
+
+const totalHeight=
+(rows-1)*(base+gap);
+
+
+const startX=
+Math.max(
+8,
+rect.width/2
+-
+totalWidth/2
+-
+base/2
+);
+
+
+const startY=
+Math.max(
+30,
+rect.height/2
+-
+totalHeight/2
+-
+base/2
+);
+
+
+for(
+let i=0;
+i<quantity;
+i++
+){
+
+const col=
+i%columns;
+
+
+const row=
+Math.floor(
+i/columns
+);
+
+
+S.tables.push({
+
+id:uid(),
+
+number:
+nextTableNumber(),
+
+seats,
+
+scale,
+
+rotation:0,
+
+xPct:
+pctX(
+startX+
+col*(base+gap)
+),
+
+yPct:
+pctY(
+startY+
+row*(base+gap)
+)
+
+});
+
+}
+
+}
+
+
+/* =====================================================
+EDIT DONE
 ===================================================== */
 
 function finishEditing(){
@@ -2808,7 +3734,7 @@ renderToolbar();
 
 
 /* =====================================================
-RENDER ALL
+RENDER
 ===================================================== */
 
 function renderAll(){
@@ -2817,20 +3743,27 @@ objectLayer.innerHTML='';
 
 tableLayer.innerHTML='';
 
-renderObjects();
+
+renderVenueObjects();
 
 renderTables();
+
 
 $('empty')
 .style
 .display=
+
 (
-S.venueImage ||
-S.objects.length ||
+S.venueImage
+||
+S.objects.length
+||
 S.tables.length
 )
+
 ?'none'
 :'grid';
+
 
 updateStatus();
 
@@ -2842,31 +3775,43 @@ updateLayerAccess();
 
 
 /* =====================================================
-RENDER OBJECTS
+RENDER VENUE
 ===================================================== */
 
-function renderObjects(){
+function renderVenueObjects(){
 
 S.objects.forEach(
 object=>{
 
 const editing=
+
 selected?.kind==='object'
+
 &&
+
 selected.id===object.id
+
 &&
+
 currentStep===1
+
 &&
+
 !S.venueLocked;
 
 
 const el=
-document.createElement('div');
+document.createElement(
+'div'
+);
 
 
 el.className=
+
 `canvasObject venueObject ${object.type}`
+
 +
+
 (
 editing
 ?' editing'
@@ -2899,11 +3844,12 @@ object.label;
 
 
 if(
-currentStep===1 &&
+currentStep===1
+&&
 !S.venueLocked
 ){
 
-attachInteraction(
+attachEditInteraction(
 el,
 object,
 'object'
@@ -2914,7 +3860,7 @@ object,
 
 if(editing){
 
-addEditingControls(
+addFloatingControls(
 el,
 object,
 'object'
@@ -2923,7 +3869,9 @@ object,
 }
 
 
-objectLayer.appendChild(el);
+objectLayer.appendChild(
+el
+);
 
 }
 );
@@ -2947,12 +3895,19 @@ table.id
 
 
 const editing=
+
 selected?.kind==='table'
+
 &&
+
 selected.id===table.id
+
 &&
+
 currentStep===2
+
 &&
+
 !S.tablesLocked;
 
 
@@ -2963,14 +3918,19 @@ document.createElement(
 
 
 el.className=
+
 'canvasObject table'
+
 +
+
 (
 used===table.seats
 ?' full'
 :''
 )
+
 +
+
 (
 editing
 ?' editing'
@@ -2987,6 +3947,7 @@ table.yPct+'%';
 
 
 el.style.transform=
+
 `scale(${table.scale||1}) rotate(${table.rotation||0}deg)`;
 
 
@@ -3019,15 +3980,18 @@ ${used}/${table.seats}
 `;
 
 
-el.appendChild(core);
+el.appendChild(
+core
+);
 
 
 if(
-currentStep===2 &&
+currentStep===2
+&&
 !S.tablesLocked
 ){
 
-attachInteraction(
+attachEditInteraction(
 el,
 table,
 'table'
@@ -3038,7 +4002,7 @@ table,
 
 if(editing){
 
-addEditingControls(
+addFloatingControls(
 el,
 table,
 'table'
@@ -3055,6 +4019,7 @@ event=>{
 
 event.stopPropagation();
 
+
 openTableGuests(
 table.id
 );
@@ -3065,7 +4030,9 @@ table.id
 }
 
 
-tableLayer.appendChild(el);
+tableLayer.appendChild(
+el
+);
 
 }
 );
@@ -3088,44 +4055,59 @@ Number(seats),
 16
 );
 
+
 const center=41;
 
 const radius=34;
 
-for(let i=0;i<count;i++){
+
+for(
+let i=0;
+i<count;
+i++
+){
 
 const angle=
 2*Math.PI*i/count
 -
 Math.PI/2;
 
+
 const chair=
 document.createElement(
 'div'
 );
 
+
 chair.className=
 'chair';
 
+
 chair.style.left=
 (
-center+
-Math.cos(angle)*
-radius-
+center
++
+Math.cos(angle)*radius
+-
 4.5
 )
 +'px';
+
 
 chair.style.top=
 (
-center+
-Math.sin(angle)*
-radius-
+center
++
+Math.sin(angle)*radius
+-
 4.5
 )
 +'px';
 
-element.appendChild(chair);
+
+element.appendChild(
+chair
+);
 
 }
 
@@ -3133,26 +4115,28 @@ element.appendChild(chair);
 
 
 /* =====================================================
-TAP / DRAG
+TAP / DRAG INTERACTION
 ===================================================== */
 
-function attachInteraction(
+function attachEditInteraction(
 element,
 item,
 kind
 ){
 
-let downX=0;
-let downY=0;
+let startX=0;
+
+let startY=0;
 
 let originalX=0;
+
 let originalY=0;
+
+let pointerId=null;
 
 let dragging=false;
 
 let before='';
-
-let pointerId=null;
 
 
 element.addEventListener(
@@ -3176,18 +4160,22 @@ event.preventDefault();
 event.stopPropagation();
 
 
-const selectedNow=
+const alreadySelected=
+
 selected?.kind===kind
+
 &&
+
 selected.id===item.id;
 
 
-if(!selectedNow){
+if(!alreadySelected){
 
 selected={
 kind,
 id:item.id
 };
+
 
 renderAll();
 
@@ -3201,20 +4189,33 @@ return;
 pointerId=
 event.pointerId;
 
-downX=
+
+startX=
 event.clientX;
 
-downY=
+
+startY=
 event.clientY;
 
+
 originalX=
-pxX(item.xPct);
+pxX(
+item.xPct
+);
+
 
 originalY=
-pxY(item.yPct);
+pxY(
+item.yPct
+);
+
 
 before=
 snapshot();
+
+
+dragging=false;
+
 
 try{
 
@@ -3234,13 +4235,14 @@ event=>{
 
 if(
 pointerId!==event.pointerId
-)return;
+)
+return;
 
 
 const distance=
 Math.hypot(
-event.clientX-downX,
-event.clientY-downY
+event.clientX-startX,
+event.clientY-startY
 );
 
 
@@ -3255,38 +4257,51 @@ return;
 dragging=true;
 
 
+event.preventDefault();
+
+
 const rect=
 canvas.getBoundingClientRect();
 
 
-let width=
+let visualWidth=
 element.offsetWidth;
 
-let height=
+
+let visualHeight=
 element.offsetHeight;
 
 
 if(kind==='table'){
 
-width*=
-Number(item.scale||1);
+visualWidth*=
+Number(
+item.scale||1
+);
 
-height*=
-Number(item.scale||1);
+
+visualHeight*=
+Number(
+item.scale||1
+);
 
 }
 
 
 let x=
-originalX+
-event.clientX-
-downX;
+originalX
++
+event.clientX
+-
+startX;
 
 
 let y=
-originalY+
-event.clientY-
-downY;
+originalY
++
+event.clientY
+-
+startY;
 
 
 x=
@@ -3295,7 +4310,7 @@ x,
 0,
 Math.max(
 0,
-rect.width-width
+rect.width-visualWidth
 )
 );
 
@@ -3306,7 +4321,7 @@ y,
 0,
 Math.max(
 0,
-rect.height-height
+rect.height-visualHeight
 )
 );
 
@@ -3340,13 +4355,24 @@ pointerId!==event.pointerId
 return;
 
 
+try{
+
+element.releasePointerCapture(
+event.pointerId
+);
+
+}catch(error){}
+
+
 if(
 dragging
 &&
 before!==snapshot()
 ){
 
-undoStack.push(before);
+undoStack.push(
+before
+);
 
 redoStack=[];
 
@@ -3369,14 +4395,28 @@ renderToolbar();
 }
 );
 
+
+element.addEventListener(
+'pointercancel',
+()=>{
+
+pointerId=null;
+
+dragging=false;
+
+before='';
+
+}
+);
+
 }
 
 
 /* =====================================================
-FLOATING OBJECT CONTROLS
+FLOATING CONTROLS
 ===================================================== */
 
-function addEditingControls(
+function addFloatingControls(
 element,
 item,
 kind
@@ -3396,25 +4436,33 @@ controls.innerHTML=`
 
 <button
 class="secondary"
-data-act="left">
+data-action="rotateLeft">
+
 ↺
+
 </button>
 
 <button
 class="secondary"
-data-act="right">
+data-action="rotateRight">
+
 ↻
+
 </button>
 
 <button
-class="deleteBtn"
-data-act="delete">
+class="danger"
+data-action="delete">
+
 🗑
+
 </button>
 
 <button
-data-act="ok">
+data-action="ok">
+
 ✓ OK
+
 </button>
 
 `;
@@ -3431,63 +4479,79 @@ event.stopPropagation();
 
 
 controls.querySelector(
-'[data-act="left"]'
+'[data-action="rotateLeft"]'
 )
 .onclick=
 event=>{
 
 event.stopPropagation();
 
+
 if(kind==='object'){
+
 rotateVenue(-15);
+
 }else{
+
 rotateTable(-15);
+
 }
 
 };
 
 
 controls.querySelector(
-'[data-act="right"]'
+'[data-action="rotateRight"]'
 )
 .onclick=
 event=>{
 
 event.stopPropagation();
 
+
 if(kind==='object'){
+
 rotateVenue(15);
+
 }else{
+
 rotateTable(15);
+
 }
 
 };
 
 
 controls.querySelector(
-'[data-act="delete"]'
+'[data-action="delete"]'
 )
 .onclick=
 event=>{
 
 event.stopPropagation();
+
 
 if(kind==='object'){
+
 deleteSelectedVenue();
+
 }else{
+
 deleteSelectedTable();
+
 }
 
 };
 
 
 controls.querySelector(
-'[data-act="ok"]'
+'[data-action="ok"]'
 )
 .onclick=
 event=>{
 
 event.stopPropagation();
+
 
 finishEditing();
 
@@ -3517,7 +4581,8 @@ event.preventDefault();
 
 event.stopPropagation();
 
-startResizeHandle(
+
+startResize(
 event,
 item,
 kind,
@@ -3536,26 +4601,43 @@ handle
 
 
 /* =====================================================
-RESIZE HANDLE
+STABLE RESIZE — NO RE-RENDER DURING DRAG
 ===================================================== */
 
-function startResizeHandle(
+function startResize(
 event,
 item,
 kind,
 element
 ){
 
-const startX=
-event.clientX;
-
-
 const before=
 snapshot();
 
 
+const startX=
+event.clientX;
+
+
 const startWidth=
 element.getBoundingClientRect().width;
+
+
+const baseWidth=
+element.offsetWidth;
+
+
+const startObjectWidth=
+item.widthPct;
+
+
+const startObjectHeight=
+item.heightPct;
+
+
+const objectRatio=
+startObjectHeight/
+startObjectWidth;
 
 
 const move=
@@ -3564,34 +4646,27 @@ moveEvent=>{
 moveEvent.preventDefault();
 
 
-const delta=
-moveEvent.clientX-
+const dx=
+moveEvent.clientX
+-
 startX;
 
 
 if(kind==='object'){
 
-const newWidth=
-Math.max(
-40,
-startWidth+
-delta
-);
-
-
 const ratio=
-element.offsetHeight/
-element.offsetWidth;
-
-
-const newHeight=
-newWidth*
-ratio;
+Math.max(
+.35,
+(
+startWidth+dx
+)/
+startWidth
+);
 
 
 item.widthPct=
 clamp(
-pctX(newWidth),
+startObjectWidth*ratio,
 5,
 70
 );
@@ -3599,34 +4674,61 @@ pctX(newWidth),
 
 item.heightPct=
 clamp(
-pctY(newHeight),
+item.widthPct*objectRatio,
 4,
 65
 );
+
+
+item.xPct=
+clamp(
+item.xPct,
+0,
+100-item.widthPct
+);
+
+
+item.yPct=
+clamp(
+item.yPct,
+0,
+100-item.heightPct
+);
+
+
+element.style.width=
+item.widthPct+'%';
+
+
+element.style.height=
+item.heightPct+'%';
 
 }
 
 
 if(kind==='table'){
 
+const newVisualWidth=
+Math.max(
+30,
+startWidth+dx
+);
+
+
 item.scale=
 clamp(
-(
-startWidth+
-delta
-)
-/
-82,
+newVisualWidth/
+baseWidth,
 .35,
 1.8
 );
 
+
+element.style.transform=
+
+`scale(${item.scale}) rotate(${item.rotation||0}deg)`;
+
 }
-
-
-renderAll();
-
-renderToolbar();
 
 };
 
@@ -3644,7 +4746,9 @@ if(
 before!==snapshot()
 ){
 
-undoStack.push(before);
+undoStack.push(
+before
+);
 
 redoStack=[];
 
@@ -3653,6 +4757,11 @@ save();
 updateUndoButtons();
 
 }
+
+
+renderAll();
+
+renderToolbar();
 
 };
 
@@ -3678,60 +4787,32 @@ once:true
 
 
 /* =====================================================
-BACKGROUND UPLOAD
+DESELECT
 ===================================================== */
 
-$('venueUpload')
-.addEventListener(
-'change',
+canvas.addEventListener(
+'pointerdown',
 event=>{
 
-const file=
-event.target.files[0];
+if(
+event.target===canvas
+||
+event.target===objectLayer
+||
+event.target===tableLayer
+){
 
-if(!file)return;
+selected=null;
 
-
-const reader=
-new FileReader();
-
-
-reader.onload=
-e=>{
-
-remember();
-
-S.venueImage=
-e.target.result;
-
-applyVenue();
 
 renderAll();
 
-save();
+renderToolbar();
 
-};
-
-
-reader.readAsDataURL(file);
-
-
-event.target.value='';
+}
 
 }
 );
-
-
-function applyVenue(){
-
-$('venueBg')
-.style
-.backgroundImage=
-S.venueImage
-?`url("${S.venueImage}")`
-:'none';
-
-}
 
 
 /* =====================================================
@@ -3752,31 +4833,82 @@ if(currentStep===5){
 renderDownloadSheet();
 }
 
+
 openSheet();
 
 }
+
 
 function openSheet(){
 
 $('sheet')
 .classList
-.add('open');
+.add(
+'open'
+);
 
 }
+
 
 function closeSheet(){
 
 $('sheet')
 .classList
-.remove('open');
+.remove(
+'open'
+);
+
 
 currentGuestTable=null;
 
 }
 
+
 function renderGuestsSheet(){
 
+if(!S.tables.length){
+
+$('sheetContent')
+.innerHTML=`
+
+<div class="sheetTop">
+
+<div>
+
+<h2>
+Add Your Guests
+</h2>
+
+<div class="hint">
+Create tables first.
+</div>
+
+</div>
+
+<button
+class="secondary sheetClose"
+onclick="closeSheet()">
+×
+</button>
+
+</div>
+
+<button
+class="wide"
+onclick="goStep(2)">
+Go to Tables
+</button>
+
+`;
+
+
+return;
+
+}
+
+
 const unassigned=
+
 S.guests.filter(
 guest=>
 !guest.tableId
@@ -3815,17 +4947,20 @@ onclick="closeSheet()">
 Manual Guest
 </div>
 
+
 <input
 id="guestSurname"
 class="field"
 style="margin-top:8px"
 placeholder="Surname">
 
+
 <input
 id="guestFirst"
 class="field"
 style="margin-top:6px"
 placeholder="First name">
+
 
 <div
 class="grid2"
@@ -3835,9 +4970,10 @@ style="margin-top:6px">
 id="guestParty"
 class="field"
 type="number"
-value="1"
 min="1"
+value="1"
 placeholder="People">
+
 
 <input
 id="guestTable"
@@ -3847,6 +4983,7 @@ min="1"
 placeholder="Table">
 
 </div>
+
 
 <button
 class="wide"
@@ -3859,6 +4996,29 @@ onclick="addManualGuest()">
 </div>
 
 
+${voiceHTML()}
+
+
+<div class="section">
+
+<div class="cardTitle">
+Search Guests
+</div>
+
+
+<input
+id="guestSearch"
+class="field"
+style="margin-top:6px"
+placeholder="Name, surname or table"
+oninput="renderGuestSearch(this.value)">
+
+
+<div id="guestSearchResults"></div>
+
+</div>
+
+
 <div class="section">
 
 <div class="cardTitle">
@@ -3867,6 +5027,7 @@ Unassigned Guests
 (${unassigned.length})
 
 </div>
+
 
 ${guestRows(
 unassigned,
@@ -3898,6 +5059,9 @@ Continue to Review →
 </button>
 
 `;
+
+
+renderVoicePreview();
 
 }
 
@@ -3938,8 +5102,7 @@ $('guestTable').value
 const table=
 S.tables.find(
 table=>
-Number(table.number)===
-tableNumber
+Number(table.number)===tableNumber
 );
 
 
@@ -3965,6 +5128,27 @@ return;
 }
 
 
+const free=
+table.seats
+-
+tableUsedSeats(
+table.id
+);
+
+
+if(
+partySize>free
+){
+
+toast(
+`Only ${free} seats available`
+);
+
+return;
+
+}
+
+
 remember();
 
 
@@ -3978,8 +5162,7 @@ firstName,
 
 partySize,
 
-tableId:
-table.id
+tableId:table.id
 
 });
 
@@ -4016,9 +5199,15 @@ if(!table)return;
 
 
 const guests=
-S.guests.filter(
+S.guests
+
+.filter(
 guest=>
-guest.tableId===tableId
+guest.tableId===table.id
+)
+
+.sort(
+compareGuests
 );
 
 
@@ -4044,6 +5233,7 @@ seats
 
 </div>
 
+
 <button
 class="secondary sheetClose"
 onclick="closeSheet()">
@@ -4060,19 +5250,22 @@ id="tableSurname"
 class="field"
 placeholder="Surname">
 
+
 <input
 id="tableFirst"
 class="field"
 style="margin-top:6px"
 placeholder="First name">
 
+
 <input
 id="tableParty"
 class="field"
 style="margin-top:6px"
 type="number"
-value="1"
-min="1">
+min="1"
+value="1">
+
 
 <button
 class="wide"
@@ -4087,6 +5280,11 @@ onclick="addGuestToTable()">
 
 <div class="section">
 
+<div class="cardTitle">
+Guests
+</div>
+
+
 ${guestRows(
 guests,
 false
@@ -4099,7 +5297,7 @@ false
 class="secondary wide"
 onclick="renderGuestsSheet()">
 
-Back
+Back to Guests
 
 </button>
 
@@ -4144,7 +5342,36 @@ $('tableParty').value||1
 );
 
 
-if(!surname)return;
+if(!surname){
+
+toast(
+'Add surname'
+);
+
+return;
+
+}
+
+
+const free=
+table.seats
+-
+tableUsedSeats(
+table.id
+);
+
+
+if(
+partySize>free
+){
+
+toast(
+`Only ${free} seats available`
+);
+
+return;
+
+}
 
 
 remember();
@@ -4160,8 +5387,7 @@ firstName,
 
 partySize,
 
-tableId:
-table.id
+tableId:table.id
 
 });
 
@@ -4267,6 +5493,15 @@ Assign
 
 
 <button
+class="secondary"
+onclick="editGuest('${guest.id}')">
+
+Edit
+
+</button>
+
+
+<button
 class="danger"
 onclick="deleteGuest('${guest.id}')">
 
@@ -4287,10 +5522,6 @@ Delete
 
 }
 
-
-/* =====================================================
-ASSIGN DELETE
-===================================================== */
 
 function assignGuest(id){
 
@@ -4316,8 +5547,7 @@ if(answer===null)return;
 const table=
 S.tables.find(
 table=>
-Number(table.number)===
-Number(answer)
+Number(table.number)===Number(answer)
 );
 
 
@@ -4325,6 +5555,27 @@ if(!table){
 
 toast(
 'Table not found'
+);
+
+return;
+
+}
+
+
+const free=
+table.seats
+-
+tableUsedSeats(
+table.id
+);
+
+
+if(
+guest.partySize>free
+){
+
+toast(
+'Not enough seats'
 );
 
 return;
@@ -4348,7 +5599,157 @@ renderGuestsSheet();
 }
 
 
+function editGuest(id){
+
+const guest=
+S.guests.find(
+guest=>
+guest.id===id
+);
+
+
+if(!guest)return;
+
+
+const surname=
+prompt(
+'Surname',
+guest.surname
+);
+
+
+if(surname===null)return;
+
+
+const firstName=
+prompt(
+'First name',
+guest.firstName||''
+);
+
+
+if(firstName===null)return;
+
+
+const people=
+prompt(
+'People',
+guest.partySize
+);
+
+
+if(people===null)return;
+
+
+const current=
+S.tables.find(
+table=>
+table.id===guest.tableId
+);
+
+
+const tableAnswer=
+prompt(
+'Table number — blank = Unassigned',
+current
+?current.number
+:''
+);
+
+
+if(tableAnswer===null)return;
+
+
+let tableId=null;
+
+
+if(tableAnswer.trim()){
+
+const target=
+S.tables.find(
+table=>
+Number(table.number)===Number(tableAnswer)
+);
+
+
+if(!target){
+
+toast(
+'Table not found'
+);
+
+return;
+
+}
+
+
+tableId=
+target.id;
+
+}
+
+
+remember();
+
+
+guest.surname=
+surname.trim();
+
+
+guest.firstName=
+firstName.trim();
+
+
+guest.partySize=
+Math.max(
+1,
+Number(people)||1
+);
+
+
+guest.tableId=
+tableId;
+
+
+renderAll();
+
+save();
+
+
+if(currentGuestTable){
+
+openTableGuests(
+currentGuestTable
+);
+
+}else{
+
+renderGuestsSheet();
+
+}
+
+}
+
+
 function deleteGuest(id){
+
+const guest=
+S.guests.find(
+guest=>
+guest.id===id
+);
+
+
+if(!guest)return;
+
+
+if(
+!confirm(
+`Delete ${guestFullName(guest)}?`
+)
+)
+return;
+
 
 remember();
 
@@ -4364,24 +5765,572 @@ renderAll();
 
 save();
 
+
+if(currentGuestTable){
+
+openTableGuests(
+currentGuestTable
+);
+
+}else{
+
 renderGuestsSheet();
+
+}
 
 }
 
 
 function deleteGuestList(){
 
+if(!S.guests.length){
+
+toast(
+'Guest list is empty'
+);
+
+return;
+
+}
+
+
 if(
 !confirm(
 'Delete entire guest list?'
 )
-)return;
+)
+return;
 
 
 remember();
 
 
 S.guests=[];
+
+
+renderAll();
+
+save();
+
+renderGuestsSheet();
+
+}
+
+
+/* =====================================================
+SEARCH
+===================================================== */
+
+function renderGuestSearch(value){
+
+const holder=
+$('guestSearchResults');
+
+if(!holder)return;
+
+
+const query=
+normalizeText(
+value
+);
+
+
+if(!query){
+
+holder.innerHTML='';
+
+return;
+
+}
+
+
+const results=
+S.guests
+
+.filter(
+guest=>{
+
+const table=
+S.tables.find(
+table=>
+table.id===guest.tableId
+);
+
+
+return normalizeText(
+
+guest.surname+
+' '+
+guest.firstName+
+' '+
+(
+table
+?table.number
+:''
+)
+
+)
+.includes(
+query
+);
+
+}
+)
+
+.slice(
+0,
+30
+);
+
+
+holder.innerHTML=
+guestRows(
+results,
+false
+);
+
+}
+
+
+/* =====================================================
+VOICE
+===================================================== */
+
+function voiceHTML(){
+
+const supported=
+Boolean(
+window.SpeechRecognition
+||
+window.webkitSpeechRecognition
+);
+
+
+if(!supported){
+
+return`
+
+<div class="voiceBox">
+
+<div class="cardTitle">
+🎙 Voice Add Guests
+</div>
+
+<div class="hint">
+
+Voice recognition is unavailable in this browser.
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+return`
+
+<div
+id="voiceBox"
+class="voiceBox">
+
+<div class="cardTitle">
+🎙 Voice Add Guests
+</div>
+
+<div class="hint">
+
+Say:
+“Γεωργίου Γιώργος,
+2 άτομα,
+τραπέζι 4”
+
+</div>
+
+
+<button
+id="voiceButton"
+class="wide"
+onclick="toggleVoice()">
+
+🎙 Start Microphone
+
+</button>
+
+
+<div
+id="voiceStatus"
+class="meta">
+
+Preview appears before saving.
+
+</div>
+
+
+<div id="voicePreview"></div>
+
+</div>
+
+`;
+
+}
+
+
+function toggleVoice(){
+
+if(voiceRecognition){
+
+voiceRecognition.stop();
+
+return;
+
+}
+
+
+const Speech=
+window.SpeechRecognition
+||
+window.webkitSpeechRecognition;
+
+
+if(!Speech){
+
+toast(
+'Voice unavailable'
+);
+
+return;
+
+}
+
+
+voiceRecognition=
+new Speech();
+
+
+voiceRecognition.lang=
+'el-GR';
+
+
+voiceRecognition.continuous=
+true;
+
+
+voiceRecognition.interimResults=
+false;
+
+
+$('voiceButton').textContent=
+'■ Stop Microphone';
+
+
+$('voiceBox')
+.classList
+.add(
+'listening'
+);
+
+
+voiceRecognition.onresult=
+event=>{
+
+for(
+let i=event.resultIndex;
+i<event.results.length;
+i++
+){
+
+parseVoice(
+event.results[i][0].transcript
+);
+
+}
+
+
+renderVoicePreview();
+
+};
+
+
+voiceRecognition.onend=
+()=>{
+
+voiceRecognition=null;
+
+
+const button=
+$('voiceButton');
+
+
+if(button){
+
+button.textContent=
+'🎙 Start Microphone';
+
+}
+
+
+const box=
+$('voiceBox');
+
+
+if(box){
+
+box.classList.remove(
+'listening'
+);
+
+}
+
+};
+
+
+voiceRecognition.onerror=
+()=>{
+
+toast(
+'Voice recognition error'
+);
+
+};
+
+
+voiceRecognition.start();
+
+}
+
+
+function parseVoice(text){
+
+const tableMatch=
+text.match(
+/(?:τραπέζι|τραπεζι|table)\s*(\d+)/i
+);
+
+
+const peopleMatch=
+text.match(
+/(\d+)\s*(?:άτομα|ατομα|people)/i
+);
+
+
+const tableNumber=
+tableMatch
+?Number(tableMatch[1])
+:1;
+
+
+const partySize=
+peopleMatch
+?Number(peopleMatch[1])
+:1;
+
+
+const clean=
+text
+
+.replace(
+/(?:τραπέζι|τραπεζι|table)\s*\d+/ig,
+''
+)
+
+.replace(
+/\d+\s*(?:άτομα|ατομα|people)/ig,
+''
+)
+
+.replace(
+/[,.;]+/g,
+' '
+)
+
+.trim();
+
+
+const names=
+clean
+.split(/\s+/)
+.filter(Boolean);
+
+
+if(!names.length)return;
+
+
+voiceDraft.push({
+
+surname:names[0],
+
+firstName:
+names
+.slice(1)
+.join(' '),
+
+partySize,
+
+tableNumber
+
+});
+
+}
+
+
+function renderVoicePreview(){
+
+const holder=
+$('voicePreview');
+
+if(!holder)return;
+
+
+if(!voiceDraft.length){
+
+holder.innerHTML='';
+
+return;
+
+}
+
+
+holder.innerHTML=
+
+voiceDraft
+
+.map(
+(guest,index)=>`
+
+<div class="voicePreviewRow">
+
+<input
+value="${safeAttribute(guest.surname)}"
+onchange="
+voiceDraft[${index}].surname=this.value">
+
+
+<input
+value="${safeAttribute(guest.firstName)}"
+onchange="
+voiceDraft[${index}].firstName=this.value">
+
+
+<input
+type="number"
+min="1"
+value="${guest.partySize}"
+onchange="
+voiceDraft[${index}].partySize=Math.max(1,+this.value||1)">
+
+
+<input
+type="number"
+min="1"
+value="${guest.tableNumber}"
+onchange="
+voiceDraft[${index}].tableNumber=Math.max(1,+this.value||1)">
+
+
+<button
+class="danger"
+onclick="
+voiceDraft.splice(${index},1);
+renderVoicePreview()">
+
+×
+
+</button>
+
+</div>
+
+`
+)
+
+.join('')
+
++
+
+`
+
+<button
+class="wide"
+onclick="saveVoiceGuests()">
+
+Add All Guests
+
+</button>
+
+`;
+
+}
+
+
+function saveVoiceGuests(){
+
+if(!voiceDraft.length)return;
+
+
+for(
+const guest
+of voiceDraft
+){
+
+const table=
+S.tables.find(
+table=>
+Number(table.number)===Number(guest.tableNumber)
+);
+
+
+if(!table){
+
+toast(
+`Table ${guest.tableNumber} not found`
+);
+
+return;
+
+}
+
+}
+
+
+remember();
+
+
+voiceDraft.forEach(
+guest=>{
+
+const table=
+S.tables.find(
+table=>
+Number(table.number)===Number(guest.tableNumber)
+);
+
+
+S.guests.push({
+
+id:uid(),
+
+surname:
+guest.surname.trim(),
+
+firstName:
+guest.firstName.trim(),
+
+partySize:
+Number(
+guest.partySize||1
+),
+
+tableId:
+table.id
+
+});
+
+}
+);
+
+
+voiceDraft=[];
 
 
 renderAll();
@@ -4401,6 +6350,118 @@ function renderReviewSheet(){
 
 const s=
 stats();
+
+
+const details=
+S.tables
+
+.slice()
+
+.sort(
+(a,b)=>
+a.number-b.number
+)
+
+.map(
+table=>{
+
+const guests=
+S.guests
+
+.filter(
+guest=>
+guest.tableId===table.id
+)
+
+.sort(
+compareGuests
+);
+
+
+return`
+
+<div class="card">
+
+<div style="display:flex;justify-content:space-between;align-items:center">
+
+<div>
+
+<div class="cardTitle">
+
+Table ${table.number}
+
+</div>
+
+<div class="meta">
+
+${tableUsedSeats(table.id)}
+/
+${table.seats}
+people
+
+</div>
+
+</div>
+
+<button
+class="secondary"
+onclick="
+currentStep=3;
+openTableGuests('${table.id}')">
+
+Guests
+
+</button>
+
+</div>
+
+
+<div style="margin-top:6px">
+
+${guests.length
+
+?guests
+
+.map(
+guest=>`
+
+<div style="font-size:11px;padding:2px 0">
+
+${safe(
+guestFullName(
+guest
+)
+)}
+
+${guest.partySize>1
+?` (${guest.partySize})`
+:''}
+
+</div>
+
+`
+)
+
+.join('')
+
+:`
+
+<div class="meta">
+No guests
+</div>
+
+`}
+
+</div>
+
+</div>
+
+`;
+
+}
+)
+
+.join('');
 
 
 $('sheetContent')
@@ -4464,6 +6525,57 @@ S.guests.length,
 </div>
 
 
+${s.unassigned>0
+
+?`
+
+<div class="card warning">
+
+<div class="cardTitle">
+
+⚠ ${s.unassigned}
+people unassigned
+
+</div>
+
+<button
+class="wide"
+onclick="goStep(3)">
+
+Review Guests
+
+</button>
+
+</div>
+
+`
+
+:`
+
+<div class="card">
+
+<div class="cardTitle">
+
+✓ Guest allocation complete
+
+</div>
+
+</div>
+
+`}
+
+
+<div class="section">
+
+<div class="cardTitle">
+Tables & Guests
+</div>
+
+${details}
+
+</div>
+
+
 <button
 class="wide"
 onclick="goStep(5)">
@@ -4505,7 +6617,7 @@ ${label}
 
 
 /* =====================================================
-DOWNLOAD STEP
+DOWNLOAD
 ===================================================== */
 
 function renderDownloadSheet(){
@@ -4522,7 +6634,7 @@ Download
 </h2>
 
 <div class="hint">
-Your final files.
+Your final Seatly files.
 </div>
 
 </div>
@@ -4546,6 +6658,12 @@ onclick="closeSheet()">
 Venue Layout
 </div>
 
+<div class="meta">
+
+Venue + Dance Floor + DJ Box + Bar + Entrance + Tables.
+
+</div>
+
 <button
 class="wide"
 onclick="openVenueExport()">
@@ -4565,6 +6683,12 @@ AΩ
 
 <div class="cardTitle">
 Alphabetical Seating Chart
+</div>
+
+<div class="meta">
+
+Alphabetical guest list with table numbers.
+
 </div>
 
 <button
@@ -4603,7 +6727,7 @@ More
 </h2>
 
 <div class="hint">
-Project tools.
+Project tools and reset.
 </div>
 
 </div>
@@ -4612,6 +6736,34 @@ Project tools.
 class="secondary sheetClose"
 onclick="closeSheet()">
 ×
+</button>
+
+</div>
+
+
+<div class="card">
+
+<div class="cardTitle">
+Project Backup
+</div>
+
+<button
+class="secondary wide"
+onclick="downloadBackup()">
+
+Download Backup
+
+</button>
+
+<button
+class="secondary wide"
+onclick="
+document
+.getElementById('backupRestore')
+.click()">
+
+Restore Backup
+
 </button>
 
 </div>
@@ -4637,18 +6789,137 @@ openSheet();
 }
 
 
+/* =====================================================
+BACKUP
+===================================================== */
+
+function downloadBackup(){
+
+const blob=
+new Blob(
+[
+JSON.stringify(
+S,
+null,
+2
+)
+],
+{
+type:'application/json'
+}
+);
+
+
+downloadBlob(
+blob,
+'seatly-project-backup.json'
+);
+
+}
+
+
+$('backupRestore')
+.addEventListener(
+'change',
+event=>{
+
+const file=
+event.target.files[0];
+
+if(!file)return;
+
+
+const reader=
+new FileReader();
+
+
+reader.onload=
+()=>{
+
+try{
+
+const data=
+JSON.parse(
+reader.result
+);
+
+
+if(
+!Array.isArray(data.tables)
+||
+!Array.isArray(data.guests)
+){
+
+throw new Error();
+
+}
+
+
+remember();
+
+
+S={
+...S,
+...data,
+version:511
+};
+
+
+applyVenue();
+
+renderAll();
+
+save();
+
+renderMoreSheet();
+
+
+toast(
+'Backup restored'
+);
+
+}catch(error){
+
+toast(
+'Invalid Seatly backup'
+);
+
+}
+
+};
+
+
+reader.readAsText(
+file
+);
+
+
+event.target.value='';
+
+}
+);
+
+
+/* =====================================================
+RESET
+===================================================== */
+
 function resetProject(){
 
 if(
 !confirm(
 'Delete EVERYTHING and start again?'
 )
-)return;
+)
+return;
+
+
+remember();
 
 
 S={
 
-version:52,
+version:511,
 
 venueImage:null,
 
@@ -4673,25 +6944,38 @@ columns:4
 };
 
 
+voiceDraft=[];
+
 selected=null;
+
+currentGuestTable=null;
+
 
 currentStep=1;
 
-save();
 
 applyVenue();
 
+save();
+
 closeSheet();
+
+closeQuickSetup();
 
 renderAll();
 
 refreshUI();
 
+
+toast(
+'New project started'
+);
+
 }
 
 
 /* =====================================================
-STATS SORTING
+STATS
 ===================================================== */
 
 function stats(){
@@ -4790,11 +7074,127 @@ Number(guest.partySize||1),
 }
 
 
+/* =====================================================
+SORTING
+===================================================== */
+
+function normalizeBasic(text){
+
+return String(
+text||''
+)
+
+.normalize('NFD')
+
+.replace(
+/[\u0300-\u036f]/g,
+''
+)
+
+.toLocaleLowerCase(
+'el-GR'
+)
+
+.trim();
+
+}
+
+
+function normalizeText(text){
+
+return normalizeBasic(
+text
+)
+.toLocaleUpperCase(
+'el-GR'
+);
+
+}
+
+
+const greekAlphabet=[
+'Α','Β','Γ','Δ',
+'Ε','Ζ','Η','Θ',
+'Ι','Κ','Λ','Μ',
+'Ν','Ξ','Ο','Π',
+'Ρ','Σ','Τ','Υ',
+'Φ','Χ','Ψ','Ω'
+];
+
+
+function alphabetLetter(
+surname
+){
+
+const value=
+normalizeText(
+surname
+);
+
+
+return value
+?value.charAt(0)
+:'#';
+
+}
+
+
+function compareLetters(a,b){
+
+const ai=
+greekAlphabet.indexOf(a);
+
+
+const bi=
+greekAlphabet.indexOf(b);
+
+
+if(
+ai>=0 &&
+bi>=0
+)
+return ai-bi;
+
+
+if(ai>=0)return-1;
+
+if(bi>=0)return 1;
+
+
+return a.localeCompare(
+b,
+'el'
+);
+
+}
+
+
 function compareGuests(a,b){
 
-return guestFullName(a)
+const surname=
+normalizeText(
+a.surname
+)
 .localeCompare(
-guestFullName(b),
+normalizeText(
+b.surname
+),
+'el'
+);
+
+
+if(surname!==0){
+return surname;
+}
+
+
+return normalizeText(
+a.firstName
+)
+.localeCompare(
+normalizeText(
+b.firstName
+),
 'el'
 );
 
@@ -4809,25 +7209,34 @@ function openChart(){
 
 $('chartOverlay')
 .classList
-.add('open');
+.add(
+'open'
+);
+
 
 $('chartCouple').value=
 S.chart.couple||'';
 
+
 $('chartDate').value=
 S.chart.date||'';
 
+
 $('chartWelcome').value=
-S.chart.welcome||'Welcome';
+S.chart.welcome||
+'Welcome';
+
 
 $('chartFind').value=
 S.chart.find||
 'Please find your seat';
 
+
 $('chartColumns').value=
 String(
 S.chart.columns||4
 );
+
 
 renderChart();
 
@@ -4838,7 +7247,9 @@ function closeChart(){
 
 $('chartOverlay')
 .classList
-.remove('open');
+.remove(
+'open'
+);
 
 }
 
@@ -4887,43 +7298,58 @@ compareGuests
 );
 
 
-$('chart')
-.innerHTML=`
+const groups={};
 
-<div class="chartWelcome">
-${safe(
-S.chart.welcome
-)}
+
+guests.forEach(
+guest=>{
+
+const letter=
+alphabetLetter(
+guest.surname
+);
+
+
+if(!groups[letter]){
+
+groups[letter]=[];
+
+}
+
+
+groups[letter]
+.push(
+guest
+);
+
+}
+);
+
+
+const letters=
+Object.keys(
+groups
+)
+.sort(
+compareLetters
+);
+
+
+const content=
+
+letters
+
+.map(
+letter=>`
+
+<div class="chartGroup">
+
+<div class="chartLetter">
+${safe(letter)}
 </div>
 
-<div class="chartSmall">
-TO THE WEDDING OF
-</div>
+${groups[letter]
 
-<div class="chartNames">
-${safe(
-S.chart.couple||
-'YOUR NAMES'
-)}
-</div>
-
-<div class="chartDate">
-${safe(
-S.chart.date
-)}
-</div>
-
-<div class="chartFind">
-${safe(
-S.chart.find
-)}
-</div>
-
-<div
-class="chartColumns"
-style="columns:${S.chart.columns}">
-
-${guests
 .map(
 guest=>{
 
@@ -4933,22 +7359,33 @@ table=>
 table.id===guest.tableId
 );
 
+
 return`
 
 <div class="chartPerson">
 
 <span>
+
 ${safe(
 guestFullName(
 guest
 )
 )}
+
+${guest.partySize>1
+?` (${guest.partySize})`
+:''}
+
 </span>
 
 <span class="chartDots"></span>
 
 <span class="chartTable">
-${table?table.number:'—'}
+
+${table
+?table.number
+:'—'}
+
 </span>
 
 </div>
@@ -4957,7 +7394,62 @@ ${table?table.number:'—'}
 
 }
 )
+
 .join('')}
+
+</div>
+
+`
+)
+
+.join('');
+
+
+$('chart')
+.innerHTML=`
+
+<div class="chartWelcome">
+
+${safe(
+S.chart.welcome
+)}
+
+</div>
+
+<div class="chartSmall">
+TO THE WEDDING OF
+</div>
+
+<div class="chartNames">
+
+${safe(
+S.chart.couple||
+'YOUR NAMES'
+)}
+
+</div>
+
+<div class="chartDate">
+
+${safe(
+S.chart.date
+)}
+
+</div>
+
+<div class="chartFind">
+
+${safe(
+S.chart.find
+)}
+
+</div>
+
+<div
+class="chartColumns"
+style="columns:${S.chart.columns}">
+
+${content}
 
 </div>
 
@@ -4974,7 +7466,10 @@ function openVenueExport(){
 
 $('venueOverlay')
 .classList
-.add('open');
+.add(
+'open'
+);
+
 
 renderVenueExport();
 
@@ -4985,7 +7480,9 @@ function closeVenueExport(){
 
 $('venueOverlay')
 .classList
-.remove('open');
+.remove(
+'open'
+);
 
 }
 
@@ -5021,12 +7518,15 @@ bg.className=
 
 
 bg.style.backgroundImage=
+
 S.venueImage
 ?`url("${S.venueImage}")`
 :'none';
 
 
-box.appendChild(bg);
+box.appendChild(
+bg
+);
 
 
 S.objects.forEach(
@@ -5066,7 +7566,9 @@ el.textContent=
 object.label;
 
 
-box.appendChild(el);
+box.appendChild(
+el
+);
 
 }
 );
@@ -5094,6 +7596,7 @@ table.yPct+'%';
 
 
 el.style.transform=
+
 `scale(${table.scale||1}) rotate(${table.rotation||0}deg)`;
 
 
@@ -5101,7 +7604,9 @@ el.textContent=
 `T${table.number}`;
 
 
-box.appendChild(el);
+box.appendChild(
+el
+);
 
 }
 );
@@ -5109,43 +7614,62 @@ box.appendChild(el);
 
 holder.innerHTML='';
 
-holder.appendChild(box);
+
+holder.appendChild(
+box
+);
 
 }
 
 
 /* =====================================================
-DOWNLOAD HELPERS
+DOWNLOADS
 ===================================================== */
 
 async function downloadVenuePNG(){
 
 renderVenueExport();
 
-const canvasOut=
+
+try{
+
+const output=
 await html2canvas(
 $('venueExport'),
 {
 scale:2,
-backgroundColor:'#fff'
+backgroundColor:'#fff',
+useCORS:true
 }
 );
+
 
 const link=
 document.createElement(
 'a'
 );
 
+
 link.download=
 'seatly-venue-layout-HD.png';
 
+
 link.href=
-canvasOut.toDataURL(
+output.toDataURL(
 'image/png',
 1
 );
 
+
 link.click();
+
+}catch(error){
+
+toast(
+'Venue PNG failed'
+);
+
+}
 
 }
 
@@ -5154,13 +7678,24 @@ async function downloadVenuePDF(){
 
 renderVenueExport();
 
-const canvasOut=
+
+try{
+
+const output=
 await html2canvas(
 $('venueExport'),
 {
 scale:2,
-backgroundColor:'#fff'
+backgroundColor:'#fff',
+useCORS:true
 }
+);
+
+
+const image=
+output.toDataURL(
+'image/jpeg',
+.97
 );
 
 
@@ -5178,26 +7713,55 @@ format:'a3'
 });
 
 
-const image=
-canvasOut.toDataURL(
-'image/jpeg',
-.97
-);
+const pw=
+pdf.internal.pageSize.getWidth();
+
+
+const ph=
+pdf.internal.pageSize.getHeight();
+
+
+const ratio=
+output.width/output.height;
+
+
+let width=pw;
+
+let height=
+width/ratio;
+
+
+if(height>ph){
+
+height=ph;
+
+width=
+height*ratio;
+
+}
 
 
 pdf.addImage(
 image,
 'JPEG',
-0,
-0,
-420,
-260
+(pw-width)/2,
+(ph-height)/2,
+width,
+height
 );
 
 
 pdf.save(
 'seatly-venue-layout.pdf'
 );
+
+}catch(error){
+
+toast(
+'Venue PDF failed'
+);
+
+}
 
 }
 
@@ -5207,12 +7771,15 @@ async function downloadChartPNG(){
 renderChart();
 
 
-const canvasOut=
+try{
+
+const output=
 await html2canvas(
 $('chart'),
 {
 scale:2,
-backgroundColor:'#fff'
+backgroundColor:'#fff',
+useCORS:true
 }
 );
 
@@ -5228,13 +7795,21 @@ link.download=
 
 
 link.href=
-canvasOut.toDataURL(
+output.toDataURL(
 'image/png',
 1
 );
 
 
 link.click();
+
+}catch(error){
+
+toast(
+'Chart PNG failed'
+);
+
+}
 
 }
 
@@ -5244,13 +7819,23 @@ async function downloadChartPDF(){
 renderChart();
 
 
-const canvasOut=
+try{
+
+const output=
 await html2canvas(
 $('chart'),
 {
 scale:2,
-backgroundColor:'#fff'
+backgroundColor:'#fff',
+useCORS:true
 }
+);
+
+
+const image=
+output.toDataURL(
+'image/jpeg',
+.97
 );
 
 
@@ -5268,20 +7853,41 @@ format:'a2'
 });
 
 
-const image=
-canvasOut.toDataURL(
-'image/jpeg',
-.97
-);
+const pw=
+pdf.internal.pageSize.getWidth();
+
+
+const ph=
+pdf.internal.pageSize.getHeight();
+
+
+const ratio=
+output.width/output.height;
+
+
+let width=pw;
+
+let height=
+width/ratio;
+
+
+if(height>ph){
+
+height=ph;
+
+width=
+height*ratio;
+
+}
 
 
 pdf.addImage(
 image,
 'JPEG',
+(pw-width)/2,
 0,
-0,
-420,
-594
+width,
+height
 );
 
 
@@ -5289,11 +7895,19 @@ pdf.save(
 'seatly-alphabetical-chart.pdf'
 );
 
+}catch(error){
+
+toast(
+'Chart PDF failed'
+);
+
+}
+
 }
 
 
 /* =====================================================
-TEXT
+TEXT / DOWNLOAD
 ===================================================== */
 
 function guestFullName(
@@ -5304,7 +7918,6 @@ return[
 guest.surname||'',
 guest.firstName||''
 ]
-
 .filter(Boolean)
 .join(' ');
 
@@ -5318,10 +7931,71 @@ document.createElement(
 'div'
 );
 
+
 div.textContent=
 text||'';
 
+
 return div.innerHTML;
+
+}
+
+
+function safeAttribute(text){
+
+return String(
+text||''
+)
+
+.replace(/&/g,'&amp;')
+
+.replace(/"/g,'&quot;')
+
+.replace(/</g,'&lt;')
+
+.replace(/>/g,'&gt;');
+
+}
+
+
+function downloadBlob(
+blob,
+name
+){
+
+const url=
+URL.createObjectURL(
+blob
+);
+
+
+const a=
+document.createElement(
+'a'
+);
+
+
+a.href=
+url;
+
+
+a.download=
+name;
+
+
+a.click();
+
+
+setTimeout(
+()=>{
+
+URL.revokeObjectURL(
+url
+);
+
+},
+1000
+);
 
 }
 
@@ -5335,21 +8009,26 @@ function toast(message){
 const el=
 $('toast');
 
+
 el.textContent=
 message;
 
+
 el.style.display=
 'block';
+
 
 clearTimeout(
 window.toastTimer
 );
 
+
 window.toastTimer=
 setTimeout(
 ()=>{
 
-el.style.display='none';
+el.style.display=
+'none';
 
 },
 1800
@@ -5359,11 +8038,26 @@ el.style.display='none';
 
 
 /* =====================================================
+RESIZE
+===================================================== */
+
+window.addEventListener(
+'resize',
+()=>{
+
+renderAll();
+
+}
+);
+
+
+/* =====================================================
 START
 ===================================================== */
 
 load();
 
 </script>
+
 </body>
 </html>
